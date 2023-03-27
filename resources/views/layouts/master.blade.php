@@ -22,7 +22,8 @@
     <link href="{{asset('public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/dropzone/dist/dropzone.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/custom/style.css')}}" rel="stylesheet">
-
+    <link href="{{asset('public/select2-develop/dist/css/select2.min.css')}}" rel="stylesheet" />
+    <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
   </head>
   <body class="menu-position-side menu-side-left full-screen color-scheme-dark">
     <div class="all-wrapper solid-bg-all">
@@ -555,7 +556,7 @@
 
         @yield('content')
 
-        <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
+       
         <script src="{{asset('public/bower_components/popper.js/dist/umd/popper.min.js')}}"></script>
         <script src="{{asset('public/bower_components/moment/moment.js')}}"></script>
         <script src="{{asset('public/bower_components/chart.js/dist/Chart.min.js')}}"></script>
@@ -593,6 +594,123 @@
           
           ga('create', 'UA-XXXXXXX-9', 'auto');
           ga('send', 'pageview');
+
+
+
         </script>
-      </body>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+   
+
+
+<script>
+
+
+
+    
+function previewImages() {
+
+  var preview = document.querySelector('#preview_img');
+  
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+    
+    var reader = new FileReader();
+    
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    });
+    
+    reader.readAsDataURL(file);
+    
+  }
+
+}
+document.querySelector('#img').addEventListener("change", previewImages);
+function previewSignature() {
+
+  var preview = document.querySelector('#preview_sig');
+  
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+    
+    var reader = new FileReader();
+    
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    });
+    
+    reader.readAsDataURL(file);
+    
+  }
+
+}
+
+document.querySelector('#sig').addEventListener("change", previewSignature);
+
+// input search 
+
+// $(document).ready(function() {
+//         $('#selUser').select2();
+//     });
+
+// var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+// $(document).ready(function(){
+
+
+//   $('#selUser').select2({
+//   ajax: {
+//     url: 'https://api.github.com/orgs/select2/repos',
+//     data: function (params) {
+//       var query = {
+//         search: params.term,
+//         type: 'public'
+//       }
+
+//       // Query parameters will be ?search=[term]&type=public
+//       return query;
+//     }
+//   }
+// });
+// var $input = $('.form-control[name=' + eKey + ']');
+// console.log($input[0].name);
+
+
+
+
+
+function noResultsButtonClicked() {
+  // alert('You clicked the "No Result Found" button.');
+  var x = document.getElementById("dog_form");
+  x.style.display = "block";
+}
+
+    </script>
+
+</body>
     </html>
