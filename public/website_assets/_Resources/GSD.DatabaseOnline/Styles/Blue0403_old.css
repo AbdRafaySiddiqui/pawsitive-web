@@ -1,0 +1,56 @@
+h1, h2, h3, h4, h5,
+a,
+blockquote p,
+blockquote p::before,
+blockquote p::after,
+.nav-meta,
+.icon-yellow,
+footer #footer-col-6 h5,
+footer .nav-meta a,
+.nav-primary > li > a:hover,
+.nav-primary .dropdown-menu a:hover,
+.teaser-header,
+.text-green,
+.nav-dots > li > a:hover,
+.nav-dots > li.active > a,
+.nav-sidebar > li > a:hover,
+.btn-blue,
+.text,
+.nav-grid li > a {
+    color: #22411c;
+}
+
+.icon-yellow.icon-circle,
+.nav-dots > li > a:hover:before,
+.nav-dots > li.active > a:before,
+.panel-default > .panel-heading,
+.nav-sidebar > li > a:hover [class^="icon-"],
+.nav-sidebar > li > a:hover [class*=" icon-"],
+.btn-blue,
+.icon-blue,
+.bootstrap-select.btn-group.form-control .dropdown-toggle .caret,
+th,
+.btn-primary{
+    background: #22411c !important;
+}
+
+.btn-blue{
+    color: white;
+    border:none;
+}
+
+
+.btn-primary:hover{
+    background: #db1e27 !important;
+}
+
+a:hover {
+    color: #db1e27 !important;
+}
+
+
+.btn-blue:hover {
+    background-color: #db1e27 !important;
+    border-color: #22411c !important;
+    color: white !important;
+}

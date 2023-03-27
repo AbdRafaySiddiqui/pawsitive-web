@@ -1,0 +1,52 @@
+#homeOverlaySwitch{
+    position:fixed;
+    width:100%;
+    height: 1200px;
+    z-index:1000;
+    background: white url('../../../../../../fileadmin/SV/Images/HomeOverlay.jpg') no-repeat center center;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size:cover;
+    -ms-background-position-y: -200px;
+    background-position-y: -200px;
+}
+#homeOverlaySwitchLogo{
+    position:absolute;
+    top: 25px;
+    left: 25px;
+    width: 250px;
+    height: 96px;
+    z-index:1001;
+    background-image:url('../Media/SV_Logo_transparent.png');
+}
+.home-overlay-button-container{
+    position: fixed;
+    top: 25%;
+    width: 100%;
+}
+.homeoverlay-footer{
+    position: fixed;
+    top: 80%;
+    width: 100%;
+    color: white;
+}
+.homeoverlay-footer-link{
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+}
+@media (min-width: 800px) {
+    .home-overlay-button-container {
+        position: fixed;
+        top: 35%;
+        width: 100%;
+    }
+}
+@media (min-width: 900px) {
+    .home-overlay-button-container {
+        position: fixed;
+        top: 40%;
+        width: 100%;
+    }
+}

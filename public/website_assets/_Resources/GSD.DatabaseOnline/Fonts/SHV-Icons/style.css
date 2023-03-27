@@ -1,0 +1,67 @@
+@font-face {
+	font-family: 'SHV-Icons';
+	src:url('fonts/SHV-Iconsef1e.eot?-xh4uld');
+	src:url('fonts/SHV-Iconsd41d.eot?#iefix-xh4uld') format('embedded-opentype'),
+		url('fonts/SHV-Iconsef1e.ttf?-xh4uld') format('truetype'),
+		url('fonts/SHV-Iconsef1e.woff?-xh4uld') format('woff'),
+		url('fonts/SHV-Iconsef1e.svg?-xh4uld#SHV-Icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'SHV-Icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-calendar:before {
+	content: "\e60d";
+}
+.icon-select:before {
+	content: "\e60c";
+}
+.icon-people:before {
+	content: "\e607";
+}
+.icon-quote:before {
+	content: "\e608";
+}
+.icon-close:before {
+	content: "\e609";
+}
+.icon-arrow-right:before {
+	content: "\e60a";
+}
+.icon-magnifier:before {
+	content: "\e60b";
+}
+.icon-facebook:before {
+	content: "\e600";
+}
+.icon-play:before {
+	content: "\e601";
+}
+.icon-badge:before {
+	content: "\e602";
+}
+.icon-heartbeat:before {
+	content: "\e603";
+}
+.icon-paw:before {
+	content: "\e604";
+}
+.icon-heart:before {
+	content: "\e605";
+}
+.icon-chevron-right:before {
+	content: "\e606";
+}
