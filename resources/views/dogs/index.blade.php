@@ -1,4 +1,6 @@
-@include('layouts.master')
+@extends('layouts.master')
+
+@section('content')
         <!--------------------
         END - Main Menu
         -------------------->
@@ -428,6 +430,4 @@ START - Support Agents
       </div>
       <div class="display-type"></div>
     </div>
-    @include('layouts.section')
-  </body>
-</html>
+    @endsection

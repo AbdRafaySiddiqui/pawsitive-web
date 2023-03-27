@@ -1,25 +1,7 @@
-@include('layouts.master')
-        <!--------------------
-        END - Main Menu
-        -------------------->
-        <div class="content-w">
-<!--------------------
-          START - Breadcrumbs
-          -------------------->
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="index.html">Home</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href="index.html">Products</a>
-            </li>
-            <li class="breadcrumb-item">
-              <span>Laptop with retina screen</span>
-            </li>
-          </ul>
-          <!--------------------
-          END - Breadcrumbs
-          -------------------->
+@extends('layouts.master')
+
+@section('content')
+       
           <div class="content-panel-toggler">
             <i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span>
           </div>
@@ -416,7 +398,4 @@ START - Support Agents
       </div>
       <div class="display-type"></div>
     </div>
-    @include('layouts.section')
-
-  </body>
-</html>
+@endsection

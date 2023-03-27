@@ -1,4 +1,6 @@
-@include('layouts.master')
+@extends('layouts.master')
+
+@section('content')
         <div class="content-w">
       <!--------------------
           START - Breadcrumbs
@@ -385,5 +387,4 @@ function previewSignature() {
 
 document.querySelector('#sig').addEventListener("change", previewSignature);
     </script>
-  </body>
-</html>
+@endsection

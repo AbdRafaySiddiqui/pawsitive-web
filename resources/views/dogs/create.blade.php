@@ -1,4 +1,6 @@
-@include('layouts.master')
+@extends('layouts.master')
+
+@section('content')
         <div class="content-w">
           <!--------------------
           START - Top Bar
@@ -495,7 +497,4 @@
       </div>
       <div class="display-type"></div>
     </div>
-    @include('layouts.section')
-   
-  </body>
-</html>
+@endsection
