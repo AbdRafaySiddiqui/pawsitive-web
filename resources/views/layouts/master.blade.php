@@ -466,7 +466,11 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
-                      <a href="{{route('club.create')}}">Add Club</a>
+                    @if(Auth::user()->hasRole('admin'))
+    <a href="{{route('club.create')}}">Add Club</a>
+@else
+    <a href="{{route('club.create')}}">Writer Club</a>
+@endif      
                       <a href="{{route('club.index')}}">All Club</a>
                     </li>
                     
@@ -542,6 +546,28 @@
                       <a href="{{route('dogs.index')}}">All Dogs</a>
                     </li>
                     
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Users</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Users
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('users.create')}}">Add Users</a>
+                    </li>                   
                   </ul>
                 </div>
               </div>

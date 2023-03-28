@@ -11,7 +11,7 @@ class AdminSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
        $user = User::create([
             'name' => 'rafay',
@@ -25,6 +25,6 @@ class AdminSeeder extends Seeder
             'current_team_id' => null,
         ]);
 
-        $user->assignRole('writer', 'admin');
+        $user->assignRole('admin');
     }
 }
