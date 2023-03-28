@@ -1,12 +1,19 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+@extends('layouts.guest')
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+@section('content')
+<div class="all-wrapper menu-side with-pattern">
+    <div class="auth-box-w wider">
+        <div class="logo-w">
+            <a href="{{ route('dashboard') }}"><img alt="" src="{{ asset('public/img/logo-big.png')}}"></a>
         </div>
+        <h4 class="auth-header">
+            Reset Password
+          </h4>
+        {{-- <div class="mb-4 text-sm text-gray-600">
+            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+        </div> --}}
+
+        
 
         @if (session('status'))
             <div class="mb-4 font-medium text-sm text-green-600">
@@ -16,19 +23,18 @@
 
         <x-validation-errors class="mb-4" />
 
+        
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
-
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <div class="form-group">
+              <label for="">{{ __('Email') }}</label>
+              <input class="form-control" placeholder="Enter your email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
+              <div class="pre-icon os-icon os-icon-fingerprint"></div>
             </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
+            <div class="buttons-w">
+              <button class="btn btn-primary" type="submit">{{ __('Email Password Reset Link') }}</button>
+              <a href="{{ route('login') }}"><button class="btn btn-danger" type="button">{{ __('Cancel') }}</button></a>
             </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+          </form>
+    </div>
+</div>

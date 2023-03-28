@@ -1,65 +1,55 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+@extends('layouts.guest')
 
-        <x-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+@section('content')
+<div class="all-wrapper menu-side with-pattern">
+    <div class="auth-box-w wider">
+      <div class="logo-w">
+        <a href="{{ route('dashboard') }}"><img alt="" src="{{ asset('public/img/logo-big.png')}}"></a>
+      </div>
+      <h4 class="auth-header">
+        Create new account
+      </h4>
+      <form method="POST" action="{{ route('register') }}">
+        @csrf
+        
+        <div class="form-group">
+            <label for=""> Name</label>
+            <input class="form-control" placeholder="Enter Full Name" type="text" name="name" id="name" :value="old('name')" required autofocus autocomplete="name">
+            <div class="pre-icon os-icon os-icon-email-2-at2"></div>
+        </div>
+        <div class="form-group">
+          <label for=""> Email Address</label>
+          <input class="form-control" placeholder="Enter email" type="email" name="email" id="email" :value="old('email')" required autofocus autocomplete="email">
+          <div class="pre-icon os-icon os-icon-email-2-at2"></div>
+        </div>
+        <div class="form-group">
+            <label for=""> Username</label>
+            <input class="form-control" placeholder="Enter Username" type="text" name="username" id="username" :value="old('username')" required autofocus autocomplete="username">
+            <div class="pre-icon os-icon os-icon-email-2-at2"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for=""> Password</label>
+              <input class="form-control" placeholder="Enter Password" type="password" name="password" id="password" required autofocus autocomplete="new-password">
+              <div class="pre-icon os-icon os-icon-fingerprint"></div>
             </div>
-
-            <div>
-                <x-label for="username" value="{{ __('Username') }}" />
-                <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">Confirm Password</label>
+              <input class="form-control" placeholder="Confirm Password" type="password" name="password_confirmation" id="password_confirmation" required autofocus autocomplete="new-password">
             </div>
+          </div>
+        </div>
+        <div class="buttons-w">
+          <button class="btn btn-primary" type="submit">Register Now</button>
+          <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+            {{ __('Already registered?') }}
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
 
-            <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
-                        <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
-
-                            <div class="ml-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
-                                ]) !!}
-                            </div>
-                        </div>
-                    </x-label>
-                </div>
-            @endif
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+@endsection
