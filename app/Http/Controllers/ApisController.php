@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Dogs;
+use App\Models\judges;
 class ApisController extends Controller
 {
     //
@@ -13,11 +13,12 @@ class ApisController extends Controller
     
         if($request->has('q')){
             $search = $request->q;
-            $data =Dogs::select("id","dog_name")
-            		->where('dog_name','LIKE',"%$search%")
+            $data =judges::select("id","full_name")
+            		->where('full_name','LIKE',"%$search%")
             		->get();
         }
         return response()->json($data);
 
     }
+   
 }

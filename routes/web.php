@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('api/search', 'App\Http\Controllers\ApisController@dataAjax');
+Route::post('/submit-form', 'App\Http\Controllers\EventsController@submitForm');
+
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::resource('club','App\Http\Controllers\ClubsController');
 Route::resource('judges','App\Http\Controllers\judgesController');

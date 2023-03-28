@@ -24,6 +24,8 @@
     <link href="{{asset('public/bower_components/custom/style.css')}}" rel="stylesheet">
     <link href="{{asset('public/select2-develop/dist/css/select2.min.css')}}" rel="stylesheet" />
     <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
   </head>
   <body class="menu-position-side menu-side-left full-screen color-scheme-dark">
     <div class="all-wrapper solid-bg-all">
@@ -598,9 +600,8 @@
 
 
         </script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
-   
+ 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
 
 <script>
@@ -610,7 +611,6 @@
     
 function previewImages() {
 
-  var preview = document.querySelector('#preview_img');
   
   if (this.files) {
     [].forEach.call(this.files, readAndPreview);
