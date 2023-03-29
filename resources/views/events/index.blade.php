@@ -109,9 +109,10 @@
              
               
               <td>{{ $created=date('d-m-Y h:i:s', strtotime($e->date)) }}</td>
-              <td>{{ $e->country }}</td>
-              
-              
+              <!-- @if(isset($e->city->city)) -->
+                <td>{{ $e->city->city }}</td>
+              <!-- @endif -->
+              <td></td>
              
               <td class="row-actions">
                 <a href="{{route('events.edit',$e->id)}}"><i class="os-icon os-icon-ui-49"></i></a><a href="#"><i class="os-icon os-icon-grid-10"></i></a>

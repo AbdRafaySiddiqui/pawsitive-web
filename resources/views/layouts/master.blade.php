@@ -24,7 +24,6 @@
     <link href="{{asset('public/bower_components/custom/style.css')}}" rel="stylesheet">
     <link href="{{asset('public/select2-develop/dist/css/select2.min.css')}}" rel="stylesheet" />
     <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   </head>
   <body class="menu-position-side menu-side-left full-screen color-scheme-dark">
@@ -530,6 +529,30 @@
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
+                <span>Events</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Events
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('events.create')}}">Add Events</a>
+                      <a href="{{route('events.index')}}">All Events</a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
                 <span>Dogs</span></a>
               <div class="sub-menu-w">
                 <div class="sub-menu-header">
@@ -672,43 +695,12 @@ function previewSignature() {
 
 document.querySelector('#sig').addEventListener("change", previewSignature);
 
-// input search 
-
-// $(document).ready(function() {
-//         $('#selUser').select2();
-//     });
-
-// var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-// $(document).ready(function(){
-
-
-//   $('#selUser').select2({
-//   ajax: {
-//     url: 'https://api.github.com/orgs/select2/repos',
-//     data: function (params) {
-//       var query = {
-//         search: params.term,
-//         type: 'public'
-//       }
-
-//       // Query parameters will be ?search=[term]&type=public
-//       return query;
-//     }
-//   }
-// });
-// var $input = $('.form-control[name=' + eKey + ']');
-// console.log($input[0].name);
 
 
 
 
 
-function noResultsButtonClicked() {
-  // alert('You clicked the "No Result Found" button.');
-  var x = document.getElementById("dog_form");
-  x.style.display = "block";
-}
+
 
     </script>
 

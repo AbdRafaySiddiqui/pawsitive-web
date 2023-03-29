@@ -476,6 +476,7 @@
       </div>
       <div class="display-type"></div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
     <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
     <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
@@ -533,5 +534,6 @@
     // });
 
 </script>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
    
 @endsection

@@ -95,7 +95,7 @@
               <div class="col-sm-8">
               <select class="form-control js-data-example-ajax" name="judge_id" id="selUser"  >
               @foreach($judges as $judge)
-                <option  value="{{$judge->id}}" {{ $judges[0]->id  == $events->judge_id  ? 'selected' : '' }}>
+                <option  value="{{$judge->id}}" {{ $judge->id  == $events->judge_id  ? 'selected' : '' }}>
 
 
                {{$judge->full_name}}
