@@ -196,8 +196,9 @@
         Horizontal Form Layout
       </h6>
       <div class="element-box">
-        <form action="{{ route('users.store') }}" method="post" >
+        <form action="{{ route('users.update' , $user->id) }}" method="post" >
         @csrf
+            @method('PUT') 
         <h5 class="form-header">
             Horizontal Layout
           </h5>
@@ -207,36 +208,21 @@
           <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Name</label>
               <div class="col-sm-8">
-                <input class="form-control" name="name" placeholder="Enter Name" type="text">
+                <input class="form-control" name="name" value="{{$user->name}}" type="text">
               </div>
             </div>
           <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Username</label>
               <div class="col-sm-8">
-                <input class="form-control" name="username" placeholder="Enter Username" type="text">
+                <input class="form-control" name="username" value="{{$user->username}}" type="text">
               </div>
             </div>
           <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Email</label>
               <div class="col-sm-8">
-                <input class="form-control" name="email" placeholder="Enter Email" type="email">
+                <input class="form-control" name="email" value="{{$user->email}}" type="email">
               </div>
             </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Password</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="password" placeholder="Enter Password" type="password">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Role</label>
-              <select class="form-control" name="role" id="role" class="col-sm-8">
-              @foreach($roles as $role)
-    <option value="{{ $role->id }}">{{ $role->name }}</option>
-  @endforeach
-             </select>
-            </div>
-          
          
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
