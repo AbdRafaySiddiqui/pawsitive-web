@@ -93,11 +93,12 @@
               <label class="col-sm-4 col-form-label" for="">Select Judge</label>
               <div class="col-sm-8">
               <select class="form-control js-data-example-ajax" name="judge_id" id="selUser"  >
-              @foreach($total_judges as $judges)
-                <option value="{{$clubs->id}}">
-               {{$judges->name}}
+              @foreach($judges as $judge)
+                <option  value="{{$judge->id}}">
+               {{$judge->full_name}}
                 </option>
                 @endforeach
+                       
                        </select>
               </div>
             </div>

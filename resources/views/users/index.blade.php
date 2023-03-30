@@ -88,6 +88,9 @@
                Email
               </th>
               <th>
+               Status
+              </th>
+              <th>
               Action
               </th>
               
@@ -117,8 +120,7 @@
                 <div class="status-pill green" data-title="Complete" data-toggle="tooltip"></div>
               </td>
               <td class="row-actions">
-                <a href="{{route('users.edit',$users->id)}}"><i class="os-icon os-icon-ui-49"></i></a><a href="#"><i class="os-icon os-icon-grid-10"></i></a>
-                <form action="{{ route('users.destroy', $users->id ) }}" method="post">
+                <a href="{{route('users.edit',$users->id)}}"><i class="os-icon os-icon-ui-49"></i></a>
                                     @csrf
                                     @method('DELETE')
                                 <button class="trans_btn" type="submit" onclick="return confirm('Are you sure to delete this user?')"><i class="os-icon os-icon-ui-15"></i></button>

@@ -25,12 +25,9 @@ Route::get('api/search', 'App\Http\Controllers\ApisController@dataAjax');
 Route::post('/submit-form', 'App\Http\Controllers\EventsController@submitForm');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::resource('club','App\Http\Controllers\ClubsController');
-Route::resource('judges','App\Http\Controllers\judgesController');
-Route::resource('dogs','App\Http\Controllers\dogsController');
-Route::resource('events','App\Http\Controllers\EventsController');
     
     Route::resource('club','App\Http\Controllers\ClubsController');
+    Route::resource('judges','App\Http\Controllers\JudgesController');
     Route::resource('breeds','App\Http\Controllers\breedsController');
     Route::resource('dogs','App\Http\Controllers\dogsController');
     Route::get('users/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
@@ -42,6 +39,8 @@ Route::resource('events','App\Http\Controllers\EventsController');
 
 
     Route::post('/users', 'App\Http\Controllers\UserController@store')->name('users.store');
+    Route::resource('breeds','App\Http\Controllers\breedsController');
+    Route::resource('events','App\Http\Controllers\EventsController');
 
     Route::get('/dashboard', function () {
         return view('dashboard');
