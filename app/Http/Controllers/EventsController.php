@@ -17,7 +17,7 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $event = Events::get();
+        $event = Events::with('cities_name','country_name','club_name','judge_name')->get();
        
         return view('events/index', compact('event'));
     }
@@ -31,7 +31,8 @@ class EventsController extends Controller
         $total_cities = Cities::get();
         $total_countries = Countries::get();
         $total_breeds = Breeds::get();
-        return view('events.create',compact('total_clubs','total_cities','total_breeds','total_countries'));
+        $total_judges = judges::get();
+        return view('events.create',compact('total_clubs','total_cities','total_breeds','total_countries','total_judges'));
        
     }
 
@@ -137,10 +138,11 @@ public function submitForm(Request $request)
     $link = str_replace(" ", "-", $request->full_name);
     $create->url_link = $link; 
     $create->save();
-
+  
     return response()->json([
         'success' => true,
-        'message' => 'Form submitted successfully'
+        'message' => 'Form submitted successfully',
+        'response' =>   $create
     ]);
 }
 

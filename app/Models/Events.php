@@ -13,14 +13,14 @@ class Events extends Model
   public function cities_name(){
     return $this->belongsTo('App\Models\Cities','city','id');
   }
-  public function country(){
+  public function country_name(){
     
     return $this->belongsTo('App\Models\Countries','country','idCountry');
   }
-  public function club(){
+  public function club_name(){
     return $this->belongsTo('App\Models\Clubs','club_id','id');
   }
-  public function judge(){
+  public function judge_name(){
     return $this->belongsTo('App\Models\Judges','judge_id','id');
   }
 }

@@ -459,9 +459,9 @@
         // console.log(data)
         return {
           results:  $.map(data, function (item) {
+            
                 return {
           //  _token: CSRF_TOKEN,
-  
                     text: item.full_name,
                     id: item.id,
                     
@@ -492,6 +492,13 @@
         success: function(response){
           // Handle successful form submission
           console.log(response);
+          console.log(response.response.full_name);
+          $('#selUser').append($('<option>', {
+          value: response.response.id,
+          text: response.response.full_name
+        }));
+          $('#selUser').val(response.response.id).trigger('change'); 
+          // $('#exampleModal').hide();
         },
         error: function(xhr, status, error){
           // Handle errors
@@ -499,6 +506,12 @@
 
         }
       });
+      // $('#exampleModal').toggle();
+//       $('.modal').hide();
+//       $('body').removeClass('modal-open');
+// $('.modal-backdrop').remove();
+
+      // $('#selUser').val('Rafay');
     });
 
 

@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Role as SpatieRole;
 
-class countries extends Model
+
+class Role extends SpatieRole
 {
     use HasFactory;
-    protected $table = 'countries';
+
+    protected $table = 'roles';
 
 }

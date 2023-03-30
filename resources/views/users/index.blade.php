@@ -1,8 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
-        <div class="content-w">
         <!--------------------
+        END - Main Menu
+        -------------------->
+        <div class="content-w">
+<!--------------------
           START - Breadcrumbs
           -------------------->
           <ul class="breadcrumb">
@@ -19,245 +22,151 @@
           <!--------------------
           END - Breadcrumbs
           -------------------->
+          <div class="content-panel-toggler">
+            <i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span>
+          </div>
           <div class="content-i">
-            <div class="content-box"><div class="row">
-  
-  <div class="col-lg-12">
-    <div class="element-wrapper">
-      <h6 class="element-header">
-        Horizontal Form Layout
-      </h6>
-      <div class="element-box">
-        <form action="{{ route('events.store') }}" method="post" enctype="multipart/form-data">
-        @csrf
-   
-                    
-          <h5 class="form-header">
-            Horizontal Layout
-          </h5>
-          <div class="form-desc">
-            Discharge best employed your phase each the of shine. Be met even reason consider logbook redesigns. Never a turned interfaces among asking
-          </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Event Name</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="event_name" placeholder="Enter Event Name" type="text">
-              </div>
-            </div>
-       
-          <div class="form-group row">
-          <label class="col-form-label col-sm-4" for=""> Select Club</label>
-          <div class="col-sm-8">
-          <select class="form-control" name="club_id">
-          @foreach($total_clubs as $clubs)
-                <option value="{{$clubs->id}}">
-               {{$clubs->name}}
-                </option>
-                @endforeach
-              </select>
-            </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Country</label>
-              <div class="col-sm-8">
-              <select class="form-control" name="country">
-              @foreach($total_countries as $countries)
-                <option  value="{{$countries->z}}">
-               {{$countries->countryName}}
-                </option>
-                @endforeach
-              </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> City</label>
-              <div class="col-sm-8">
-              <select class="form-control" name="city">
-              @foreach($total_cities as $cities)
-                <option  value="{{$cities->id}}">
-               {{$cities->city}}
-                </option>
-                @endforeach
-              </select>
-              </div>
-            </div>
-          
-           
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Date</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="date" placeholder="Enter DOB" type="date">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Select Judge</label>
-              <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="judge_id" id="selUser"  >
-              @foreach($total_judges as $judges)
-                <option value="{{$clubs->id}}">
-               {{$judges->name}}
-                </option>
-                @endforeach
-                       </select>
-              </div>
-            </div>
-            <div class="form-buttons-w mb-4">
-            <button class="btn btn-primary" type="submit"> Submit</button>
-            <button class="btn btn-secondary" type="reset"> Reset</button>
-            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
-              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
-            </a>
-          </div>
-          @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
+            <div class="content-box">
+<div class="element-wrapper">
+  <div class="element-box-tp">
+    <h5 class="form-header">
+      Table without wrapper
+    </h5>
+    <div class="form-desc">You can put a table tag inside an <code>.element-box-tp</code> class wrapper and add <code>.table</code> class to it to get something like this:
     </div>
-@endif
-
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-            <!-- start dog form  -->
-
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Judge</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form action="{{ route('judges.store') }}" method="post" enctype="multipart/form-data">
-        @csrf
-         
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Full Name</label>
-              <div class="col-sm-8">
-                <input id="full_name" class="form-control" name="full_name" placeholder="Enter Full Name" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Position In Club</label>
-              <div class="col-sm-8">
-                <input   class="form-control" name="position_in_club" id="position_in_club" placeholder="Enter Position In Club" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Image</label>
-              <div class="col-sm-8">
-              <input class="form-control" type="file" id="img" name="img" accept="image/png, image/jpeg">
-                <div id="preview_img"></div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Signature</label>
-              <div class="col-sm-8">
-              <input class="form-control" type="file" id="sig" name="sig" accept="image/png, image/jpeg">
-                <div id="preview_sig"></div>
-              </div>
-            </div>
-       
-            <div class="form-group row">
-            <label class="col-form-label col-sm-4" for=""> Enter Description Below</label>
-            <div class="col-sm-8">
-            <textarea class="form-control" cols="80" id="ckeditor1" name="description" rows="10"></textarea>
-            </div>
+    <div class="element-box-tp">
+      <!--------------------
+      START - Controls Above Table
+      -------------------->
+      <div class="controls-above-table">
+        <div class="row">
+          <div class="col-sm-6">
+            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('users.create')}}">Add Users</a><a class="btn btn-sm btn-danger" href="#">Delete</a>
           </div>
-           
-         
-          <div class="form-buttons-w mb-4">
-            <button class="btn btn-primary" type="submit"> Submit</button>
-            <button class="btn btn-secondary" type="reset"> Reset</button>
-            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
-              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
-            </a>
+          <div class="col-sm-6">
+            <form class="form-inline justify-content-sm-end">
+              <input class="form-control form-control-sm rounded bright" placeholder="Search" type="text"><select class="form-control form-control-sm rounded bright">
+                <option selected="selected" value="">
+                  Select Status
+                </option>
+                <option value="Pending">
+                  Pending
+                </option>
+                <option value="Active">
+                  Active
+                </option>
+                <option value="Cancelled">
+                  Cancelled
+                </option>
+              </select>
+            </form>
           </div>
-          @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
-
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      <!--------------------
+      END - Controls Above Table
+      ------------------          --><!--------------------
+      START - Table with actions
+      ------------------  -->
+      <div class="table-responsive">
+        <table class="table table-bordered table-lg table-v2 table-striped">
+          <thead>
+            <tr>
+              <th class="text-center">
+                <input class="form-control" type="checkbox">
+              </th>
+              <th>
+                S.no
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+               Username
+              </th>
+              <th>
+               Email
+              </th>
+              <th>
+              Action
+              </th>
+              
+            </tr>
+          </thead>
+          <tbody>
+          <?php
+                         $i = 1;
+                        ?>
+        
+          @foreach ($user as $users)
+            <tr>
+              <td class="text-center">
+                <input class="form-control" type="checkbox">
+              </td>
+              <td>{{ $i++ }}</td>
+              <td>
+              {{$users->name}}
+              </td>
+              <td>
+              {{$users->username}}
+              </td>
+              <td>
+              {{$users->email}}
+              </td>
+              <td class="text-center">
+                <div class="status-pill green" data-title="Complete" data-toggle="tooltip"></div>
+              </td>
+              <td class="row-actions">
+                <a href="{{route('users.edit',$users->id)}}"><i class="os-icon os-icon-ui-49"></i></a><a href="#"><i class="os-icon os-icon-grid-10"></i></a>
+                <form action="{{ route('users.destroy', $users->id ) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                <button class="trans_btn" type="submit" onclick="return confirm('Are you sure to delete this user?')"><i class="os-icon os-icon-ui-15"></i></button>
+                              </form>
+                              </td>
+                            </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
+      <!--------------------
+      END - Table with actions
+      ------------------            --><!--------------------
+      START - Controls below table
+      ------------------  -->
+      <div class="controls-below-table">
+        <div class="table-records-info">
+          Showing records 1 - 5
+        </div>
+        <div class="table-records-pages">
+          <ul>
+            <li>
+              <a href="#">Previous</a>
+            </li>
+            <li>
+              <a class="current" href="#">1</a>
+            </li>
+            <li>
+              <a href="#">2</a>
+            </li>
+            <li>
+              <a href="#">3</a>
+            </li>
+            <li>
+              <a href="#">4</a>
+            </li>
+            <li>
+              <a href="#">Next</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--------------------
+      END - Controls below table
+      -------------------->
     </div>
   </div>
 </div>
-</form>
-            <!-- <div id="dog_form">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Dog Name</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="dog_name" placeholder="Enter Dog Name" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">DOB</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="dob" placeholder="Enter DOB" type="date">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Club Reg #</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="reg_no" placeholder="Enter Club Reg #" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Microchip</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="microchip" placeholder="Enter Microchip" type="text">
-              </div>
-            </div>
-       
-         
-            <div class="form-group row">
-          <label class="col-form-label col-sm-4" for="" > Gender</label>
-          <div class="col-sm-8">
-          <select class="form-control" name="gender">
-          <option value="">
-                  Select One
-                </option>
-                <option value="Male">
-                  Male
-                </option>
-                <option value="Female">
-                Female
-                </option>
-              </select>
-            </div>
-            </div>
-            <div class="form-group row">
-            <label class="col-form-label col-sm-4" for="">Show Title</label>
-            <div class="col-sm-8">
-              <input class="form-control" name="show_title" placeholder="Enter Show Title" type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Achievements </label>
-              <div class="col-sm-8">
-                <textarea class="form-control" name="achievements" id="" cols="30" rows="10"></textarea>
-              </div>
-            </div>
-            </div> -->
-
-            <!-- close dog form  -->
-
-
-         
-         
-      
 <!--------------------
               START - Color Scheme Toggler
               -------------------->
@@ -475,69 +384,23 @@
               END - Chat Popup Box
               -------------------->
             </div>
+            <!--------------------
+            START - Sidebar
+            -------------------->
+            <div class="content-panel">
+              <div class="content-panel-close">
+                <i class="os-icon os-icon-close"></i>
+              </div><!--------------------
+START - Support Agents
+-------------------->
+
+            </div>
+            <!--------------------
+            END - Sidebar
+            -------------------->
           </div>
         </div>
       </div>
       <div class="display-type"></div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
-    <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
-    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
-<script>
-  $('#selUser').select2({
-    allowClear: true,
-    placeholder: 'Select an item',
-    language: {
-      noResults: function (term) {
-        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Judge</button>';
-      }
-    },
-    escapeMarkup: function(markup) {
-      return markup;
-    },
-    ajax: {
-      type: "get",
-      url: '{{ URL::to('api/search') }}',
-      dataType: 'json',
-  
-      delay: 250,
-   
-       data: function (params) {
-              return {
-                  q: $.trim(params.term)
-              };   
-          },
-      processResults: function (data) {
-        // console.log(data)
-        return {
-          results:  $.map(data, function (item) {
-                return {
-          //  _token: CSRF_TOKEN,
-  
-                    text: item.full_name,
-                    id: item.id,
-                    
-                }
-            })
-        };
-      },
-      
-      cache: true
-    }
-    
-  }).on('select2:open', function() {
-    // debugger;
-// $("#selUser").on("click", clearSelectedOptions);
-});
-
-      // if (input.val() == "") {
-      //   $(this).val(null).trigger('change');
-      //   $('#dog_form').hide();
-      // }
-    // });
-
-</script>
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
-   
-@endsection
+    @endsection

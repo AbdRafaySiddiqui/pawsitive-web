@@ -2,7 +2,175 @@
 
 @section('content')
         <div class="content-w">
-        <!--------------------
+          <!--------------------
+          START - Top Bar
+          -------------------->
+          <div class="top-bar color-scheme-transparent">
+            <!--------------------
+            START - Top Menu Controls
+            -------------------->
+            <div class="top-menu-controls">
+              <div class="element-search autosuggest-search-activator">
+                <input placeholder="Start typing to search..." type="text">
+              </div>
+              <!--------------------
+              START - Messages Link in secondary top menu
+              -------------------->
+              <div class="messages-notifications os-dropdown-trigger os-dropdown-position-left">
+                <i class="os-icon os-icon-mail-14"></i>
+                <div class="new-messages-count">
+                  12
+                </div>
+                <div class="os-dropdown light message-list">
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <div class="user-avatar-w">
+                          <img alt="" src="img/avatar1.jpg">
+                        </div>
+                        <div class="message-content">
+                          <h6 class="message-from">
+                            John Mayers
+                          </h6>
+                          <h6 class="message-title">
+                            Account Update
+                          </h6>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <div class="user-avatar-w">
+                          <img alt="" src="img/avatar2.jpg">
+                        </div>
+                        <div class="message-content">
+                          <h6 class="message-from">
+                            Phil Jones
+                          </h6>
+                          <h6 class="message-title">
+                            Secutiry Updates
+                          </h6>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <div class="user-avatar-w">
+                          <img alt="" src="img/avatar3.jpg">
+                        </div>
+                        <div class="message-content">
+                          <h6 class="message-from">
+                            Bekky Simpson
+                          </h6>
+                          <h6 class="message-title">
+                            Vacation Rentals
+                          </h6>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <div class="user-avatar-w">
+                          <img alt="" src="img/avatar4.jpg">
+                        </div>
+                        <div class="message-content">
+                          <h6 class="message-from">
+                            Alice Priskon
+                          </h6>
+                          <h6 class="message-title">
+                            Payment Confirmation
+                          </h6>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!--------------------
+              END - Messages Link in secondary top menu
+              --------------------><!--------------------
+              START - Settings Link in secondary top menu
+              -------------------->
+              <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-left">
+                <i class="os-icon os-icon-ui-46"></i>
+                <div class="os-dropdown">
+                  <div class="icon-w">
+                    <i class="os-icon os-icon-ui-46"></i>
+                  </div>
+                  <ul>
+                    <li>
+                      <a href="users_profile_small.html"><i class="os-icon os-icon-ui-49"></i><span>Profile Settings</span></a>
+                    </li>
+                    <li>
+                      <a href="users_profile_small.html"><i class="os-icon os-icon-grid-10"></i><span>Billing Info</span></a>
+                    </li>
+                    <li>
+                      <a href="users_profile_small.html"><i class="os-icon os-icon-ui-44"></i><span>My Invoices</span></a>
+                    </li>
+                    <li>
+                      <a href="users_profile_small.html"><i class="os-icon os-icon-ui-15"></i><span>Cancel Account</span></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!--------------------
+              END - Settings Link in secondary top menu
+              --------------------><!--------------------
+              START - User avatar and menu in secondary top menu
+              -------------------->
+              <div class="logged-user-w">
+                <div class="logged-user-i">
+                  <div class="avatar-w">
+                    <img alt="" src="img/avatar1.jpg">
+                  </div>
+                  <div class="logged-user-menu color-style-bright">
+                    <div class="logged-user-avatar-info">
+                      <div class="avatar-w">
+                        <img alt="" src="img/avatar1.jpg">
+                      </div>
+                      <div class="logged-user-info-w">
+                        <div class="logged-user-name">
+                          Maria Gomez
+                        </div>
+                        <div class="logged-user-role">
+                          Administrator
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bg-icon">
+                      <i class="os-icon os-icon-wallet-loaded"></i>
+                    </div>
+                    <ul>
+                      <li>
+                        <a href="apps_email.html"><i class="os-icon os-icon-mail-01"></i><span>Incoming Mail</span></a>
+                      </li>
+                      <li>
+                        <a href="users_profile_big.html"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a>
+                      </li>
+                      <li>
+                        <a href="users_profile_small.html"><i class="os-icon os-icon-coins-4"></i><span>Billing Details</span></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="os-icon os-icon-others-43"></i><span>Notifications</span></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--------------------
+              END - User avatar and menu in secondary top menu
+              -------------------->
+            </div>
+            <!--------------------
+            END - Top Menu Controls
+            -------------------->
+          </div>
+          <!--------------------
+          END - Top Bar
+          --------------------><!--------------------
           START - Breadcrumbs
           -------------------->
           <ul class="breadcrumb">
@@ -28,236 +196,63 @@
         Horizontal Form Layout
       </h6>
       <div class="element-box">
-        <form action="{{ route('events.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('users.store') }}" method="post" >
         @csrf
-   
-                    
-          <h5 class="form-header">
+        <h5 class="form-header">
             Horizontal Layout
           </h5>
           <div class="form-desc">
             Discharge best employed your phase each the of shine. Be met even reason consider logbook redesigns. Never a turned interfaces among asking
           </div>
           <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Event Name</label>
+              <label class="col-sm-4 col-form-label" for="">Name</label>
               <div class="col-sm-8">
-                <input class="form-control" name="event_name" placeholder="Enter Event Name" type="text">
+                <input class="form-control" name="name" placeholder="Enter Name" type="text">
               </div>
             </div>
-       
           <div class="form-group row">
-          <label class="col-form-label col-sm-4" for=""> Select Club</label>
-          <div class="col-sm-8">
-          <select class="form-control" name="club_id">
-          @foreach($total_clubs as $clubs)
-                <option value="{{$clubs->id}}">
-               {{$clubs->name}}
-                </option>
-                @endforeach
-              </select>
-            </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Country</label>
+              <label class="col-sm-4 col-form-label" for="">Username</label>
               <div class="col-sm-8">
-              <select class="form-control" name="country">
-              @foreach($total_countries as $countries)
-                <option  value="{{$countries->z}}">
-               {{$countries->countryName}}
-                </option>
-                @endforeach
-              </select>
+                <input class="form-control" name="username" placeholder="Enter Username" type="text">
+              </div>
+            </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Email</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="email" placeholder="Enter Email" type="email">
+              </div>
+            </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Password</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="password" placeholder="Enter Password" type="password">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> City</label>
-              <div class="col-sm-8">
-              <select class="form-control" name="city">
-              @foreach($total_cities as $cities)
-                <option  value="{{$cities->id}}">
-               {{$cities->city}}
-                </option>
-                @endforeach
-              </select>
-              </div>
+              <label class="col-sm-4 col-form-label" for="">Role</label>
+              <select class="form-control" name="role" id="role" class="col-sm-8">
+              @foreach($roles as $role)
+    <option value="{{ $role->id }}">{{ $role->name }}</option>
+  @endforeach
+             </select>
             </div>
           
-           
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Date</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="date" placeholder="Enter DOB" type="date">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Select Judge</label>
-              <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="judge_id" id="selUser"  >
-              @foreach($total_judges as $judges)
-                <option value="{{$clubs->id}}">
-               {{$judges->name}}
-                </option>
-                @endforeach
-                       </select>
-              </div>
-            </div>
-            <div class="form-buttons-w mb-4">
+         
+          <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
-            <button class="btn btn-secondary" type="reset"> Reset</button>
-            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
-              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
-            </a>
           </div>
           @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
 @endif
+
 
         </form>
       </div>
     </div>
   </div>
 </div>
-            <!-- start dog form  -->
-
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Judge</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form action="{{ route('judges.store') }}" method="post" enctype="multipart/form-data">
-        @csrf
-         
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Full Name</label>
-              <div class="col-sm-8">
-                <input id="full_name" class="form-control" name="full_name" placeholder="Enter Full Name" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Position In Club</label>
-              <div class="col-sm-8">
-                <input   class="form-control" name="position_in_club" id="position_in_club" placeholder="Enter Position In Club" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Image</label>
-              <div class="col-sm-8">
-              <input class="form-control" type="file" id="img" name="img" accept="image/png, image/jpeg">
-                <div id="preview_img"></div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Signature</label>
-              <div class="col-sm-8">
-              <input class="form-control" type="file" id="sig" name="sig" accept="image/png, image/jpeg">
-                <div id="preview_sig"></div>
-              </div>
-            </div>
-       
-            <div class="form-group row">
-            <label class="col-form-label col-sm-4" for=""> Enter Description Below</label>
-            <div class="col-sm-8">
-            <textarea class="form-control" cols="80" id="ckeditor1" name="description" rows="10"></textarea>
-            </div>
-          </div>
-           
-         
-          <div class="form-buttons-w mb-4">
-            <button class="btn btn-primary" type="submit"> Submit</button>
-            <button class="btn btn-secondary" type="reset"> Reset</button>
-            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
-              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
-            </a>
-          </div>
-          @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-</form>
-            <!-- <div id="dog_form">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Dog Name</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="dog_name" placeholder="Enter Dog Name" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">DOB</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="dob" placeholder="Enter DOB" type="date">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Club Reg #</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="reg_no" placeholder="Enter Club Reg #" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Microchip</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="microchip" placeholder="Enter Microchip" type="text">
-              </div>
-            </div>
-       
-         
-            <div class="form-group row">
-          <label class="col-form-label col-sm-4" for="" > Gender</label>
-          <div class="col-sm-8">
-          <select class="form-control" name="gender">
-          <option value="">
-                  Select One
-                </option>
-                <option value="Male">
-                  Male
-                </option>
-                <option value="Female">
-                Female
-                </option>
-              </select>
-            </div>
-            </div>
-            <div class="form-group row">
-            <label class="col-form-label col-sm-4" for="">Show Title</label>
-            <div class="col-sm-8">
-              <input class="form-control" name="show_title" placeholder="Enter Show Title" type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Achievements </label>
-              <div class="col-sm-8">
-                <textarea class="form-control" name="achievements" id="" cols="30" rows="10"></textarea>
-              </div>
-            </div>
-            </div> -->
-
-            <!-- close dog form  -->
-
-
-         
-         
-      
 <!--------------------
               START - Color Scheme Toggler
               -------------------->
@@ -480,64 +475,4 @@
       </div>
       <div class="display-type"></div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
-    <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
-    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
-<script>
-  $('#selUser').select2({
-    allowClear: true,
-    placeholder: 'Select an item',
-    language: {
-      noResults: function (term) {
-        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Judge</button>';
-      }
-    },
-    escapeMarkup: function(markup) {
-      return markup;
-    },
-    ajax: {
-      type: "get",
-      url: '{{ URL::to('api/search') }}',
-      dataType: 'json',
-  
-      delay: 250,
-   
-       data: function (params) {
-              return {
-                  q: $.trim(params.term)
-              };   
-          },
-      processResults: function (data) {
-        // console.log(data)
-        return {
-          results:  $.map(data, function (item) {
-                return {
-          //  _token: CSRF_TOKEN,
-  
-                    text: item.full_name,
-                    id: item.id,
-                    
-                }
-            })
-        };
-      },
-      
-      cache: true
-    }
-    
-  }).on('select2:open', function() {
-    // debugger;
-// $("#selUser").on("click", clearSelectedOptions);
-});
-
-      // if (input.val() == "") {
-      //   $(this).val(null).trigger('change');
-      //   $('#dog_form').hide();
-      // }
-    // });
-
-</script>
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
-   
 @endsection

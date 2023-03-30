@@ -89,6 +89,15 @@
               <th>
               City
               </th>
+              <th>
+              Club Name
+              </th>
+              <th>
+              Judge Name
+              </th>
+              <th>
+              Action
+              </th>
              
               
             </tr>
@@ -98,7 +107,7 @@
                          $i = 1;
                         ?>
                       
-          @foreach ($event as $key => $e)
+          @foreach ($event as  $e)
             <tr>
             <td>{{ $i++ }}</td>
             
@@ -109,11 +118,35 @@
              
               
               <td>{{ $created=date('d-m-Y h:i:s', strtotime($e->date)) }}</td>
-              <!-- @if(isset($e->city->city)) -->
-                <td>{{ $e->cities_name->city }}</td>
-              <!-- @endif -->
-              <td></td>
-             
+              @if(isset($e->cities_name->city))
+                <td>{{$e->cities_name->city}}</td>
+                @else
+                <td></td>
+              @endif
+
+              @if(isset($e->cities_name->city))
+              <td>
+              {{$e->country_name->countryName}}
+              </td>
+              @else
+                <td></td>
+              @endif
+
+              @if(isset($e->club_name->name))
+              <td>
+              {{$e->club_name->name}}
+              </td>
+              @else
+                <td></td>
+              @endif
+
+              @if(isset($e->judge_name->full_name))
+              <td>
+              {{$e->judge_name->full_name}}
+              </td>
+              @else
+                <td></td>
+              @endif
               <td class="row-actions">
                 <a href="{{route('events.edit',$e->id)}}"><i class="os-icon os-icon-ui-49"></i></a><a href="#"><i class="os-icon os-icon-grid-10"></i></a>
                 <form action="{{ route('events.destroy', $e->id ) }}" method="post">
