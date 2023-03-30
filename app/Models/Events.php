@@ -10,7 +10,7 @@ class Events extends Model
     use HasFactory;
     protected $table = 'events';
 
-  public function cities(){
+  public function cities_name(){
     return $this->belongsTo('App\Models\Cities','city','id');
   }
   public function country(){
