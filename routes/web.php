@@ -14,15 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// Route::get('/login', function () {
-//     return view('auth_login');
+// Route::get('/', function () {
+//     return view('dashboard');
 // });
 // Route::get('/for', function () {
 //     return view('club.store');
 // });
 
+Route::get('api/search', 'App\Http\Controllers\ApisController@dataAjax');
+Route::post('/submit-form', 'App\Http\Controllers\EventsController@submitForm');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+
     
     Route::resource('club','App\Http\Controllers\ClubsController');
     Route::resource('judges','App\Http\Controllers\judgesController');
@@ -37,6 +40,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 
     Route::post('/users', 'App\Http\Controllers\UserController@store')->name('users.store');
+    Route::resource('breeds','App\Http\Controllers\breedsController');
+    Route::resource('events','App\Http\Controllers\EventsController');
 
     Route::get('/dashboard', function () {
         return view('dashboard');

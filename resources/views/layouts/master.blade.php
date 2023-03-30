@@ -22,6 +22,8 @@
     <link href="{{asset('public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/dropzone/dist/dropzone.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/custom/style.css')}}" rel="stylesheet">
+    <link href="{{asset('public/select2-develop/dist/css/select2.min.css')}}" rel="stylesheet" />
+    <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
 
   </head>
   <body class="menu-position-side menu-side-left full-screen color-scheme-dark">
@@ -531,6 +533,30 @@
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
+                <span>Events</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Events
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('events.create')}}">Add Events</a>
+                      <a href="{{route('events.index')}}">All Events</a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
                 <span>Dogs</span></a>
               <div class="sub-menu-w">
                 <div class="sub-menu-header">
@@ -615,7 +641,7 @@
 
         @yield('content')
 
-        <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
+       
         <script src="{{asset('public/bower_components/popper.js/dist/umd/popper.min.js')}}"></script>
         <script src="{{asset('public/bower_components/moment/moment.js')}}"></script>
         <script src="{{asset('public/bower_components/chart.js/dist/Chart.min.js')}}"></script>
@@ -653,6 +679,90 @@
           
           ga('create', 'UA-XXXXXXX-9', 'auto');
           ga('send', 'pageview');
+
+
+
         </script>
-      </body>
+ 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
+
+<script>
+
+
+
+    
+function previewImages() {
+
+  
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+    
+    var reader = new FileReader();
+    
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    });
+    
+    reader.readAsDataURL(file);
+    
+  }
+
+}
+document.querySelector('#img').addEventListener("change", previewImages);
+function previewSignature() {
+
+  var preview = document.querySelector('#preview_sig');
+  
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+    
+    var reader = new FileReader();
+    
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    });
+    
+    reader.readAsDataURL(file);
+    
+  }
+
+}
+
+document.querySelector('#sig').addEventListener("change", previewSignature);
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
     </html>
