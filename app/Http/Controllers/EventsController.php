@@ -31,7 +31,8 @@ class EventsController extends Controller
         $total_cities = Cities::get();
         $total_countries = Countries::get();
         $total_breeds = Breeds::get();
-        return view('events.create',compact('total_clubs','total_cities','total_breeds','total_countries'));
+        $judges = Judges::all();
+        return view('events.create',compact('total_clubs','total_cities','total_breeds','total_countries','judges'));
        
     }
 
