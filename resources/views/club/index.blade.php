@@ -59,18 +59,17 @@
                 Club Name
               </th>
               <th>
-                Country
+                Email
               </th>
-              <th>
-              City
-              </th>
-              <th>
-               Email
-              </th>
-            
               <th>
               Phone
               </th>
+              <th>
+              Country
+              </th>
+              <th>
+              City
+              </th>   
               <th>
                 Affiliation with
               </th>
@@ -92,18 +91,17 @@
               <td>
               {{$clubs->name}}
               </td>
-             
-              <td class="text-right">
-                $245
-              </td>
-              <td>
-                Organic
-              </td>
               <td>
               {{$clubs->email}}
               </td>
               <td>
               {{$clubs->phone}}
+              </td>
+              <td>
+              {{$clubs->country}}
+              </td>
+              <td>
+              {{$clubs->city}}
               </td>
               <td>
               {{$clubs->affiliation}}

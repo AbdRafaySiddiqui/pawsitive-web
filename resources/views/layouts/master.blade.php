@@ -24,6 +24,7 @@
     <link href="{{asset('public/bower_components/custom/style.css')}}" rel="stylesheet">
     <link href="{{asset('public/select2-develop/dist/css/select2.min.css')}}" rel="stylesheet" />
     <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
+
   </head>
   <body class="menu-position-side menu-side-left full-screen color-scheme-dark">
     <div class="all-wrapper solid-bg-all">
@@ -467,7 +468,11 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
-                      <a href="{{route('club.create')}}">Add Club</a>
+                    @if(Auth::user()->hasRole('admin'))
+    <a href="{{route('club.create')}}">Add Club</a>
+@else
+    <a href="{{route('club.create')}}">Writer Club</a>
+@endif      
                       <a href="{{route('club.index')}}">All Club</a>
                     </li>
                     
@@ -528,6 +533,30 @@
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
+                <span>Events</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Events
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('events.create')}}">Add Events</a>
+                      <a href="{{route('events.index')}}">All Events</a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
                 <span>Dogs</span></a>
               <div class="sub-menu-w">
                 <div class="sub-menu-header">
@@ -541,14 +570,70 @@
                     <li>
                       <a href="{{route('dogs.create')}}">Add Dogs</a>
                       <a href="{{route('dogs.index')}}">All Dogs</a>
+                    </li>             
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Users</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Users
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('users.create')}}">Add Users</a>
                     </li>
-                    
+                    <li>
+                      <a href="{{route('users.index')}}">All Users</a>
+                    </li>     
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Logged in as:</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Logged in as:
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <!-- check if the user have logged in as admin  -->
+                    @if(Auth::check() && Auth::user()->role_id == '1')
+                      <a href="">Admin</a>
+                      @endif
+                      <!-- check in if the user have logged in as writer  -->
+                      @if(Auth::check() && Auth::user()->role_id == '2')
+                      <a href="">Writer</a>
+                      @endif
+                      <!-- check if the user have logged in as user  -->
+                      @if(Auth::check() && Auth::user()->role_id == '3')
+                      <a href="">User</a>
+                      @endif
+                    </li>                   
                   </ul>
                 </div>
               </div>
             </li>
           </ul>
-          
         </div>
         <!--------------------
         END - Main Menu
@@ -598,9 +683,13 @@
 
 
         </script>
-    {{-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
-   
+ 
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<!-- <script>
+    var $j = jQuery.noConflict();
+    // Use $j instead of $ to reference the jQuery library
+</script> -->
+
 
 
 <script>
@@ -610,7 +699,6 @@
     
 function previewImages() {
 
-  var preview = document.querySelector('#preview_img');
   
   if (this.files) {
     [].forEach.call(this.files, readAndPreview);
@@ -672,43 +760,11 @@ function previewSignature() {
 
 document.querySelector('#sig').addEventListener("change", previewSignature);
 
-// input search 
-
-// $(document).ready(function() {
-//         $('#selUser').select2();
-//     });
-
-// var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-// $(document).ready(function(){
-
-
-//   $('#selUser').select2({
-//   ajax: {
-//     url: 'https://api.github.com/orgs/select2/repos',
-//     data: function (params) {
-//       var query = {
-//         search: params.term,
-//         type: 'public'
-//       }
-
-//       // Query parameters will be ?search=[term]&type=public
-//       return query;
-//     }
-//   }
-// });
-// var $input = $('.form-control[name=' + eKey + ']');
-// console.log($input[0].name);
 
 
 
 
 
-function noResultsButtonClicked() {
-  // alert('You clicked the "No Result Found" button.');
-  var x = document.getElementById("dog_form");
-  x.style.display = "block";
-}
 
     </script>
 

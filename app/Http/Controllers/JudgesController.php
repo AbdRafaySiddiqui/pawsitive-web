@@ -59,8 +59,9 @@ class judgesController extends Controller
         //     VALUES ('".$request->full_name."','".htmlentities($request->description)."','".$imageName."','".$imagesig."','".$request->position_in_club."') "));
 
        
-            return redirect()->route('judges.index')
-                    ->with('success','New Judge Added');
+            // return redirect()->route('judges.index')
+            //         ->with('success','New Judge Added');
+            return redirect()->back()->with('success', 'New Judge Added');
     }
 
     /**

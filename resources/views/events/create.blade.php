@@ -28,7 +28,7 @@
         Horizontal Form Layout
       </h6>
       <div class="element-box">
-        <form action="{{ route('judges.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('events.store') }}" method="post" enctype="multipart/form-data">
         @csrf
    
                     
@@ -46,9 +46,9 @@
             </div>
        
           <div class="form-group row">
-          <label class="col-form-label col-sm-4" for="" name="countries"> Select Club</label>
+          <label class="col-form-label col-sm-4" for=""> Select Club</label>
           <div class="col-sm-8">
-          <select class="form-control" name="country">
+          <select class="form-control" name="club_id">
           @foreach($total_clubs as $clubs)
                 <option value="{{$clubs->id}}">
                {{$clubs->name}}
@@ -56,6 +56,18 @@
                 @endforeach
               </select>
             </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for=""> Country</label>
+              <div class="col-sm-8">
+              <select class="form-control" name="country">
+              @foreach($total_countries as $countries)
+                <option  value="{{$countries->z}}">
+               {{$countries->countryName}}
+                </option>
+                @endforeach
+              </select>
+              </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for=""> City</label>
@@ -69,38 +81,122 @@
               </select>
               </div>
             </div>
-          <div class="form-group row">
-          <label class="col-form-label col-sm-4" for="" name="countries"> Select Gender</label>
-          <div class="col-sm-8">
-          <select class="form-control" name="gender">
-         
-                <option value="Male">
-                Male
-                </option>
-                <option value="Female">
-                Female
-                </option>
-              </select>
-            </div>
-            </div>
+          
            
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">DOB</label>
+              <label class="col-sm-4 col-form-label" for="">Date</label>
               <div class="col-sm-8">
-                <input class="form-control" name="dob" placeholder="Enter DOB" type="date">
+                <input class="form-control" name="date" placeholder="Enter DOB" type="date">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Select Dog</label>
+              <label class="col-sm-4 col-form-label" for="">Select Judge</label>
               <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="dog_name" id="selUser"  >
+              <select class="form-control js-data-example-ajax" name="judge_id" id="selUser"  >
+              @foreach($judges as $judge)
+                <option  value="{{$judge->id}}">
+               {{$judge->full_name}}
+                </option>
+                @endforeach
                        
                        </select>
               </div>
             </div>
+            <div class="form-buttons-w mb-4">
+            <button class="btn btn-primary" type="submit"> Submit</button>
+            <button class="btn btn-secondary" type="reset"> Reset</button>
+            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
+              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
+            </a>
+          </div>
+          @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
 
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
             <!-- start dog form  -->
-            <div id="dog_form">
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Judge</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="{{ route('judges.store') }}" method="post" enctype="multipart/form-data">
+        @csrf
+         
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Full Name</label>
+              <div class="col-sm-8">
+                <input id="full_name" class="form-control" name="full_name" placeholder="Enter Full Name" type="text">
+              </div>
+            </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for=""> Position In Club</label>
+              <div class="col-sm-8">
+                <input   class="form-control" name="position_in_club" id="position_in_club" placeholder="Enter Position In Club" type="text">
+              </div>
+            </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for=""> Image</label>
+              <div class="col-sm-8">
+              <input class="form-control" type="file" id="img" name="img" accept="image/png, image/jpeg">
+                <div id="preview_img"></div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for=""> Signature</label>
+              <div class="col-sm-8">
+              <input class="form-control" type="file" id="sig" name="sig" accept="image/png, image/jpeg">
+                <div id="preview_sig"></div>
+              </div>
+            </div>
+       
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for=""> Enter Description Below</label>
+            <div class="col-sm-8">
+            <textarea class="form-control" cols="80" id="ckeditor1" name="description" rows="10"></textarea>
+            </div>
+          </div>
+           
+         
+          <div class="form-buttons-w mb-4">
+            <button class="btn btn-primary" type="submit"> Submit</button>
+            <button class="btn btn-secondary" type="reset"> Reset</button>
+            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
+              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
+            </a>
+          </div>
+          @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+            <!-- <div id="dog_form">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Dog Name</label>
               <div class="col-sm-8">
@@ -155,58 +251,14 @@
                 <textarea class="form-control" name="achievements" id="" cols="30" rows="10"></textarea>
               </div>
             </div>
-            </div>
+            </div> -->
 
             <!-- close dog form  -->
 
 
-          <!-- <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Position In Club</label>
-              <div class="col-sm-8">
-                <input   class="form-control" name="position_in_club" id="position_in_club" placeholder="Enter Position In Club" type="text">
-              </div>
-            </div> -->
-          <!-- <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Image</label>
-              <div class="col-sm-8">
-              <input class="form-control" type="file" id="img" name="img" accept="image/png, image/jpeg">
-                <div id="preview_img"></div>
-              </div>
-            </div> -->
-            <!-- <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Signature</label>
-              <div class="col-sm-8">
-              <input class="form-control" type="file" id="sig" name="sig" accept="image/png, image/jpeg">
-                <div id="preview_sig"></div>
-              </div>
-            </div> -->
-       
-            <!-- <div class="form-group row">
-            <label class="col-form-label col-sm-4" for=""> Enter Description Below</label>
-            <div class="col-sm-8">
-            <textarea class="form-control" cols="80" id="ckeditor1" name="description" rows="10"></textarea>
-            </div>
-          </div>
-            -->
          
-          <div class="form-buttons-w mb-4">
-            <button class="btn btn-primary" type="submit"> Submit</button>
-            <button class="btn btn-secondary" type="reset"> Reset</button>
-            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
-              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
-            </a>
-          </div>
-          @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
-
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+         
+      
 <!--------------------
               START - Color Scheme Toggler
               -------------------->
@@ -429,16 +481,17 @@
       </div>
       <div class="display-type"></div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
     <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
     <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
 <script>
   $('#selUser').select2({
-    
+    allowClear: true,
     placeholder: 'Select an item',
     language: {
       noResults: function (term) {
-        return '<a id="no-results-btn" onclick="noResultsButtonClicked()">Add Dog</a>';
+        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Judge</button>';
       }
     },
     escapeMarkup: function(markup) {
@@ -463,7 +516,7 @@
                 return {
           //  _token: CSRF_TOKEN,
   
-                    text: item.dog_name,
+                    text: item.full_name,
                     id: item.id,
                     
                 }
@@ -475,12 +528,17 @@
     }
     
   }).on('select2:open', function() {
-      var input = $('.select2-search__field');
-      if (input.val() == "") {
-        $(this).val(null).trigger('change');
-        $('#dog_form').hide();
-      }
-    });
+    // debugger;
+// $("#selUser").on("click", clearSelectedOptions);
+});
+
+      // if (input.val() == "") {
+      //   $(this).val(null).trigger('change');
+      //   $('#dog_form').hide();
+      // }
+    // });
+
 </script>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
    
 @endsection

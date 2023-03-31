@@ -9,4 +9,5 @@ class countries extends Model
 {
     use HasFactory;
     protected $table = 'countries';
+
 }
