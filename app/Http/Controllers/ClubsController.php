@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Clubs;
 use App\Models\Countries;
 use App\Models\Cities;
+use Illuminate\Pagination\Paginator;
 
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class ClubsController extends Controller
      */
     public function index()
     {
-        $club = Clubs::get();
+        $club = Clubs::orderBy('id','DESC')->paginate('5');
         
         return view('club.index',compact('club'));
     }

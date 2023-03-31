@@ -16,3 +16,12 @@ span.select2-dropdown.select2-dropdown--below {
 span.select2-dropdown.select2-dropdown--above {
     z-index: 1 !important;
 }
+div#success-msg {
+    color: #104f09;
+    background-color: #6acb5f;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 2px solid transparent;
+    border-radius: 6px;
+}

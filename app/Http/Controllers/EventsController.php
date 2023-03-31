@@ -9,6 +9,7 @@ use App\Models\Breeds;
 use App\Models\Events;
 use App\Models\judges;
 use App\Models\Countries;
+use Illuminate\Pagination\Paginator;
 
 class EventsController extends Controller
 {
@@ -17,7 +18,8 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $event = Events::with('cities_name','country_name','club_name','judge_name')->get();
+        Paginator::useBootstrap();
+        $event = Events::with('cities_name','country_name','club_name','judge_name')->orderBy('id','DESC')->paginate('5');
        
         return view('events/index', compact('event'));
     }
@@ -41,6 +43,12 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name'=>'required',
+            'club_id'=>'required',
+            'country'=>'required',
+       
+        ]); 
         $events = new Events;
         $events->name =  $request->event_name;
 	    $events->club_id = $request->club_id;
@@ -50,7 +58,7 @@ class EventsController extends Controller
 	    $events->judge_id = $request->judge_id;
         $events->save();
         
-        return redirect()->back()->with('message', 'Record added successfully');
+        return redirect()->back()->with('message', 'Record added successfully',compact('request'));
     }
 
     /**
@@ -146,12 +154,15 @@ public function submitForm(Request $request)
     $link = str_replace(" ", "-", $request->full_name);
     $create->url_link = $link; 
     $create->save();
-  
+
     return response()->json([
         'success' => true,
         'message' => 'Form submitted successfully',
         'response' =>   $create
     ]);
+
+
+
 }
 
 }
