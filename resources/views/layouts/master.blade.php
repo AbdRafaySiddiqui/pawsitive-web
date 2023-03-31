@@ -388,7 +388,7 @@
         --------------------><!--------------------
         START - Main Menu
         -------------------->
-        <div class="menu-w menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright menu-activated-on-hover menu-has-selected-link color-scheme-dark color-style-transparent selected-menu-color-bright">
+        <div class="menu-w menu-position-side menu-side-left menu-layout-compact sub-menu-style-flyout sub-menu-color-bright menu-activated-on-hover menu-has-selected-link color-scheme-dark color-style-transparent selected-menu-color-bright">
           <div class="logged-user-w avatar-inline">
             <div class="logged-user-i">
               <div class="avatar-w">
@@ -685,15 +685,19 @@
         </script>
  
  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script>
+<!-- <script>
     var $j = jQuery.noConflict();
     // Use $j instead of $ to reference the jQuery library
-</script>
+</script> -->
 
 
 
 <script>
-
+// hover 
+$(".has-sub-menu").hover(
+  function(){ $(this).addClass('active') },
+  function(){ $(this).removeClass('active') }
+);
 
 
     

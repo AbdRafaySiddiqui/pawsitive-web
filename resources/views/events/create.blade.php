@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
+
+
         <div class="content-w">
         <!--------------------
           START - Breadcrumbs
@@ -50,6 +52,7 @@
           <div class="col-sm-8">
           <select class="form-control" name="club_id">
           @foreach($total_clubs as $clubs)
+          <option> Select Club </option>
                 <option value="{{$clubs->id}}">
                {{$clubs->name}}
                 </option>
@@ -61,6 +64,7 @@
               <label class="col-sm-4 col-form-label" for=""> Country</label>
               <div class="col-sm-8">
               <select class="form-control" name="country">
+              <option> Select Country </option>
               @foreach($total_countries as $countries)
                 <option  value="{{$countries->z}}">
                {{$countries->countryName}}
@@ -73,6 +77,7 @@
               <label class="col-sm-4 col-form-label" for=""> City</label>
               <div class="col-sm-8">
               <select class="form-control" name="city">
+              <option> Select City </option>
               @foreach($total_cities as $cities)
                 <option  value="{{$cities->id}}">
                {{$cities->city}}
@@ -93,6 +98,7 @@
               <label class="col-sm-4 col-form-label" for="">Select Judge</label>
               <div class="col-sm-8">
               <select class="form-control js-data-example-ajax" name="judge_id" id="selUser"  >
+              <option> Select Judge </option>
               @foreach($judges as $judge)
                 <option  value="{{$judge->id}}">
                {{$judge->full_name}}
@@ -112,6 +118,11 @@
           @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
+    </div>
+@endif
+@if($errors->any())
+<div class="alert alert-danger">
+    {!! implode('', $errors->all('<div>:message</div>')) !!}
     </div>
 @endif
 
@@ -136,19 +147,19 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="{{ route('judges.store') }}" method="post" enctype="multipart/form-data">
+      <form  id="my-form">
         @csrf
          
           <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Full Name</label>
               <div class="col-sm-8">
-                <input id="full_name" class="form-control" name="full_name" placeholder="Enter Full Name" type="text">
+                <input id="full_name" class="form-control"  name="full_name" placeholder="Enter Full Name" type="text">
               </div>
             </div>
           <div class="form-group row">
               <label class="col-sm-4 col-form-label" for=""> Position In Club</label>
               <div class="col-sm-8">
-                <input   class="form-control" name="position_in_club" id="position_in_club" placeholder="Enter Position In Club" type="text">
+                <input   class="form-control"  name="position_in_club" id="position_in_club" placeholder="Enter Position In Club" type="text">
               </div>
             </div>
           <div class="form-group row">
@@ -169,91 +180,30 @@
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Enter Description Below</label>
             <div class="col-sm-8">
-            <textarea class="form-control" cols="80" id="ckeditor1" name="description" rows="10"></textarea>
+            <textarea class="form-control"  cols="80" id="ckeditor1" name="description" rows="10"></textarea>
             </div>
           </div>
            
-         
+         <div id="success-msg"> </div>
+         <div id="msg"> </div>
           <div class="form-buttons-w mb-4">
-            <button class="btn btn-primary" type="submit"> Submit</button>
+            <button class="btn btn-primary" id="m_sub" type="submit"> Submit</button>
             <button class="btn btn-secondary" type="reset"> Reset</button>
             <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
               <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
             </a>
           </div>
-          @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
 
       </div>
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
 </form>
-            <!-- <div id="dog_form">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Dog Name</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="dog_name" placeholder="Enter Dog Name" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">DOB</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="dob" placeholder="Enter DOB" type="date">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Club Reg #</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="reg_no" placeholder="Enter Club Reg #" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Microchip</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="microchip" placeholder="Enter Microchip" type="text">
-              </div>
-            </div>
-       
          
-            <div class="form-group row">
-          <label class="col-form-label col-sm-4" for="" > Gender</label>
-          <div class="col-sm-8">
-          <select class="form-control" name="gender">
-          <option value="">
-                  Select One
-                </option>
-                <option value="Male">
-                  Male
-                </option>
-                <option value="Female">
-                Female
-                </option>
-              </select>
-            </div>
-            </div>
-            <div class="form-group row">
-            <label class="col-form-label col-sm-4" for="">Show Title</label>
-            <div class="col-sm-8">
-              <input class="form-control" name="show_title" placeholder="Enter Show Title" type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Achievements </label>
-              <div class="col-sm-8">
-                <textarea class="form-control" name="achievements" id="" cols="30" rows="10"></textarea>
-              </div>
-            </div>
-            </div> -->
-
-            <!-- close dog form  -->
 
 
          
@@ -481,8 +431,9 @@
       </div>
       <div class="display-type"></div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
+    
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
     <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
 <script>
@@ -527,18 +478,66 @@
       cache: true
     }
     
-  }).on('select2:open', function() {
-    // debugger;
-// $("#selUser").on("click", clearSelectedOptions);
+  })
+
+
+   
+// modal submit 
+  $('#my-form').on('submit', function(e){
+
+      e.preventDefault();
+
+      $.ajax({
+        url: '{{ URL::to('/submit-form')}}',
+        method: 'POST',
+        data: $(this).serialize(),
+        success: function(response){
+          // Handle successful form submission
+          
+          console.log(response);
+          console.log(response.response.full_name);
+          console.log(response.response.message);
+          $('#selUser').append($('<option>', {
+          value: response.response.id,
+
+          text: response.response.full_name
+        }));
+          $('#selUser').val(response.response.id).trigger('change'); 
+          $('#success-msg').html('<p class="success">'+response.message+'</p>');
+        },
+        error: function(response,xhr, status, error){
+          
+          // Handle errors
+          var responJson=JSON.parse(response.responseText);
+          var responseJson=responJson.errors;
+       //   console.log(responJson.message);
+          //   $.map(responseJson, function(value) {
+          $('#msg').append($('<p>',{
+            text: responseJson.description
+          }));
+          $('#msg').append($('<p>',{
+            text: responseJson.position_in_club
+          }));
+          $('#msg').append($('<p>',{
+            text: responseJson.full_name
+          }));
+
+     //     console.log(response);
+         
+        }
+      });
+
+    });
+    $('#exampleModal').on('hidden.bs.modal', function () {
+  $('#my-form')[0].reset(); // reset the form
+  $('#msg').text(''); // clear the error message
+});
+$('#m_sub').on('click', function () {
+  $('#msg').text(''); // clear the error message
 });
 
-      // if (input.val() == "") {
-      //   $(this).val(null).trigger('change');
-      //   $('#dog_form').hide();
-      // }
-    // });
-
 </script>
+
 <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
-   
+
 @endsection

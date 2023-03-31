@@ -116,6 +116,11 @@
         {{ session()->get('message') }}
     </div>
 @endif
+@if($errors->any())
+<div class="alert alert-danger">
+    {!! implode('', $errors->all('<div>:message</div>')) !!}
+    </div>
+@endif
 
         </form>
       </div>
@@ -474,15 +479,13 @@
     }
     
   })
-//   .on('select2:open', function() {
-//     // debugger;
-// // $("#selUser").on("click", clearSelectedOptions);
-// });
 
 
 
-  // modal submit 
-  $('#my-form').on('submit', function(e){
+
+// modal submit 
+$('#my-form').on('submit', function(e){
+
       e.preventDefault();
 
       $.ajax({
@@ -491,28 +494,47 @@
         data: $(this).serialize(),
         success: function(response){
           // Handle successful form submission
+          
           console.log(response);
           console.log(response.response.full_name);
+          console.log(response.response.message);
           $('#selUser').append($('<option>', {
           value: response.response.id,
+
           text: response.response.full_name
         }));
           $('#selUser').val(response.response.id).trigger('change'); 
-          // $('#exampleModal').hide();
+          $('#success-msg').html('<p class="success">'+response.message+'</p>');
         },
-        error: function(xhr, status, error){
+        error: function(response,xhr, status, error){
+          
           // Handle errors
-          console.log(error);
+          var responJson=JSON.parse(response.responseText);
+          var responseJson=responJson.errors;
+        //  console.log(responJson.message);
+          $('#msg').append($('<p>',{
+            text: responseJson.description
+          }));
+          $('#msg').append($('<p>',{
+            text: responseJson.position_in_club
+          }));
+          $('#msg').append($('<p>',{
+            text: responseJson.full_name
+          }));
 
+       //   console.log(response);
+         
         }
       });
-      // $('#exampleModal').toggle();
-//       $('.modal').hide();
-//       $('body').removeClass('modal-open');
-// $('.modal-backdrop').remove();
 
-      // $('#selUser').val('Rafay');
     });
+    $('#exampleModal').on('hidden.bs.modal', function () {
+  $('#my-form')[0].reset(); // reset the form
+  $('#msg').text(''); // clear the error message
+});
+$('#m_sub').on('click', function () {
+  $('#msg').text(''); // clear the error message
+});
 
 
 
