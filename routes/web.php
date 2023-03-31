@@ -14,12 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// Route::get('/', function () {
-//     return view('dashboard');
-// });
-// Route::get('/for', function () {
-//     return view('club.store');
-// });
+Route::get('/', function () {
+    return redirect()->route('dashboard');
+});
+
 
 Route::get('api/search', 'App\Http\Controllers\ApisController@dataAjax');
 Route::post('/submit-form', 'App\Http\Controllers\EventsController@submitForm');
