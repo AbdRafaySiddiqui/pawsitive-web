@@ -51,7 +51,7 @@
           <div class="col-sm-8">
           <select class="form-control" name="country">
           @foreach($total_countries as $countries)
-                <option value="{{$countries->countryName}}"  {{ $countries->idCountry == $et_club->country ? 'selected' : '' }}>
+                <option value="{{$countries->id}}"  {{ $countries->idCountry == $et_club->country ? 'selected' : '' }}>
                {{$countries->countryName}}
                 </option>
                 @endforeach
