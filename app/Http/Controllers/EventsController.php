@@ -117,6 +117,14 @@ class EventsController extends Controller
 // modal data submit 
 public function submitForm(Request $request)
 {
+
+    $request->validate([
+        'full_name'=>'required',
+        'position_in_club'=>'required',
+        'description'=>'required',
+   
+    ]); 
+
     if($request->hasFile('img') && $request->hasFile('sig') ) {
         $imageName = time().'.'.request()->img->getClientoriginalName();
         request()->img->move(public_path('judge_images'), $imageName);

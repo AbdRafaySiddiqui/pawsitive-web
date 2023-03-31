@@ -136,19 +136,19 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="{{ route('judges.store') }}" method="post" enctype="multipart/form-data">
+      <form  id="my-form">
         @csrf
          
           <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Full Name</label>
               <div class="col-sm-8">
-                <input id="full_name" class="form-control" name="full_name" placeholder="Enter Full Name" type="text">
+                <input id="full_name" class="form-control" required name="full_name" placeholder="Enter Full Name" type="text">
               </div>
             </div>
           <div class="form-group row">
               <label class="col-sm-4 col-form-label" for=""> Position In Club</label>
               <div class="col-sm-8">
-                <input   class="form-control" name="position_in_club" id="position_in_club" placeholder="Enter Position In Club" type="text">
+                <input   class="form-control" required name="position_in_club" id="position_in_club" placeholder="Enter Position In Club" type="text">
               </div>
             </div>
           <div class="form-group row">
@@ -169,11 +169,11 @@
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Enter Description Below</label>
             <div class="col-sm-8">
-            <textarea class="form-control" cols="80" id="ckeditor1" name="description" rows="10"></textarea>
+            <textarea class="form-control" required cols="80" id="ckeditor1" name="description" rows="10"></textarea>
             </div>
           </div>
            
-         
+         <p id="msg"> </p>
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
             <button class="btn btn-secondary" type="reset"> Reset</button>
@@ -538,7 +538,45 @@
       // }
     // });
 
-</script>
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
+
    
+// modal submit 
+  $('#my-form').on('submit', function(e){
+      e.preventDefault();
+
+      $.ajax({
+        url: '{{ URL::to('/submit-form')}}',
+        method: 'POST',
+        data: $(this).serialize(),
+        success: function(response){
+          // Handle successful form submission
+          
+          console.log(response);
+          console.log(response.response.full_name);
+          console.log(response.response.message);
+          $('#selUser').append($('<option>', {
+          value: response.response.id,
+
+          text: response.response.full_name
+        }));
+          $('#selUser').val(response.response.id).trigger('change'); 
+          $('#msg').html(response.response.message);
+          // $('#exampleModal').hide();
+        },
+        error: function(response,xhr, status, error){
+          // Handle errors
+          // console.log(response.responseText);
+          // console.log(response);
+          // console.log(status);
+          // $('#msg').html(response.responseText);
+        }
+      });
+
+    });
+
+
+
+</script>
+
+
 @endsection
