@@ -316,7 +316,7 @@
       </div>
       <div class="display-type"></div>
     </div>
-    @include('layouts.section')
+
     <script>
     
 
