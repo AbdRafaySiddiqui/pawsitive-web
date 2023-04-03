@@ -8,5 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class breeds extends Model
 {
     use HasFactory;
-    protected $table = 'breeds';
+    
+    public function species()
+    {
+        return $this->belongsTo('App\Models\specie','sp_id','id');
+    }
+
+    public function countryorigin()
+    {
+        return $this->belongsTo('App\Models\Countries','country','idCountry');
+    }
 }

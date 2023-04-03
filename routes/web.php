@@ -39,7 +39,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/users', 'App\Http\Controllers\UserController@store')->name('users.store');
     Route::resource('breeds','App\Http\Controllers\breedsController');
     Route::resource('events','App\Http\Controllers\EventsController');
-
+    Route::resource('akc_groups','App\Http\Controllers\akc_group');
+    Route::resource('fci_groups','App\Http\Controllers\fci_group');
+    Route::resource('species','App\Http\Controllers\SpeciesController');
+    Route::get('breeds/{id}/destroy', [App\Http\Controllers\BreedsController::class, 'destroy'])->name('br_del');
+    Route::post('breeds/{id}/update', [App\Http\Controllers\BreedsController::class, 'update'])->name('br_up');
+    Route::post('breeds/{id}/upload-profile-picture', [App\Http\Controllers\BreedsController::class, 'upload_profile_picture'])->name('breed_up_pp');
+    Route::post('breeds/{id}/upload-images', [App\Http\Controllers\BreedsController::class, 'upload_images'])->name('breed_up_imgs');
+    
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');

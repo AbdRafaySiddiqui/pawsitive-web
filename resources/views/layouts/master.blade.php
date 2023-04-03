@@ -605,6 +605,81 @@
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
+                <span>AKC Groups</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                AKC Groups
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('akc_groups.create')}}">Add Groups</a>
+                    </li>
+                    <li>
+                      <a href="{{route('akc_groups.index')}}">All Groups</a>
+                    </li>     
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>FCI Groups</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                FCI Groups
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('fci_groups.create')}}">Add Groups</a>
+                    </li>
+                    <li>
+                      <a href="{{route('fci_groups.index')}}">All Groups</a>
+                    </li>     
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Species</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Species
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('species.create')}}">Add Species</a>
+                    </li>
+                    <li>
+                      <a href="{{route('species.index')}}">All Species</a>
+                    </li>     
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
                 <span>Logged in as:</span></a>
               <div class="sub-menu-w">
                 <div class="sub-menu-header">
