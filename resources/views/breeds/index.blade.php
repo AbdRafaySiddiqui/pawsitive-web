@@ -1,18 +1,65 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="content-w" style="width:100%">
-        
-        <div class="content-i">
+    <div class="content-w " style="width:100%">
+    <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="index.html">Products</a>
+            </li>
+            <li class="breadcrumb-item">
+              <span>Laptop with retina screen</span>
+            </li>
+          </ul>
+          <!--------------------
+          END - Breadcrumbs
+          -------------------->
+          <div class="content-panel-toggler">
+            <i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span>
+          </div>
+          <div class="content-i">
             <div class="content-box">
-                <div class="element-wrapper">
-                    <div class="element-box-tp">
-                        <h5 class="form-header">
-                            Breeds - List
-                        </h5>
-                        <div class="form-desc">
-                        </div>
-                        <div class="element-box-tp">
+<div class="element-wrapper">
+  <div class="element-box-tp">
+    <h5 class="form-header">
+      Table without wrapper
+    </h5>
+    <div class="form-desc">You can put a table tag inside an <code>.element-box-tp</code> class wrapper and add <code>.table</code> class to it to get something like this:
+    </div>
+    <div class="element-box-tp">
+      <!--------------------
+      START - Controls Above Table
+      -------------------->
+      <div class="controls-above-table">
+        <div class="row">
+          <div class="col-sm-6">
+            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('breeds.create')}}">Add Breed</a><a class="btn btn-sm btn-danger " href="#">Delete</a>
+          </div>
+          <div class="col-sm-6">
+            <form class="form-inline justify-content-sm-end">
+              <input class="form-control form-control-sm rounded bright" placeholder="Search" type="text"><select class="form-control form-control-sm rounded bright">
+                <option selected="selected" value="">
+                  Select Status
+                </option>
+                <option value="Pending">
+                  Pending
+                </option>
+                <option value="Active">
+                  Active
+                </option>
+                <option value="Cancelled">
+                  Cancelled
+                </option>
+              </select>
+            </form>
+          </div>
+        </div>
+      </div> 
+
+    
+
                             <div class="table-responsive">
                                 <table class="table table-bordered table-lg table-v2 table-striped">
                                     <thead>
@@ -65,13 +112,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+               
     </div>
     </div>
     <div class="display-type"></div>
