@@ -20,7 +20,11 @@ Route::get('/', function () {
 
 
 Route::get('api/search', 'App\Http\Controllers\ApisController@dataAjax');
+Route::get('api/dog', 'App\Http\Controllers\ApisController@AjaxDog');
+Route::get('api/fe_dog', 'App\Http\Controllers\ApisController@AjaxDog_Fe');
 Route::post('/submit-form', 'App\Http\Controllers\EventsController@submitForm');
+Route::post('/submit-Dogform', 'App\Http\Controllers\DogsController@storeMale');
+Route::post('/submit-Dogform-Female', 'App\Http\Controllers\DogsController@storeFemale');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     

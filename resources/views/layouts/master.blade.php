@@ -760,10 +760,6 @@
         </script>
  
  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script>
-    var $j = jQuery.noConflict();
-    // Use $j instead of $ to reference the jQuery library
-</script>
 
 
 
