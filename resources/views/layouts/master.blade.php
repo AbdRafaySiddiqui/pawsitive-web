@@ -640,7 +640,7 @@
         <script src="{{asset('public/bower_components/bootstrap/js/dist/popover.js')}}"></script>
         <script src="{{asset('public/js/demo_customizer.js?version=4.4.0')}}"></script>
         <script src="{{asset('public/js/main.js?version=4.4.0')}}"></script>
-    <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script>
+    <!-- <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script> -->
 
 <script src="{{asset('public/bower_components/summernote/summernote-bs4.js')}}"></script>
 
@@ -657,7 +657,7 @@
 
         </script>
  
- <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <!-- <script>
     var $j = jQuery.noConflict();
     // Use $j instead of $ to reference the jQuery library
@@ -666,6 +666,9 @@
 
 
 <script>
+
+  
+
 // hover 
 $(".has-sub-menu").hover(
   function(){ $(this).addClass('active') },

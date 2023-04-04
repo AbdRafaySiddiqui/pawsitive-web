@@ -31,21 +31,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Species</label>
-                                                <select class="form-control select2" tabindex="-1" aria-hidden="true"
-                                                    name="sp_id" id="sp_id">
-                                                    <option value="0">{{ 'Select Species' }}</option>
-                                                    @foreach ($species as $sp)
-                                                        <option value="{{ $sp->id }}">{{ $sp->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                    <?php 
-/** 
+                                    
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>AKC Group</label>
@@ -58,8 +45,7 @@
                                                 </select>
                                             </div>
                                         </div>
-*/
-?>
+
 
 <div class="col-md-1"></div>
 
@@ -81,25 +67,23 @@
                                             </div>
                                         </div>
 
-                                        <?php 
-/** 
+    
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>FCI Group</label>
                                                 <select class="form-control select2" tabindex="-1" aria-hidden="true"
-                                                    name="fci_group" id="fci_group"> -->
-                                                    <!-- <option value="0">{{ 'Select FCI Group' }}</option> -->
-                                                    <!-- @foreach ($FCI as $fci) -->
-                                                        <!-- <option value="{{ $fci->id }}">{{ $fci->name }}</option> -->
-                                                    <!-- @endforeach -->
-                                                <!-- </select>
+                                                    name="fci_group" id="fci_group">
+                                                    <option value="0">{{ 'Select FCI Group' }}</option>
+                                                    @foreach ($FCI as $fci)
+                                                        <option value="{{ $fci->id }}">{{ $fci->name }}</option>
+                                                    @endforeach
+                                                 </select>
                                             </div>
                                         </div>
 
                                     </div> 
 
-                                    */
-                                    ?>
+                                   
 
                                     <div class="row">
                                     <div class="col-md-6">
@@ -621,56 +605,56 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>About The Breed</label>
-                                                <textarea class="summernote" name="about" id="ckeditor1"></textarea>
+                                                <textarea class="about" name="about" id="ckeditor1"></textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>History</label>
-                                                <textarea class="ckeditor1" name="history" id="ckeditor1"></textarea>
+                                                <textarea class="history" name="history" id="ckeditor2"></textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Personality</label>
-                                                <textarea class="ckeditor1" name="personality" id="personality"></textarea>
+                                                <textarea class="ckeditor1" name="personality" id="ckeditor3"></textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Health</label>
-                                                <textarea class="summernote" name="health" id="health"></textarea>
+                                                <textarea class="summernote" name="health" id="ckeditor4"></textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Care</label>
-                                                <textarea class="summernote" name="care" id="care"></textarea>
+                                                <textarea class="summernote" name="care" id="ckeditor5"></textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Feeding</label>
-                                                <textarea class="summernote" name="feeding" id="feeding"></textarea>
+                                                <textarea class="summernote" name="feeding" id="ckeditor6"></textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Grooming</label>
-                                                <textarea class="summernote" name="grooming" id="grooming"></textarea>
+                                                <textarea class="summernote" name="grooming" id="ckeditor7"></textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Children & Pets</label>
-                                                <textarea class="summernote" name="child_pets" id="child_pets"></textarea>
+                                                <textarea class="summernote" name="child_pets" id="ckeditor8"></textarea>
                                             </div>
                                         </div>
                                     </div>                         
@@ -693,9 +677,36 @@
     </div>
     <div class="display-type"></div>
     </div>
+    <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script>
 
 
     <script type="text/javascript">
+if ($('#ckeditor1').length) {
+    CKEDITOR.replace('ckeditor1');
+  }
+  if ($('#ckeditor2').length) {
+    CKEDITOR.replace('ckeditor2');
+  }
+  if ($('#ckeditor3').length) {
+    CKEDITOR.replace('ckeditor3');
+  }
+  if ($('#ckeditor4').length) {
+    CKEDITOR.replace('ckeditor4');
+  }
+  if ($('#ckeditor5').length) {
+    CKEDITOR.replace('ckeditor5');
+  }
+  if ($('#ckeditor6').length) {
+    CKEDITOR.replace('ckeditor6');
+  }
+  if ($('#ckeditor7').length) {
+    CKEDITOR.replace('ckeditor7');
+  }
+  if ($('#ckeditor8').length) {
+    CKEDITOR.replace('ckeditor8');
+  }
+
+
         function rangeadp(v) {
             let split = v.id.split('-');
             $('#rangeadp-' + split[1]).html(v.value + '.0');
