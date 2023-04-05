@@ -21,7 +21,6 @@ class DogController extends Controller
         'reg_no',
         'achievements',
         'show_title')
-        //   ->leftjoin('species','species.id','=','breeds.sp_id')
         ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
         
           ->where('breed_id','=',$id)
@@ -42,7 +41,6 @@ class DogController extends Controller
         'reg_no',
         'achievements',
         'show_title')
-        //   ->leftjoin('species','species.id','=','breeds.sp_id')
         ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
         
           ->where('dogs.id','=',$id)

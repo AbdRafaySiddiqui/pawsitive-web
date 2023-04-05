@@ -26,13 +26,45 @@
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label" for="">Breed Name</label>
                                         <div class="col-sm-8">
-                                            <input class="form-control" name="name" placeholder="Enter Breed Name"
-                                                type="text" required>
+                                            <input class="form-control" name="name" placeholder="Enter Breed Name" type="text" required>
                                         </div>
                                     </div>
 
-                                    
-                                    <div class="row">
+                                    <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Species</label>
+                                                <select class="form-control select2" tabindex="-1" aria-hidden="true"
+                                                    name="sp_id" id="sp_id">
+                                                    <option value="0">{{ 'Select Species' }}</option>
+                                                    @foreach ($species as $sp)
+                                                        <option value="{{ $sp->id }}">{{ $sp->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Variations (Seperate by ';')</label>
+                                                <input type="text" class="form-control" name="variations" id="variations"
+                                                    placeholder="For e.g. Black Brown;White;Black">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Clubs</label>
+                                                <select class="form-control select2" tabindex="-1" aria-hidden="true"
+                                                    name="club_id[]" id="club_id" multiple>
+                                                    <option value="0">{{ 'Select Club(s)' }}</option>
+                                                    @foreach ($clubs as $club)
+                                                        <option value="{{ $club->id }}">{{ $club->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>AKC Group</label>
@@ -710,69 +742,68 @@
             </div>
             </div>
 
-            <div class="row">
+        <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label>About The Breed</label>
-                    <textarea class="summernote" name="about" id="about"></textarea>
+                    <textarea class="summernote" name="about" id="ckeditor1"></textarea>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label>History</label>
-                    <textarea class="summernote" name="history" id="history"></textarea>
+                    <textarea class="summernote" name="history" id="ckeditor2"></textarea>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Personality</label>
-                    <textarea class="summernote" name="personality" id="personality"></textarea>
+                    <textarea class="summernote" name="personality" id="ckeditor3"></textarea>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Health</label>
-                    <textarea class="summernote" name="health" id="health"></textarea>
+                    <textarea class="summernote" name="health" id="ckeditor4"></textarea>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Care</label>
-                    <textarea class="summernote" name="care" id="care"></textarea>
+                    <textarea class="summernote" name="care" id="ckeditor5"></textarea>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Feeding</label>
-                    <textarea class="summernote" name="feeding" id="feeding"></textarea>
+                    <textarea class="summernote" name="feeding" id="ckeditor6"></textarea>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Grooming</label>
-                    <textarea class="summernote" name="grooming" id="grooming"></textarea>
+                    <textarea class="summernote" name="grooming" id="ckeditor7"></textarea>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Children & Pets</label>
-                    <textarea class="summernote" name="child_pets" id="child_pets"></textarea>
+                    <textarea class="summernote" name="child_pets" id="ckeditor8"></textarea>
                 </div>
             </div>
-            </div>
+        </div>
 
                                     <div class="form-buttons-w mb-4">
                                         <button class="btn btn-primary" type="submit"> Submit</button>
                                         <a href="{{ route('breeds.index') }}">
-                                        <button class="btn btn-danger" type="button">Cancel</button>
-                                    </a>
+                                        <button class="btn btn-danger" type="button">Cancel</button></a>
                                     </div>
 
                                 </form>
@@ -915,4 +946,31 @@ if ($('#ckeditor1').length) {
             console.log(total / 4);
         }
     </script>
+    <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script>
+    <script type="text/javascript">
+if ($('#ckeditor1').length) {
+    CKEDITOR.replace('ckeditor1');
+  }
+  if ($('#ckeditor2').length) {
+    CKEDITOR.replace('ckeditor2');
+  }
+  if ($('#ckeditor3').length) {
+    CKEDITOR.replace('ckeditor3');
+  }
+  if ($('#ckeditor4').length) {
+    CKEDITOR.replace('ckeditor4');
+  }
+  if ($('#ckeditor5').length) {
+    CKEDITOR.replace('ckeditor5');
+  }
+  if ($('#ckeditor6').length) {
+    CKEDITOR.replace('ckeditor6');
+  }
+  if ($('#ckeditor7').length) {
+    CKEDITOR.replace('ckeditor7');
+  }
+  if ($('#ckeditor8').length) {
+    CKEDITOR.replace('ckeditor8');
+  }
+  </script>
 @endsection
