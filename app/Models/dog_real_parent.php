@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActivityLog extends Model
+class dog_real_parent extends Model
 {
     use HasFactory;
-    protected $table = 'activity_log';
+    protected $table = 'dog_real_parents';
 }

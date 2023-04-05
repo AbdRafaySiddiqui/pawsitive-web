@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActivityLog extends Model
+class akcgroup extends Model
 {
     use HasFactory;
-    protected $table = 'activity_log';
+
+    protected $table = 'akc_groups';
 }

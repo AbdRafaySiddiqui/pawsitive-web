@@ -53,11 +53,11 @@ trait Misc
     {
         $setting = SystemSettings::where('setting_name','reg_number_prefix')->first();
 
-        $latest = Pets::select('reg_number')->where('reg_number','LIKE','%'.$setting->value.'%')->orderBy('reg_number','DESC')->first();
+        $latest = dogs::select('reg_no')->where('reg_no','LIKE','%'.$setting->value.'%')->orderBy('reg_no','DESC')->first();
 
         if($latest)
         {
-            $split = explode('-',$latest->reg_number);
+            $split = explode('-',$latest->reg_no);
 
             $split[1] = (int)$split[1];
 

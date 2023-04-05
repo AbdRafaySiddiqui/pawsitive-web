@@ -71,7 +71,7 @@
                                                 Breed Name
                                             </th>
                                             <th>
-                                                Status
+                                                Species
                                             </th>
                                             <th>
                                                 Actions
@@ -84,12 +84,13 @@
                                         $i = 1;
                                         ?>
 
-                                        @foreach ($breed as $breeds)
+                                        @foreach ($breeds as $breed)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
                                                 <td>
-                                                    {{ $breeds->name }}
+                                                    {{ $breed->name }}
                                                 </td>
+<<<<<<< HEAD
                                                 @if($breeds->status == 'Active')
               <td class="text-center">
                 <div class="status-pill green" data-title="Complete" data-toggle="tooltip"></div>
@@ -99,18 +100,23 @@
                 <div class="status-pill red" data-title="Complete" data-toggle="tooltip"></div>
               </td>
                             @endif
+=======
+                                                <td class="text-center">
+                                                    @if(isset($breed->species->name))
+                                                    {{$breed->species->name}}
+                                                    @endif
+                                                </td>
+>>>>>>> 607bc2251d41f382b9c44fe25b44dbf0ee928d5c
                                                 <td class="row-actions">
-                                                    <a href="{{ route('breeds.edit', $breeds->id) }}"><i
+                                                    <a href="{{ route('breeds.show', $breed->id) }}"><i
                                                             class="os-icon os-icon-ui-49"></i></a><a href="#"><i
                                                             class="os-icon os-icon-grid-10"></i></a>
-                                                    <form action="{{ route('breeds.destroy', $breeds->id) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="trans_btn" type="submit"
-                                                            onclick="return confirm('Are you sure to delete this user?')"><i
-                                                                class="os-icon os-icon-ui-15"></i></button>
-                                                    </form>
+                                                            <a href="{{route('breeds.edit', $breed->id)}}" class="btn btn-icon btn-secondary">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a href="{{route('br_del', $breed->id)}}" class="btn btn-icon btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

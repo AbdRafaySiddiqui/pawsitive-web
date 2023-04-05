@@ -31,8 +31,45 @@
                                         </div>
                                     </div>
 
+<<<<<<< HEAD
                                     
                                     <div class="row">
+=======
+                                    <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Species</label>
+                                                <select class="form-control select2" tabindex="-1" aria-hidden="true"
+                                                    name="sp_id" id="sp_id">
+                                                    <option value="0">{{ 'Select Species' }}</option>
+                                                    @foreach ($species as $sp)
+                                                        <option value="{{ $sp->id }}">{{ $sp->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Variations (Seperate by ';')</label>
+                                                <input type="text" class="form-control" name="variations" id="variations"
+                                                    placeholder="For e.g. Black Brown;White;Black">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Clubs</label>
+                                                <select class="form-control select2" tabindex="-1" aria-hidden="true"
+                                                    name="club_id[]" id="club_id" multiple>
+                                                    <option value="0">{{ 'Select Club(s)' }}</option>
+                                                    @foreach ($clubs as $club)
+                                                        <option value="{{ $club->id }}">{{ $club->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+>>>>>>> 607bc2251d41f382b9c44fe25b44dbf0ee928d5c
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>AKC Group</label>
@@ -46,10 +83,16 @@
                                             </div>
                                         </div>
 
+<<<<<<< HEAD
 
 <div class="col-md-1"></div>
 
                                     <div class="col-md-2">
+=======
+                                        <div class="col-md-1"></div>
+
+                                        <div class="col-md-2">
+>>>>>>> 607bc2251d41f382b9c44fe25b44dbf0ee928d5c
                                             <div class="form-group">
                                                 <label>CFA ?</label>
                                                 <div class="custom-switches mt-2">
@@ -67,7 +110,12 @@
                                             </div>
                                         </div>
 
+<<<<<<< HEAD
     
+=======
+                                        <div class="col-md-1"></div>
+
+>>>>>>> 607bc2251d41f382b9c44fe25b44dbf0ee928d5c
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>FCI Group</label>
@@ -77,6 +125,7 @@
                                                     @foreach ($FCI as $fci)
                                                         <option value="{{ $fci->id }}">{{ $fci->name }}</option>
                                                     @endforeach
+<<<<<<< HEAD
                                                  </select>
                                             </div>
                                         </div>
@@ -660,9 +709,606 @@
                                     </div>                         
 
 
+=======
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                                    </div>
+
+            <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Height</label>
+                    <br>
+                    <input type="number" class="form-control col-md-2 float-left"
+                        name="height_male1" id="height_male1">
+                    <span class="float-left" style="padding:10px;"><strong>To</strong></span>
+                    <input type="number" class="form-control col-md-2 float-left"
+                        name="height_male2" id="height_male2">
+                    <span class="float-left" style="padding:10px;"><strong>CM
+                            (MALE)</strong></span>
+                    <br>
+                    <br>
+                    <br>
+                    <input type="number" class="form-control col-md-2 float-left"
+                        name="height_female1" id="height_female1">
+                    <span class="float-left" style="padding:10px;"><strong>To</strong></span>
+                    <input type="number" class="form-control col-md-2 float-left"
+                        name="height_female2" id="height_female2">
+                    <span class="float-left" style="padding:10px;"><strong>CM
+                            (FEMALE)</strong></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Weight</label>
+                    <br>
+                    <input type="number" class="form-control col-md-2 float-left"
+                        name="weight_male1" id="weight_male1">
+                    <span class="float-left" style="padding:10px;"><strong>To</strong></span>
+                    <input type="number" class="form-control col-md-2 float-left"
+                        name="weight_male2" id="weight_male2">
+                    <span class="float-left" style="padding:10px;"><strong>KG
+                            (MALE)</strong></span>
+                    <br>
+                    <br>
+                    <br>
+                    <input type="number" class="form-control col-md-2 float-left"
+                        name="weight_female1" id="weight_female1">
+                    <span class="float-left" style="padding:10px;"><strong>To</strong></span>
+                    <input type="number" class="form-control col-md-2 float-left"
+                        name="weight_female2" id="weight_female2">
+                    <span class="float-left" style="padding:10px;"><strong>KG
+                            (FEMALE)</strong></span>
+                </div>
+            </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Life Span</label>
+                    <br>
+                    <input type="number" class="form-control col-md-2 float-left"
+                        name="life_span1" id="life_span1">
+                    <span class="float-left" style="padding:10px;"><strong>To</strong></span>
+                    <input type="number" class="form-control col-md-2 float-left"
+                        name="life_span2" id="life_span2">
+                    <span class="float-left"
+                        style="padding:10px;"><strong>YEARS</strong></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Country of Origin</label>
+                    <select class="form-control select2" tabindex="-1" aria-hidden="true"
+                        name="country" id="country">
+                        <option value="0">{{ 'Select Country' }}</option>
+                        @foreach ($countries as $country)
+                            <option value="{{ $country->idCountry }}">
+                                {{ $country->countryName }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="row">
+            <div class="col-md-12">
+                <span>
+                    <hr>
+                    <center>
+                        <legend>Rating 1 to 5 Bones </legend>
+                    </center>
+                    <hr>
+                </span>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <center>
+                        <h5>Adaptability
+                            <span id="rangeres1" class="badge badge-success"
+                                style="font-size:15px;">
+                                {{ number_format(0, 1) }}
+                            </span>
+                        </h5>
+                    </center>
+                    <br>
+
+                    <?php $i = 0;
+                    $I = 0;
+                    $total = 0; ?>
+
+                    <div class="appartmentLivingDiv" style="text-align:center;">
+                        <!-- <div style="display: flex; gap:10px"> -->
+                        @foreach ($adapt_bones as $ab)
+                            <div>
+                                <!-- <p style="margin: 0px;">Suited To Apartment Living </p> -->
+                                <p style="margin: 0px;">
+                                    <label>{{ $ab }}
+                                        <span id="rangeadp-{{ ++$I }}"
+                                            class="badge badge-primary"
+                                            style="font-size:15px;">
+                                            {{ number_format(0, 1) }}
+                                        </span>
+                                    </label>
+                                </p>
+                                <!-- <div class="badge badge-primary">
+                                    <span id="demo"></span>
+                                </div> -->
+                            </div>
+                            <div class="rating">
+                                <input type="hidden" name="adp[]"
+                                    id="adp-{{ ++$i }}-value" value="0" />
+                                <label>
+                                    <input type="radio" name="adpstar-{{ $i }}"
+                                        id="adp-{{ $i }}" value="1"
+                                        onchange="rangeadp(this)" />
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="adpstar-{{ $i }}"
+                                        id="adp-{{ $i }}" value="2"
+                                        onchange="rangeadp(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="adpstar-{{ $i }}"
+                                        id="adp-{{ $i }}" value="3"
+                                        onchange="rangeadp(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="adpstar-{{ $i }}"
+                                        id="adp-{{ $i }}" value="4"
+                                        onchange="rangeadp(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="adpstar-{{ $i }}"
+                                        id="adp-{{ $i }}" value="5"
+                                        onchange="rangeadp(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                            </div>
+                        @endforeach
+                        <input type="hidden" name="adapt" id="adapt"
+                            value="0" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <center>
+                        <h5>Overall Friendliness
+                            <span id="rangeres2" class="badge badge-success"
+                                style="font-size:15px;">
+                                {{ number_format(0, 1) }}
+                            </span>
+                        </h5>
+                    </center>
+                    <br>
+
+                    <?php $i = 0;
+                    $I = 0;
+                    $total = 0; ?>
+
+                    <div class="appartmentLivingDiv" style="text-align:center;">
+                        <!-- <div style="display: flex; gap:10px"> -->
+                        @foreach ($friendly_bones as $frn)
+                            <div>
+                                <!-- <p style="margin: 0px;">Suited To Apartment Living </p> -->
+                                <p style="margin: 0px;">
+                                    <label>{{ $frn }}
+                                        <span id="rangefrn-{{ ++$I }}"
+                                            class="badge badge-primary"
+                                            style="font-size:15px;">
+                                            {{ number_format(0, 1) }}
+                                        </span>
+                                    </label>
+                                </p>
+                                <!-- <div class="badge badge-primary">
+                                    <span id="demo"></span>
+                                </div> -->
+                            </div>
+                            <div class="rating">
+                                <input type="hidden" name="frn[]"
+                                    id="frn-{{ ++$i }}-value" value="0" />
+                                <label>
+                                    <input type="radio" name="frnstar-{{ $i }}"
+                                        id="frn-{{ $i }}" value="1"
+                                        onchange="rangefrn(this)" />
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="frnstar-{{ $i }}"
+                                        id="frn-{{ $i }}" value="2"
+                                        onchange="rangefrn(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="frnstar-{{ $i }}"
+                                        id="frn-{{ $i }}" value="3"
+                                        onchange="rangefrn(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="frnstar-{{ $i }}"
+                                        id="frn-{{ $i }}" value="4"
+                                        onchange="rangefrn(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="frnstar-{{ $i }}"
+                                        id="frn-{{ $i }}" value="5"
+                                        onchange="rangefrn(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                            </div>
+                        @endforeach
+                        <input type="hidden" name="friendly" id="friendly"
+                            value="0" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <center>
+                        <h5>Health And Grooming Needs
+                            <span id="rangeres3" class="badge badge-success"
+                                style="font-size:15px;">
+                                {{ number_format(0, 1) }}
+                            </span>
+                        </h5>
+                    </center>
+                    <br>
+
+                    <?php $i = 0;
+                    $I = 0;
+                    $total = 0; ?>
+
+                    <div class="appartmentLivingDiv" style="text-align:center;">
+                        @foreach ($hg_bones as $hg)
+                            <div>
+                                <!-- <p style="margin: 0px;">Suited To Apartment Living </p> -->
+                                <p style="margin: 0px;">
+                                    <label>{{ $hg }}
+                                        <span id="rangehg-{{ ++$I }}"
+                                            class="badge badge-primary"
+                                            style="font-size:15px;">
+                                            {{ number_format(0, 1) }}
+                                        </span>
+                                    </label>
+                                </p>
+                                <!-- <div class="badge badge-primary">
+                                    <span id="demo"></span>
+                                </div> -->
+                            </div>
+                            <div class="rating">
+                                <input type="hidden" name="hg[]"
+                                    id="hg-{{ ++$i }}-value" value="0" />
+                                <label>
+                                    <input type="radio" name="hgstar-{{ $i }}"
+                                        id="hg-{{ $i }}" value="1"
+                                        onchange="rangehg(this)" />
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="hgstar-{{ $i }}"
+                                        id="hg-{{ $i }}" value="2"
+                                        onchange="rangehg(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="hgstar-{{ $i }}"
+                                        id="hg-{{ $i }}" value="3"
+                                        onchange="rangehg(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="hgstar-{{ $i }}"
+                                        id="hg-{{ $i }}" value="4"
+                                        onchange="rangehg(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="hgstar-{{ $i }}"
+                                        id="hg-{{ $i }}" value="5"
+                                        onchange="rangehg(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                            </div>
+                        @endforeach
+                        <input type="hidden" name="health_groom" id="health_groom"
+                            value="0" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <center>
+                        <h5>Trainability
+                            <span id="rangeres4" class="badge badge-success"
+                                style="font-size:15px;">
+                                {{ number_format(0, 1) }}
+                            </span>
+                        </h5>
+                    </center>
+                    <br>
+
+                    <?php $i = 0;
+                    $I = 0;
+                    $total = 0; ?>
+
+                    <div class="appartmentLivingDiv" style="text-align:center;">
+                        @foreach ($train_bones as $trn)
+                            <div>
+                                <!-- <p style="margin: 0px;">Suited To Apartment Living </p> -->
+                                <p style="margin: 0px;">
+                                    <label>{{ $trn }}
+                                        <span id="rangetrain-{{ ++$I }}"
+                                            class="badge badge-primary"
+                                            style="font-size:15px;">
+                                            {{ number_format(0, 1) }}
+                                        </span>
+                                    </label>
+                                </p>
+                                <!-- <div class="badge badge-primary">
+                                    <span id="demo"></span>
+                                </div> -->
+                            </div>
+                            <div class="rating">
+                                <input type="hidden" name="trainb[]"
+                                    id="trn-{{ ++$i }}-value" value="0" />
+                                <label>
+
+                                    <input type="radio" name="trnstar-{{ $i }}"
+                                        id="trn-{{ $i }}" value="1"
+                                        onchange="rangetrain(this)" />
+
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+
+                                    <input type="radio" name="trnstar-{{ $i }}"
+                                        id="trn-{{ $i }}" value="2"
+                                        onchange="rangetrain(this)" />
+
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="trnstar-{{ $i }}"
+                                        id="trn-{{ $i }}" value="3"
+                                        onchange="rangetrain(this)" />
+
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+
+                                    <input type="radio" name="trnstar-{{ $i }}"
+                                        id="trn-{{ $i }}" value="4"
+                                        onchange="rangetrain(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+
+                                    <input type="radio" name="trnstar-{{ $i }}"
+                                        id="trn-{{ $i }}" value="5"
+                                        onchange="rangetrain(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                            </div>
+                        @endforeach
+                        <input type="hidden" name="train" id="train"
+                            value="0" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <center>
+                        <h5>
+                            Physical Needs
+                            <span id="rangeres5" class="badge badge-success"
+                                style="font-size:15px;">
+                                {{ number_format(0, 1) }}
+                            </span>
+                        </h5>
+                    </center>
+                    <br>
+
+                    <?php $i = 0;
+                    $I = 0;
+                    $total = 0; ?>
+
+                    <div class="appartmentLivingDiv" style="text-align:center;">
+                        @foreach ($physical_bones as $pb)
+                            <div>
+                                <!-- <p style="margin: 0px;">Suited To Apartment Living </p> -->
+                                <p style="margin: 0px;">
+                                    <label>{{ $pb }}
+                                        <span id="rangeph-{{ ++$I }}"
+                                            class="badge badge-primary"
+                                            style="font-size:15px;">
+                                            {{ number_format(0, 1) }}
+                                        </span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="rating">
+                                <input type="hidden" name="physicalb[]"
+                                    id="physical-{{ ++$i }}-value" value="0" />
+                                <label>
+                                    <input type="radio" name="pbstar-{{ $i }}"
+                                        id="pb-{{ $i }}" value="1"
+                                        onchange="rangeph(this)" />
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="pbstar-{{ $i }}"
+                                        id="pb-{{ $i }}" value="2"
+                                        onchange="rangeph(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="pbstar-{{ $i }}"
+                                        id="pb-{{ $i }}" value="3"
+                                        onchange="rangeph(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="pbstar-{{ $i }}"
+                                        id="pb-{{ $i }}" value="4"
+                                        onchange="rangeph(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="pbstar-{{ $i }}"
+                                        id="pb-{{ $i }}" value="5"
+                                        onchange="rangeph(this)" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                            </div>
+                        @endforeach
+                        <input type="hidden" name="physical" id="physical"
+                            value="0" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <span>
+                    <hr>
+                    <hr>
+                </span>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>About The Breed</label>
+                    <textarea class="summernote" name="about" id="about"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>History</label>
+                    <textarea class="summernote" name="history" id="history"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Personality</label>
+                    <textarea class="summernote" name="personality" id="personality"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Health</label>
+                    <textarea class="summernote" name="health" id="health"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Care</label>
+                    <textarea class="summernote" name="care" id="care"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Feeding</label>
+                    <textarea class="summernote" name="feeding" id="feeding"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Grooming</label>
+                    <textarea class="summernote" name="grooming" id="grooming"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Children & Pets</label>
+                    <textarea class="summernote" name="child_pets" id="child_pets"></textarea>
+                </div>
+            </div>
+            </div>
+>>>>>>> 607bc2251d41f382b9c44fe25b44dbf0ee928d5c
 
                                     <div class="form-buttons-w mb-4">
                                         <button class="btn btn-primary" type="submit"> Submit</button>
+                                        <a href="{{ route('breeds.index') }}">
+                                        <button class="btn btn-danger" type="button">Cancel</button>
+                                    </a>
                                     </div>
 
                                 </form>
@@ -677,6 +1323,7 @@
     </div>
     <div class="display-type"></div>
     </div>
+<<<<<<< HEAD
     <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script>
 
 
@@ -707,6 +1354,10 @@ if ($('#ckeditor1').length) {
   }
 
 
+=======
+
+    <script type="text/javascript">
+>>>>>>> 607bc2251d41f382b9c44fe25b44dbf0ee928d5c
         function rangeadp(v) {
             let split = v.id.split('-');
             $('#rangeadp-' + split[1]).html(v.value + '.0');
@@ -806,5 +1457,8 @@ if ($('#ckeditor1').length) {
             console.log(total / 4);
         }
     </script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 607bc2251d41f382b9c44fe25b44dbf0ee928d5c
 @endsection

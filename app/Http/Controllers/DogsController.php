@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\dogs;
 use App\Models\Breeds;
 
+use App\Models\dog_real_parent;
 
 class dogsController extends Controller
 {
@@ -25,7 +26,9 @@ class dogsController extends Controller
     public function create()
     {
         $total_breeds = Breeds::get();
-        return view('dogs.create',compact('total_breeds'));
+        $maleDogs = dogs::where('gender', '=', 'Male')->get();
+        $femaleDogs = dogs::where('gender', '=', 'Female')->get();
+        return view('dogs.create',compact('maleDogs', 'femaleDogs','total_breeds'));
     }
 
     /**
@@ -38,11 +41,20 @@ class dogsController extends Controller
         $dogs->dob =  $request->dob;
         $dogs->reg_no =  $request->reg_no;
         $dogs->microchip =  $request->microchip;
+        $dogs->microchip =  $request->microchip;
         $dogs->gender =  $request->gender;
         $dogs->show_title =  $request->show_title;
         $dogs->achievements =  $request->achievements;
         $dogs->breed_id = $request->breed_id;
         $dogs->save();
+
+        $new_dog_id = $dogs->id;
+
+        $parent = new dog_real_parent;
+        $parent->dog_id = $new_dog_id;
+        $parent->sire_id = $request->sire_id;
+        $parent->dam_id = $request->dam_id;
+        $parent->save();
         return redirect()->back()->with('message', 'Record added successfully');
     }
 
@@ -103,4 +115,36 @@ class dogsController extends Controller
         Dogs::where('id',$id)->update(array('status' => 'Inactive'));
         return redirect()->back()->with('message', 'Record deleted successfully');
     }
+    
+    public function storeMale(Request $request)
+    {
+        $dogs = new dogs;
+        $dogs->dog_name =  $request->dog_name;
+        $dogs->dob =  $request->dob;
+        $dogs->reg_no =  $request->reg_no;
+        $dogs->microchip =  $request->microchip;
+        $dogs->gender =  "Male";
+        $dogs->title =  $request->show_title;
+        $dogs->achievements =  $request->achievements;
+	
+        $dogs->save();
+        return redirect()->back()->with('message', 'Record added successfully');
+    }
+
+    public function storeFemale(Request $request)
+    {
+        $dogs = new dogs;
+        $dogs->dog_name =  $request->fe_dog_name;
+        $dogs->dob =  $request->fe_dob;
+        $dogs->reg_no =  $request->fe_reg_no;
+        $dogs->microchip =  $request->fe_microchip;
+        $dogs->gender =  "Female";
+        $dogs->title =  $request->fe_show_title;
+        $dogs->achievements =  $request->fe_achievements;
+	
+        $dogs->save();
+        return redirect()->back()->with('message', 'Record added successfully');
+    }
+    
+
 }

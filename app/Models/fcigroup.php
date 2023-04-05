@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActivityLog extends Model
+class fcigroup extends Model
 {
     use HasFactory;
-    protected $table = 'activity_log';
+
+    protected $table = 'fci_groups';
 }

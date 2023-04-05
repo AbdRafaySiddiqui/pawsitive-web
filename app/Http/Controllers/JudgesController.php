@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\judges;
 use Illuminate\Pagination\Paginator;
 
-class judgesController extends Controller
+class JudgesController extends Controller
 {
 
     public $module_name = "judges";
