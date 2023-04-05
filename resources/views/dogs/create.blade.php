@@ -768,5 +768,6 @@
     
   }).on('select2:open', function() {
 });
+
 </script>
 @endsection
