@@ -259,6 +259,18 @@
               </div>
             </div>
             <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Breed </label>
+              <div class="col-sm-8">
+              <select class="form-control" name="breed_id">
+                   @foreach($total_breeds as $breeds)
+                <option  value="{{$breeds->id}}">
+               {{$breeds->name}}
+                </option>
+                @endforeach
+</select>
+                </div>
+            </div>
+            <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Sire</label>
               <div class="col-sm-8">
               <select class="form-control js-data-example-ajax" name="sire_id" id="selUser"  >
@@ -711,6 +723,7 @@
 
 
 
+
 <script>
   $('#selUser_fe').select2({
     allowClear: true,
@@ -725,7 +738,7 @@
     },
     ajax: {
       type: "get",
-      url: '{{ URL::to('api/dog') }}',
+      url: '{{ URL::to('api/fe_dog') }}',
       dataType: 'json',
   
       delay: 250,

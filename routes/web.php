@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('api/search', 'App\Http\Controllers\ApisController@dataAjax');
 Route::get('api/dog', 'App\Http\Controllers\ApisController@AjaxDog');
 Route::get('api/fe_dog', 'App\Http\Controllers\ApisController@AjaxDog_Fe');

@@ -140,9 +140,17 @@
               <td>
               {{$dogs->show_title}}
               </td>
+             
+              @if($dogs->status == 'Active')
               <td class="text-center">
                 <div class="status-pill green" data-title="Complete" data-toggle="tooltip"></div>
               </td>
+                            @else
+                            <td class="text-center">
+                <div class="status-pill red" data-title="Complete" data-toggle="tooltip"></div>
+              </td>
+                            @endif
+              
               <td class="row-actions">
                 <a href="{{route('dogs.edit',$dogs->id)}}"><i class="os-icon os-icon-ui-49"></i></a><a href="#"><i class="os-icon os-icon-grid-10"></i></a>
                 <form action="{{ route('dogs.destroy', $dogs->id ) }}" method="post">
