@@ -259,22 +259,6 @@
               </div>
             </div>
             <div class="form-group row">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-              <label class="col-sm-4 col-form-label" for="">Breed </label>
-              <div class="col-sm-8">
-              <select class="form-control" name="breed_id">
-                   @foreach($total_breeds as $breeds)
-                <option  value="{{$breeds->id}}">
-               {{$breeds->name}}
-                </option>
-                @endforeach
-</select>
-                </div>
-            </div>
-            <div class="form-group row">
->>>>>>> 84c8c02855eb53402f00d146456ef40b0ef9d123
               <label class="col-sm-4 col-form-label" for="">Select Sire</label>
               <div class="col-sm-8">
               <select class="form-control js-data-example-ajax" name="sire_id" id="selUser"  >
@@ -290,7 +274,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Dam</label>
               <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="dam_id" id="selUser_fe"  >
+              <select class="form-control js-data-example-ajax" name="dam_id" id="selUser_fe">
               @foreach($femaleDogs as $femaleDog)
                 <option  value="{{$femaleDog->id}}">
                {{$femaleDog->dog_name}}
@@ -300,22 +284,6 @@
               </div>
             </div>
          
-<<<<<<< HEAD
-=======
-              <label class="col-sm-4 col-form-label" for="">Breed </label>
-              <div class="col-sm-8">
-              <select class="form-control" name="breed_id">
-                   @foreach($total_breeds as $breeds)
-                <option  value="{{$breeds->id}}">
-               {{$breeds->name}}
-                </option>
-                @endforeach
-</select>
-                </div>
-            </div>
->>>>>>> 96697584cf8455b2a3769e3e142ac1dd911108a2
-=======
->>>>>>> 84c8c02855eb53402f00d146456ef40b0ef9d123
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
           </div>
