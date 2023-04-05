@@ -8,6 +8,7 @@ use App\Models\Breeds;
 use App\Models\Clubs;
 use App\Models\Countries;
 use App\Models\Species;
+<<<<<<< HEAD
 =======
 use App\Models\BreedImgVids;
 use App\Models\FCIGroup;
@@ -19,6 +20,11 @@ use App\Models\specie;
 use App\Models\Pets;
 use DB;
 >>>>>>> 42a98c42be82ae4680d9116b06f260eece20df00
+=======
+use App\Models\AKCGroup;
+use App\Models\FCIGroup;
+use App\Models\Ratings;
+>>>>>>> b2c96d537b4ea5401493f664bcee928f244d65f1
 
 class BreedsController extends Controller
 {
@@ -40,9 +46,14 @@ class BreedsController extends Controller
         $FCI = FCIGroup::where('status','=','Active')->get();
         $AKC = AKCGroup::where('status','=','Active')->get();
 
+<<<<<<< HEAD
         $clubs = Clubs::where('status','=','Active')->get();
 
 <<<<<<< HEAD
+=======
+        $FCI = FCIGroup::where('status','=','Active')->get();
+        $AKC = AKCGroup::where('status','=','Active')->get();
+>>>>>>> b2c96d537b4ea5401493f664bcee928f244d65f1
         $clubs = Clubs::where('status','=','Active')->get();
 
         $species = Species::where('status','=','Active')->get();
@@ -106,10 +117,14 @@ class BreedsController extends Controller
         $physical = array('0.0','0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8','0.9','1.0','1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.8','1.9','2.0','2.1','2.2','2.3','2.4','2.5','2.6','2.7','2.8','2.9','3.0','3.1','3.2','3.3','3.4','3.5','3.6','3.7','3.8','3.9','4.0','4.1','4.2','4.3','4.4','4.5','4.6','4.7','4.8','4.9','5.0');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         return view('breeds.create', compact('species','countries','adapt','friendly','h_g','train','physical','adapt_bones','friendly_bones','hg_bones','train_bones','physical_bones','clubs'));
 =======
         return view('breeds.create', compact('FCI','AKC','species','countries','adapt','friendly','h_g','train','physical','adapt_bones','friendly_bones','hg_bones','train_bones','physical_bones','clubs'));
 >>>>>>> 42a98c42be82ae4680d9116b06f260eece20df00
+=======
+        return view('breeds.create', compact('countries','adapt','friendly','h_g','train','physical','adapt_bones','friendly_bones','hg_bones','train_bones','physical_bones','clubs','AKC','FCI'));
+>>>>>>> b2c96d537b4ea5401493f664bcee928f244d65f1
     }
 
     /**
@@ -159,7 +174,11 @@ $physical_bones = array(
 );
 
 $new = new Breeds;
+<<<<<<< HEAD
 $new->sp_id = $request->sp_id;
+=======
+// $new->sp_id = $request->sp_id;
+>>>>>>> b2c96d537b4ea5401493f664bcee928f244d65f1
 $new->name = $request->name;
 $new->variations = $request->variations;
 $new->fci_group = $request->fci_group;
@@ -296,6 +315,10 @@ else
 {
 return redirect()->route('breeds.index')->with('danger','Something went wrong. Please try creating a new breed again.');
 }
+<<<<<<< HEAD
+=======
+        return redirect()->back()->with('message', 'Record added successfully');
+>>>>>>> b2c96d537b4ea5401493f664bcee928f244d65f1
     }
 
     /**
