@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\judges;
+use App\Models\Judges;
 
-class judgesController extends Controller
+class JudgesController extends Controller
 {
 
     public $module_name = "judges";
