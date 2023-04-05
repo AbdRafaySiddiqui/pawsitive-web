@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Clubs;
 use App\Models\Countries;
 use App\Models\Cities;
+use Illuminate\Pagination\Paginator;
 
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class ClubsController extends Controller
      */
     public function index()
     {
-        $club = Clubs::get();
+        $club = Clubs::orderBy('id','DESC')->paginate('5');
         
         return view('club.index',compact('club'));
     }
@@ -83,8 +84,8 @@ class ClubsController extends Controller
         // Getting values from the blade template form
 	    $club->name = $request->name;
 	    $club->email = $request->email;
-	    $club->email = $request->city;
-	    $club->email = $request->country;
+	    $club->city = $request->city;
+	    $club->country = $request->country;
 	    $club->phone = $request->phone;
         $club->affiliation = $request->affiliation;
         $club->update();

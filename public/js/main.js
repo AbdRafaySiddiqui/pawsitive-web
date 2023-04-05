@@ -225,6 +225,7 @@ $(function () {
   if ($('#ckeditor1').length) {
     CKEDITOR.replace('ckeditor1');
   }
+ 
 
   // #10. CHARTJS CHARTS http://www.chartjs.org/
 

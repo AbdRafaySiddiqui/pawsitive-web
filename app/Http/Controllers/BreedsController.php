@@ -34,11 +34,13 @@ class BreedsController extends Controller
         $FCI = FCIGroup::where('status','=','Active')->get();
         $AKC = AKCGroup::where('status','=','Active')->get();
 
+        $FCI = FCIGroup::where('status','=','Active')->get();
+        $AKC = AKCGroup::where('status','=','Active')->get();
         $clubs = Clubs::where('status','=','Active')->get();
 
-        $species = specie::where('status','=','Active')->get();
+        $species = Species::where('status','=','Active')->get();
 
-        $countries = DB::table('countries')->get();
+        $countries = Countries::get();
 
         $adapt_bones = array(
                         'Suited To Apartment Living',
@@ -91,7 +93,7 @@ class BreedsController extends Controller
 
         $physical = array('0.0','0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8','0.9','1.0','1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.8','1.9','2.0','2.1','2.2','2.3','2.4','2.5','2.6','2.7','2.8','2.9','3.0','3.1','3.2','3.3','3.4','3.5','3.6','3.7','3.8','3.9','4.0','4.1','4.2','4.3','4.4','4.5','4.6','4.7','4.8','4.9','5.0');
 
-        return view('breeds.create', compact('FCI','AKC','species','countries','adapt','friendly','h_g','train','physical','adapt_bones','friendly_bones','hg_bones','train_bones','physical_bones','clubs'));
+        return view('breeds.create', compact('countries','adapt','friendly','h_g','train','physical','adapt_bones','friendly_bones','hg_bones','train_bones','physical_bones','clubs','AKC','FCI'));
     }
 
     /**
@@ -141,7 +143,7 @@ $physical_bones = array(
 );
 
 $new = new Breeds;
-$new->sp_id = $request->sp_id;
+// $new->sp_id = $request->sp_id;
 $new->name = $request->name;
 $new->variations = $request->variations;
 $new->fci_group = $request->fci_group;

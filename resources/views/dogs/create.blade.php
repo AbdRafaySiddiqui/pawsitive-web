@@ -259,6 +259,7 @@
               </div>
             </div>
             <div class="form-group row">
+<<<<<<< HEAD
               <label class="col-sm-4 col-form-label" for="">Select Sire</label>
               <div class="col-sm-8">
               <select class="form-control js-data-example-ajax" name="sire_id" id="selUser"  >
@@ -284,6 +285,19 @@
               </div>
             </div>
          
+=======
+              <label class="col-sm-4 col-form-label" for="">Breed </label>
+              <div class="col-sm-8">
+              <select class="form-control" name="breed_id">
+                   @foreach($total_breeds as $breeds)
+                <option  value="{{$breeds->id}}">
+               {{$breeds->name}}
+                </option>
+                @endforeach
+</select>
+                </div>
+            </div>
+>>>>>>> 96697584cf8455b2a3769e3e142ac1dd911108a2
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
           </div>

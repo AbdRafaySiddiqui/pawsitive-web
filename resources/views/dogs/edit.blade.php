@@ -259,7 +259,18 @@
                 <textarea class="form-control" name="achievements"  id="" cols="30" rows="10">{{$dog->achievements}}</textarea>
               </div>
             </div>
-          
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Breed </label>
+              <div class="col-sm-8">
+              <select class="form-control" name="breed_id">
+                   @foreach($total_breeds as $breeds)
+                <option  value="{{$breeds->id}}" {{ $breeds->id == $dog->breed_id ? 'selected' : '' }}>
+               {{$breeds->name}}
+                </option>
+                @endforeach
+</select>
+                </div>
+            </div>
          
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>

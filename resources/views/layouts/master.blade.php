@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet" type="text/css">
     <link href="{{asset('public/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/bower_components/summernote/summernote-bs4.css')}}">
+    <link rel="stylesheet" href="{{asset('public/bower_components/jquery-selectric/selectric.css')}}">
     <link href="{{asset('public/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
     <link href="{{asset('public/css/main.css?version=4.4.0')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/slick-carousel/slick/slick.css')}}" rel="stylesheet">
@@ -22,9 +24,8 @@
     <link href="{{asset('public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/dropzone/dist/dropzone.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/custom/style.css')}}" rel="stylesheet">
-    <link href="{{asset('public/select2-develop/dist/css/select2.min.css')}}" rel="stylesheet" />
+    <!-- <link href="{{asset('public/select2-develop/dist/css/select2.min.css')}}" rel="stylesheet" /> -->
     <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
-
   </head>
   <body class="menu-position-side menu-side-left full-screen color-scheme-dark">
     <div class="all-wrapper solid-bg-all">
@@ -388,7 +389,7 @@
         --------------------><!--------------------
         START - Main Menu
         -------------------->
-        <div class="menu-w menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright menu-activated-on-hover menu-has-selected-link color-scheme-dark color-style-transparent selected-menu-color-bright">
+        <div class="menu-w menu-position-side menu-side-left menu-layout-compact sub-menu-style-flyout sub-menu-color-bright menu-activated-on-hover menu-has-selected-link color-scheme-dark color-style-transparent selected-menu-color-bright">
           <div class="logged-user-w avatar-inline">
             <div class="logged-user-i">
               <div class="avatar-w">
@@ -746,6 +747,10 @@
         <script src="{{asset('public/bower_components/bootstrap/js/dist/popover.js')}}"></script>
         <script src="{{asset('public/js/demo_customizer.js?version=4.4.0')}}"></script>
         <script src="{{asset('public/js/main.js?version=4.4.0')}}"></script>
+    <!-- <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script> -->
+
+<script src="{{asset('public/bower_components/summernote/summernote-bs4.js')}}"></script>
+
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -756,7 +761,6 @@
           ga('send', 'pageview');
 
 
-
         </script>
  
  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -765,6 +769,13 @@
 
 <script>
 
+  
+
+// hover 
+$(".has-sub-menu").hover(
+  function(){ $(this).addClass('active') },
+  function(){ $(this).removeClass('active') }
+);
 
 
     
@@ -838,7 +849,6 @@ document.querySelector('#sig').addEventListener("change", previewSignature);
 
 
     </script>
-
 </body>
     </html>
 

@@ -41,7 +41,7 @@
       <div class="controls-above-table">
         <div class="row">
           <div class="col-sm-6">
-            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('club.create')}}">Add Club</a><a class="btn btn-sm btn-danger " href="#">Delete</a>
+            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('judges.create')}}">Add Judge</a><a class="btn btn-sm btn-danger " href="#">Delete</a>
           </div>
           <div class="col-sm-6">
             <form class="form-inline justify-content-sm-end">
@@ -143,26 +143,7 @@
           Showing records 1 - 5
         </div>
         <div class="table-records-pages">
-          <ul>
-            <li>
-              <a href="#">Previous</a>
-            </li>
-            <li>
-              <a class="current" href="#">1</a>
-            </li>
-            <li>
-              <a href="#">2</a>
-            </li>
-            <li>
-              <a href="#">3</a>
-            </li>
-            <li>
-              <a href="#">4</a>
-            </li>
-            <li>
-              <a href="#">Next</a>
-            </li>
-          </ul>
+        {{$judge->links()}}
         </div>
       </div>
       <!--------------------
