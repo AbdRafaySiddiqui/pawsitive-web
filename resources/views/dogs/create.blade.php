@@ -723,6 +723,7 @@
 
 
 
+
 <script>
   $('#selUser_fe').select2({
     allowClear: true,
@@ -737,7 +738,7 @@
     },
     ajax: {
       type: "get",
-      url: '{{ URL::to('api/dog') }}',
+      url: '{{ URL::to('api/fe_dog') }}',
       dataType: 'json',
   
       delay: 250,

@@ -90,23 +90,11 @@
                                                 <td>
                                                     {{ $breed->name }}
                                                 </td>
-<<<<<<< HEAD
-                                                @if($breeds->status == 'Active')
-              <td class="text-center">
-                <div class="status-pill green" data-title="Complete" data-toggle="tooltip"></div>
-              </td>
-                            @else
-                            <td class="text-center">
-                <div class="status-pill red" data-title="Complete" data-toggle="tooltip"></div>
-              </td>
-                            @endif
-=======
                                                 <td class="text-center">
                                                     @if(isset($breed->species->name))
                                                     {{$breed->species->name}}
                                                     @endif
                                                 </td>
->>>>>>> 607bc2251d41f382b9c44fe25b44dbf0ee928d5c
                                                 <td class="row-actions">
                                                     <a href="{{ route('breeds.show', $breed->id) }}"><i
                                                             class="os-icon os-icon-ui-49"></i></a><a href="#"><i

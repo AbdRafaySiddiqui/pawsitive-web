@@ -29,6 +29,10 @@ class ApisController extends Controller
                     ->where('dog_name','LIKE',"%$search%")
                     ->where('gender', '=', 'Male')
                     ->get();
+        }else{
+            $data = dogs::select("id","dog_name")
+            ->where('gender', '=', 'Male')
+                    ->get();
         }
         return response()->json($data);
     }
@@ -40,6 +44,10 @@ class ApisController extends Controller
             $data = dogs::select("id","dog_name")
                     ->where('dog_name','LIKE',"%$search%")
                     ->where('gender', '=', 'Female')
+                    ->get();
+        }else{
+            $data = dogs::select("id","dog_name")
+            ->where('gender', '=', 'Female')
                     ->get();
         }
         return response()->json($data);
