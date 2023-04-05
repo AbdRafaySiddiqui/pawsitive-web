@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\dogs;
+use App\Models\Breeds;
+
 
 class dogsController extends Controller
 {
@@ -22,7 +24,8 @@ class dogsController extends Controller
      */
     public function create()
     {
-        return view('dogs.create');
+        $total_breeds = Breeds::get();
+        return view('dogs.create',compact('total_breeds'));
     }
 
     /**
@@ -38,7 +41,7 @@ class dogsController extends Controller
         $dogs->gender =  $request->gender;
         $dogs->show_title =  $request->show_title;
         $dogs->achievements =  $request->achievements;
-	
+        $dogs->breed_id = $request->breed_id;
         $dogs->save();
         return redirect()->back()->with('message', 'Record added successfully');
     }
@@ -57,7 +60,8 @@ class dogsController extends Controller
     public function edit(string $id)
     {
         $dog = dogs::find($id);
-        return view('dogs.edit', compact('dog')); 
+        $total_breeds = Breeds::get();
+        return view('dogs.edit', compact('dog','total_breeds')); 
     }
 
     /**
@@ -72,7 +76,8 @@ class dogsController extends Controller
             'microchip'=>'required',
             'gender'=>'required',
             'show_title'=>'required',
-            'achievements'=>'required'
+            'achievements'=>'required',
+            'breed_id'=>'required'
         ]); 
         $dog = dogs::find($id);
         // Getting values from the blade template form
@@ -83,6 +88,7 @@ class dogsController extends Controller
 	    $dog->gender = $request->gender;
 	    $dog->show_title = $request->show_title;
 	    $dog->achievements = $request->achievements;
+	    $dog->breed_id = $request->breed_id;
 	
         $dog->save();
  
@@ -94,7 +100,7 @@ class dogsController extends Controller
      */
     public function destroy(string $id)
     {
-        dogs::destroy($id);
+        Dogs::where('id',$id)->update(array('status' => 'Inactive'));
         return redirect()->back()->with('message', 'Record deleted successfully');
     }
 }

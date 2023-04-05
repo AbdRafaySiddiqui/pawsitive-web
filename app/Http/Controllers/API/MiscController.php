@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Cities;
 use App\Models\Countries;
 use App\Models\Species;
+use App\Models\Clubs;
+use App\Models\Dogs;
+use App\Models\Events;
 use App\Models\OldGsdData;
 
 use App\Models\Breeds;
@@ -26,6 +29,24 @@ use GoogleSearch;
 class MiscController extends Controller
 {
     use Misc;
+
+    public function statistic()
+    {
+        $clubs = Clubs::where('status','=','Active')->get();
+        $totalNoClubs= $clubs->count();
+
+        $dogs = Dogs::where('status','=','Active')->get();
+        $totalNoDogs= $dogs->count();
+
+        $breeds = Breeds::where('status','=','Active')->get();
+        $totalNoBreeds= $breeds->count();
+
+
+        $events = Events::where('status','=','Active')->get();
+        $totalNoEvents= $events->count();
+        
+        return response()->json(['totalNoClubs' => $totalNoClubs,'totalNoDogs' => $totalNoDogs,'totalNoBreeds' => $totalNoBreeds,'totalNoEvents' => $totalNoEvents], 200);
+    }
 
     public function countries()
     {

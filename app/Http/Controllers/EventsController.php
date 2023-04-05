@@ -116,8 +116,7 @@ class EventsController extends Controller
     public function destroy(string $id)
     {
         //
-        $event=Events::find($id);
-        $event->delete();
+        Events::where('id',$id)->update(array('status' => 'Inactive'));
         return redirect()->back()->with('message', 'Record Permenantly Deleted!');
     }
 

@@ -16,6 +16,18 @@ class BreedController extends Controller
 {
     use Activity;
 
+
+
+    public function breed_short(request $request)
+    {
+        $breeds = Breeds::select('breeds.id','breeds.name as breed_name',)
+          ->where('breeds.status','=','Active')
+          ->orderBy('breeds.name','ASC')
+          ->get();
+        
+        return response()->json(['breeds' => $breeds], 200);
+    }
+
     public function listing(request $request)
     {
         $breeds = Breeds::select('breeds.id','breeds.name as breed_name','profile_photo')

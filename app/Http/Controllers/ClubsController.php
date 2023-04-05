@@ -84,8 +84,8 @@ class ClubsController extends Controller
         // Getting values from the blade template form
 	    $club->name = $request->name;
 	    $club->email = $request->email;
-	    $club->email = $request->city;
-	    $club->email = $request->country;
+	    $club->city = $request->city;
+	    $club->country = $request->country;
 	    $club->phone = $request->phone;
         $club->affiliation = $request->affiliation;
         $club->update();

@@ -7,6 +7,8 @@ use App\Http\Controllers\API\MemberController;
 use App\Http\Controllers\API\MiscController;
 use App\Http\Controllers\API\TrainerController;
 use App\Http\Controllers\API\PetsController;
+use App\Http\Controllers\API\DogController;
+use App\Http\Controllers\API\ClubController;
 
 
 /*
@@ -23,13 +25,26 @@ use App\Http\Controllers\API\PetsController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//DogController routes
+Route::get('dog/{id}/listings', [DogController::class, 'listing']);
+Route::get('dog/{id}/details', [DogController::class, 'details']);
+
+//ClubController routes
+Route::get('club-listings', [ClubController::class, 'listing']);
+Route::get('club/{id}/details', [ClubController::class, 'details']);
+
+
 
 //MiscController routes
 Route::get('countries', [MiscController::class, 'countries']);
 Route::get('cities', [MiscController::class, 'cities']);
 Route::get('species', [MiscController::class, 'species']);
 Route::get('instagram-api', [MiscController::class, 'instagram_api']);
+Route::get('statistic', [MiscController::class, 'statistic']);
+
 Route::post('instagram-api-response-reader', [MiscController::class, 'instagram_api_response_reader']);
+
+
     
     // For Admin Panel use
     Route::post('countries/cities', [MiscController::class, 'cities_by_countries'])->name('cities_by_countries');
@@ -41,6 +56,8 @@ Route::post('upgrade-as-vet', [MiscController::class, 'upgrade_as_vet']);
 //BreedController routes
 Route::get('breed-listings', [BreedController::class, 'listing']);
 Route::get('breed/{id}/details', [BreedController::class, 'details']);
+Route::get('breed-short', [BreedController::class, 'breed_short']);
+
 
     // For Admin Panel use
     Route::post('species/breeds', [BreedController::class, 'get_by_species'])->name('get_by_species');
