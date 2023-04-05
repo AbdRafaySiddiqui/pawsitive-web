@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\dogs;
+use App\Models\Breeds;
+
 use App\Models\dog_real_parent;
 
 class dogsController extends Controller
@@ -23,9 +25,10 @@ class dogsController extends Controller
      */
     public function create()
     {
+        $total_breeds = Breeds::get();
         $maleDogs = dogs::where('gender', '=', 'Male')->get();
         $femaleDogs = dogs::where('gender', '=', 'Female')->get();
-        return view('dogs.create',compact('maleDogs', 'femaleDogs'));
+        return view('dogs.create',compact('maleDogs', 'femaleDogs','total_breeds'));
     }
 
     /**

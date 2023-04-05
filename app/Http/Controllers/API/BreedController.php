@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API;
 
-<<<<<<< HEAD
 use App\Models\Breeds;
 use App\Models\BreedImgVids;
 use App\Models\Ratings;
@@ -10,49 +9,18 @@ use App\Traits\Activity;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-=======
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use App\Models\Breeds;
-use App\Models\BreedImgVids;
-use App\Models\Ratings;
-use App\Models\Pets;
-
-use App\Traits\Activity;
->>>>>>> 96697584cf8455b2a3769e3e142ac1dd911108a2
 
 class BreedController extends Controller
 {
     use Activity;
 
-<<<<<<< HEAD
     public function listing(request $request)
     {
         $breeds = Breeds::select('breeds.id','breeds.name as breed_name','profile_photo')
-=======
-
-
-    public function breed_short(request $request)
-    {
-        $breeds = Breeds::select('breeds.id','breeds.name as breed_name',)
-          ->where('breeds.status','=','Active')
-          ->orderBy('breeds.name','ASC')
-          ->get();
-        
-        return response()->json(['breeds' => $breeds], 200);
-    }
-
-    public function listing(request $request)
-    {
-        $breeds = Breeds::select('breeds.id','breeds.name as breed_name','profile_photo')
-                    //   ->leftjoin('species','species.id','=','breeds.sp_id')
->>>>>>> 96697584cf8455b2a3769e3e142ac1dd911108a2
                       ->where('breeds.status','=','Active')
                       ->orderBy('breeds.name','ASC')
                       ->get();
 
-<<<<<<< HEAD
         foreach($breeds as $breed)
         {
             $pp = BreedImgVids::where('breed_id','=',$breed->id)->inRandomOrder()->get();
@@ -72,27 +40,6 @@ class BreedController extends Controller
                 }
             }
         }
-=======
-        // foreach($breeds as $breed)
-        // {
-        //     $pp = BreedImgVids::where('breed_id','=',$breed->id)->inRandomOrder()->get();
-
-        //     $breed->profile_photo = asset('storage/app/public/noimage.png');
-
-        //     if(count($pp) > 0)
-        //     {
-        //         foreach($pp as $m)
-        //         {
-        //             if(file_exists(storage_path().'/app/public/breed_imgs'.'/'.$m->media))
-        //             {
-        //                 $breed->profile_photo = asset('storage/app/public/breed_imgs').'/'.$m->media;
-
-        //                 break;
-        //             }
-        //         }
-        //     }
-        // }
->>>>>>> 96697584cf8455b2a3769e3e142ac1dd911108a2
 
         $this->save_user_activity(6, $request->user_id, 'View', 'Viewed Breed List from Mobile App');
 
@@ -103,10 +50,6 @@ class BreedController extends Controller
     {
         $breed = Breeds::select('breeds.id',
                                 'breeds.name as breed_name',
-<<<<<<< HEAD
-=======
-                                // 'species.name as species',
->>>>>>> 96697584cf8455b2a3769e3e142ac1dd911108a2
                                 'breeds.height_male',
                                 'breeds.height_female',
                                 'breeds.weight_male',
@@ -126,20 +69,11 @@ class BreedController extends Controller
                                 'breeds.feeding',
                                 'breeds.grooming',
                                 'breeds.child_pets as children_and_pets')
-<<<<<<< HEAD
                       ->leftjoin('countries','countries.idCountry','=','breeds.country')
                       ->find($id);
 
             $Media = BreedImgVids::where('breed_id','=',$breed->id)->inRandomOrder()->get();
             $media = array();
-=======
-                    //   ->leftjoin('species','species.id','=','breeds.sp_id')
-                      ->leftjoin('countries','countries.idCountry','=','breeds.country')
-                      ->find($id);
-
-            // $Media = BreedImgVids::where('breed_id','=',$breed->id)->inRandomOrder()->get();
-            // $media = array();
->>>>>>> 96697584cf8455b2a3769e3e142ac1dd911108a2
             if($breed)
             {
                 if($breed->height_male == " TO ")
@@ -176,7 +110,6 @@ class BreedController extends Controller
                 $ratings[$bone->group_name][str_replace('-','_',str_replace(' ','_',strtolower($bone->name)))] = $bone->value;
             }
 
-<<<<<<< HEAD
             foreach($Media as $m)
             {
                 if(!in_array(asset('storage/app/public/breed_imgs').'/'.$m->media, $media))
@@ -185,21 +118,10 @@ class BreedController extends Controller
                     {
                         array_push($media, asset('storage/app/public/breed_imgs').'/'.$m->media);
                     }
-=======
-            // foreach($Media as $m)
-            // {
-            //     if(!in_array(asset('storage/app/public/breed_imgs').'/'.$m->media, $media))
-            //     {
-            //         if(file_exists(storage_path().'/app/public/breed_imgs'.'/'.$m->media))
-            //         {
-            //             array_push($media, asset('storage/app/public/breed_imgs').'/'.$m->media);
-            //         }
->>>>>>> 96697584cf8455b2a3769e3e142ac1dd911108a2
                     // else
                     // {
                     //     BreedImgVids::where('media', '=', $m->media)->delete();
                     // }
-<<<<<<< HEAD
                 }
             }
 
@@ -224,62 +146,5 @@ class BreedController extends Controller
         $this->save_user_activity(6, $request->user_id, 'View', 'Viewed Breed Details of '.$breed->name.' from Mobile App');
 
         return response()->json(['breed' => $breed, 'ratings' => $ratings, 'media' => $media], 200);
-=======
-            //     }
-            // }
-
-            // if(count($Media) == 0)
-            // {
-            //     $breed->profile_photo = asset('storage/app/public/noimage.png');
-            // }
-            // else
-            // {
-            //     foreach($Media as $m)
-            //     {
-            //         if(file_exists(storage_path().'/app/public/breed_imgs'.'/'.$m->media))
-            //         {
-            //             $breed->profile_photo = asset('storage/app/public/breed_imgs').'/'.$m->media;
-
-            //             break;
-            //         }
-            //     }
-                
-            // }
-
-        $this->save_user_activity(6, $request->user_id, 'View', 'Viewed Breed Details of '.$breed->name.' from Mobile App');
-
-        return response()->json(['breed' => $breed, 'ratings' => $ratings], 200);
-    }
-
-    public function get_by_species(request $request)
-    {
-        $breeds = Breeds::select('breeds.id','breeds.name as breed_name','species.name as species','profile_photo')
-                      ->leftjoin('species','species.id','=','breeds.sp_id')
-                      ->where('breeds.status','=','Active')
-                      ->where('breeds.sp_id','=',$request->id)
-                      ->orderBy('breeds.name','ASC')
-                      ->get();
-        
-        return response()->json(['breeds' => $breeds], 200);
-    }
-
-    public function pets_by_breed(request $request)
-    {
-        if(isset($request->except))
-        {
-            $pets = Pets::select('id','name','gender')
-                        ->where('breed_id','=',$request->id)
-                        ->where('id','!=',$request->except)
-                        ->get();
-        }
-        else
-        {
-            $pets = Pets::select('id','name','gender')
-                        ->where('breed_id','=',$request->id)
-                        ->get();
-        }
-        
-        return response()->json(['pets' => $pets], 200);
->>>>>>> 96697584cf8455b2a3769e3e142ac1dd911108a2
     }
 }
