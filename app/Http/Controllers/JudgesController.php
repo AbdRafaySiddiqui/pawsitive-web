@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\judges;
-use Illuminate\Pagination\Paginator;
+use App\Models\Judges;
 
 class JudgesController extends Controller
 {

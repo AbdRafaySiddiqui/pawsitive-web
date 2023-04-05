@@ -90,7 +90,7 @@
                                                 <td>
                                                     {{ $breed->name }}
                                                 </td>
-                                                @if($breeds->status == 'Active')
+                                                @if($breed->status == 'Active')
               <td class="text-center">
                 <div class="status-pill green" data-title="Complete" data-toggle="tooltip"></div>
               </td>

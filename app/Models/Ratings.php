@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Ratings extends Model
 {
     use HasFactory;
+
     protected $table = 'rating_bones';
-    
 }

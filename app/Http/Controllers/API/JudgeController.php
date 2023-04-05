@@ -8,13 +8,15 @@ use App\Models\Judges;
 
 class JudgeController extends Controller
 {
-    function listing()
+    public function listing()
     {
-        return Judges::all();
+        $judges = Judges::where('status','=','Active')->get();
+        return response()->json(['judges' => $judges], 200);
     }
 
-    function details($id=null)
+    public function details($id)
     {
-        return Judges::find($id);
+        $judge = Judges::find($id);
+        return response()->json(['judge' => $judge], 200);
     }
 }

@@ -32,7 +32,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('club','App\Http\Controllers\ClubsController');
     Route::resource('judges','App\Http\Controllers\JudgesController');
     Route::resource('breeds','App\Http\Controllers\breedsController');
-    Route::resource('dogs','App\Http\Controllers\dogsController');
+    Route::resource('dogs','App\Http\Controllers\DogsController');
     Route::get('users/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
     Route::get('/users', 'App\Http\Controllers\UserController@index')->name('users.index');
     Route::get('/users/{id}/edit', 'App\Http\Controllers\UserController@edit')->name('users.edit');

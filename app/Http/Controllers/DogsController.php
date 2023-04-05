@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\dogs;
+use App\Models\Dogs;
 use App\Models\Breeds;
 
 use App\Models\dog_real_parent;
 
-class dogsController extends Controller
+class DogsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $dog = dogs::get();
+        $dog = Dogs::get();
         
         return view('dogs.index',compact('dog'));
     }
@@ -26,8 +26,8 @@ class dogsController extends Controller
     public function create()
     {
         $total_breeds = Breeds::get();
-        $maleDogs = dogs::where('gender', '=', 'Male')->get();
-        $femaleDogs = dogs::where('gender', '=', 'Female')->get();
+        $maleDogs = Dogs::where('gender', '=', 'Male')->get();
+        $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
         return view('dogs.create',compact('maleDogs', 'femaleDogs','total_breeds'));
     }
 
@@ -71,7 +71,7 @@ class dogsController extends Controller
      */
     public function edit(string $id)
     {
-        $dog = dogs::find($id);
+        $dog = Dogs::find($id);
         $total_breeds = Breeds::get();
         return view('dogs.edit', compact('dog','total_breeds')); 
     }
@@ -91,7 +91,7 @@ class dogsController extends Controller
             'achievements'=>'required',
             'breed_id'=>'required'
         ]); 
-        $dog = dogs::find($id);
+        $dog = Dogs::find($id);
         // Getting values from the blade template form
 	    $dog->dog_name = $request->dog_name;
 	    $dog->dob = $request->dob;
