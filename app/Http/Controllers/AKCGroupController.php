@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\akcgroup;
+use App\Models\AKCGroup;
 
-class akc_group extends Controller
+class AKCGroupsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $akcs = akcgroup::get();
+        $akcs = AKCGroup::get();
         
         return view('akc_groups.index',compact('akcs'));
     }
@@ -31,7 +31,7 @@ class akc_group extends Controller
     public function store(Request $request)
     {
 
-        $new = new akcgroup;
+        $new = new AKCGroup;
         $new->name = $request->name;
 
         $new->save();
@@ -52,7 +52,7 @@ class akc_group extends Controller
      */
     public function edit(string $id)
     {
-        $akc = akcgroup::find($id);
+        $akc = AKCGroup::find($id);
         return view('akc_groups.edit', compact('akc'));
     }
 
@@ -64,7 +64,7 @@ class akc_group extends Controller
         $request->validate([
             'name'=>'required',
         ]); 
-        $akc = akcgroup::find($id);
+        $akc = AKCGroup::find($id);
         // Getting values from the blade template form
 	    $akc->name = $request->name;
 
@@ -78,7 +78,7 @@ class akc_group extends Controller
      */
     public function destroy(string $id)
     {
-        akcgroup::where('id','=',$id)->delete();
+        AKCGroup::where('id','=',$id)->delete();
         
         return redirect()->back()->with('message', 'Record deleted successfully');
     }

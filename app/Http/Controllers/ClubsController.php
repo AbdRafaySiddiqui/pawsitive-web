@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Models\Clubs;
 use App\Models\Countries;
 use App\Models\Cities;
-use Illuminate\Pagination\Paginator;
 
 use Illuminate\Http\Request;
 

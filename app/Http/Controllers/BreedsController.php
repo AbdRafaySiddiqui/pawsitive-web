@@ -30,13 +30,6 @@ class BreedsController extends Controller
     {
         $FCI = FCIGroup::where('status','=','Active')->get();
         $AKC = AKCGroup::where('status','=','Active')->get();
-<<<<<<< HEAD
-
-        $FCI = FCIGroup::where('status','=','Active')->get();
-        $AKC = AKCGroup::where('status','=','Active')->get();
-
-=======
->>>>>>> 7d0cba9eb31f87ea534b52a7a8f967cc1bb7d190
         $clubs = Clubs::where('status','=','Active')->get();
 
         // $species = Species::where('status','=','Active')->get();

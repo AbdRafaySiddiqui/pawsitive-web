@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\fcigroup;
+use App\Models\FCIGroup;
 
-class fci_group extends Controller
+class FCIGroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $fcis = fcigroup::get();
+        $fcis = FCIGroup::get();
         
         return view('fci_groups.index',compact('fcis'));
     }
@@ -30,7 +30,7 @@ class fci_group extends Controller
      */
     public function store(Request $request)
     {
-        $new = new fcigroup;
+        $new = new FCIGroup;
         $new->name = $request->name;
 
         $new->save();
@@ -50,7 +50,7 @@ class fci_group extends Controller
      */
     public function edit(string $id)
     {
-        $fci = fcigroup::find($id);
+        $fci = FCIGroup::find($id);
         return view('fci_groups.edit', compact('fci'));
     }
 
@@ -62,7 +62,7 @@ class fci_group extends Controller
         $request->validate([
             'name'=>'required',
         ]); 
-        $fci = fcigroup::find($id);
+        $fci = FCIGroup::find($id);
         // Getting values from the blade template form
 	    $fci->name = $request->name;
 
@@ -76,7 +76,7 @@ class fci_group extends Controller
      */
     public function destroy(string $id)
     {
-        fcigroup::where('id','=',$id)->delete();
+        FCIGroup::where('id','=',$id)->delete();
         
         return redirect()->back()->with('message', 'Record deleted successfully');
     }

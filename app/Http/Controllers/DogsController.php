@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Dogs;
 use App\Models\Breeds;
 
-use App\Models\dog_real_parent;
+use App\Models\DogsRealParent;
 
 class DogsController extends Controller
 {
@@ -36,7 +36,7 @@ class DogsController extends Controller
      */
     public function store(Request $request)
     {
-        $dogs = new dogs;
+        $dogs = new Dogs;
         $dogs->dog_name =  $request->dog_name;
         $dogs->dob =  $request->dob;
         $dogs->reg_no =  $request->reg_no;
@@ -50,7 +50,7 @@ class DogsController extends Controller
 
         $new_dog_id = $dogs->id;
 
-        $parent = new dog_real_parent;
+        $parent = new DogsRealParent;
         $parent->dog_id = $new_dog_id;
         $parent->sire_id = $request->sire_id;
         $parent->dam_id = $request->dam_id;
@@ -118,7 +118,7 @@ class DogsController extends Controller
     
     public function storeMale(Request $request)
     {
-        $dogs = new dogs;
+        $dogs = new Dogs;
         $dogs->dog_name =  $request->dog_name;
         $dogs->dob =  $request->dob;
         $dogs->reg_no =  $request->reg_no;
@@ -133,7 +133,7 @@ class DogsController extends Controller
 
     public function storeFemale(Request $request)
     {
-        $dogs = new dogs;
+        $dogs = new Doge;
         $dogs->dog_name =  $request->fe_dog_name;
         $dogs->dob =  $request->fe_dob;
         $dogs->reg_no =  $request->fe_reg_no;
