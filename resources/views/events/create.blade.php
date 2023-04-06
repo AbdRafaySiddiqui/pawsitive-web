@@ -274,9 +274,9 @@
         success: function(response){
           // Handle successful form submission
           
-          console.log(response);
-          console.log(response.response.full_name);
-          console.log(response.response.message);
+          // console.log(response);
+          // console.log(response.response.full_name);
+          // console.log(response.response.message);
           $('#selUser').append($('<option>', {
           value: response.response.id,
 
@@ -308,6 +308,8 @@
       });
 
     });
+
+    // clear modal 
     $('#exampleModal').on('hidden.bs.modal', function () {
   $('#my-form')[0].reset(); // reset the form
   $('#msg').text(''); // clear the error message

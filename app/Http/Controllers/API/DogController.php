@@ -25,7 +25,7 @@ class DogController extends Controller
         
           ->where('breed_id','=',$id)
           ->orderBy('dogs.dog_name','ASC')
-          ->get();
+          ->first();
         
         return response()->json(['dog' => $dog], 200);
     }
@@ -48,5 +48,26 @@ class DogController extends Controller
           ->first();
         
         return response()->json(['dog' => $dog], 200);
+    }
+
+    public function alldogs(request $request)
+    {
+      if($request->has('q')){
+        $search = $request->q;
+        $data = Dogs::select('dogs.id',
+        'dog_name',
+          )
+          ->where('dog_name','LIKE',"%$search%")
+          ->orderBy('dog_name','ASC')
+          ->get();
+        }
+        else{
+          $data = Dogs::select('dogs.id',
+          'dog_name',
+            )
+            ->orderBy('dog_name','ASC')
+                  ->get();
+      }
+        return response()->json($data);
     }
 }

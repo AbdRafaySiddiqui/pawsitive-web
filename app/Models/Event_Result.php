@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Event_Result extends Model
 {
     use HasFactory;
+    protected $table = 'event_results';
 }

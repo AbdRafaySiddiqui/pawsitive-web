@@ -24,11 +24,13 @@ Route::get('api/search', 'App\Http\Controllers\ApisController@dataAjax');
 Route::get('api/dog', 'App\Http\Controllers\ApisController@AjaxDog');
 Route::get('api/fe_dog', 'App\Http\Controllers\ApisController@AjaxDog_Fe');
 Route::post('/submit-form', 'App\Http\Controllers\EventsController@submitForm');
+Route::post('/event-dog', 'App\Http\Controllers\EventResultsController@dog_submit');
 Route::post('/submit-Dogform', 'App\Http\Controllers\DogsController@storeMale');
 Route::post('/submit-Dogform-Female', 'App\Http\Controllers\DogsController@storeFemale');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     
+    Route::resource('event_results','App\Http\Controllers\EventResultsController');
     Route::resource('club','App\Http\Controllers\ClubsController');
     Route::resource('judges','App\Http\Controllers\JudgesController');
     Route::resource('breeds','App\Http\Controllers\breedsController');

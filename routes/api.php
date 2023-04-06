@@ -9,6 +9,7 @@ use App\Http\Controllers\API\TrainerController;
 use App\Http\Controllers\API\PetsController;
 use App\Http\Controllers\API\DogController;
 use App\Http\Controllers\API\ClubController;
+use App\Http\Controllers\API\ApiController;
 
 
 /*
@@ -36,6 +37,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //DogController routes
 Route::get('dog/{id}/listings', [DogController::class, 'listing']);
 Route::get('dog/{id}/details', [DogController::class, 'details']);
+Route::get('dog/all-dogs', [DogController::class, 'alldogs']);
+
 
 //ClubController routes
 Route::get('club-listings', [ClubController::class, 'listing']);

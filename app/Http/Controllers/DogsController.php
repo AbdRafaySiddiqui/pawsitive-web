@@ -42,7 +42,6 @@ class dogsController extends Controller
         $dogs->dob =  $request->dob;
         $dogs->reg_no =  $request->reg_no;
         $dogs->microchip =  $request->microchip;
-        $dogs->microchip =  $request->microchip;
         $dogs->gender =  $request->gender;
         $dogs->show_title =  $request->show_title;
         $dogs->achievements =  $request->achievements;

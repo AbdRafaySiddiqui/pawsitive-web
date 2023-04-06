@@ -258,6 +258,19 @@
                 <textarea class="form-control" name="achievements" id="" cols="30" rows="10"></textarea>
               </div>
             </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Select Breed</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="breed_id" id="breed_id">
+              @foreach($total_breeds as $total_breed)
+                <option  value="{{$total_breed->id}}">
+               {{$total_breed->name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Sire</label>
               <div class="col-sm-8">
@@ -283,6 +296,7 @@
               </select>
               </div>
             </div>
+          
          
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
@@ -491,12 +505,9 @@
     
   }).on('select2:open', function() {
 });
-</script>
 
 
 
-
-<script>
   $('#selUser_fe').select2({
     allowClear: true,
     placeholder: 'Select an item',
