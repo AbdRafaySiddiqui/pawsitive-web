@@ -25,6 +25,7 @@ use App\Http\Controllers\API\ClubController;
 // Breeds Controller.
 Route::get('breed-listings', [App\Http\Controllers\API\BreedController::class, 'listing']);
 Route::get('breed/{id}/details', [App\Http\Controllers\API\BreedController::class, 'details']);
+Route::get('breed-short', [BreedController::class, 'breed_short']);
 
 // Judges Controller.
 Route::get('judge-listings', [App\Http\Controllers\API\JudgeController::class, 'listing']);
@@ -61,10 +62,6 @@ Route::post('instagram-api-response-reader', [MiscController::class, 'instagram_
 Route::post('upgrade-as-trainer', [MiscController::class, 'upgrade_as_trainer']);
 Route::post('upgrade-as-vet', [MiscController::class, 'upgrade_as_vet']);
 
-//BreedController routes
-Route::get('breed-listings', [BreedController::class, 'listing']);
-Route::get('breed/{id}/details', [BreedController::class, 'details']);
-Route::get('breed-short', [BreedController::class, 'breed_short']);
 
 
     // For Admin Panel use
