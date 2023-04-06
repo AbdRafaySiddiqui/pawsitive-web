@@ -5,23 +5,7 @@
         END - Main Menu
         -------------------->
         <div class="content-w">
-<!--------------------
-          START - Breadcrumbs
-          -------------------->
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="index.html">Home</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href="index.html">Products</a>
-            </li>
-            <li class="breadcrumb-item">
-              <span>Laptop with retina screen</span>
-            </li>
-          </ul>
-          <!--------------------
-          END - Breadcrumbs
-          -------------------->
+
           <div class="content-panel-toggler">
             <i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span>
           </div>
@@ -30,9 +14,9 @@
 <div class="element-wrapper">
   <div class="element-box-tp">
     <h5 class="form-header">
-      Table without wrapper
+    Users List
     </h5>
-    <div class="form-desc">You can put a table tag inside an <code>.element-box-tp</code> class wrapper and add <code>.table</code> class to it to get something like this:
+    <div class="form-desc">
     </div>
     <div class="element-box-tp">
       <!--------------------
@@ -42,6 +26,11 @@
         <div class="row">
           <div class="col-sm-6">
             <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('users.create')}}">Add Users</a>
+          </div>
+          <div class="col-sm-6">
+            <form class="form-inline justify-content-sm-end">
+              <input class="form-control form-control-sm rounded bright" placeholder="Search" type="text">
+            </form>
           </div>
         </div>
       </div>
@@ -117,26 +106,7 @@
           Showing records 1 - 5
         </div>
         <div class="table-records-pages">
-          <ul>
-            <li>
-              <a href="#">Previous</a>
-            </li>
-            <li>
-              <a class="current" href="#">1</a>
-            </li>
-            <li>
-              <a href="#">2</a>
-            </li>
-            <li>
-              <a href="#">3</a>
-            </li>
-            <li>
-              <a href="#">4</a>
-            </li>
-            <li>
-              <a href="#">Next</a>
-            </li>
-          </ul>
+        {{$user->links()}}
         </div>
       </div>
       <!--------------------

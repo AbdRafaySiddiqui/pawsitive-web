@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\fcigroup;
+use App\Models\FCIGroup;
 
 class fci_group extends Controller
 {

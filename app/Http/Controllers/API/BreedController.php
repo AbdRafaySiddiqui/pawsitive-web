@@ -2,21 +2,36 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
 use App\Models\Breeds;
 use App\Models\BreedImgVids;
 use App\Models\Ratings;
-use App\Traits\Activity;
+use App\Models\Pets;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Traits\Activity;
 
 class BreedController extends Controller
 {
     use Activity;
 
+
+
+    public function breed_short(request $request)
+    {
+        $breeds = Breeds::select('breeds.id','breeds.name as breed_name',)
+          ->where('breeds.status','=','Active')
+          ->orderBy('breeds.name','ASC')
+          ->get();
+        
+        return response()->json(['breeds' => $breeds], 200);
+    }
+
     public function listing(request $request)
     {
         $breeds = Breeds::select('breeds.id','breeds.name as breed_name','profile_photo')
+                    //   ->leftjoin('species','species.id','=','breeds.sp_id')
                       ->where('breeds.status','=','Active')
                       ->orderBy('breeds.name','ASC')
                       ->get();

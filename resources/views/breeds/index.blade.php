@@ -7,11 +7,9 @@
               <a href="index.html">Home</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="index.html">Products</a>
+              <a href="index.html"> Breed List</a>
             </li>
-            <li class="breadcrumb-item">
-              <span>Laptop with retina screen</span>
-            </li>
+           
           </ul>
           <!--------------------
           END - Breadcrumbs
@@ -24,9 +22,9 @@
 <div class="element-wrapper">
   <div class="element-box-tp">
     <h5 class="form-header">
-      Table without wrapper
+   BREEDS - LIST
     </h5>
-    <div class="form-desc">You can put a table tag inside an <code>.element-box-tp</code> class wrapper and add <code>.table</code> class to it to get something like this:
+    <div class="form-desc">
     </div>
     <div class="element-box-tp">
       <!--------------------
@@ -35,24 +33,11 @@
       <div class="controls-above-table">
         <div class="row">
           <div class="col-sm-6">
-            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('breeds.create')}}">Add Breed</a><a class="btn btn-sm btn-danger " href="#">Delete</a>
+            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('breeds.create')}}">Add Breed</a>
           </div>
           <div class="col-sm-6">
             <form class="form-inline justify-content-sm-end">
-              <input class="form-control form-control-sm rounded bright" placeholder="Search" type="text"><select class="form-control form-control-sm rounded bright">
-                <option selected="selected" value="">
-                  Select Status
-                </option>
-                <option value="Pending">
-                  Pending
-                </option>
-                <option value="Active">
-                  Active
-                </option>
-                <option value="Cancelled">
-                  Cancelled
-                </option>
-              </select>
+              <input class="form-control form-control-sm rounded bright" placeholder="Search" type="text">
             </form>
           </div>
         </div>
@@ -101,20 +86,31 @@
                             @endif
                                                 <td class="row-actions">
                                                     <a href="{{ route('breeds.show', $breed->id) }}"><i
-                                                            class="os-icon os-icon-ui-49"></i></a><a href="#"><i
-                                                            class="os-icon os-icon-grid-10"></i></a>
-                                                            <a href="{{route('breeds.edit', $breed->id)}}" class="btn btn-icon btn-secondary">
-                                                        <i class="fa fa-edit"></i>
+                                                            class="os-icon os-icon-ui-49"></i></a>
+                                                            <a href="{{route('breeds.edit', $breed->id)}}">
+                                                        <i class="os-icon os-icon-ui-49"></i>
                                                     </a>
-                                                    <a href="{{route('br_del', $breed->id)}}" class="btn btn-icon btn-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <form action="{{ route('breeds.destroy', $breed->id ) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                <button class="trans_btn" type="submit" onclick="return confirm('Are you sure to delete this user?')"><i class="os-icon os-icon-ui-15"></i></button>
+                              </form>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
+
+
+                            <div class="controls-below-table">
+        <div class="table-records-info">
+          Showing records 1 - 5
+        </div>
+        <div class="table-records-pages">
+        {{$breeds->links()}}
+        </div>
+      </div>                     
                
     </div>
     </div>

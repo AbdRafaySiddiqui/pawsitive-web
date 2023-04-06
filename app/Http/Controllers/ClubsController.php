@@ -36,13 +36,22 @@ class ClubsController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->hasFile('img')) {
+            $imageName = time().'.'.request()->img->getClientoriginalName();
+            request()->img->move(public_path('club_images'), $imageName);
+        }
+        else {
+            $imageName = "";
+        }
         $club = new Clubs;
+
         $club->name =  $request->name;
 	    $club->country = $request->country;
 	    $club->city = $request->city;
 	    $club->email = $request->email;
 	    $club->phone = $request->phone;
 	    $club->affiliation = $request->affiliation;
+        $club->image = $imageName;
         $club->save();
         
         return redirect()->back()->with('message', 'Record added successfully');

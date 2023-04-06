@@ -8,7 +8,7 @@
                 <div class="element-wrapper">
                     <div class="element-box-tp">
                         <h5 class="form-header">
-                            Breeds - List
+                            AKC - LIST
                         </h5>
                         <div class="form-desc">
                         </div>

@@ -10,6 +10,9 @@ use App\Models\Species;
 use App\Models\AKCGroup;
 use App\Models\FCIGroup;
 use App\Models\Ratings;
+use Illuminate\Pagination\Paginator;
+
+
 
 class BreedsController extends Controller
 {
@@ -18,7 +21,8 @@ class BreedsController extends Controller
      */
     public function index()
     {
-        $breeds = Breeds::get();
+        Paginator::useBootstrap();
+        $breeds = Breeds::orderBy('id','DESC')->paginate('5');
 
         return view('breeds.index', compact('breeds'));
     }
@@ -30,12 +34,9 @@ class BreedsController extends Controller
     {
         $FCI = FCIGroup::where('status','=','Active')->get();
         $AKC = AKCGroup::where('status','=','Active')->get();
-
-        $FCI = FCIGroup::where('status','=','Active')->get();
-        $AKC = AKCGroup::where('status','=','Active')->get();
         $clubs = Clubs::where('status','=','Active')->get();
 
-        $species = Species::where('status','=','Active')->get();
+        // $species = Species::where('status','=','Active')->get();
 
         $countries = Countries::get();
 
@@ -90,7 +91,7 @@ class BreedsController extends Controller
 
         $physical = array('0.0','0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8','0.9','1.0','1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.8','1.9','2.0','2.1','2.2','2.3','2.4','2.5','2.6','2.7','2.8','2.9','3.0','3.1','3.2','3.3','3.4','3.5','3.6','3.7','3.8','3.9','4.0','4.1','4.2','4.3','4.4','4.5','4.6','4.7','4.8','4.9','5.0');
 
-        return view('breeds.create', compact('FCI','AKC','species','countries','adapt','friendly','h_g','train','physical','adapt_bones','friendly_bones','hg_bones','train_bones','physical_bones','clubs'));
+        return view('breeds.create', compact('FCI','AKC','countries','adapt','friendly','h_g','train','physical','adapt_bones','friendly_bones','hg_bones','train_bones','physical_bones','clubs'));
     }
 
     /**
@@ -300,13 +301,13 @@ return redirect()->route('breeds.index')->with('danger','Something went wrong. P
 
         $FCI = FCIGroup::where('status','=','Active')->get();
         $AKC = AKCGroup::where('status','=','Active')->get();
-        $CFA = CFA::where('status','=','Active')->get();
+        // $CFA = CFA::where('status','=','Active')->get();
 
         $clubs = Clubs::where('status','=','Active')->get();
 
-        $species = specie::where('status','=','Active')->get();
+        // $species = specie::where('status','=','Active')->get();
 
-        $countries = DB::table('countries')->get();
+        $countries = countries::get();
 
         $adapt_bones = Ratings::select('id','name','value')->where('breed_id','=',$id)->where('group_name','=','adapt')->get();
 
@@ -338,7 +339,7 @@ return redirect()->route('breeds.index')->with('danger','Something went wrong. P
 
         $physical_key = array_search($breed->physical,$physical);
 
-        return view('breeds.edit', compact('breed','species','FCI','AKC','CFA','countries','adapt_key','friendly_key','hg_key','train_key','physical_key','clubs','adapt','physical','train','friendly','h_g','adapt_bones','train_bones','friendly_bones','hg_bones','physical_bones'));
+        return view('breeds.edit', compact('breed','FCI','AKC','countries','adapt_key','friendly_key','hg_key','train_key','physical_key','clubs','adapt','physical','train','friendly','h_g','adapt_bones','train_bones','friendly_bones','hg_bones','physical_bones'));
     }
 
     /**

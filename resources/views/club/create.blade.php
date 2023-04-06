@@ -28,7 +28,7 @@
         Horizontal Form Layout
       </h6>
       <div class="element-box">
-        <form action="{{ route('club.store') }}" method="post" >
+        <form action="{{ route('club.store') }}" method="post" enctype="multipart/form-data">
         @csrf
           <h5 class="form-header">
             Horizontal Layout
@@ -78,7 +78,6 @@
                 <input class="form-control" name="phone" placeholder="Phone" type="tel" >
               </div>
             </div>
-         
           
           <div class="form-group row">
             <label class="col-form-label col-sm-4" for="" name="affiliation"> Affiliation with</label>
@@ -86,7 +85,13 @@
             <input class="form-control" name="affiliation" placeholder="Affiliation with" type="text">
             </div>
           </div>
-         
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for=""> Image</label>
+              <div class="col-sm-8">
+              <input class="form-control" type="file" id="img" name="img" accept="image/png, image/jpeg">
+                <div id="preview_img"></div>
+              </div>
+            </div>
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
           </div>
@@ -107,4 +112,39 @@
       </div>
       <div class="display-type"></div>
     </div>
+
+    <script>
+
+function previewImages() {
+
+var preview = document.querySelector('#preview_img');
+
+if (this.files) {
+  [].forEach.call(this.files, readAndPreview);
+}
+
+function readAndPreview(file) {
+
+  // Make sure `file.name` matches our extensions criteria
+  if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+    return alert(file.name + " is not an image");
+  } // else...
+  
+  var reader = new FileReader();
+  
+  reader.addEventListener("load", function() {
+    var image = new Image();
+    image.height = 100;
+    image.title  = file.name;
+    image.src    = this.result;
+    preview.appendChild(image);
+  });
+  
+  reader.readAsDataURL(file);
+  
+}
+
+}
+
+    </script>
 @endsection

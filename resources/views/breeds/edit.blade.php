@@ -32,23 +32,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Species</label>
-                                                <select class="form-control select2" tabindex="-1" aria-hidden="true"
-                                                    name="sp_id" id="sp_id">
-                                                    <option value="0">{{ 'Select Species' }}</option>
-                                                    @foreach ($species as $sp)
-                                                        @if ($sp->id == $breed->sp_id)
-                                                            <option selected value="{{ $sp->id }}">{{ $sp->name }}
-                                                            </option>
-                                                        @else
-                                                            <option value="{{ $sp->id }}">{{ $sp->name }}</option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
+                                     
                                         
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -285,6 +269,7 @@
                                             </div>
                                     </div>
 
+                                   
                                     <div class="row">
                                         <div class="col-md-12">
                                             <span>
@@ -951,56 +936,56 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>About The Breed</label>
-                                                <textarea class="summernote" name="about" id="about">{{ htmlspecialchars_decode($breed->about) }}</textarea>
+                                                <textarea class="summernote" name="about" id="ckeditor1">{{ htmlspecialchars_decode($breed->about) }}</textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>History</label>
-                                                <textarea class="summernote" name="history" id="history">{{ htmlspecialchars_decode($breed->history) }}</textarea>
+                                                <textarea class="summernote" name="history" id="ckeditor2">{{ htmlspecialchars_decode($breed->history) }}</textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Personality</label>
-                                                <textarea class="summernote" name="personality" id="personality">{{ htmlspecialchars_decode($breed->personality) }}</textarea>
+                                                <textarea class="summernote" name="personality" id="ckeditor3">{{ htmlspecialchars_decode($breed->personality) }}</textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Health</label>
-                                                <textarea class="summernote" name="health" id="health">{{ htmlspecialchars_decode($breed->health) }}</textarea>
+                                                <textarea class="summernote" name="health" id="ckeditor4">{{ htmlspecialchars_decode($breed->health) }}</textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Care</label>
-                                                <textarea class="summernote" name="care" id="care">{{ htmlspecialchars_decode($breed->care) }}</textarea>
+                                                <textarea class="summernote" name="care" id="ckeditor5">{{ htmlspecialchars_decode($breed->care) }}</textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Feeding</label>
-                                                <textarea class="summernote" name="feeding" id="feeding">{{ htmlspecialchars_decode($breed->feeding) }}</textarea>
+                                                <textarea class="summernote" name="feeding" id="ckeditor6">{{ htmlspecialchars_decode($breed->feeding) }}</textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Grooming</label>
-                                                <textarea class="summernote" name="grooming" id="grooming">{{ htmlspecialchars_decode($breed->grooming) }}</textarea>
+                                                <textarea class="summernote" name="grooming" id="ckeditor7">{{ htmlspecialchars_decode($breed->grooming) }}</textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Children & Pets</label>
-                                                <textarea class="summernote" name="child_pets" id="child_pets">{{ htmlspecialchars_decode($breed->child_pets) }}</textarea>
+                                                <textarea class="summernote" name="child_pets" id="ckeditor8">{{ htmlspecialchars_decode($breed->child_pets) }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1086,117 +1071,35 @@
         </div>
     </div>
 
-    <script type="text/javascript">
 
-        function changepic() {
-            $('#upload_profile_picture').modal('show');
-        }
+ <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script>
 
-        function rangeadp(v) {
-            let split = v.id.split('-');
-            $('#rangeadp-' + split[1]).html(v.value + '.0');
 
-            $('#adp-' + split[1] + '-value').attr('value', parseFloat(v.value));
-
-            let total = parseInt($("#adp-1:checked").val() != undefined ? $("#adp-1:checked").val() : 0) +
-                parseInt($("#adp-2:checked").val() != undefined ? $("#adp-2:checked").val() : 0) +
-                parseInt($("#adp-3:checked").val() != undefined ? $("#adp-3:checked").val() : 0) +
-                parseInt($("#adp-4:checked").val() != undefined ? $("#adp-4:checked").val() : 0) +
-                parseInt($("#adp-5:checked").val() != undefined ? $("#adp-5:checked").val() : 0) +
-                parseInt($("#adp-6:checked").val() != undefined ? $("#adp-6:checked").val() : 0);
-
-            $('#adapt').attr('value', parseFloat(total / 6).toFixed(1));
-
-            $('#rangeres1').html(parseFloat(total / 6).toFixed(1));
-
-            console.log(total / 6, "adp");
-        }
-
-        function rangefrn(f) {
-            let split = f.id.split('-');
-
-            $('#rangefrn-' + split[1]).html(f.value + '.0');
-
-            $('#frn-' + split[1] + '-value').attr('value', parseFloat(f.value));
-
-            let total = parseInt($("#frn-1:checked").val() != undefined ? $("#frn-1:checked").val() : 0) +
-                parseInt($("#frn-2:checked").val() != undefined ? $("#frn-2:checked").val() : 0) +
-                parseInt($("#frn-3:checked").val() != undefined ? $("#frn-3:checked").val() : 0) +
-                parseInt($("#frn-4:checked").val() != undefined ? $("#frn-4:checked").val() : 0);
-
-            $('#friendly').attr('value', parseFloat(total / 4).toFixed(1));
-
-            $('#rangeres2').html(parseFloat(total / 4).toFixed(1));
-
-            console.log(total / 4);
-        }
-
-        function rangehg(h) {
-            let split = h.id.split('-');
-            $('#rangehg-' + split[1]).html(h.value + '.0');
-
-            $('#hg-' + split[1] + '-value').attr('value', parseFloat(h.value));
-
-            let total = parseInt($("#hg-1:checked").val() != undefined ? $("#hg-1:checked").val() : 0) +
-                parseInt($("#hg-2:checked").val() != undefined ? $("#hg-2:checked").val() : 0) +
-                parseInt($("#hg-3:checked").val() != undefined ? $("#hg-3:checked").val() : 0) +
-                parseInt($("#hg-4:checked").val() != undefined ? $("#hg-4:checked").val() : 0) +
-                parseInt($("#hg-5:checked").val() != undefined ? $("#hg-5:checked").val() : 0) +
-                parseInt($("#hg-6:checked").val() != undefined ? $("#hg-6:checked").val() : 0);
-
-            $('#health_groom').attr('value', parseFloat(total / 6).toFixed(1));
-
-            $('#rangeres3').html(parseFloat(total / 6).toFixed(1));
-
-            console.log(total / 6);
-        }
-
-        function rangetrain(t) {
-            let split = t.id.split('-');
-
-            $('#rangetrain-' + split[1]).html(t.value + '.0');
-
-            $('#trn-' + split[1] + '-value').attr('value', parseFloat(t.value));
-
-            let total = parseInt($("#trn-1:checked").val() != undefined ? $("#trn-1:checked").val() : 0) +
-                parseInt($("#trn-2:checked").val() != undefined ? $("#trn-2:checked").val() : 0) +
-                parseInt($("#trn-3:checked").val() != undefined ? $("#trn-3:checked").val() : 0) +
-                parseInt($("#trn-4:checked").val() != undefined ? $("#trn-4:checked").val() : 0) +
-                parseInt($("#trn-5:checked").val() != undefined ? $("#trn-5:checked").val() : 0) +
-                parseInt($("#trn-6:checked").val() != undefined ? $("#trn-6:checked").val() : 0);
-
-            $('#train').attr('value', parseFloat(total / 6).toFixed(1));
-
-            $('#rangeres4').html(parseFloat(total / 6).toFixed(1));
-
-            console.log(total / 6);
-        }
-
-        function rangeph(p) {
-            let split = p.id.split('-');
-
-            $('#rangeph-' + split[1]).html(p.value + '.0');
-
-            $('#physical-' + split[1] + '-value').attr('value', parseFloat(p.value));
-
-            let total = parseInt($("#pb-1:checked").val() != undefined ? $("#pb-1:checked").val() : 0) +
-                parseInt($("#pb-2:checked").val() != undefined ? $("#pb-2:checked").val() : 0) +
-                parseInt($("#pb-3:checked").val() != undefined ? $("#pb-3:checked").val() : 0) +
-                parseInt($("#pb-4:checked").val() != undefined ? $("#pb-4:checked").val() : 0);
-
-            $('#physical').attr('value', parseFloat(total / 4).toFixed(1));
-
-            $('#rangeres5').html(parseFloat(total / 4).toFixed(1));
-
-            console.log(total / 4);
-        }
-    </script>
-    </div>
-    </div>
-    <div class="display-type"></div>
-    </div>
-
-    <script type="text/javascript">
+<script type="text/javascript">
+if ($('#ckeditor1').length) {
+CKEDITOR.replace('ckeditor1');
+}
+if ($('#ckeditor2').length) {
+CKEDITOR.replace('ckeditor2');
+}
+if ($('#ckeditor3').length) {
+CKEDITOR.replace('ckeditor3');
+}
+if ($('#ckeditor4').length) {
+CKEDITOR.replace('ckeditor4');
+}
+if ($('#ckeditor5').length) {
+CKEDITOR.replace('ckeditor5');
+}
+if ($('#ckeditor6').length) {
+CKEDITOR.replace('ckeditor6');
+}
+if ($('#ckeditor7').length) {
+CKEDITOR.replace('ckeditor7');
+}
+if ($('#ckeditor8').length) {
+CKEDITOR.replace('ckeditor8');
+}
 
         function changepic() {
             $('#upload_profile_picture').modal('show');

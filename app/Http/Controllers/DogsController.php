@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\dogs;
 use App\Models\Breeds;
-
+use Illuminate\Pagination\Paginator;
 use App\Models\dog_real_parent;
 
 class dogsController extends Controller
@@ -15,7 +15,8 @@ class dogsController extends Controller
      */
     public function index()
     {
-        $dog = dogs::get();
+        Paginator::useBootstrap();
+        $dog = dogs::orderBy('id','DESC')->paginate('5');
         
         return view('dogs.index',compact('dog'));
     }
