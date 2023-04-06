@@ -52,21 +52,21 @@ class MiscController extends Controller
     {
         $countries = Countries::get();
 
-        $has = array();
+        // $has = array();
 
-        foreach($countries as $key => $c)
-        {
-            $cities = Cities::where('country','=',$c->idCountry)->count();
+        // foreach($countries as $key => $c)
+        // {
+        //     $cities = Cities::where('country','=',$c->idCountry)->count();
             
-            if($cities > 0)
-            {
-                array_push($has, $c->idCountry);
-            }
-        }
+        //     if($cities > 0)
+        //     {
+        //         array_push($has, $c->idCountry);
+        //     }
+        // }
 
-        $countries_with_cities = Countries::whereIn('idCountry',$has)->get();
+        // $countries_with_cities = Countries::whereIn('idCountry',$has)->get();
 
-        return response()->json(['countries' => $countries_with_cities], 200);
+        return response()->json(['countries' => $countries], 200);
     }
     
     public function cities()
