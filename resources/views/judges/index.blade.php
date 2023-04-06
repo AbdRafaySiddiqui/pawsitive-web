@@ -26,14 +26,6 @@
         <div class="row">
           <div class="col-sm-6">
             <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('judges.create')}}">Add Judge</a>
-<<<<<<< HEAD
-=======
-          </div>
-          <div class="col-sm-6">
-            <form class="form-inline justify-content-sm-end">
-              <input class="form-control form-control-sm rounded bright" placeholder="Search" type="text">
-            </form>
->>>>>>> 418ac8d7778bb0c65cbcec70a123b3e4b511c6b1
           </div>
         </div>
       </div>
@@ -127,10 +119,6 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 418ac8d7778bb0c65cbcec70a123b3e4b511c6b1
             </div>
             <!--------------------
             START - Sidebar

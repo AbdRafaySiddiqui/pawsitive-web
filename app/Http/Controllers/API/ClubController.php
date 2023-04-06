@@ -28,9 +28,14 @@ class ClubController extends Controller
      
         foreach($club as $clubs)
         {
+          if($clubs->clubs_name != null){
+            $name=$clubs->clubs_name;
+            $clubs->clubs_name=   ucfirst( $name);
+          }
+          
             // $pp = Clubs::where('id','=',$clubs->id)->inRandomOrder()->get();
 
-                    if(file_exists(storage_path().'/app/public/club_images'.'/'.$clubs->image))
+                    if($clubs->image != null)
                     {
                         $clubs->image = asset('storage/app/public/club_images').'/'.$clubs->image;
                     }
@@ -52,7 +57,7 @@ class ClubController extends Controller
         'phone',
         'countries.countryName as country_of_origin',
         'cities.city as city_of_origin',
-        'affiliation')
+        'affiliation','image')
         //   ->leftjoin('species','species.id','=','breeds.sp_id')
         ->leftjoin('countries','countries.idCountry','=','clubs.country')
         ->leftjoin('cities','cities.id','=','clubs.city')
@@ -60,6 +65,21 @@ class ClubController extends Controller
           ->orderBy('clubs.name','ASC')
           ->first();
         
+            if($club->clubs_name != null){
+              $name=$club->clubs_name;
+              $club->clubs_name=   ucfirst( $name);
+            }
+
+            
+            if($clubs->image != null)
+            {
+                $club->image = asset('storage/app/public/club_images').'/'.$club->image;
+            }
+            else
+            {
+              $club->image = asset('storage/app/public/img/noimage.png');
+            }
+          
         return response()->json(['club' => $club], 200);
     }
 }

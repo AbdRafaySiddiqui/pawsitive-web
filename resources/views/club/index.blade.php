@@ -22,14 +22,6 @@
         <div class="row">
           <div class="col-sm-6">
             <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('club.create')}}">Add Club</a>
-<<<<<<< HEAD
-=======
-          </div>
-          <div class="col-sm-6">
-            <form class="form-inline justify-content-sm-end">
-              <input class="form-control form-control-sm rounded bright" placeholder="Search" type="text">
-            </form>
->>>>>>> 418ac8d7778bb0c65cbcec70a123b3e4b511c6b1
           </div>
         </div>
       </div>
@@ -42,10 +34,6 @@
         <table class="table table-bordered table-lg table-v2 table-striped">
           <thead>
             <tr>
-<<<<<<< HEAD
-=======
-             
->>>>>>> 418ac8d7778bb0c65cbcec70a123b3e4b511c6b1
               <th>
                 Club Name
               </th>
@@ -76,10 +64,6 @@
           <tbody>
           @foreach ($club as $clubs)
             <tr>
-<<<<<<< HEAD
-=======
-             
->>>>>>> 418ac8d7778bb0c65cbcec70a123b3e4b511c6b1
               <td>
               {{$clubs->name}}
               </td>
@@ -133,11 +117,6 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
-=======
-
-            
->>>>>>> 418ac8d7778bb0c65cbcec70a123b3e4b511c6b1
             </div>
             <!--------------------
             START - Sidebar

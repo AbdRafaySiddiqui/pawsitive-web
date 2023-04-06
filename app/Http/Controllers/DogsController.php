@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\dogs;
+use App\Models\Dogs;
 use App\Models\Breeds;
 use Illuminate\Pagination\Paginator;
 use App\Models\dog_real_parent;
@@ -27,8 +27,8 @@ class dogsController extends Controller
     public function create()
     {
         $total_breeds = Breeds::get();
-        $maleDogs = dogs::where('gender', '=', 'Male')->get();
-        $femaleDogs = dogs::where('gender', '=', 'Female')->get();
+        $maleDogs = Dogs::where('gender', '=', 'Male')->get();
+        $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
         return view('dogs.create',compact('maleDogs', 'femaleDogs','total_breeds'));
     }
 
@@ -37,7 +37,7 @@ class dogsController extends Controller
      */
     public function store(Request $request)
     {
-        $dogs = new dogs;
+        $dogs = new Dogs;
         $dogs->dog_name =  $request->dog_name;
         $dogs->dob =  $request->dob;
         $dogs->reg_no =  $request->reg_no;
@@ -72,7 +72,7 @@ class dogsController extends Controller
      */
     public function edit(string $id)
     {
-        $dog = dogs::find($id);
+        $dog = Dogs::find($id);
         $total_breeds = Breeds::get();
         return view('dogs.edit', compact('dog','total_breeds')); 
     }
@@ -119,7 +119,7 @@ class dogsController extends Controller
     
     public function storeMale(Request $request)
     {
-        $dogs = new dogs;
+        $dogs = new Dogs;
         $dogs->dog_name =  $request->dog_name;
         $dogs->dob =  $request->dob;
         $dogs->reg_no =  $request->reg_no;
@@ -134,7 +134,7 @@ class dogsController extends Controller
 
     public function storeFemale(Request $request)
     {
-        $dogs = new dogs;
+        $dogs = new Dogs;
         $dogs->dog_name =  $request->fe_dog_name;
         $dogs->dob =  $request->fe_dob;
         $dogs->reg_no =  $request->fe_reg_no;
