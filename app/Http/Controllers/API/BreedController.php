@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Models\Breeds;
 use App\Models\BreedImgVids;
 use App\Models\Ratings;
-use App\Models\Pets;
 
 use App\Traits\Activity;
 
@@ -20,7 +19,7 @@ class BreedController extends Controller
 
     public function breed_short(request $request)
     {
-        $breeds = Breeds::select('breeds.id','breeds.name as breed_name',)
+        $breeds = Breeds::select('breeds.id','breeds.name as label',)
           ->where('breeds.status','=','Active')
           ->orderBy('breeds.name','ASC')
           ->get();

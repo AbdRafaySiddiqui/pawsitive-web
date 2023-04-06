@@ -7,7 +7,7 @@ use App\Models\Clubs;
 use App\Models\Cities;
 use App\Models\Breeds;
 use App\Models\Events;
-use App\Models\judges;
+use App\Models\Judges;
 use App\Models\Countries;
 use Illuminate\Pagination\Paginator;
 

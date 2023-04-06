@@ -26,6 +26,7 @@ use App\Http\Controllers\API\ApiController;
 // Breeds Controller.
 Route::get('breed-listings', [App\Http\Controllers\API\BreedController::class, 'listing']);
 Route::get('breed/{id}/details', [App\Http\Controllers\API\BreedController::class, 'details']);
+Route::get('breed-short', [BreedController::class, 'breed_short']);
 
 // Judges Controller.
 Route::get('judge-listings', [App\Http\Controllers\API\JudgeController::class, 'listing']);
@@ -35,7 +36,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 //DogController routes
-Route::get('dog/{id}/listings', [DogController::class, 'listing']);
+Route::get('dog/{breed_id}/listings', [DogController::class, 'listing']);
 Route::get('dog/{id}/details', [DogController::class, 'details']);
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);
 
@@ -64,10 +65,6 @@ Route::post('instagram-api-response-reader', [MiscController::class, 'instagram_
 Route::post('upgrade-as-trainer', [MiscController::class, 'upgrade_as_trainer']);
 Route::post('upgrade-as-vet', [MiscController::class, 'upgrade_as_vet']);
 
-//BreedController routes
-Route::get('breed-listings', [BreedController::class, 'listing']);
-Route::get('breed/{id}/details', [BreedController::class, 'details']);
-Route::get('breed-short', [BreedController::class, 'breed_short']);
 
 
     // For Admin Panel use

@@ -141,7 +141,9 @@ $physical_bones = array(
 );
 
 $new = new Breeds;
-$new->sp_id = $request->sp_id;
+
+
+// $new->sp_id = $request->sp_id;
 $new->name = $request->name;
 $new->variations = $request->variations;
 $new->fci_group = $request->fci_group;

@@ -100,20 +100,7 @@
       </div>
       <!--------------------
       END - Table with actions
-      ------------------            --><!--------------------
-      START - Controls below table
-      ------------------  -->
-      <div class="controls-below-table">
-        <div class="table-records-info">
-          Showing records 1 - 5
-        </div>
-        <div class="table-records-pages">
-        {{$club->links()}}
-        </div>
-      </div>
-      <!--------------------
-      END - Controls below table
-      -------------------->
+      ------------------            -->
     </div>
   </div>
 </div>
@@ -128,10 +115,6 @@
 START - Support Agents
 -------------------->
 
-            </div>
-            <!--------------------
-            END - Sidebar
-            -------------------->
           </div>
         </div>
       </div>

@@ -5,18 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Dogs;
 use App\Models\Breeds;
-use Illuminate\Pagination\Paginator;
-use App\Models\dog_real_parent;
 
-class dogsController extends Controller
+use App\Models\DogsRealParent;
+
+class DogsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        Paginator::useBootstrap();
-        $dog = dogs::orderBy('id','DESC')->paginate('5');
+        $dog = Dogs::get();
         
         return view('dogs.index',compact('dog'));
     }
@@ -50,7 +49,7 @@ class dogsController extends Controller
 
         $new_dog_id = $dogs->id;
 
-        $parent = new dog_real_parent;
+        $parent = new DogsRealParent;
         $parent->dog_id = $new_dog_id;
         $parent->sire_id = $request->sire_id;
         $parent->dam_id = $request->dam_id;
@@ -91,7 +90,7 @@ class dogsController extends Controller
             'achievements'=>'required',
             'breed_id'=>'required'
         ]); 
-        $dog = dogs::find($id);
+        $dog = Dogs::find($id);
         // Getting values from the blade template form
 	    $dog->dog_name = $request->dog_name;
 	    $dog->dob = $request->dob;

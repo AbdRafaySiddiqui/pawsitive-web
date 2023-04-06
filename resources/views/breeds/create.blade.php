@@ -26,10 +26,15 @@
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label" for="">Breed Name</label>
                                         <div class="col-sm-8">
-                                            <input class="form-control" name="name" placeholder="Enter Breed Name" type="text" required>
+                                            <input class="form-control" name="name" placeholder="Enter Breed Name"
+                                                type="text" required>
                                         </div>
                                     </div>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> b545a460f2e48d364be231b9abd3c698857f1722
 
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -684,7 +689,8 @@
                                     <div class="form-buttons-w mb-4">
                                         <button class="btn btn-primary" type="submit"> Submit</button>
                                         <a href="{{ route('breeds.index') }}">
-                                        <button class="btn btn-danger" type="button">Cancel</button></a>
+                                        <button class="btn btn-danger" type="button">Cancel</button>
+                                    </a>
                                     </div>
 
                                 </form>

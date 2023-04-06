@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AKCGroup;
+use App\Models\FCIGroup;
 
-class akc_group extends Controller
+class FCIGroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $akcs = akcgroup::get();
+        $fcis = FCIGroup::get();
         
-        return view('akc_groups.index',compact('akcs'));
+        return view('fci_groups.index',compact('fcis'));
     }
 
     /**
@@ -22,7 +22,7 @@ class akc_group extends Controller
      */
     public function create()
     {
-        return view('akc_groups.create');
+        return view('fci_groups.create');
     }
 
     /**
@@ -30,13 +30,11 @@ class akc_group extends Controller
      */
     public function store(Request $request)
     {
-
-        $new = new akcgroup;
+        $new = new FCIGroup;
         $new->name = $request->name;
 
         $new->save();
         return redirect()->back()->with('message', 'Record added successfully');
-
     }
 
     /**
@@ -52,8 +50,8 @@ class akc_group extends Controller
      */
     public function edit(string $id)
     {
-        $akc = akcgroup::find($id);
-        return view('akc_groups.edit', compact('akc'));
+        $fci = FCIGroup::find($id);
+        return view('fci_groups.edit', compact('fci'));
     }
 
     /**
@@ -64,11 +62,11 @@ class akc_group extends Controller
         $request->validate([
             'name'=>'required',
         ]); 
-        $akc = akcgroup::find($id);
+        $fci = FCIGroup::find($id);
         // Getting values from the blade template form
-	    $akc->name = $request->name;
+	    $fci->name = $request->name;
 
-        $akc->save();
+        $fci->save();
  
         return redirect()->back()->with('message', 'Record updated successfully');
     }
@@ -78,7 +76,7 @@ class akc_group extends Controller
      */
     public function destroy(string $id)
     {
-        akcgroup::where('id','=',$id)->delete();
+        FCIGroup::where('id','=',$id)->delete();
         
         return redirect()->back()->with('message', 'Record deleted successfully');
     }
