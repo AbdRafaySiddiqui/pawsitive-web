@@ -10,6 +10,9 @@ use App\Models\Species;
 use App\Models\AKCGroup;
 use App\Models\FCIGroup;
 use App\Models\Ratings;
+use Illuminate\Pagination\Paginator;
+
+
 
 class BreedsController extends Controller
 {
@@ -18,7 +21,8 @@ class BreedsController extends Controller
      */
     public function index()
     {
-        $breeds = Breeds::get();
+        Paginator::useBootstrap();
+        $breeds = Breeds::orderBy('id','DESC')->paginate('5');
 
         return view('breeds.index', compact('breeds'));
     }

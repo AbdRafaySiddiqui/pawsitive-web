@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\akcgroup;
+use App\Models\AKCGroup;
 
 class akc_group extends Controller
 {
