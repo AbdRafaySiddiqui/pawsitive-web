@@ -49,8 +49,7 @@
                                                 </td>
                                                 <td class="row-actions">
                                                     <a href="{{ route('akc_groups.edit', $akc->id) }}"><i
-                                                            class="os-icon os-icon-ui-49"></i></a><a href="#"><i
-                                                            class="os-icon os-icon-grid-10"></i></a>
+                                                            class="os-icon os-icon-ui-49"></i></a>
                                                     <form action="{{ route('akc_groups.destroy', $akc->id) }}"
                                                         method="post">
                                                         @csrf

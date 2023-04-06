@@ -42,15 +42,9 @@ class EventsController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'name'=>'required',
-            'club_id'=>'required',
-            'country'=>'required',
-       
-        ]); 
+    { 
         $events = new Events;
-        $events->name =  $request->event_name;
+        $events->name =  $request->name;
 	    $events->club_id = $request->club_id;
 	    $events->city = $request->city;
 	    $events->country = $request->country;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Judges;
 
+
 class JudgesController extends Controller
 {
 
@@ -14,7 +15,6 @@ class JudgesController extends Controller
      */
     public function index()
     {
-        Paginator::useBootstrap();
         $judge = Judges::where('status','=','1')->orderBy('id','DESC')->paginate('5');
        
         return view('judges/index', compact('judge'));

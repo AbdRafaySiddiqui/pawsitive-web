@@ -49,8 +49,7 @@
                                                 </td>
                                                 <td class="row-actions">
                                                     <a href="{{ route('fci_groups.edit', $fci->id) }}"><i
-                                                            class="os-icon os-icon-ui-49"></i></a><a href="#"><i
-                                                            class="os-icon os-icon-grid-10"></i></a>
+                                                            class="os-icon os-icon-ui-49"></i></a>
                                                     <form action="{{ route('fci_groups.destroy', $fci->id) }}"
                                                         method="post">
                                                         @csrf
