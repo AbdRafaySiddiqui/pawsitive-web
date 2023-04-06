@@ -19,7 +19,7 @@ class BreedController extends Controller
 
     public function breed_short(request $request)
     {
-        $breeds = Breeds::select('breeds.id','breeds.name as breed_name',)
+        $breeds = Breeds::select('breeds.id','breeds.name as label',)
           ->where('breeds.status','=','Active')
           ->orderBy('breeds.name','ASC')
           ->get();
@@ -64,7 +64,6 @@ class BreedController extends Controller
     {
         $breed = Breeds::select('breeds.id',
                                 'breeds.name as breed_name',
-                                // 'species.name as species',
                                 'breeds.height_male',
                                 'breeds.height_female',
                                 'breeds.weight_male',

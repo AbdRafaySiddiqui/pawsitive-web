@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Judges;
 
+
 class JudgesController extends Controller
 {
 
@@ -14,7 +15,7 @@ class JudgesController extends Controller
      */
     public function index()
     {
-        $judge = Judges::where('status','=','Active')->orderBy('id','DESC')->paginate('5');
+        $judge = Judges::where('status','=','1')->orderBy('id','DESC')->paginate('5');
        
         return view('judges/index', compact('judge'));
     }
@@ -34,10 +35,10 @@ class JudgesController extends Controller
     {
         if($request->hasFile('img') && $request->hasFile('sig') ) {
             $imageName = time().'.'.request()->img->getClientoriginalName();
-            request()->img->move(public_path('judge_images'), $imageName);
+            request()->img->move(storage_path('app/public/judge_imgs'), $imageName);
             
             $imagesig = time().'.'.request()->sig->getClientoriginalName();
-            request()->sig->move(public_path('judge_signatures'), $imagesig);
+            request()->sig->move(storage_path('app/public/judge_sigs'), $imagesig);
         }
         else {
             $imageName = "";
@@ -54,13 +55,6 @@ class JudgesController extends Controller
         $create->url_link = $link; 
         $create->save();
         
-
-        // $judge = DB::insert(DB::raw("INSERT INTO judges (full_name,description,image,signature,position_in_club)
-        //     VALUES ('".$request->full_name."','".htmlentities($request->description)."','".$imageName."','".$imagesig."','".$request->position_in_club."') "));
-
-       
-            // return redirect()->route('judges.index')
-            //         ->with('success','New Judge Added');
             return redirect()->back()->with('success', 'New Judge Added');
     }
 
@@ -89,12 +83,12 @@ class JudgesController extends Controller
     {
         if(!empty(request()->img)){
             $imageName = time().'.'.request()->img->getClientOriginalExtension();
-                request()->img->move(public_path('judge_images'), $imageName);
+                request()->img->move(storage_path('app/public/judge_imgs'), $imageName);
         }
 
         if(!empty(request()->sig)){
                 $imagesig = time().'.'.request()->sig->getClientOriginalExtension();
-                request()->sig->move(public_path('judge_signatures'), $imagesig);
+                request()->sig->move(storage_path('app/public/judge_sigs'), $imagesig);
         }
 
         if(!empty($imageName) && !empty($imagesig)){
@@ -140,8 +134,6 @@ class JudgesController extends Controller
                 $judge->position_in_club = $request->position_in_club;
                 $judge->update();
             }
-
-        // $this->saveActivity('Update Record',$this->module_name);
         return redirect()->route('judges.index')
             ->with('success','Judge Updated');
     }

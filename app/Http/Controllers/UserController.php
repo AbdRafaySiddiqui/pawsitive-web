@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
@@ -67,7 +68,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $user = User::get();
+        Paginator::useBootstrap();
+        $user = User::orderBy('id','DESC')->paginate('5');
         
         return view('users.index',compact('user'));
     }

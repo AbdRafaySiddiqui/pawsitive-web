@@ -454,7 +454,7 @@
                 <span>Dashboard</span></a>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('club.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -482,7 +482,7 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('judges.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -506,7 +506,7 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('breeds.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -530,7 +530,7 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('events.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -554,7 +554,7 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('dogs.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -577,7 +577,7 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('users.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -602,7 +602,7 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('akc_groups.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -627,7 +627,7 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('fci_groups.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -651,9 +651,33 @@
                 </div>
               </div>
             </li>
-           
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('species.index')}}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Species</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Species
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('species.create')}}">Add Species</a>
+                    </li>
+                    <li>
+                      <a href="{{route('species.index')}}">All Species</a>
+                    </li>     
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>

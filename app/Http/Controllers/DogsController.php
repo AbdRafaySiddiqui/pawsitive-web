@@ -133,7 +133,7 @@ class DogsController extends Controller
 
     public function storeFemale(Request $request)
     {
-        $dogs = new Doge;
+        $dogs = new Dogs;
         $dogs->dog_name =  $request->fe_dog_name;
         $dogs->dob =  $request->fe_dob;
         $dogs->reg_no =  $request->fe_reg_no;

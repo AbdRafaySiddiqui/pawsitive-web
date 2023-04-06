@@ -10,9 +10,9 @@
 <div class="element-wrapper">
   <div class="element-box-tp">
     <h5 class="form-header">
-      Table without wrapper
+     CLUB - LIST
     </h5>
-    <div class="form-desc">You can put a table tag inside an <code>.element-box-tp</code> class wrapper and add <code>.table</code> class to it to get something like this:
+    <div class="form-desc">
     </div>
     <div class="element-box-tp">
       <!--------------------
@@ -21,25 +21,7 @@
       <div class="controls-above-table">
         <div class="row">
           <div class="col-sm-6">
-            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('club.create')}}">Add Club</a><a class="btn btn-sm btn-danger" href="#">Delete</a>
-          </div>
-          <div class="col-sm-6">
-            <form class="form-inline justify-content-sm-end">
-              <input class="form-control form-control-sm rounded bright" placeholder="Search" type="text"><select class="form-control form-control-sm rounded bright">
-                <option selected="selected" value="">
-                  Select Status
-                </option>
-                <option value="Pending">
-                  Pending
-                </option>
-                <option value="Active">
-                  Active
-                </option>
-                <option value="Cancelled">
-                  Cancelled
-                </option>
-              </select>
-            </form>
+            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('club.create')}}">Add Club</a>
           </div>
         </div>
       </div>
@@ -52,9 +34,6 @@
         <table class="table table-bordered table-lg table-v2 table-striped">
           <thead>
             <tr>
-              <th class="text-center">
-                <input class="form-control" type="checkbox">
-              </th>
               <th>
                 Club Name
               </th>
@@ -85,9 +64,6 @@
           <tbody>
           @foreach ($club as $clubs)
             <tr>
-              <td class="text-center">
-                <input class="form-control" type="checkbox">
-              </td>
               <td>
               {{$clubs->name}}
               </td>
@@ -98,10 +74,10 @@
               {{$clubs->phone}}
               </td>
               <td>
-              {{$clubs->country}}
+              {{$clubs->country_name->countryName}}
               </td>
               <td>
-              {{$clubs->city}}
+              {{$clubs->cities_name->city}}
               </td>
               <td>
               {{$clubs->affiliation}}
@@ -110,7 +86,7 @@
                 <div class="status-pill green" data-title="Complete" data-toggle="tooltip"></div>
               </td>
               <td class="row-actions">
-                <a href="{{route('club.edit',$clubs->id)}}"><i class="os-icon os-icon-ui-49"></i></a><a href="#"><i class="os-icon os-icon-grid-10"></i></a>
+                <a href="{{route('club.edit',$clubs->id)}}"><i class="os-icon os-icon-ui-49"></i></a>
                 <form action="{{ route('club.destroy', $clubs->id ) }}" method="post">
                                     @csrf
                                     @method('DELETE')
@@ -128,6 +104,16 @@
     </div>
   </div>
 </div>
+            </div>
+            <!--------------------
+            START - Sidebar
+            -------------------->
+            <div class="content-panel">
+              <div class="content-panel-close">
+                <i class="os-icon os-icon-close"></i>
+              </div><!--------------------
+START - Support Agents
+-------------------->
 
           </div>
         </div>
