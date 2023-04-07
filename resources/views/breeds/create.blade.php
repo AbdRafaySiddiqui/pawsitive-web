@@ -31,10 +31,6 @@
                                         </div>
                                     </div>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> b545a460f2e48d364be231b9abd3c698857f1722
 
                                         <div class="col-md-6">
                                             <div class="form-group">

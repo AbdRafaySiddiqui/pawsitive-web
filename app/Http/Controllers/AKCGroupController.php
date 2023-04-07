@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AKCGroup;
+use Illuminate\Pagination\Paginator;
 
-class AKCGroupsController extends Controller
+
+class AKCGroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $akcs = AKCGroup::get();
+        Paginator::useBootstrap();
+        $akcs = AKCGroup::orderBy('id','DESC')->paginate('5');
         
         return view('akc_groups.index',compact('akcs'));
     }

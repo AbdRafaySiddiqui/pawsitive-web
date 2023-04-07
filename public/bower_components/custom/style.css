@@ -185,6 +185,11 @@ star rating style BY HAMZA end
 	color: #000;
 	text-shadow: 0 0 5px #09f;
   }
+
+  #success-msg {
+    display: none;
+  }
+
 /* ##########
 2nd star rating style BY HAMZA end
 ############ */

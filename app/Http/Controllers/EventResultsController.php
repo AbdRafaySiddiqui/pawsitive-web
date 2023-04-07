@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Dogs;
 use App\Models\Breeds;
 use App\Models\Event_Result;
+use App\Models\Judges;
+use App\Models\DogsRealParent;
 
 class EventResultsController extends Controller
 {
@@ -24,7 +26,10 @@ class EventResultsController extends Controller
     {
         $dogs = Dogs::get();
         $total_breeds = Breeds::get();
-        return view('event_results.create',compact('dogs','total_breeds'));
+        $total_judges = Judges::get();
+        $maleDogs = Dogs::where('gender', '=', 'Male')->get();
+        $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
+        return view('event_results.create',compact('maleDogs', 'femaleDogs','dogs','total_breeds','total_judges'));
     }
 
     /**
@@ -92,7 +97,13 @@ class EventResultsController extends Controller
         $dogs->achievements =  $request->achievements;
         $dogs->breed_id = $request->breed_id;
         $dogs->save();
-    
+        $new_dog_id = $dogs->id;
+
+        $parent = new DogsRealParent;
+        $parent->dog_id = $new_dog_id;
+        $parent->sire_id = $request->sire_id;
+        $parent->dam_id = $request->dam_id;
+        $parent->save();
         return response()->json([
             'success' => true,
             'message' => 'Form submitted successfully',

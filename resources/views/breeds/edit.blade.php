@@ -19,7 +19,7 @@
                                         </div>
                                     @endif
                             <div class="element-box">
-                            <form action="{{ route('br_up', $breed->id) }}" method="POST">
+                            <form action="{{ route('breeds.edit', $breed->id) }}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="row">
@@ -1008,55 +1008,8 @@
             </div>
         </div>
 
-        <div class="modal fade" tabindex="-1" role="dialog" id="upload_profile_picture">
-        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Upload Profile Picture</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <form action="{{ route('breed_up_pp', $breed->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <!-- <div class="fallback dropzone" id="mydropzone"> -->
-                        <input type="file" accept="image/*" name="prof_pic" id="prof_pic" />
-                        <!-- </div> -->
-                    </div>
-                    <div class="modal-footer bg-whitesmoke br">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Upload Image</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="upload_images">
-        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Upload Images</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <form action="{{ route('breed_up_imgs', $breed->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <!-- <div class="fallback dropzone" id="mydropzone"> -->
-                        <input type="file" accept="image/*" name="images[]" id="images" multiple />
-                        <!-- </div> -->
-                    </div>
-                    <div class="modal-footer bg-whitesmoke br">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Upload Image(s)</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    
 
     <div class="modal fade" tabindex="-1" role="dialog" id="upload_videos">
         <div class="modal-dialog modal-md modal-dialog-centered" role="document">

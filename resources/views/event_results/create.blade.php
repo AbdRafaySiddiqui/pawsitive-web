@@ -37,7 +37,7 @@
             Discharge best employed your phase each the of shine. Be met even reason consider logbook redesigns. Never a turned interfaces among asking
           </div>
           
-          <div class="form-group row">
+          <!-- <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Dog</label>
               <div class="col-sm-8">
               <select class="form-control js-data-example-ajax" name="dog_id" id="all_dogs">
@@ -48,7 +48,7 @@
                 @endforeach
               </select>
               </div>
-            </div>
+            </div> -->
          
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Grade</label>
@@ -65,10 +65,10 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Judge</label>
               <div class="col-sm-8">
-              <select class="form-control" name="judge">
-              @foreach($dogs as $dog)
-                <option  value="{{$dog->id}}">
-               {{$dog->dog_name}}
+              <select class="form-control select2" name="judge">
+              @foreach($total_judges as $judge)
+                <option  value="{{$judge->id}}">
+               {{$judge->full_name}}
                 </option>
                 @endforeach
               </select>
@@ -92,12 +92,114 @@
     </div>
   </div>
 </div>
+
+<div class="element-wrapper">
+  <div class="element-box-tp">
+    
+    <div class="form-desc">
+    </div>
+    <div class="element-box-tp">
+      <!--------------------
+      START - Controls Above Table
+      -------------------->
+      <div class="controls-above-table">
+        <div class="row">
+          <div class="col-sm-6">
+           
+          </div>
+          <div class="col-sm-6">
+           
+          </div>
+        </div>
+      </div>
+   <!--------------------
+      START - Table with actions
+      ------------------  -->
+      <div class="table-responsive">
+        <table class="table table-bordered table-lg table-v2 table-striped">
+          <thead>
+            <tr>
+           
+              <th>
+             Dog
+              </th>
+              <th>
+        Grade
+              </th>
+              <th>
+              Place
+              </th>
+              <th>
+              Judge
+              </th>
+             
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              
+              <td>
+              <div class="form-group row">
+              <div class="col-sm-12">
+              <select class="form-control js-data-example-ajax" name="dog_id" id="all_dogs">
+              @foreach($dogs as $dog)
+                <option  value="{{$dog->id}}">
+               {{$dog->dog_name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
+              </td>
+              <td>
+              <div class="form-group row">
+            
+            <div class="col-sm-12">
+              <input class="form-control" name="grade" placeholder="Enter Grade" type="text">
+            </div>
+              </td>
+              <td class="text-right">
+              <div class="form-group row">
+              
+              <div class="col-sm-12">
+                <input class="form-control" name="place" placeholder="Enter Place" type="text">
+              </div>
+            </div>
+              </td>
+              <td>
+              <div class="form-group row">
+             
+             <div class="col-sm-12">
+             <select class="form-control js-data-example-ajax" id="judge" name="judge">
+             @foreach($total_judges as $judge)
+               <option  value="{{$judge->id}}">
+              {{$judge->full_name}}
+               </option>
+               @endforeach
+             </select>
+             </div>
+           </div>
+              </td>
+           
+              
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      <!--------------------
+      END - Table with actions
+      ------------------            -->
             </div>
           </div>
         </div>
       </div>
       <div class="display-type"></div>
     </div>
+
+
+
+
 
        <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -182,6 +284,32 @@
               </select>
               </div>
             </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Select Sire</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="sire_id" id="selUser"  >
+              @foreach($maleDogs as $maleDog)
+                <option  value="{{$maleDog->id}}">
+               {{$maleDog->dog_name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Select Dam</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="dam_id" id="selUser_fe">
+              @foreach($femaleDogs as $femaleDog)
+                <option  value="{{$femaleDog->id}}">
+               {{$femaleDog->dog_name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
             <div id="success-msg"> </div>
          <div id="msg"> </div>
             <div class="form-buttons-w mb-4">
@@ -200,9 +328,29 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
     <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
-    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
+    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script> 
 
     <script>
+
+
+$('#judge').select2();
+
+
+// $('#all_dogs').select2({
+
+//   allowClear: true,
+//     placeholder: "Search a cow/dam ID",
+//     language: {
+//         noResults: function () {
+//             return $("<a href='http://google.com/'>Add</a>");
+//         }
+//     }
+    
+//   });
+
+
+
+
   $('#all_dogs').select2({
     allowClear: true,
     placeholder: 'Select an item',
@@ -247,6 +395,16 @@
   }).on('select2:open', function() {
 });
 
+
+
+$('#selUser').select2({
+  dropdownParent: $("#exampleModal .modal-content"),
+});
+
+
+$('#selUser_fe').select2({
+  dropdownParent: $("#exampleModal .modal-content"),
+});
 
 // modal submit 
 $('#my-form').on('submit', function(e){
