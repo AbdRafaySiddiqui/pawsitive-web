@@ -41,7 +41,8 @@ Route::get('dog/{id}/details', [DogController::class, 'details']);
 Route::get('club-listings', [ClubController::class, 'listing']);
 Route::get('club/{id}/details', [ClubController::class, 'details']);
 
-
+Route::get('/judges/{judgeId}', 'App\Http\Controllers\API\JudgeController@judge_details')->name('judge_details');
+Route::get('/countries/{countryId}', 'App\Http\Controllers\API\CountriesController@country_details')->name('country_details');
 
 //MiscController routes
 Route::get('countries', [MiscController::class, 'countries']);

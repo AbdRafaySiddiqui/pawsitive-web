@@ -14,7 +14,7 @@
 <div class="element-wrapper">
   <div class="element-box-tp">
     <h5 class="form-header">
-      Judges List
+   Events List
     </h5>
     <div class="form-desc">
     </div>
@@ -25,7 +25,7 @@
       <div class="controls-above-table">
         <div class="row">
           <div class="col-sm-6">
-            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('judges.create')}}">Add Judge</a>
+            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('events.create')}}">Add Event</a>
           </div>
         </div>
       </div>
@@ -36,7 +36,6 @@
       ------------------  -->
       <div class="table-responsive">
         <table class="table table-bordered table-lg table-v2 table-striped">
-          
           <thead>
             <tr>
        
@@ -44,17 +43,26 @@
               S.no
               </th>
               <th>
-              Judge's Name
+              Event's Name
               </th>
               <th>
-              Status
+              Date
               </th>
               <th>
-              Created
+              Country
               </th>
             
               <th>
-              Actions
+              City
+              </th>
+              <th>
+              Club Name
+              </th>
+              <th>
+              Judge Name
+              </th>
+              <th>
+              Action
               </th>
              
               
@@ -65,31 +73,49 @@
                          $i = 1;
                         ?>
                       
-          @foreach ($judge as $j)
+          @foreach ($event as  $e)
             <tr>
             <td>{{ $i++ }}</td>
             
               
               <td>
-              {{$j->full_name}}
+              {{$e->name}}
               </td>
-              @if($j->status == 1)
-              <td class="text-center">
-                <div class="status-pill green" data-title="Complete" data-toggle="tooltip"></div>
-              </td>
-                            @else
-                            <td class="text-center">
-                <div class="status-pill red" data-title="Complete" data-toggle="tooltip"></div>
-              </td>
-                            @endif
-              
-              <td>{{ $created=date('d-m-Y h:i:s', strtotime($j->created_at)) }}</td>
-              
-              
              
+              
+              <td>{{ $created=date('d-m-Y h:i:s', strtotime($e->date)) }}</td>
+              @if(isset($e->cities_name->city))
+                <td>{{$e->cities_name->city}}</td>
+                @else
+                <td></td>
+              @endif
+
+              @if(isset($e->cities_name->city))
+              <td>
+              {{$e->country_name->countryName}}
+              </td>
+              @else
+                <td></td>
+              @endif
+
+              @if(isset($e->club_name->name))
+              <td>
+              {{$e->club_name->name}}
+              </td>
+              @else
+                <td></td>
+              @endif
+
+              @if(isset($e->judge_name->full_name))
+              <td>
+              {{$e->judge_name->full_name}}
+              </td>
+              @else
+                <td></td>
+              @endif
               <td class="row-actions">
-                <a href="{{route('judges.edit',$j->id)}}"><i class="os-icon os-icon-ui-49"></i></a>
-                <form action="{{ route('judges.destroy', $j->id ) }}" method="post">
+                <a href="{{route('events.edit',$e->id)}}"><i class="os-icon os-icon-ui-49"></i></a>
+                <form action="{{ route('events.destroy', $e->id ) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                 <button type="submit" class="trans_btn" onclick="return confirm('Are you sure to delete this user?')"><i class="os-icon os-icon-ui-15"></i></button>
@@ -106,23 +132,17 @@
       START - Controls below table
       ------------------  -->
       <div class="controls-below-table">
-        <div class="table-records-info">
-          Showing records 1 - 5
-        </div>
         <div class="table-records-pages">
-        {{$judge->links()}}
+        {{$event->links()}}
         </div>
       </div>
+   
       <!--------------------
       END - Controls below table
       -------------------->
     </div>
   </div>
 </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 418ac8d7778bb0c65cbcec70a123b3e4b511c6b1
             </div>
             <!--------------------
             START - Sidebar

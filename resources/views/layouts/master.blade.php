@@ -652,6 +652,31 @@
               </div>
             </li>
             <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Event Result</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Event Result
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('event_result.create')}}">Result Form</a>
+                    </li>
+                    <li>
+                      <a href="#">All Groups</a>
+                    </li>     
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
               <a href="{{route('species.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>

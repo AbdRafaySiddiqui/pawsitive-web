@@ -62,4 +62,5 @@ class ClubController extends Controller
         
         return response()->json(['club' => $club], 200);
     }
+
 }

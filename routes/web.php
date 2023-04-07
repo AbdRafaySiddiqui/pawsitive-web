@@ -39,11 +39,20 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::delete('/users/{id}', 'App\Http\Controllers\UserController@destroy')->name('users.destroy');
     Route::put('/users/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
 
+    Route::get('/events/{eventId}/details', 'App\Http\Controllers\EventsController@details')->name('event_details');
+    Route::get('/clubs/{clubId}', 'App\Http\Controllers\ClubsController@club_details')->name('club_details');
+
+
+
+
+
+
 
 
     Route::post('/users', 'App\Http\Controllers\UserController@store')->name('users.store');
     Route::resource('breeds','App\Http\Controllers\breedsController');
     Route::resource('events','App\Http\Controllers\EventsController');
+    Route::resource('event_result','App\Http\Controllers\EventResultsController');
     Route::resource('akc_groups','App\Http\Controllers\akc_group');
     Route::resource('fci_groups','App\Http\Controllers\fci_group');
     Route::resource('species','App\Http\Controllers\SpeciesController');

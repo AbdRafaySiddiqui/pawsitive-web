@@ -5,10 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class countries extends Model
+class Event_Result extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'idCountry';
-    protected $table = 'countries';
-
+    protected $table = 'event_results';
 }
