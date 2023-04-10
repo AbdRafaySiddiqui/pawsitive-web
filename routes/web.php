@@ -60,8 +60,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('breeds','App\Http\Controllers\breedsController');
     Route::resource('events','App\Http\Controllers\EventsController');
     Route::resource('event_result','App\Http\Controllers\EventResultsController');
-    Route::resource('akc_groups','App\Http\Controllers\akc_group');
-    Route::resource('fci_groups','App\Http\Controllers\fci_group');
+    Route::resource('akc_groups','App\Http\Controllers\AKCGroupController');
+    Route::resource('fci_groups','App\Http\Controllers\FCIGroupController');
     Route::resource('species','App\Http\Controllers\SpeciesController');
     Route::get('breeds/{id}/destroy', [App\Http\Controllers\BreedsController::class, 'destroy'])->name('br_del');
     Route::post('breeds/{id}/update', [App\Http\Controllers\BreedsController::class, 'update'])->name('br_up');

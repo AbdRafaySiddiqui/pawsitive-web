@@ -2,36 +2,20 @@
 
 @section('content')
         <div class="content-w">
-        <!--------------------
-          START - Breadcrumbs
-          -------------------->
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="index.html">Home</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href="index.html">Products</a>
-            </li>
-            <li class="breadcrumb-item">
-              <span>Laptop with retina screen</span>
-            </li>
-          </ul>
-          <!--------------------
-          END - Breadcrumbs
-          -------------------->
+    
           <div class="content-i">
             <div class="content-box"><div class="row">
   
   <div class="col-lg-12">
     <div class="element-wrapper">
       <h6 class="element-header">
-        Horizontal Form Layout
+       Add Event
       </h6>
       <div class="element-box">
         <form action="{{ route('event_results.store') }}" method="post" enctype="multipart/form-data">
         @csrf
           <h5 class="form-header">
-            Horizontal Layout
+          Add Event
           </h5>
           <div class="form-desc">
             Discharge best employed your phase each the of shine. Be met even reason consider logbook redesigns. Never a turned interfaces among asking
