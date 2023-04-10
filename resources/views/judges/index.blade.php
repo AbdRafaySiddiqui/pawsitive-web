@@ -29,7 +29,7 @@
       <div class="controls-above-table">
         <div class="row">
           <div class="col-sm-6">
-            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('judges.create')}}">Add Judge</a>
+            <a class="btn btn-sm btn-secondary" href="{{ route('download-judge-csv') }}">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('judges.create')}}">Add Judge</a>
           </div>
         </div>
       </div>
@@ -38,72 +38,7 @@
       ------------------          --><!--------------------
       START - Table with actions
       ------------------  -->
-      <div class="table-responsive">
-        <table class="table table-bordered table-lg table-v2 table-striped">
-          
-          <thead>
-            <tr>
-       
-              <th>
-              S.no
-              </th>
-              <th>
-              Judge's Name
-              </th>
-              <th>
-              Status
-              </th>
-              <th>
-              Created
-              </th>
-            
-              <th>
-              Actions
-              </th>
-             
-              
-            </tr>
-          </thead>
-          <tbody>
-          <?php
-                         $i = 1;
-                        ?>
-                      
-          @foreach ($judge as $j)
-            <tr>
-            <td>{{ $i++ }}</td>
-            
-              
-              <td>
-              {{$j->full_name}}
-              </td>
-              @if($j->status == 1)
-              <td class="text-center">
-                <div class="status-pill green" data-title="Complete" data-toggle="tooltip"></div>
-              </td>
-                            @else
-                            <td class="text-center">
-                <div class="status-pill red" data-title="Complete" data-toggle="tooltip"></div>
-              </td>
-                            @endif
-              
-              <td>{{ $created=date('d-m-Y h:i:s', strtotime($j->created_at)) }}</td>
-              
-              
-             
-              <td class="row-actions">
-                <a href="{{route('judges.edit',$j->id)}}"><i class="os-icon os-icon-ui-49"></i></a>
-                <form action="{{ route('judges.destroy', $j->id ) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                <button type="submit" class="trans_btn" onclick="return confirm('Are you sure to delete this user?')"><i class="os-icon os-icon-ui-15"></i></button>
-                              </form>
-                              </td>
-                            </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
+ 
       <!--------------------
       END - Table with actions
       ------------------            --><!--------------------
@@ -133,6 +68,11 @@
               </div><!--------------------
 START - Support Agents
 -------------------->
+<div class="table-responsive">
+        <table class="table table-bordered table-lg table-v2 table-striped">
+          
+          <thead>
+            <tr>
 
                                             <th>
                                                 S.no
@@ -141,10 +81,10 @@ START - Support Agents
                                                 Judge's Name
                                             </th>
                                             <th>
-                                                Status
+                                                Position
                                             </th>
                                             <th>
-                                                Created
+                                                Description.
                                             </th>
 
                                             <th>
@@ -167,19 +107,10 @@ START - Support Agents
                                                 <td>
                                                     {{ $j->full_name }}
                                                 </td>
-                                                @if ($j->status == 1)
-                                                    <td class="text-center">
-                                                        <div class="status-pill green" data-title="Complete"
-                                                            data-toggle="tooltip"></div>
-                                                    </td>
-                                                @else
-                                                    <td class="text-center">
-                                                        <div class="status-pill red" data-title="Complete"
-                                                            data-toggle="tooltip"></div>
-                                                    </td>
-                                                @endif
 
-                                                <td>{{ $created = date('d-m-Y h:i:s', strtotime($j->created_at)) }}</td>
+                                                <td>{{ $j->position_in_club }}</td>
+
+                                                <td>{{ $j->description }}</td>
 
 
 

@@ -11,6 +11,7 @@ use App\Models\AKCGroup;
 use App\Models\FCIGroup;
 use App\Models\Ratings;
 use Illuminate\Pagination\Paginator;
+use League\Csv\Writer;
 
 
 
@@ -517,4 +518,54 @@ return redirect()->route('breeds.index')->with('danger','Something went wrong. P
             return redirect()->route('breeds.index')->with('danger','Something went wrong. Please try deleting a breed again.');
         }
     }
+
+    public function download()
+{
+    // Fetch data from the database
+    $breeds = Breeds::all();
+
+    // Create a new CSV file and write the data to it
+    $csv = Writer::createFromString('');
+    $csv->insertOne(['name', 'variations', 'akc_group', 'fci_group', 'cfa_group', 'club_id', 'height_male', 'weight_male', 'height_female', 'weight_female', 'life_span', 'country', 'adapt', 'friendly', 'health_groom', 'train', 'physical', 'about', 'history', 'personality', 'health', 'care', 'feeding', 'grooming', 'child_pets', 'profile_photo', 'status']);
+
+    foreach ($breeds as $breed) {
+        $csv->insertOne([
+            $breed->name,
+            $breed->variations,
+            $breed->akc_group,
+            $breed->fci_group,
+            $breed->cfa_group,
+            $breed->club_id,
+            $breed->height_male,
+            $breed->weight_male,
+            $breed->height_female,
+            $breed->weight_female,
+            $breed->life_span,
+            $breed->country,
+            $breed->adapt,
+            $breed->friendly,
+            $breed->health_groom,
+            $breed->train,
+            $breed->physical,
+            $breed->about,
+            $breed->history,
+            $breed->personality,
+            $breed->health,
+            $breed->care,
+            $breed->feeding,
+            $breed->grooming,
+            $breed->child_pets,
+            $breed->profile_photo,
+            $breed->status,
+        ]);
+    }
+
+    // Download the CSV file
+    $headers = [
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="breeds.csv"',
+    ];
+
+    return response($csv->getContent(), 200, $headers);
+}
 }

@@ -106,3 +106,5 @@ Route::get('all-appointments', [VetController::class, 'all_appointments']);
 Route::get('appointment/{id}/details', [VetController::class, 'view_appointment_normal']);
 Route::get('appointment/{id}/history', [VetController::class, 'view_appointment_with_history']);
 Route::post('update-vet-profile', [VetController::class, 'update_vet_profile']);
+
+

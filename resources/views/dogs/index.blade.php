@@ -25,7 +25,7 @@
       <div class="controls-above-table">
         <div class="row">
           <div class="col-sm-6">
-            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('dogs.create')}}">Add Dog</a>
+            <a class="btn btn-sm btn-secondary" href="{{ route('download-dog-csv') }}">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('dogs.create')}}">Add Dog</a>
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@
               <label class="col-sm-4 col-form-label" for="">Club Name</label>
               <div class="col-sm-8">
                 <input class="form-control" name="date" id="club-name" placeholder="Enter Club" type="text">
-              </div>
+              </div>  
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">judge Name</label>
@@ -125,11 +125,9 @@
    <!--------------------
       START - Table with actions
       ------------------  -->
-      <div class="table-responsive">
-        <table class="table table-bordered table-lg table-v2 table-striped">
+      <table class="table table-bordered table-lg table-v2 table-striped" id="table">
           <thead>
             <tr>
-           
               <th>
              Dog
               </th>
@@ -142,16 +140,17 @@
               <th>
               Judge
               </th>
-             
+              <th>
+              Action
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              
               <td>
               <div class="form-group row">
               <div class="col-sm-12">
-              <select class="form-control js-data-example-ajax" name="dog_id" id="all_dogs">
+              <select class="form-control js-data-example-ajax" name="inputs[0]['dog_id']" id="all_dogs">
               @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
                {{$dog->dog_name}}
@@ -163,24 +162,21 @@
               </td>
               <td>
               <div class="form-group row">
-            
             <div class="col-sm-12">
-              <input class="form-control" name="grade" placeholder="Enter Grade" type="text">
+              <input class="form-control" name="inputs[0]['grade']" placeholder="Enter Grade" type="text">
             </div>
               </td>
               <td class="text-right">
               <div class="form-group row">
-              
               <div class="col-sm-12">
-                <input class="form-control" name="place" placeholder="Enter Place" type="text">
+                <input class="form-control" name="inputs[0]['place']" placeholder="Enter Place" type="text">
               </div>
             </div>
               </td>
               <td>
               <div class="form-group row">
-             
              <div class="col-sm-12">
-             <select class="form-control js-data-example-ajax" id="judge" name="judge">
+             <select class="form-control js-data-example-ajax" name="inputs[0]['judge']" id="judge">
              @foreach($total_judges as $judge)
                <option  value="{{$judge->id}}">
               {{$judge->full_name}}
@@ -190,13 +186,10 @@
              </div>
            </div>
               </td>
-           
-              
+              <td> <button id="add" class="btn btn-primary">Add</button></td>
             </tr>
-            
           </tbody>
         </table>
-      </div>
       <!--------------------
       END - Table with actions
       ------------------            -->
@@ -207,6 +200,39 @@
       <div class="display-type"></div>
     </div>
 
+    <script>
+      var i=0;
+$('#add').click(function(){
+  ++i;
+$('#table').append(
+`<tr>
+<td><select class="form-control js-data-example-ajax" name="inputs[`+i+`][dog_id]" id="all_dogs">
+              @foreach($dogs as $dog)
+                <option  value="{{$dog->id}}">
+               {{$dog->dog_name}}
+                </option>
+                @endforeach
+              </select></td>
+<td>  <input class="form-control" name="inputs[`+i+`][grade]" placeholder="Enter Grade" type="text"></td>
+<td>  <input class="form-control" name="inputs[`+i+`][place]" placeholder="Enter place" type="text"></td>
+<td><select class="form-control js-data-example-ajax" name="inputs[`+i+`][judge]" id="judge">
+             @foreach($total_judges as $judge)
+               <option  value="{{$judge->id}}">
+              {{$judge->full_name}}
+               </option>
+               @endforeach
+             </select>
+</td>
+<td> <button id="remove" class="btn btn-danger">Remove</button></td>
+             </tr>`
+);
+  // $('#table').find('#all_dogs').last().select2();
+$('#all_dogs').select2();
+});
+$(document).on('click','#remove',function(){
+$(this).parents('tr').remove();
+});
+    </script>
 
 
 

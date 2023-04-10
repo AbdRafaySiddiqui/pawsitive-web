@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Judges;
+use League\Csv\Writer;
 
 
 class JudgesController extends Controller
@@ -150,5 +151,26 @@ class JudgesController extends Controller
         return redirect()->back()->with('message', 'Record Permenantly Deleted!');
     }
 
+    public function download()
+{
+    // Fetch data from the database
+    $judges = Judges::all();
+
+    // Create a new CSV file and write the data to it
+    $csv = Writer::createFromString('');
+    $csv->insertOne(['full_name', 'position_in_club', 'description', 'image', 'signature']);
+
+    foreach ($judges as $judge) {
+        $csv->insertOne([$judge->full_name, $judge->position_in_club, $judge->description, $judge->image, $judge->signature]);
+    }
+
+    // Download the CSV file
+    $headers = [
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="Judges.csv"',
+    ];
+
+    return response($csv->getContent(), 200, $headers);
+}
     
 }

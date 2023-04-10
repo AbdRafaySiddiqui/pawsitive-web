@@ -5,6 +5,7 @@ use App\Models\Clubs;
 use App\Models\Countries;
 use App\Models\Cities;
 use Illuminate\Pagination\Paginator;
+use League\Csv\Writer;
 
 use Illuminate\Http\Request;
 
@@ -124,4 +125,28 @@ class ClubsController extends Controller
         //   return response()->json($club);
         return $club;
       }
+
+      
+public function download()
+{
+    // Fetch data from the database
+    $clubs = Clubs::all();
+
+    // Create a new CSV file and write the data to it
+    $csv = Writer::createFromString('');
+    $csv->insertOne(['name', 'country', 'city', 'email', 'phone', 'affiliation', 'image']);
+
+    foreach ($clubs as $club) {
+        $csv->insertOne([$club->name, $club->country, $club->city, $club->email, $club->phone, $club->affiliation, $club->image]);
+    }
+
+    // Download the CSV file
+    $headers = [
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="clubs.csv"',
+    ];
+
+    return response($csv->getContent(), 200, $headers);
+}
+
 }

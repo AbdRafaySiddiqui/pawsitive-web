@@ -48,6 +48,16 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 
 
+    // csv download route.
+    Route::get('/download-club-csv', 'App\Http\Controllers\ClubsController@download')->name('download-club-csv');
+    Route::get('/download-judge-csv', 'App\Http\Controllers\JudgesController@download')->name('download-judge-csv');
+    Route::get('/download-breed-csv', 'App\Http\Controllers\BreedsController@download')->name('download-breed-csv');
+    Route::get('/download-event-csv', 'App\Http\Controllers\EventsController@download')->name('download-event-csv');
+    Route::get('/download-dog-csv', 'App\Http\Controllers\dogsController@download')->name('download-dog-csv');
+
+
+
+
 
 
 
