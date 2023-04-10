@@ -37,55 +37,7 @@
             Discharge best employed your phase each the of shine. Be met even reason consider logbook redesigns. Never a turned interfaces among asking
           </div>
           
-          <!-- <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Select Dog</label>
-              <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="dog_id" id="all_dogs">
-              @foreach($dogs as $dog)
-                <option  value="{{$dog->id}}">
-               {{$dog->dog_name}}
-                </option>
-                @endforeach
-              </select>
-              </div>
-            </div> -->
-         
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Grade</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="grade" placeholder="Enter Event Name" type="text">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Place</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="place" placeholder="Enter Event Name" type="text">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Select Judge</label>
-              <div class="col-sm-8">
-              <select class="form-control select2" name="judge">
-              @foreach($total_judges as $judge)
-                <option  value="{{$judge->id}}">
-               {{$judge->full_name}}
-                </option>
-                @endforeach
-              </select>
-              </div>
-            </div>
-          <div class="form-buttons-w mb-4">
-            <button class="btn btn-primary" type="submit"> Submit</button>
-            <button class="btn btn-secondary" type="reset"> Reset</button>
-            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
-              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
-            </a>
-          </div>
-          @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
+        
 
         </form>
       </div>
