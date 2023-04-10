@@ -126,7 +126,7 @@
       START - Table with actions
       ------------------  -->
       <div class="table-responsive">
-        <table class="table table-bordered table-lg table-v2 table-striped">
+        <table class="table table-bordered table-lg table-v2 table-striped" id="table">
           <thead>
             <tr>
            
@@ -142,6 +142,9 @@
               <th>
               Judge
               </th>
+              <th>
+              Action
+              </th>
              
             </tr>
           </thead>
@@ -151,7 +154,7 @@
               <td>
               <div class="form-group row">
               <div class="col-sm-12">
-              <select class="form-control js-data-example-ajax" name="dog_id" id="all_dogs">
+              <select class="form-control " name="inputs[0]['dog_id']" id="all_dogs">
               @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
                {{$dog->dog_name}}
@@ -165,22 +168,22 @@
               <div class="form-group row">
             
             <div class="col-sm-12">
-              <input class="form-control" name="grade" placeholder="Enter Grade" type="text">
+              <input class="form-control" name="inputs[0]['grade']" placeholder="Enter Grade" type="text">
             </div>
               </td>
               <td class="text-right">
               <div class="form-group row">
               
               <div class="col-sm-12">
-                <input class="form-control" name="place" placeholder="Enter Place" type="text">
+                <input class="form-control" name="inputs[0]['place']" placeholder="Enter Place" type="text">
               </div>
             </div>
               </td>
               <td>
               <div class="form-group row">
              
-             <div class="col-sm-12">
-             <select class="form-control js-data-example-ajax" id="judge" name="judge">
+             <div class="col-sm-12"> 
+             <select class="form-control select2" name="inputs[0]['judge']" id="judge">
              @foreach($total_judges as $judge)
                <option  value="{{$judge->id}}">
               {{$judge->full_name}}
@@ -191,7 +194,7 @@
            </div>
               </td>
            
-              
+              <td> <button id="add" class="btn btn-primary">Add</button></td>
             </tr>
             
           </tbody>
@@ -285,7 +288,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Breed</label>
               <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="breed_id" id="breed_id">
+              <select class="form-control " name="breed_id" class="breed_id">
               @foreach($total_breeds as $total_breed)
                 <option  value="{{$total_breed->id}}">
                {{$total_breed->name}}
@@ -298,7 +301,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Sire</label>
               <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="sire_id" id="selUser"  >
+              <select class="form-control select2" name="sire_id" id="selUser"  >
               @foreach($maleDogs as $maleDog)
                 <option  value="{{$maleDog->id}}">
                {{$maleDog->dog_name}}
@@ -311,7 +314,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Dam</label>
               <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="dam_id" id="selUser_fe">
+              <select class="form-control " name="dam_id" id="selUser_fe">
               @foreach($femaleDogs as $femaleDog)
                 <option  value="{{$femaleDog->id}}">
                {{$femaleDog->dog_name}}
@@ -335,22 +338,46 @@
     </div>
   </div>
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
-    <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
-    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script> 
+     <script src="{{asset('public/select2-develop/dist/js/select2.min.js')}}"></script>
+    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>  
 
     <script>
 
 
-$('#judge').select2();
+      var i=0;
 
+$('#add').click(function(){
+  ++i;
+$('#table').append(
+`<tr>
+<td><select class="form-control js-data-example-ajax" name="inputs[`+i+`][dog_id]" id="all_dogs">
+             
+                <option  value="{{$dog->id}}">
+               hello
+                </option>
+                
+              </select></td>
+<td>  <input class="form-control" name="inputs[`+i+`][grade]" placeholder="Enter Grade" type="text"></td>
+<td>  <input class="form-control" name="inputs[`+i+`][place]" placeholder="Enter place" type="text"></td>
+<td><select class="form-control js-data-example-ajax" name="inputs[`+i+`][judge]" id="judge">
+             @foreach($total_judges as $judge)
+               <option  value="{{$judge->id}}">
+              {{$judge->full_name}}
+               </option>
+               @endforeach
+             </select>
+</td>
+<td> <button id="remove" class="btn btn-danger">Remove</button></td>
 
+             </tr>`
+);
 
-
-
-  $('#all_dogs').select2({
-    allowClear: true,
+  // $('#table').find('#all_dogs').last().select2();
+$('.js-data-example-ajax').select2({
+  allowClear: true,
     placeholder: 'Select an item',
     language: {
       noResults: function (term) {
@@ -359,45 +386,68 @@ $('#judge').select2();
     },
     escapeMarkup: function(markup) {
       return markup;
-    },
-    ajax: {
-      type: "get",
-      url: '{{ URL::to('api/dog/all-dogs') }}',
-      dataType: 'json',
-  
-      delay: 250,
-   
-       data: function (params) {
-              return {
-                  q: $.trim(params.term)
-              };   
-          },
-      processResults: function (data) {
-        // console.log(data)
-        return {
-          results:  $.map(data, function (item) {
-                return {
-          //  _token: CSRF_TOKEN,
-  
-                    text: item.dog_name,
-                    id: item.id,
-                    
-                }
-            })
-        };
-      },
-      
-      cache: true
     }
+
+  });
+});
+$(document).on('click','#remove',function(){
+$(this).parents('tr').remove();
+
+});
+
+
+
+
+
+  // $('#all_dogs').select2({
+  //   allowClear: true,
+  //   placeholder: 'Select an item',
+  //   language: {
+  //     noResults: function (term) {
+  //       return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+  //     }
+  //   },
+  //   escapeMarkup: function(markup) {
+  //     return markup;
+  //   }
+    // ,
+    // ajax: {
+    //   type: "get",
+    //   url: '{{ URL::to('api/dog/all-dogs') }}',
+    //   dataType: 'json',
+  
+    //   delay: 250,
+   
+    //    data: function (params) {
+    //           return {
+    //               q: $.trim(params.term)
+    //           };   
+    //       },
+    //   processResults: function (data) {
+    //     // console.log(data)
+    //     return {
+    //       results:  $.map(data, function (item) {
+    //             return {
+    //       //  _token: CSRF_TOKEN,
+  
+    //                 text: item.dog_name,
+    //                 id: item.id,
+                    
+    //             }
+    //         })
+    //     };
+    //   },
+      
+    //   cache: true
+    // }
     
-  }).on('select2:open', function() {
-});
+  // })
 
 
 
-$('#selUser').select2({
-  dropdownParent: $("#exampleModal .modal-content"),
-});
+// $('#selUser').select2({
+//   dropdownParent: $("#exampleModal .modal-content"),
+// });
 
 
 $('#selUser_fe').select2({
