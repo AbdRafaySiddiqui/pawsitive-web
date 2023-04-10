@@ -36,8 +36,82 @@
           <div class="form-desc">
             Discharge best employed your phase each the of shine. Be met even reason consider logbook redesigns. Never a turned interfaces among asking
           </div>
-          
-        
+         
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for=""> Select Event</label>
+            <div class="col-sm-8">
+                <select class="form-control" name="event_id" id="event_id">
+                    <option value=""> Select Event </option>
+                    @foreach($Events as $Event)
+                        <option value="{{$Event->id}}">
+                            {{$Event->name}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Date</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="date" id="event-date" type="date">
+              </div>
+            </div>
+                <input class="form-control" style="display: none;" name="date" id="club-id" placeholder="Enter Club" type="text">
+                <input class="form-control" style="display: none;" name="date" id="judge-id" placeholder="Enter Judge" type="text">
+                <input class="form-control" style="display: none;" name="date" id="country" placeholder="Enter country" type="text">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Club Name</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="date" id="club-name" placeholder="Enter Club" type="text">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">judge Name</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="date" id="judge-name" placeholder="Enter judge" type="text">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Country Name</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="date" id="country-name" placeholder="Enter country" type="text">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Class</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="date" id="country-name" placeholder="Enter Class" type="text">
+              </div>
+            </div>
+            <div class="form-group row">
+          <label class="col-form-label col-sm-4" for="" > Gender</label>
+          <div class="col-sm-8">
+          <select class="form-control" name="gender">
+          <option value="">
+                  Select One
+                </option>
+                <option value="Male">
+                  Male
+                </option>
+                <option value="Female">
+                Female
+                </option>
+              </select>
+            </div>
+            </div>
+        <div id="event-details-container"></div>
+            <div class="form-buttons-w mb-4">
+            <button class="btn btn-primary" type="submit"> Submit</button>
+            <button class="btn btn-secondary" type="reset"> Reset</button>
+            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
+              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
+            </a>
+          </div>
+          @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
 
         </form>
       </div>
@@ -288,18 +362,6 @@
 $('#judge').select2();
 
 
-// $('#all_dogs').select2({
-
-//   allowClear: true,
-//     placeholder: "Search a cow/dam ID",
-//     language: {
-//         noResults: function () {
-//             return $("<a href='http://google.com/'>Add</a>");
-//         }
-//     }
-    
-//   });
-
 
 
 
@@ -379,6 +441,7 @@ $.ajax({
     text: response.response.dog_name
   }));
     $('#all_dogs').val(response.response.id).trigger('change'); 
+    $('#success-msg').show();
     $('#success-msg').html('<p class="success">'+response.message+'</p>');
   },
   error: function(response,xhr, status, error){
@@ -417,7 +480,72 @@ $.ajax({
 
 });
 
-
+function fetchClubDetails(clubId) {
+    $.ajax({
+        url: '{{ route("club_details", ":club_id") }}'.replace(':club_id', clubId),
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            // Set value of club name input field
+            $('#club-name').val(response.name);
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+}
+function fetchJudgeDetails(judgeId) {
+    $.ajax({
+        url: '{{ route("judge_details", ":judge_id") }}'.replace(':judge_id', judgeId),
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            // Set value of club name input field
+            $('#judge-name').val(response.full_name);
+            // console.log(response);
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+}
+function fetchCountryDetails(countryId) {
+    $.ajax({
+        url: '{{ route("country_details", ":idCountry") }}'.replace(':idCountry', countryId),
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#country-name').val(response.countryName);
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+}
+$('#event_id').on('change', function() {
+    var event_id = $('#event_id').val();
+    // Make AJAX request to fetch event details
+    $.ajax({
+        url: '{{ route("event_details", ":event_id") }}'.replace(':event_id', event_id),
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            // Update HTML content of container element with event details
+            // Set values of input fields
+            $('#event-date').val(response.date);
+            $('#club-id').val(response.club_id);
+            $('#judge-id').val(response.judge_id);
+            $('#country').val(response.country);
+            // Fetch club details using club_id
+            fetchClubDetails(response.club_id);
+            fetchJudgeDetails(response.judge_id);
+            fetchCountryDetails(response.country);
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+});
 // clear modal 
 $('#exampleModal').on('hidden.bs.modal', function () {
   $('#my-form')[0].reset(); // reset the form

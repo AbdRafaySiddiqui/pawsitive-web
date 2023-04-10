@@ -43,23 +43,30 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('judges',App\Http\Controllers\JudgesController::class);
     Route::put('/judges/{id}/update', [App\Http\Controllers\JudgesController::class, 'update'])->name('judges.update');
     Route::delete('/judges/{id}/delete', [App\Http\Controllers\JudgesController::class, 'destroy'])->name('judges.destroy');
+    Route::get('/events/{eventId}/details', 'App\Http\Controllers\EventsController@details')->name('event_details');
+    Route::get('/clubs/{clubId}', 'App\Http\Controllers\ClubsController@club_details')->name('club_details');
+
+
+
+
+
+
 
     Route::resource('breeds',App\Http\Controllers\BreedsController::class);
     Route::put('/breeds/{id}/update', [App\Http\Controllers\BreedsController::class, 'update'])->name('breeds.update');
     Route::delete('/breeds/{id}/delete', [App\Http\Controllers\BreedsController::class, 'destroy'])->name('breeds.destroy');
 
-    Route::resource('dogs',App\Http\Controllers\DogsController::class);
-    Route::put('/dogs/{id}/update', [App\Http\Controllers\DogsController::class, 'update'])->name('dogs.update');
-    Route::delete('/dogs/{id}/delete', [App\Http\Controllers\DogsController::class, 'destroy'])->name('dogs.destroy');
-
-    Route::resource('users', App\Http\Controllers\UserController::class);
-    Route::put('/users/{id}/update', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{id}/delete', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
-    
-    Route::resource('events',App\Http\Controllers\EventsController::class);
-    Route::resource('akc_groups',App\Http\Controllers\AKCGroupController::class);
-    Route::resource('fci_groups',App\Http\Controllers\FCIGroupController::class);
-    // Route::resource('species','App\Http\Controllers\SpeciesController');
+    Route::post('/users', 'App\Http\Controllers\UserController@store')->name('users.store');
+    Route::resource('breeds','App\Http\Controllers\breedsController');
+    Route::resource('events','App\Http\Controllers\EventsController');
+    Route::resource('event_result','App\Http\Controllers\EventResultsController');
+    Route::resource('akc_groups','App\Http\Controllers\akc_group');
+    Route::resource('fci_groups','App\Http\Controllers\fci_group');
+    Route::resource('species','App\Http\Controllers\SpeciesController');
+    Route::get('breeds/{id}/destroy', [App\Http\Controllers\BreedsController::class, 'destroy'])->name('br_del');
+    Route::post('breeds/{id}/update', [App\Http\Controllers\BreedsController::class, 'update'])->name('br_up');
+    Route::post('breeds/{id}/upload-profile-picture', [App\Http\Controllers\BreedsController::class, 'upload_profile_picture'])->name('breed_up_pp');
+    Route::post('breeds/{id}/upload-images', [App\Http\Controllers\BreedsController::class, 'upload_images'])->name('breed_up_imgs');
     
     Route::get('/dashboard', function () {
         return view('dashboard');

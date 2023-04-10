@@ -77,4 +77,17 @@ class JudgeController extends Controller
 
         return response()->json(['judge' => $judge], 200);
     }
+
+    public function judge_details($judgeId)
+      {
+          $judge = Judges::find($judgeId);
+          
+          if (!$judge) {
+              return response()->json(['error' => 'judge not found'], 404);
+          }
+          
+        //   return response()->json($club);
+        return $judge;
+      }
+
 }

@@ -158,4 +158,12 @@ public function submitForm(Request $request)
 
 }
 
+public function details($eventId)
+{
+    $event = Events::find($eventId);
+    return response()->json($event);
+}
+
+
+
 }

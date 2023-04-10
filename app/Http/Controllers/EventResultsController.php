@@ -8,6 +8,7 @@ use App\Models\Breeds;
 use App\Models\Event_Result;
 use App\Models\Judges;
 use App\Models\DogsRealParent;
+use App\Models\Events;
 
 class EventResultsController extends Controller
 {
@@ -29,7 +30,9 @@ class EventResultsController extends Controller
         $total_judges = Judges::get();
         $maleDogs = Dogs::where('gender', '=', 'Male')->get();
         $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
-        return view('event_results.create',compact('maleDogs', 'femaleDogs','dogs','total_breeds','total_judges'));
+        $Events = Events::all();
+        
+        return view('event_results.create',compact('Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges'));
     }
 
     /**
@@ -44,6 +47,7 @@ class EventResultsController extends Controller
         $event_result->judge =  $request->judge;
         $event_result->save();
         return redirect()->back()->with('message', 'Record added successfully');
+        //
     }
 
     /**

@@ -149,4 +149,6 @@ class JudgesController extends Controller
   
         return redirect()->back()->with('message', 'Record Permenantly Deleted!');
     }
+
+    
 }

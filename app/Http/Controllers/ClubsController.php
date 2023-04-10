@@ -112,4 +112,16 @@ class ClubsController extends Controller
         
         return redirect()->back()->with('message', 'Record deleted successfully');
     }
+
+    public function club_details($clubId)
+      {
+          $club = Clubs::find($clubId);
+          
+          if (!$club) {
+              return response()->json(['error' => 'Club not found'], 404);
+          }
+          
+        //   return response()->json($club);
+        return $club;
+      }
 }
