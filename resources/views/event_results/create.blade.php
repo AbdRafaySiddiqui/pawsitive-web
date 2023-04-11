@@ -12,8 +12,8 @@
        Add Event
       </h6>
       <div class="element-box">
-        <form action="{{ route('event_results.store') }}" method="post" enctype="multipart/form-data">
-        @csrf
+        <!-- <form action="" method="post" enctype="multipart/form-data">
+        @csrf -->
           <h5 class="form-header">
           Add Event
           </h5>
@@ -91,13 +91,8 @@
               <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
             </a>
           </div>
-          @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
-
-        </form>
+         
+        <!-- </form> -->
       </div>
     </div>
   </div>
@@ -126,6 +121,14 @@
       START - Table with actions
       ------------------  -->
       <div class="table-responsive">
+      <form action="{{ route('event_results.store') }}" method="post">
+                 @csrf
+                 @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+
         <table class="table table-bordered table-lg table-v2 table-striped" id="table">
           <thead>
             <tr>
@@ -152,9 +155,10 @@
             <tr>
               
               <td>
+                 
               <div class="form-group row">
               <div class="col-sm-12">
-              <select class="form-control " name="inputs[0]['dog_id']" id="all_dogs">
+              <select class="form-control js-data-example-ajax" name="inputs[0][dog_id]" id="all_dogs">
               @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
                {{$dog->dog_name}}
@@ -167,15 +171,15 @@
               <td>
               <div class="form-group row">
             
-            <div class="col-sm-12">
-              <input class="form-control" name="inputs[0]['grade']" placeholder="Enter Grade" type="text">
+            <div class="col-sm-12"> 
+              <input class="form-control" name="inputs[0][grading]" placeholder="Enter Grade" type="text">
             </div>
               </td>
               <td class="text-right">
               <div class="form-group row">
               
               <div class="col-sm-12">
-                <input class="form-control" name="inputs[0]['place']" placeholder="Enter Place" type="text">
+                <input class="form-control" name="inputs[0][place]" placeholder="Enter Place" type="text">
               </div>
             </div>
               </td>
@@ -183,7 +187,7 @@
               <div class="form-group row">
              
              <div class="col-sm-12"> 
-             <select class="form-control select2" name="inputs[0]['judge']" id="judge">
+             <select class="form-control js-data-example-ajax" name="inputs[0][judge]" id="judge">
              @foreach($total_judges as $judge)
                <option  value="{{$judge->id}}">
               {{$judge->full_name}}
@@ -194,11 +198,13 @@
            </div>
               </td>
            
-              <td> <button id="add" class="btn btn-primary">Add</button></td>
+              <td> <button id="add" name="add" class="btn btn-primary" type="button">Add</button></td>
             </tr>
             
           </tbody>
         </table>
+        <button class="btn btn-primary"  type="submit"> Submit</button>
+        </form>
       </div>
       <!--------------------
       END - Table with actions
@@ -314,7 +320,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Dam</label>
               <div class="col-sm-8">
-              <select class="form-control " name="dam_id" id="selUser_fe">
+              <select class="form-control select2" name="dam_id" id="selUser_fe">
               @foreach($femaleDogs as $femaleDog)
                 <option  value="{{$femaleDog->id}}">
                {{$femaleDog->dog_name}}
@@ -338,29 +344,33 @@
     </div>
   </div>
 </div>
-<script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<!-- <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
-     <script src="{{asset('public/select2-develop/dist/js/select2.min.js')}}"></script>
-    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>  
+    <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
 
     <script>
 
 
       var i=0;
+      $('#judge').select2();
+// $('.dg').select2();
 
 $('#add').click(function(){
   ++i;
 $('#table').append(
 `<tr>
-<td><select class="form-control js-data-example-ajax" name="inputs[`+i+`][dog_id]" id="all_dogs">
+<td><select class="form-control js-data-example-ajax dg" name="inputs[`+i+`][dog_id]" id="all_dogs">
              
+@foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
-               hello
+               {{$dog->dog_name}}
                 </option>
+                @endforeach
                 
               </select></td>
-<td>  <input class="form-control" name="inputs[`+i+`][grade]" placeholder="Enter Grade" type="text"></td>
+<td>  <input class="form-control" name="inputs[`+i+`][grading]" placeholder="Enter Grade" type="text"></td>
 <td>  <input class="form-control" name="inputs[`+i+`][place]" placeholder="Enter place" type="text"></td>
 <td><select class="form-control js-data-example-ajax" name="inputs[`+i+`][judge]" id="judge">
              @foreach($total_judges as $judge)
@@ -374,22 +384,24 @@ $('#table').append(
 
              </tr>`
 );
+             
 
-  // $('#table').find('#all_dogs').last().select2();
-$('.js-data-example-ajax').select2({
-  allowClear: true,
-    placeholder: 'Select an item',
-    language: {
-      noResults: function (term) {
-        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-      }
-    },
-    escapeMarkup: function(markup) {
-      return markup;
-    }
-
-  });
 });
+  // $('#table').find('#all_dogs').last().select2();
+// $('.js-data-example-ajax').select2({
+//   allowClear: true,
+//     placeholder: 'Select an item',
+//     language: {
+//       noResults: function (term) {
+//         return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+//       }
+//     },
+//     escapeMarkup: function(markup) {
+//       return markup;
+//     }
+
+//   });
+
 $(document).on('click','#remove',function(){
 $(this).parents('tr').remove();
 
@@ -399,60 +411,60 @@ $(this).parents('tr').remove();
 
 
 
-  // $('#all_dogs').select2({
-  //   allowClear: true,
-  //   placeholder: 'Select an item',
-  //   language: {
-  //     noResults: function (term) {
-  //       return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-  //     }
-  //   },
-  //   escapeMarkup: function(markup) {
-  //     return markup;
-  //   }
-    // ,
-    // ajax: {
-    //   type: "get",
-    //   url: '{{ URL::to('api/dog/all-dogs') }}',
-    //   dataType: 'json',
+  $('#all_dogs').select2({
+    allowClear: true,
+    placeholder: 'Select an item',
+    language: {
+      noResults: function (term) {
+        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+      }
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    }
+    ,
+    ajax: {
+      type: "get",
+      url: '{{ URL::to('api/dog/all-dogs') }}',
+      dataType: 'json',
   
-    //   delay: 250,
+      delay: 250,
    
-    //    data: function (params) {
-    //           return {
-    //               q: $.trim(params.term)
-    //           };   
-    //       },
-    //   processResults: function (data) {
-    //     // console.log(data)
-    //     return {
-    //       results:  $.map(data, function (item) {
-    //             return {
-    //       //  _token: CSRF_TOKEN,
+       data: function (params) {
+              return {
+                  q: $.trim(params.term)
+              };   
+          },
+      processResults: function (data) {
+        // console.log(data)
+        return {
+          results:  $.map(data, function (item) {
+                return {
+          //  _token: CSRF_TOKEN,
   
-    //                 text: item.dog_name,
-    //                 id: item.id,
+                    text: item.dog_name,
+                    id: item.id,
                     
-    //             }
-    //         })
-    //     };
-    //   },
+                }
+            })
+        };
+      },
       
-    //   cache: true
-    // }
+      cache: true
+    }
     
-  // })
+  });
 
 
 
-// $('#selUser').select2({
+// $('.select2').select2({
 //   dropdownParent: $("#exampleModal .modal-content"),
 // });
 
 
-$('#selUser_fe').select2({
-  dropdownParent: $("#exampleModal .modal-content"),
-});
+// $('#selUser_fe').select2({
+//   dropdownParent: $("#exampleModal .modal-content"),
+// });
 
 // modal submit 
 $('#my-form').on('submit', function(e){

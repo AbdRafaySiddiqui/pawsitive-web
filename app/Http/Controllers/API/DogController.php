@@ -63,7 +63,7 @@ class DogController extends Controller
         }
         else{
           $data = Dogs::select('dogs.id',
-          'dog_name',
+          'dog_name'
             )
             ->orderBy('dog_name','ASC')
                   ->get();

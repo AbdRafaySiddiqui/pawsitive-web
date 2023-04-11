@@ -41,6 +41,7 @@ Route::get('dog/{id}/details', [DogController::class, 'details']);
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);
 
 
+
 //ClubController routes
 Route::get('club-listings', [ClubController::class, 'listing']);
 Route::get('club/{id}/details', [ClubController::class, 'details']);
