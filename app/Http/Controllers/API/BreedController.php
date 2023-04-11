@@ -161,4 +161,16 @@ class BreedController extends Controller
 
         return response()->json(['breed' => $breed, 'ratings' => $ratings, 'media' => $media], 200);
     }
+
+    public function retrieve()
+    {
+      $breeds = Breeds::all();
+      $breedsdata = $breeds->map(function($breed){
+        return [
+          'id' => $breed->id,
+          'name' => $breed->name,
+        ];
+      });
+      return response()->json(['breed' => $breedsdata]);
+    }
 }

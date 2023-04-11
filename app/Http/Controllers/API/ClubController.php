@@ -84,4 +84,16 @@ class ClubController extends Controller
         return response()->json(['club' => $club], 200);
     }
 
+    public function retrieve()
+    {
+      $clubs = Clubs::all();
+      $clubsdata = $clubs->map(function($club){
+        return [
+          'id' => $club->id,
+          'name' => $club->name,
+        ];
+      });
+      return response()->json(['club' => $clubsdata]);
+    }
+
 }
