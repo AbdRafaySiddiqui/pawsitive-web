@@ -10,6 +10,7 @@ use App\Http\Controllers\API\PetsController;
 use App\Http\Controllers\API\DogController;
 use App\Http\Controllers\API\ClubController;
 use App\Http\Controllers\API\ApiController;
+use App\Http\Controllers\API\EventResultController;
 
 
 /*
@@ -27,6 +28,7 @@ use App\Http\Controllers\API\ApiController;
 Route::get('breed-listings', [App\Http\Controllers\API\BreedController::class, 'listing']);
 Route::get('breed/{id}/details', [App\Http\Controllers\API\BreedController::class, 'details']);
 Route::get('breed-short', [BreedController::class, 'breed_short']);
+Route::get('breed-names', [BreedController::class, 'retrieve']);
 
 // Judges Controller.
 Route::get('judge-listings', [App\Http\Controllers\API\JudgeController::class, 'listing']);
@@ -40,10 +42,19 @@ Route::get('dog/{breed_id}/listings', [DogController::class, 'listing']);
 Route::get('dog/{id}/details', [DogController::class, 'details']);
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);
 
+//EventResultController routes
+Route::get('result-listing', [EventResultController::class, 'result']);
+
+
+//EventController routes
+Route::get('event-listing', [App\Http\Controllers\API\EventController::class, 'retrieve']);
+Route::post('/events/filter', [App\Http\Controllers\API\EventController::class, 'filterEvents']);
+
 
 //ClubController routes
 Route::get('club-listings', [ClubController::class, 'listing']);
 Route::get('club/{id}/details', [ClubController::class, 'details']);
+Route::get('club-names', [ClubController::class, 'retrieve']);
 
 Route::get('/judges/{judgeId}', 'App\Http\Controllers\API\JudgeController@judge_details')->name('judge_details');
 Route::get('/countries/{countryId}', 'App\Http\Controllers\API\CountriesController@country_details')->name('country_details');
