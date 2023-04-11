@@ -51,6 +51,7 @@ Route::get('event-listing', [App\Http\Controllers\API\EventController::class, 'r
 Route::post('/events/filter', [App\Http\Controllers\API\EventController::class, 'filterEvents']);
 
 
+
 //ClubController routes
 Route::get('club-listings', [ClubController::class, 'listing']);
 Route::get('club/{id}/details', [ClubController::class, 'details']);

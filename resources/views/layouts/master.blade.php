@@ -744,7 +744,7 @@
         <script src="{{asset('public/bower_components/popper.js/dist/umd/popper.min.js')}}"></script>
         <script src="{{asset('public/bower_components/moment/moment.js')}}"></script>
         <script src="{{asset('public/bower_components/chart.js/dist/Chart.min.js')}}"></script>
-        <!-- <script src="{{asset('public/bower_components/select2/dist/js/select2.full.min.js')}}"></script> -->
+        <script src="{{asset('public/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
         <script src="{{asset('public/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js')}}"></script>
         <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script>
         <script src="{{asset('public/bower_components/bootstrap-validator/dist/validator.min.js')}}"></script>
@@ -787,7 +787,7 @@
 
         </script>
  
- <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <!-- <script>
     var $j = jQuery.noConflict();
     // Use $j instead of $ to reference the jQuery library
