@@ -158,7 +158,7 @@
                  
               <div class="form-group row">
               <div class="col-sm-12">
-              <select class="form-control js-data-example-ajax" name="inputs[0][dog_id]" id="all_dogs">
+              <select class="form-control select2 dog" name="inputs[0][dog_id]" id="all_dogs_0">
               @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
                {{$dog->dog_name}}
@@ -221,7 +221,7 @@
 
 
        <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -318,7 +318,7 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Select Dam</label>
+              <label class="col-sm-4 col-form-label " for="">Select Dam</label>
               <div class="col-sm-8">
               <select class="form-control select2" name="dam_id" id="selUser_fe">
               @foreach($femaleDogs as $femaleDog)
@@ -345,8 +345,8 @@
   </div>
 </div>
 <!-- <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
+<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+
     <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
     <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
 
@@ -361,7 +361,7 @@ $('#add').click(function(){
   ++i;
 $('#table').append(
 `<tr>
-<td><select class="form-control js-data-example-ajax dg" name="inputs[`+i+`][dog_id]" id="all_dogs">
+<td><select class="form-control js-data-example-ajax dg" name="inputs[`+i+`][dog_id]" id="all_dogs_`+i+`">
              
 @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
@@ -383,8 +383,50 @@ $('#table').append(
 <td> <button id="remove" class="btn btn-danger">Remove</button></td>
 
              </tr>`
+          
 );
-             
+$('#all_dogs_'+i+'').select2({
+    allowClear: true,
+    placeholder: 'Select an items',
+    language: {
+      noResults: function (term) {
+        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+      }
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    }
+    ,
+    ajax: {
+      type: "get",
+      url: '{{ URL::to('api/dog/all-dogs') }}',
+      dataType: 'json',
+  
+      delay: 250,
+   
+       data: function (params) {
+              return {
+                  q: $.trim(params.term)
+              };   
+          },
+      processResults: function (data) {
+        // console.log(data)
+        return {
+          results:  $.map(data, function (item) {
+                return {
+          //  _token: CSRF_TOKEN,
+  
+                    text: item.dog_name,
+                    id: item.id,
+                    
+                }
+            })
+        };
+      },
+      
+      cache: true
+    }
+  });         
 
 });
   // $('#table').find('#all_dogs').last().select2();
@@ -410,8 +452,8 @@ $(this).parents('tr').remove();
 
 
 
-
-  $('#all_dogs').select2({
+$(document).ready(function() {
+  $('#all_dogs_0').select2({
     allowClear: true,
     placeholder: 'Select an item',
     language: {
@@ -452,18 +494,20 @@ $(this).parents('tr').remove();
       
       cache: true
     }
-    
+  });
   });
 
 
+  
 
-// $('.select2').select2({
+
+// $('#selUser').select2({
 //   dropdownParent: $("#exampleModal .modal-content"),
 // });
 
 
 // $('#selUser_fe').select2({
-//   dropdownParent: $("#exampleModal .modal-content"),
+//   dropdownParent: $("#exampleModal .modal-content")
 // });
 
 // modal submit 
@@ -481,12 +525,12 @@ $.ajax({
     // console.log(response);
     // console.log(response.response.full_name);
     // console.log(response.response.message);
-    $('#all_dogs').append($('<option>', {
+    $('.dog').append($('<option>', {
     value: response.response.id,
 
     text: response.response.dog_name
   }));
-    $('#all_dogs').val(response.response.id).trigger('change'); 
+    $('.dog').val(response.response.id).trigger('change'); 
     $('#success-msg').show();
     $('#success-msg').html('<p class="success">'+response.message+'</p>');
   },
