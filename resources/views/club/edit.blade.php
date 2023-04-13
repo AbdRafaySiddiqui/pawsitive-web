@@ -88,7 +88,7 @@
           <div class="form-group row">
             <label class="col-form-label col-sm-4" for="" > Affiliation with</label>
             <div class="col-sm-8">
-            <input class="form-control" name="affiliation" placeholder="Affiliation with" type="text">
+            <input class="form-control" name="affiliation" value="{{$et_club->affiliation}}" placeholder="Affiliation with" type="text">
             </div>
           </div>
          

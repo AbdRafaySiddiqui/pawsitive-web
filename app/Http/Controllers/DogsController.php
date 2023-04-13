@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Dogs;
 use App\Models\Breeds;
 use Illuminate\Pagination\Paginator;
+use League\Csv\Writer;
 
 use App\Models\DogsRealParent;
 
@@ -145,6 +146,38 @@ class DogsController extends Controller
 	
         $dogs->save();
         return redirect()->back()->with('message', 'Record added successfully');
+    }
+
+    public function download()
+    {
+        // Fetch data from the database
+        $dogs = Dogs::all();
+
+        // Create a new CSV file and write the data to it
+        $csv = Writer::createFromString('');
+        $csv->insertOne(['dog_name', 'dob', 'gender', 'microchip', 'reg_no', 'achievements', 'show_title', 'breed_id', 'status']);
+
+        foreach ($dogs as $dog) {
+            $csv->insertOne([
+                $dog->dog_name,
+                $dog->dob,
+                $dog->gender,
+                $dog->microchip,
+                $dog->reg_no,
+                $dog->achievements,
+                $dog->show_title,
+                $dog->breed_id,
+                $dog->status,
+            ]);
+        }
+
+        // Download the CSV file
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="dogs.csv"',
+        ];
+
+        return response($csv->getContent(), 200, $headers);
     }
     
 

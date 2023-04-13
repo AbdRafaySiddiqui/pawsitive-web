@@ -10,6 +10,7 @@ use App\Models\Events;
 use App\Models\Judges;
 use App\Models\Countries;
 use Illuminate\Pagination\Paginator;
+use League\Csv\Writer;
 
 class EventsController extends Controller
 {
@@ -164,6 +165,34 @@ public function details($eventId)
     return response()->json($event);
 }
 
+public function download()
+{
+    // Fetch data from the database
+    $events = Events::all();
 
+    // Create a new CSV file and write the data to it
+    $csv = Writer::createFromString('');
+    $csv->insertOne(['name', 'date', 'club_id', 'judge_id', 'country', 'city', 'status']);
+
+    foreach ($events as $event) {
+        $csv->insertOne([
+            $event->name,
+            $event->date,
+            $event->club_id,
+            $event->judge_id,
+            $event->country,
+            $event->city,
+            $event->status,
+        ]);
+    }
+
+    // Download the CSV file
+    $headers = [
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="events.csv"',
+    ];
+
+    return response($csv->getContent(), 200, $headers);
+}
 
 }

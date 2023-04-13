@@ -10,6 +10,7 @@ use App\Http\Controllers\API\PetsController;
 use App\Http\Controllers\API\DogController;
 use App\Http\Controllers\API\ClubController;
 use App\Http\Controllers\API\ApiController;
+use App\Http\Controllers\API\EventResultController;
 
 
 /*
@@ -27,6 +28,7 @@ use App\Http\Controllers\API\ApiController;
 Route::get('breed-listings', [App\Http\Controllers\API\BreedController::class, 'listing']);
 Route::get('breed/{id}/details', [App\Http\Controllers\API\BreedController::class, 'details']);
 Route::get('breed-short', [BreedController::class, 'breed_short']);
+Route::get('breed-names', [BreedController::class, 'retrieve']);
 
 // Judges Controller.
 Route::get('judge-listings', [App\Http\Controllers\API\JudgeController::class, 'listing']);
@@ -39,12 +41,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('dog/{breed_id}/listings', [DogController::class, 'listing']);
 Route::get('dog/{id}/details', [DogController::class, 'details']);
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);
+Route::get('dog/dog-profile', [DogController::class, 'dog_profile']);
+
+//EventResultController routes
+Route::get('result-listing', [EventResultController::class, 'result']);
+
+
+//EventController routes
+Route::get('event-listing', [App\Http\Controllers\API\EventController::class, 'retrieve']);
+Route::post('/events/filter', [App\Http\Controllers\API\EventController::class, 'filterEvents']);
 
 
 
 //ClubController routes
 Route::get('club-listings', [ClubController::class, 'listing']);
 Route::get('club/{id}/details', [ClubController::class, 'details']);
+Route::get('club-names', [ClubController::class, 'retrieve']);
 
 Route::get('/judges/{judgeId}', 'App\Http\Controllers\API\JudgeController@judge_details')->name('judge_details');
 Route::get('/countries/{countryId}', 'App\Http\Controllers\API\CountriesController@country_details')->name('country_details');
@@ -107,3 +119,5 @@ Route::get('all-appointments', [VetController::class, 'all_appointments']);
 Route::get('appointment/{id}/details', [VetController::class, 'view_appointment_normal']);
 Route::get('appointment/{id}/history', [VetController::class, 'view_appointment_with_history']);
 Route::post('update-vet-profile', [VetController::class, 'update_vet_profile']);
+
+

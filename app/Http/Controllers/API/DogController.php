@@ -70,4 +70,36 @@ class DogController extends Controller
       }
         return response()->json($data);
     }
+
+
+    public function dog_profile(request $request)
+    {
+        $dog = Dogs::select('id','dog_name','profile_photo')
+                    //   ->leftjoin('species','species.id','=','breeds.sp_id')
+                      ->where('status','=','Active')
+                      ->orderBy('dog_name','ASC')
+                      ->get();
+
+                      foreach($dog as $dogs)
+                      {
+              
+                        if($dogs->profile_photo != null)
+                        {
+                          if(file_exists(storage_path().'/app/public/dog_profile'.'/'.$dogs->image))
+                          {
+                            $dogs->profile_photo = asset('storage/app/public/dog_profile').'/'.$dogs->image;
+                          }
+                          else
+                          {
+                            $dogs->profile_photo = asset('storage/app/public/noimage.png');
+                          }
+                        }
+                        else
+                        {
+                          $dogs->profile_photo = asset('storage/app/public/noimage.png');
+                        }
+                      }
+                      return response()->json(['profile' => $dog], 200);
+}
+
 }

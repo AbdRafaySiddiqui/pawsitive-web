@@ -158,7 +158,7 @@
                  
               <div class="form-group row">
               <div class="col-sm-12">
-              <select class="form-control js-data-example-ajax dog" name="dog_id[]" id="all_dogs_0">
+              <select class="form-control js-data-example-ajax dog" name="dog_id[]" id="all_dogs">
               @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
                {{$dog->dog_name}}
@@ -206,20 +206,10 @@
         <button class="btn btn-primary"  type="submit"> Submit</button>
         </form>
       </div>
-      <!--------------------
-      END - Table with actions
-      ------------------            -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="display-type"></div>
-    </div>
-
-
-
-
-
+      <!--            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class=
        <!-- Modal -->
 <div class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -385,52 +375,11 @@ $('#table').append(
              </tr>`
           
 );
-// $('#all_dogs_'+i+'').select2({
-//     allowClear: true,
-//     placeholder: 'Select an items',
-//     language: {
-//       noResults: function (term) {
-//         return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-//       }
-//     },
-//     escapeMarkup: function(markup) {
-//       return markup;
-//     }
-//     ,
-//     ajax: {
-//       type: "get",
-//       url: '{{ URL::to('api/dog/all-dogs') }}',
-//       dataType: 'json',
-  
-//       delay: 250,
-   
-//        data: function (params) {
-//               return {
-//                   q: $.trim(params.term)
-//               };   
-//           },
-//       processResults: function (data) {
-//         // console.log(data)
-//         return {
-//           results:  $.map(data, function (item) {
-//                 return {
-//           //  _token: CSRF_TOKEN,
-  
-//                     text: item.dog_name,
-//                     id: item.id,
-                    
-//                 }
-//             })
-//         };
-//       },
-      
-//       cache: true
-//     }
-//   });         
+     
 
 });
 
-$('#all_dogs_'+i+'').select2({
+$('#all_dogs').select2({
     allowClear: true,
     placeholder: 'Select an items',
     language: {
@@ -648,5 +597,6 @@ $('#m_sub').on('click', function () {
 });
 
 </script>
+
 @endsection
 
