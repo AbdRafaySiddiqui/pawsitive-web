@@ -158,7 +158,7 @@
                  
               <div class="form-group row">
               <div class="col-sm-12">
-              <select class="form-control select2 dog" name="inputs[0][dog_id]" id="all_dogs_0">
+              <select class="form-control js-data-example-ajax dog" name="dog_id[]" id="all_dogs_0">
               @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
                {{$dog->dog_name}}
@@ -172,14 +172,14 @@
               <div class="form-group row">
             
             <div class="col-sm-12"> 
-              <input class="form-control" name="inputs[0][grading]" placeholder="Enter Grade" type="text">
+              <input class="form-control" name="grading[]" placeholder="Enter Grade" type="text">
             </div>
               </td>
               <td class="text-right">
               <div class="form-group row">
               
               <div class="col-sm-12">
-                <input class="form-control" name="inputs[0][place]" placeholder="Enter Place" type="text">
+                <input class="form-control" name="place[]" placeholder="Enter Place" type="text">
               </div>
             </div>
               </td>
@@ -187,7 +187,7 @@
               <div class="form-group row">
              
              <div class="col-sm-12"> 
-             <select class="form-control js-data-example-ajax" name="inputs[0][judge]" id="judge">
+             <select class="form-control js-data-example-ajax" name="judge[]" id="judge">
              @foreach($total_judges as $judge)
                <option  value="{{$judge->id}}">
               {{$judge->full_name}}
@@ -294,7 +294,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Breed</label>
               <div class="col-sm-8">
-              <select class="form-control " name="breed_id" class="breed_id">
+              <select class="form-control js-data-example-ajax" name="breed_id" class="breed_id">
               @foreach($total_breeds as $total_breed)
                 <option  value="{{$total_breed->id}}">
                {{$total_breed->name}}
@@ -307,7 +307,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Sire</label>
               <div class="col-sm-8">
-              <select class="form-control select2" name="sire_id" id="selUser"  >
+              <select class="form-control js-data-example-ajax" name="sire_id" id="selUser"  >
               @foreach($maleDogs as $maleDog)
                 <option  value="{{$maleDog->id}}">
                {{$maleDog->dog_name}}
@@ -320,7 +320,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label " for="">Select Dam</label>
               <div class="col-sm-8">
-              <select class="form-control select2" name="dam_id" id="selUser_fe">
+              <select class="form-control js-data-example-ajax" name="dam_id" id="selUser_fe">
               @foreach($femaleDogs as $femaleDog)
                 <option  value="{{$femaleDog->id}}">
                {{$femaleDog->dog_name}}
@@ -353,15 +353,15 @@
     <script>
 
 
-      var i=0;
+      // var i=0;
       $('#judge').select2();
 // $('.dg').select2();
 
 $('#add').click(function(){
-  ++i;
+  // ++i;
 $('#table').append(
 `<tr>
-<td><select class="form-control js-data-example-ajax dg" name="inputs[`+i+`][dog_id]" id="all_dogs_`+i+`">
+<td><select class="form-control js-data-example-ajax dg" name="dog_id[]" id="all_dogs">
              
 @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
@@ -370,9 +370,9 @@ $('#table').append(
                 @endforeach
                 
               </select></td>
-<td>  <input class="form-control" name="inputs[`+i+`][grading]" placeholder="Enter Grade" type="text"></td>
-<td>  <input class="form-control" name="inputs[`+i+`][place]" placeholder="Enter place" type="text"></td>
-<td><select class="form-control js-data-example-ajax" name="inputs[`+i+`][judge]" id="judge">
+<td>  <input class="form-control" name="grading[]" placeholder="Enter Grade" type="text"></td>
+<td>  <input class="form-control" name="place[]" placeholder="Enter place" type="text"></td>
+<td><select class="form-control js-data-example-ajax" name="judge[]" id="judge">
              @foreach($total_judges as $judge)
                <option  value="{{$judge->id}}">
               {{$judge->full_name}}
@@ -385,6 +385,51 @@ $('#table').append(
              </tr>`
           
 );
+// $('#all_dogs_'+i+'').select2({
+//     allowClear: true,
+//     placeholder: 'Select an items',
+//     language: {
+//       noResults: function (term) {
+//         return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+//       }
+//     },
+//     escapeMarkup: function(markup) {
+//       return markup;
+//     }
+//     ,
+//     ajax: {
+//       type: "get",
+//       url: '{{ URL::to('api/dog/all-dogs') }}',
+//       dataType: 'json',
+  
+//       delay: 250,
+   
+//        data: function (params) {
+//               return {
+//                   q: $.trim(params.term)
+//               };   
+//           },
+//       processResults: function (data) {
+//         // console.log(data)
+//         return {
+//           results:  $.map(data, function (item) {
+//                 return {
+//           //  _token: CSRF_TOKEN,
+  
+//                     text: item.dog_name,
+//                     id: item.id,
+                    
+//                 }
+//             })
+//         };
+//       },
+      
+//       cache: true
+//     }
+//   });         
+
+});
+
 $('#all_dogs_'+i+'').select2({
     allowClear: true,
     placeholder: 'Select an items',
@@ -427,8 +472,6 @@ $('#all_dogs_'+i+'').select2({
       cache: true
     }
   });         
-
-});
   // $('#table').find('#all_dogs').last().select2();
 // $('.js-data-example-ajax').select2({
 //   allowClear: true,
@@ -453,62 +496,21 @@ $(this).parents('tr').remove();
 
 
 $(document).ready(function() {
-  $('#all_dogs_0').select2({
-    allowClear: true,
-    placeholder: 'Select an item',
-    language: {
-      noResults: function (term) {
-        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-      }
-    },
-    escapeMarkup: function(markup) {
-      return markup;
-    }
-    ,
-    ajax: {
-      type: "get",
-      url: '{{ URL::to('api/dog/all-dogs') }}',
-      dataType: 'json',
-  
-      delay: 250,
-   
-       data: function (params) {
-              return {
-                  q: $.trim(params.term)
-              };   
-          },
-      processResults: function (data) {
-        // console.log(data)
-        return {
-          results:  $.map(data, function (item) {
-                return {
-          //  _token: CSRF_TOKEN,
-  
-                    text: item.dog_name,
-                    id: item.id,
-                    
-                }
-            })
-        };
-      },
-      
-      cache: true
-    }
-  });
+ 
   });
 
 
   
 
 
-// $('#selUser').select2({
-//   dropdownParent: $("#exampleModal .modal-content"),
-// });
+$('#selUser').select2({
+  dropdownParent: $("#exampleModal .modal-content"),
+});
 
 
-// $('#selUser_fe').select2({
-//   dropdownParent: $("#exampleModal .modal-content")
-// });
+$('#selUser_fe').select2({
+  dropdownParent: $("#exampleModal .modal-content")
+});
 
 // modal submit 
 $('#my-form').on('submit', function(e){
