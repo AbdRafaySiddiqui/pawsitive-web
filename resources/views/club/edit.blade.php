@@ -80,7 +80,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Phone</label>
               <div class="col-sm-8">
-                <input class="form-control" value="{{$et_club->phone}}" name="phone" placeholder="Phone" type="number">
+                <input class="form-control" value="{{$et_club->phone}}" name="phone" placeholder="Phone" type="text">
               </div>
             </div>
          
@@ -95,11 +95,11 @@
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
           </div>
-          @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
+                  @if(session()->has('message'))
+                  <div class="alert alert-success">
+                      {{ session()->get('message') }}
+                  </div>
+              @endif
 
         </form>
       </div>
