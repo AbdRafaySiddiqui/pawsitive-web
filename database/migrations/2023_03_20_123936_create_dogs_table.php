@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('dogs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->enum('is_champion', ['Yes', 'No'])->default('No');
             $table->string('dog_name')->nullable();
             $table->date('dob')->nullable();
             $table->enum('gender', ['Male', 'Female'])->nullable();

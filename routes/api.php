@@ -47,8 +47,8 @@ Route::get('result-listing', [EventResultController::class, 'result']);
 
 
 //EventController routes
-Route::get('event-listing', [App\Http\Controllers\API\EventController::class, 'retrieve']);
-Route::post('/events/filter', [App\Http\Controllers\API\EventController::class, 'filterEvents']);
+Route::get('event-listing/{breed_id}', [App\Http\Controllers\API\EventController::class, 'retrieve']);
+Route::get('/events/filter', [App\Http\Controllers\API\EventController::class, 'filterEvents']);
 
 
 
