@@ -27,7 +27,6 @@ class EventController extends Controller
                 ->where('breeds.id', '=', $breed_id)
                 ->orderBy('events.date', 'asc')
                 ->get();
-                
         return response()->json(['event_detailz' => $results]);
     }
 
@@ -47,43 +46,39 @@ class EventController extends Controller
                         'countries.countryCode',
                         'judges.full_name AS judge',
                         'events.id AS eventId');
-
         // Apply filters based on request parameters
         if ($request->has('start_date')) {
             $start_date = $request->input('start_date');
             $query->where('events.start_date', '>=', $start_date);
         }
-
         if ($request->has('end_date')) {
             $end_date = $request->input('end_date');
             $query->where('events.end_date', '<=', $end_date);
         }
-
         if ($request->has('country_id')) {
             $country_id = $request->input('country_id');
             $query->where('events.country', '=', $country_id);
         }
-        
         if ($request->has('breed_id')) {
             $breed_id = $request->input('breed_id');
             $query->where('dogs.breed_id', '=', $breed_id);
         }
-
         $results = $query->orderBy('events.date', 'asc')->get();
-
         if($results){
             return response()->json(['event_result' => $results]);
         }
         else{
             return response()->json('event_result not found.');
         }
-
-        
     }
 
-    public function champions()
+    public function champions($breed_id)
     {
-        $champions = Dogs::select('dog_name')->where('is_champion','Yes')->where('status','=','Active')->get();
+        $champions = Dogs::select('dog_name')
+                          ->where('breed_id', $breed_id)
+                          ->where('is_champion','Yes')
+                          ->where('status','=','Active')
+                          ->get();
 
         return response()->json(['champions' => $champions], 200);
     }
