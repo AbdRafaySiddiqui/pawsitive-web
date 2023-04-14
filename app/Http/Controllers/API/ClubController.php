@@ -15,8 +15,8 @@ class ClubController extends Controller
         $club = Clubs::select('clubs.id',
                               'clubs.name as clubs_name',
                               'countries.countryName as country_of_origin',
-                              'cities.city as city_of_origin',
-                              'image')
+                             
+                              'image as logo')
         ->leftjoin('countries','countries.idCountry','=','clubs.country')
         ->leftjoin('cities','cities.id','=','clubs.city')
         ->where('clubs.status','=','Active')
@@ -26,20 +26,20 @@ class ClubController extends Controller
         foreach($club as $clubs)
         {
 
-          if($clubs->image != null)
+          if($clubs->logo != null)
           {
             if(file_exists(storage_path().'/app/public/club_images'.'/'.$clubs->image))
             {
-              $clubs->image = asset('storage/app/public/club_images').'/'.$clubs->image;
+              $clubs->logo = asset('storage/app/public/club_images').'/'.$clubs->image;
             }
             else
             {
-              $clubs->image = asset('storage/app/public/noimage.png');
+              $clubs->logo = asset('storage/app/public/noimage.png');
             }
           }
           else
           {
-            $clubs->image = asset('storage/app/public/noimage.png');
+            $clubs->logo = asset('storage/app/public/noimage.png');
           }
         }
         
@@ -55,8 +55,8 @@ class ClubController extends Controller
         'phone',
         'countries.countryName as country_of_origin',
         'cities.city as city_of_origin',
-        'affiliation',
-        'image',
+        'affiliation as affiliatedBy',
+        'image as logo',
         'address',
         'website')
         ->leftjoin('countries','countries.idCountry','=','clubs.country')
@@ -65,20 +65,20 @@ class ClubController extends Controller
           ->orderBy('clubs.name','ASC')
           ->first();
             
-            if($club->image != null)
+            if($club->logo != null)
             {
               if(file_exists(storage_path().'/app/public/club_images'.'/'.$club->image))
               {
-                $club->image = asset('storage/app/public/club_images').'/'.$club->image;
+                $club->logo = asset('storage/app/public/club_images').'/'.$club->image;
               }
               else
               {
-                $club->image = asset('storage/app/public/noimage.png');
+                $club->logo = asset('storage/app/public/noimage.png');
               }
             }
             else
             {
-              $club->image = asset('storage/app/public/noimage.png');
+              $club->logo = asset('storage/app/public/noimage.png');
             }
           
         return response()->json(['club' => $club], 200);

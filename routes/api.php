@@ -29,6 +29,9 @@ Route::get('breed-listings', [App\Http\Controllers\API\BreedController::class, '
 Route::get('breed/{id}/details', [App\Http\Controllers\API\BreedController::class, 'details']);
 Route::get('breed-short', [BreedController::class, 'breed_short']);
 Route::get('breed-names', [BreedController::class, 'retrieve']);
+Route::get('breed/{id}/info', [BreedController::class, 'breed_info']);
+Route::get('breed/details', [BreedController::class, 'details']);
+
 
 // Judges Controller.
 Route::get('judge-listings', [App\Http\Controllers\API\JudgeController::class, 'listing']);
