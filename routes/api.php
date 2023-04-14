@@ -45,12 +45,11 @@ Route::get('dog/all-dogs', [DogController::class, 'alldogs']);
 //EventResultController routes
 Route::get('result-listing', [EventResultController::class, 'result']);
 
-
 //EventController routes
-Route::get('event-listing', [App\Http\Controllers\API\EventController::class, 'retrieve']);
-Route::post('/events/filter', [App\Http\Controllers\API\EventController::class, 'filterEvents']);
+Route::get('event-listing/{breed_id}', [App\Http\Controllers\API\EventController::class, 'retrieve']);
+Route::get('/events/filter', [App\Http\Controllers\API\EventController::class, 'filterEvents']);
 
-
+Route::get('/champions-listing/{breed_id}', [App\Http\Controllers\API\EventController::class, 'champions']);
 
 //ClubController routes
 Route::get('club-listings', [ClubController::class, 'listing']);
