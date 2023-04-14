@@ -85,9 +85,9 @@
               </td>
                             @endif
                                                 <td class="row-actions">
-                                                    <a href="{{ route('breeds.show', $breed->id) }}"><i
+                                                    <a href="{{route('breeds.edit', $breed->id)}}"><i
                                                             class="os-icon os-icon-ui-49"></i></a>
-                                                            <a href="{{route('breeds.edit', $breed->id)}}">
+                                                            <a href="{{ route('breeds.show', $breed->id) }}">
                                                         <i class="os-icon os-icon-grid-10"></i>
                                                     </a>
                                                     <form action="{{ route('breeds.destroy', $breed->id ) }}" method="post">

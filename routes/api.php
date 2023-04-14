@@ -70,9 +70,9 @@ Route::post('instagram-api-response-reader', [MiscController::class, 'instagram_
 
 
     
-    // For Admin Panel use
-    Route::post('countries/cities', [MiscController::class, 'cities_by_countries'])->name('cities_by_countries');
-    Route::get('import-data', [MiscController::class, 'import_data']);
+// For Admin Panel use
+Route::post('countries/cities', [MiscController::class, 'cities_by_countries'])->name('cities_by_countries');
+Route::get('import-data', [MiscController::class, 'import_data']);
 
 Route::post('upgrade-as-trainer', [MiscController::class, 'upgrade_as_trainer']);
 Route::post('upgrade-as-vet', [MiscController::class, 'upgrade_as_vet']);

@@ -155,11 +155,12 @@ class DogsController extends Controller
 
         // Create a new CSV file and write the data to it
         $csv = Writer::createFromString('');
-        $csv->insertOne(['dog_name', 'dob', 'gender', 'microchip', 'reg_no', 'achievements', 'show_title', 'breed_id', 'status']);
+        $csv->insertOne(['dog_name', 'is_champion', 'dob', 'gender', 'microchip', 'reg_no', 'achievements', 'show_title', 'breed_id', 'status']);
 
         foreach ($dogs as $dog) {
             $csv->insertOne([
                 $dog->dog_name,
+                $dog->is_champion,
                 $dog->dob,
                 $dog->gender,
                 $dog->microchip,
