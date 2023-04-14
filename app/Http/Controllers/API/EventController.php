@@ -30,7 +30,7 @@ class EventController extends Controller
                 ->get();
         return response()->json(['event_detailz' => $results]);
     }
-
+   
     public function filterEvents(Request $request)
     {
         $query = DB::table('event_results')

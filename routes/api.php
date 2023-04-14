@@ -29,6 +29,9 @@ Route::get('breed-listings', [App\Http\Controllers\API\BreedController::class, '
 Route::get('breed/{id}/details', [App\Http\Controllers\API\BreedController::class, 'details']);
 Route::get('breed-short', [BreedController::class, 'breed_short']);
 Route::get('breed-names', [BreedController::class, 'retrieve']);
+Route::get('breed/{id}/info', [BreedController::class, 'breed_info']);
+Route::get('breed/details', [BreedController::class, 'details']);
+
 
 // Judges Controller.
 Route::get('judge-listings', [App\Http\Controllers\API\JudgeController::class, 'listing']);
@@ -41,6 +44,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('dog/{breed_id}/listings', [DogController::class, 'listing']);
 Route::get('dog/{id}/details', [DogController::class, 'details']);
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);
+Route::get('dog/dog-profile', [DogController::class, 'dog_profile']);
+Route::get('dog/profile-details', [DogController::class, 'profile_details']);
 
 //EventResultController routes
 Route::get('result-listing', [EventResultController::class, 'result']);

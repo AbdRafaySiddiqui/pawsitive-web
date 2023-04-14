@@ -33,4 +33,5 @@ class EventResultController extends Controller
                 ->get();
                 return response()->json(['event_result' => $results]);
     }
+    
 }

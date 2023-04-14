@@ -41,16 +41,27 @@ class EventResultsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            // 'inputs.*.name' => 'required',
-            'inputs.*.dog_id' => 'required',
-            'inputs.*.grading' => 'required',
-            'inputs.*.place' => 'required',
-            'inputs.*.judge' => 'required'
-        ]
-    );
-        foreach($request->inputs as $key => $value){
-            Event_Result::create($value);
+    //     $request->validate([
+    //         // 'inputs.*.name' => 'required',
+    //         'inputs.*.dog_id' => 'required',
+    //         'inputs.*.grading' => 'required',
+    //         'inputs.*.place' => 'required',
+    //         'inputs.*.judge' => 'required'
+    //     ]
+    // );
+    
+    $dog_id =  $request->input('dog_id');
+    $grading =  $request->input('grading');
+    $place =  $request->input('place');
+    $judge =  $request->input('judge');
+  
+        foreach($dog_id as $key => $value){
+            $event_result = new Event_Result;
+         $event_result->dog_id=$value;
+         $event_result->grading=$grading[$key];
+         $event_result->place=$place[$key];
+         $event_result->judge=$judge[$key];
+         $event_result->save();
         }
 
         return redirect()->back()->with('message', 'Record added successfully');

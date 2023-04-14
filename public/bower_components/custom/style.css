@@ -4,6 +4,10 @@
     color: white;
     cursor: pointer;
 }
+
+/* .select2-container {
+  z-index: 99999;
+} */
 #dog_form{
     display: none;
 }
@@ -115,6 +119,9 @@ star rating style BY HAMZA start
 /* ##########
 star rating style BY HAMZA end
 ############ */
+
+
+
 
 
 /* ##########

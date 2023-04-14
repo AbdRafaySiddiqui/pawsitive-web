@@ -25,6 +25,7 @@
     <link href="{{asset('public/bower_components/custom/style.css')}}" rel="stylesheet">
     <!-- <link href="{{asset('public/select2-develop/dist/css/select2.min.css')}}" rel="stylesheet" /> -->
     <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
+    
   </head>
   <body class="menu-position-side menu-side-left full-screen color-scheme-dark">
     <div class="all-wrapper solid-bg-all">
