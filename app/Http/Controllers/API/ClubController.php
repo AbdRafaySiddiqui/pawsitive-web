@@ -95,5 +95,6 @@ class ClubController extends Controller
       });
       return response()->json(['club' => $clubsdata]);
     }
+    
 
 }

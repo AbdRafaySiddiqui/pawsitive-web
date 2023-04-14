@@ -42,6 +42,7 @@ Route::get('dog/{breed_id}/listings', [DogController::class, 'listing']);
 Route::get('dog/{id}/details', [DogController::class, 'details']);
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);
 Route::get('dog/dog-profile', [DogController::class, 'dog_profile']);
+Route::get('dog/profile-details', [DogController::class, 'profile_details']);
 
 //EventResultController routes
 Route::get('result-listing', [EventResultController::class, 'result']);
