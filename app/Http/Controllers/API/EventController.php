@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Events;
+use App\Models\Dogs;
 
 class EventController extends Controller
 {
@@ -60,6 +61,10 @@ class EventController extends Controller
         if ($request->has('country_id')) {
             $country_id = $request->input('country_id');
             $query->where('events.country', '=', $country_id);
+        }
+        if ($request->has('club_id')) {
+            $club_id = $request->input('club_id');
+            $query->where('events.club_id', '=', $club_id);
         }
         if ($request->has('breed_id')) {
             $breed_id = $request->input('breed_id');

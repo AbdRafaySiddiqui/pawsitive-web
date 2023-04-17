@@ -427,7 +427,7 @@ class MiscController extends Controller
 
         foreach($breeds as $breed)
         {
-            // $count = BreedImgVids::where('breed_id','=',$breed->id)->count();
+            $count = BreedImgVids::where('breed_id','=',$breed->id)->count();
 
             if($count == 0)
             {
