@@ -18,19 +18,144 @@ class EventResultController extends Controller
         $results = DB::table('event_results')
                 ->join('dogs', 'event_results.dog_id', '=', 'dogs.id')
                 ->join('events', 'event_results.event_id', '=', 'events.id')
-                ->join('breeds', 'dogs.breed_id', '=', 'breeds.id')
+                // ->join('breeds', 'dogs.breed_id', '=', 'breeds.id')
                 ->join('clubs', 'events.club_id', '=', 'clubs.id')
                 ->join('countries', 'clubs.country', '=', 'countries.idCountry')
                 ->select('events.date',
                          'events.name AS event',
-                         'breeds.name AS breedName',
+                        //  'breeds.name AS breedName',
                          'clubs.name AS club',
                          'countries.countryName AS country',
                          'countries.countryCode',
                          'events.id AS eventId')
                 ->orderBy('events.date', 'asc')
                 ->get();
-                return response()->json(['event_result' => $results]);
+                // return response()->json(['event_result' => $results]);
     }
+
+    public function event_result(request $request,$id)
+    {
+        $results = DB::table('event_results')
+                ->leftjoin('events', 'events.id', '=', 'event_results.event_id')
+                ->leftjoin('countries', 'countries.idCountry', '=', 'events.country')
+                ->leftjoin('cities', 'cities.id', '=', 'events.city')
+                ->leftjoin('clubs', 'clubs.id', '=', 'events.club_id')
+                // ->leftjoin('breeds', 'dogs.breed_id', '=', 'breeds.id')
+                ->select('events.date',
+                         'events.name AS event',
+                        //  'breeds.name AS breedName',
+                         'clubs.name AS club',
+                         'countries.countryName AS country',
+                         'cities.city',
+                         'events.id AS eventId')
+                ->orderBy('events.date', 'asc')
+                ->where('event_results.event_id','=',$id)
+                ->get();
+
+  $awards= DB::table('event_results')
+
+
+//    ->leftjoin('event_results','event_results.event_id','=','events.id')
+  ->leftjoin('dogs', 'dogs.id', '=', 'event_results.dog_id')
+  ->leftjoin('breeds', 'breeds.id', '=', 'dogs.breed_id')
+//   ->leftjoin('award_system', 'award_system.id', '=', 'event_results.award_id')
+  ->leftjoin('award_system', function ($join) {
+    $join->on(DB::raw("FIND_IN_SET(award_system.id, event_results.award_id)"), ">", DB::raw("'0'"));
+  })
+  ->leftjoin('users', 'users.id', '=', 'dogs.dog_owner')
+   ->select(
+            'breeds.name AS breedName',
+            'dogs.dog_name AS dogName',
+            'dogs.id AS dogId',
+            'award_system.award_title AS awards' ,
+            'users.name AS owner',
+            'event_results.event_id AS eventId')
+            ->where('event_results.event_id','=',$id)
+            ->get();
+            $best=array();
+  
+            foreach($awards as $award) {
+            if($award->awards == 'Challenge Certificate')
+            {
+                if($award->awards)
+                
+                $best[$award->awards][]=array(
+               'dogName'=>$award->dogName,
+               'breed'=>$award->breedName,
+               'awards'=>$award->awards,
+               'owner'=>$award->owner,
+               'dogId'=>$award->dogId
+                );
+            }
+        }
+
+
+  $event_results= DB::table('event_results')
+
+
+            //    ->leftjoin('event_results','event_results.event_id','=','events.id')
+              ->leftjoin('dogs', 'dogs.id', '=', 'event_results.dog_id')
+              ->leftjoin('award_system', 'award_system.id', '=', 'event_results.award_id')
+              ->leftjoin('users', 'users.id', '=', 'dogs.dog_owner')
+              ->leftjoin('dog_classes', 'dog_classes.id', '=', 'event_results.class')
+               ->select(
+                       //  'breeds.name AS breedName',
+                       'event_results.grading AS grading',
+                       'event_results.place AS place',
+                        'dogs.dog_name AS dogName',
+                        
+                        'award_system.award_title AS awards',
+                        'dog_classes.class AS class',
+                        'dogs.id AS dogId',
+                        'dogs.gender AS gender'
+                        )
+                        ->where('event_results.event_id','=',$id)
+                        ->get();
+                       
+                        $dog_class=array();
+                        
+            foreach($event_results as $dog) {
+                // if(!isset($dog_class[$dog->class])){
+                //     $dog_class[$dog->class]=array('males'=>array(),
+                //     'female'=>array());
+                  
+                // }
+             
+                        if($dog->gender=='Male'){
+                            $dog_class[$dog->class]['male'][]=array(
+                            'grading' =>$dog->grading,
+                            'place' =>$dog->place,
+                            'grading' =>$dog->grading,
+                            'dogName' =>$dog->dogName,
+                            'awards' =>$dog->awards,
+                            'class' =>$dog->class,
+                            'dogId' =>$dog->dogId
+                                )
+                            ;
+                        }  
+                        elseif($dog->gender=='Female'){
+                            $dog_class[$dog->class]['female'][]=
+                            
+                            array(
+                                'grading' =>$dog->grading,
+                                'place' =>$dog->place,
+                                'grading' =>$dog->grading,
+                                'dogName' =>$dog->dogName,
+                                'awards' =>$dog->awards,
+                                'class' =>$dog->class,
+                                'dogId' =>$dog->dogId
+                                    )
+                                ;
+                        }
+                  }
+                //  $classData=array(
+                //     'male'=>$males,
+                //     'female'=>$female
+                //  );
+                
+
+                return response()->json(['details' => $results,'Challenge Certifcate'=> $best,'classData' => $dog_class]);
+    }
+
     
 }

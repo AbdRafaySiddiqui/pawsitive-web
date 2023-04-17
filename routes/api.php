@@ -30,7 +30,6 @@ Route::get('breed/{id}/details', [App\Http\Controllers\API\BreedController::clas
 Route::get('breed-short', [BreedController::class, 'breed_short']);
 Route::get('breed-names', [BreedController::class, 'retrieve']);
 Route::get('breed/{id}/info', [BreedController::class, 'breed_info']);
-Route::get('breed/details', [BreedController::class, 'details']);
 
 
 // Judges Controller.
@@ -49,6 +48,7 @@ Route::get('dog/profile-details', [DogController::class, 'profile_details']);
 
 //EventResultController routes
 Route::get('result-listing', [EventResultController::class, 'result']);
+Route::get('event/{id}/result', [EventResultController::class, 'event_result']);
 
 //EventController routes
 Route::get('event-listing/{breed_id}', [App\Http\Controllers\API\EventController::class, 'retrieve']);
