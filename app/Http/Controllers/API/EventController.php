@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Events;
+use App\Models\Dogs;
 
 class EventController extends Controller
 {
@@ -17,7 +18,8 @@ class EventController extends Controller
                 ->join('clubs', 'events.club_id', '=', 'clubs.id')
                 ->join('countries', 'events.country', '=', 'countries.idCountry')
                 ->join('judges', 'events.judge_id', '=', 'judges.id')
-                ->select('events.date',
+                ->select('events.start_date',
+                         'events.end_date',
                         'events.name AS event',
                         'clubs.name AS club',
                         'countries.countryName AS country',
@@ -39,7 +41,8 @@ class EventController extends Controller
                 ->join('clubs', 'events.club_id', '=', 'clubs.id')
                 ->join('countries', 'events.country', '=', 'countries.idCountry')
                 ->join('judges', 'events.judge_id', '=', 'judges.id')
-                ->select('events.date',
+                ->select('events.start_date',
+                         'events.end_date',
                         'events.name AS event',
                         'clubs.name AS club',
                         'countries.countryName AS country',
@@ -58,6 +61,10 @@ class EventController extends Controller
         if ($request->has('country_id')) {
             $country_id = $request->input('country_id');
             $query->where('events.country', '=', $country_id);
+        }
+        if ($request->has('club_id')) {
+            $club_id = $request->input('club_id');
+            $query->where('events.club_id', '=', $club_id);
         }
         if ($request->has('breed_id')) {
             $breed_id = $request->input('breed_id');

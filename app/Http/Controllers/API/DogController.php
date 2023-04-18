@@ -15,6 +15,7 @@ class DogController extends Controller
         $dog = Dogs::select('dogs.id',
         'dogs.dog_name as dogs_name',
         'dob',
+        'dogs.profile_photo',
         'gender',
         'breeds.name as breed_name',
         'microchip',
@@ -26,7 +27,27 @@ class DogController extends Controller
           ->where('breed_id','=',$id)
           ->orderBy('dogs.dog_name','ASC')
           ->get();
-        
+       
+          foreach($dog as $dogs)
+                      {
+              
+                        if($dogs->profilePhoto != null)
+                        {
+                          if(file_exists(storage_path().'/app/public/dog_profile'.'/'.$dogs->image))
+                          {
+                            $dogs->profilePhoto = asset('storage/app/public/dog_profile').'/'.$dogs->image;
+                          }
+                          else
+                          {
+                            $dogs->profilePhoto = asset('storage/app/public/noimage.png');
+                          }
+                        }
+                        else
+                        {
+                          $dogs->profilePhoto = asset('storage/app/public/noimage.png');
+                        }
+                      }
+
         return response()->json(['dog' => $dog], 200);
     }
 
@@ -104,7 +125,7 @@ class DogController extends Controller
 
 
 
-public function profile_details(request $request)
+public function profile_details(request $request,$id)
 {
     $profile_details = Dogs::select('dogs.id',
     'dogs.dog_name as dogName',
@@ -115,21 +136,53 @@ public function profile_details(request $request)
     'dam.dog_name as dam_name',
     'dogs.reg_no as registration',
     'dogs.breeders',
-    DB::raw('GROUP_CONCAT(users.name SEPARATOR ' , ') as owners')
+    'users.name as owners'
+    // DB::raw('GROUP_CONCAT(users.name SEPARATOR ' , ') as owners')
     )
-
+ 
 
  ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
  ->leftjoin('dog_real_parents','dog_real_parents.dog_id','=','dogs.id')
  ->leftjoin('dogs as sire','sire.id','=','dog_real_parents.sire_id')
  ->leftjoin('dogs as dam','dam.id','=','dog_real_parents.dam_id')
+
  ->leftjoin('dog_owners','dog_owners.dog_id','=','dogs.dog_owner')
  ->leftjoin('users','users.id','=','dog_owners.owner_id')
- ->where('dogs.status','=','Active')
- ->orderBy('dogs.dog_name','ASC')
- ->get();
 
-                
+
+ ->where('dogs.status','=','Active')
+ ->where('dogs.id','=',$id)
+//  ->orderBy('dogs.dog_name','ASC')
+//  ->groupBY('users.name')
+ ->get();
+$profile_details['owners']=array();
+
+
+ $name=array();
+
+ $own= Dogs::select(
+'users.name as owners')
+->leftjoin('breeds','breeds.id','=','dogs.breed_id')
+->leftjoin('dog_real_parents','dog_real_parents.dog_id','=','dogs.id')
+->leftjoin('dogs as sire','sire.id','=','dog_real_parents.sire_id')
+->leftjoin('dogs as dam','dam.id','=','dog_real_parents.dam_id')
+
+->leftjoin('dog_owners','dog_owners.dog_id','=','dogs.dog_owner')
+->leftjoin('users','users.id','=','dog_owners.owner_id')
+->where('dogs.id','=',$id)
+->get();
+// $own['owners']=array();
+ foreach($own as $owns) {
+      // if($award->awards)
+      
+      // $best[$award->awards][]=array(
+        // $own[]=array(
+        //   "owners"=>$owns->owners
+        // );
+
+    }   
+
+        //  $profile_details[]=$name;
                   return response()->json(['profile_details' => $profile_details], 200);
 }
 

@@ -116,8 +116,7 @@ START - Support Agents
 
                                                 <td class="row-actions">
                                                     <a href="{{ route('judges.edit', $j->id) }}"><i
-                                                            class="os-icon os-icon-ui-49"></i></a><a href="#"><i
-                                                            class="os-icon os-icon-grid-10"></i></a>
+                                                            class="os-icon os-icon-ui-49"></i></a>
                                                     <form action="{{ route('judges.destroy', $j->id) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')

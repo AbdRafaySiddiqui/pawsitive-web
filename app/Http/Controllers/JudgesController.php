@@ -146,8 +146,6 @@ class JudgesController extends Controller
     {
         $DeleteData = Judges::findOrFail($id);
         $DeleteData->delete();
-        $this->saveActivity('Record Delete',$this->module_name,"Permenantly Deleted Record  ".$DeleteData->full_name." ");
-  
         return redirect()->back()->with('message', 'Record Permenantly Deleted!');
     }
 

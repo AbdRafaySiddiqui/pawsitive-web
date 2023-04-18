@@ -11,7 +11,7 @@ use App\Models\PetImgVids;
 use App\Models\PetDocuments;
 use App\Models\PetVaccinations;
 
-use App\Models\Users;
+use App\Models\User;
 
 use App\Traits\Activity;
 
@@ -27,7 +27,7 @@ class PetsController extends Controller
      */
     public function index(request $request, $id)
     {
-        $user = Users::find($id);
+        $user = User::find($id);
 
         if($request->user_id == $id)
         {

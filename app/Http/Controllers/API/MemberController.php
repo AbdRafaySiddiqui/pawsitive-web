@@ -17,9 +17,13 @@ class MemberController extends Controller
     
     public function user_profile(request $request, $id)
     {
-        $profile = Users::select('users.name','users.email','users.phone',DB::raw('CONCAT(cities.city,", ",countries.countryName) as location'))
-                        ->leftjoin('countries','countries.idCountry','=','users.country_id')
-                        ->leftjoin('cities','cities.id','=','users.city_id')
+        $profile = User::select('users.name',
+                        'users.email',
+                        // 'users.phone',
+                        // DB::raw('CONCAT(cities.city,", ",countries.countryName) as location')
+                        )
+                        // ->leftjoin('countries','countries.idCountry','=','users.country_id')
+                        // ->leftjoin('cities','cities.id','=','users.city_id')
                         ->find($id);
         if($profile)
         {
@@ -44,16 +48,17 @@ class MemberController extends Controller
 
     public function my_profile(request $request)
     {
-        $profile = Users::select('users.name',
+        $profile = User::select('users.name',
                                  'users.email',
-                                 'users.phone',
-                                 'users.pet_preference',
-                                 DB::raw('CONCAT(cities.city,", ",countries.countryName) as location'),
-                                 'users.country_id',
-                                 'users.city_id',
-                                 'users.profile_photo_path')
-                        ->leftjoin('countries','countries.idCountry','=','users.country_id')
-                        ->leftjoin('cities','cities.id','=','users.city_id')
+                                //  'users.phone',
+                                //  'users.pet_preference',
+                                //  DB::raw('CONCAT(cities.city,", ",countries.countryName) as location'),
+                                //  'users.country_id',
+                                //  'users.city_id',
+                                //  'users.profile_photo_path')
+        )
+                        // ->leftjoin('countries','countries.idCountry','=','users.country_id')
+                        // ->leftjoin('cities','cities.id','=','users.city_id')
                         ->find($request->user_id);
         if($profile)
         {
