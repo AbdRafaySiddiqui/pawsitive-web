@@ -30,7 +30,7 @@ class EventResultController extends Controller
                          'events.id AS eventId')
                 ->orderBy('events.date', 'asc')
                 ->get();
-                // return response()->json(['event_result' => $results]);
+                return response()->json(['event_result' => $results]);
     }
 
     public function event_result(request $request,$id)
@@ -50,7 +50,7 @@ class EventResultController extends Controller
                          'events.id AS eventId')
                 ->orderBy('events.date', 'asc')
                 ->where('event_results.event_id','=',$id)
-                ->get();
+                ->first();
 
   $awards= DB::table('event_results')
 
@@ -72,14 +72,29 @@ class EventResultController extends Controller
             'event_results.event_id AS eventId')
             ->where('event_results.event_id','=',$id)
             ->get();
-            $best=array();
+            $bestInGroup=array();
+            $bestInShow=array();
   
             foreach($awards as $award) {
-            if($award->awards == 'Challenge Certificate')
+            if($award->awards == 'Best in Group')
             {
-                if($award->awards)
+                // if($award->awards)
                 
-                $best[$award->awards][]=array(
+                // $best[$award->awards][]=array(
+                $bestInGroup[]=array(
+               'dogName'=>$award->dogName,
+               'breed'=>$award->breedName,
+               'awards'=>$award->awards,
+               'owner'=>$award->owner,
+               'dogId'=>$award->dogId
+                );
+            }
+            if($award->awards == 'Best in Show')
+            {
+                // if($award->awards)
+                
+                // $best[$award->awards][]=array(
+                $bestInShow[]=array(
                'dogName'=>$award->dogName,
                'breed'=>$award->breedName,
                'awards'=>$award->awards,
@@ -114,12 +129,19 @@ class EventResultController extends Controller
                        
                         $dog_class=array();
                         
+
             foreach($event_results as $dog) {
+
                 // if(!isset($dog_class[$dog->class])){
                 //     $dog_class[$dog->class]=array('males'=>array(),
                 //     'female'=>array());
                   
                 // }
+                if($dog->class!= null){
+                  $dog->class= strtolower($dog->class);
+                  $dog->class=str_replace(' ', '',$dog->class);
+                  $dog->class=str_replace('class', '',$dog->class);
+                }
              
                         if($dog->gender=='Male'){
                             $dog_class[$dog->class]['male'][]=array(
@@ -154,7 +176,7 @@ class EventResultController extends Controller
                 //  );
                 
 
-                return response()->json(['details' => $results,'Challenge Certifcate'=> $best,'classData' => $dog_class]);
+                return response()->json(['details' => $results,'bestInGroup'=> $bestInGroup,'bestInShow'=> $bestInShow,'classData' => $dog_class]);
     }
 
     

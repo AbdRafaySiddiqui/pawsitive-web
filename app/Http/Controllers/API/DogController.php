@@ -25,7 +25,7 @@ class DogController extends Controller
         
           ->where('breed_id','=',$id)
           ->orderBy('dogs.dog_name','ASC')
-          ->first();
+          ->get();
         
         return response()->json(['dog' => $dog], 200);
     }
@@ -115,7 +115,9 @@ public function profile_details(request $request)
     'dam.dog_name as dam_name',
     'dogs.reg_no as registration',
     'dogs.breeders',
-    DB::raw('GROUP_CONCAT(users.name SEPARATOR ' , ') as owners'))
+    DB::raw('GROUP_CONCAT(users.name SEPARATOR ' , ') as owners')
+    )
+
 
  ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
  ->leftjoin('dog_real_parents','dog_real_parents.dog_id','=','dogs.id')
