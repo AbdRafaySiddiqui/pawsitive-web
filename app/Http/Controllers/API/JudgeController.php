@@ -39,7 +39,7 @@ class JudgeController extends Controller
 
     public function details($id)
     {
-        $judge = Judges::select('id','full_name as judgeName','description','image as profilePhoto')->find($id);
+        $judge = Judges::select('id','full_name as judgeName','description','image as profilePhoto','facebook','instagram','linkedIn','twitter')->find($id);
 
         $judge->description = html_entity_decode($judge->description);
 

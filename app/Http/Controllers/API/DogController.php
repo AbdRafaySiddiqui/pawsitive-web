@@ -25,7 +25,7 @@ class DogController extends Controller
         
           ->where('breed_id','=',$id)
           ->orderBy('dogs.dog_name','ASC')
-          ->first();
+          ->get();
         
         return response()->json(['dog' => $dog], 200);
     }
@@ -105,30 +105,38 @@ class DogController extends Controller
 
 
 public function profile_details(request $request)
-{
-    $profile_details = Dogs::select('dogs.id',
-    'dogs.dog_name as dogName',
-    'dogs.show_title as title',
-    'dogs.gender',
-    'dogs.microchip',
-    'sire.dog_name as sire_name',
-    'dam.dog_name as dam_name',
-    'dogs.reg_no as registration',
-    'dogs.breeders',
-    DB::raw('GROUP_CONCAT(users.name SEPARATOR \',\') as owners'))
+  {
+    $results = DB::table('dogs')
+    ->leftJoin('breeds', 'breeds.id', '=', 'dogs.breed_id')
+    ->leftJoin('dog_real_parents', 'dog_real_parents.dog_id', '=', 'dogs.id')
+    ->leftJoin('dogs as sire', 'sire.id', '=', 'dog_real_parents.sire_id')
+    ->leftJoin('dogs as dam', 'dam.id', '=', 'dog_real_parents.dam_id')
+    ->leftJoin('dog_owners', 'dog_owners.dog_id', '=', 'dogs.dog_owner')
+    ->leftJoin('users', 'users.id', '=', 'dog_owners.owner_id')
+    ->where('dogs.status', '=', 'Active')
+    ->select('dogs.id', 
+            'dogs.dog_name as dogName', 
+            'dogs.show_title as title', 
+            'dogs.gender', 
+            'dogs.microchip',
+            'sire.dog_name as sire_name', 
+            'dam.dog_name as dam_name', 
+            'dogs.reg_no as registration', 
+            'dogs.breeders', 
+            DB::raw("GROUP_CONCAT(users.name SEPARATOR ',') as owners"))
+    ->groupBy('dogs.id', 
+              'dogs.dog_name', 
+              'dogs.show_title', 
+              'dogs.gender', 
+              'dogs.microchip', 
+              'sire.dog_name', 
+              'dam.dog_name', 
+              'dogs.reg_no', 
+              'dogs.breeders')
+    ->orderBy('dogs.dog_name', 'asc')
+    ->get();
 
- ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
- ->leftjoin('dog_real_parents','dog_real_parents.dog_id','=','dogs.id')
- ->leftjoin('dogs as sire','sire.id','=','dog_real_parents.sire_id')
- ->leftjoin('dogs as dam','dam.id','=','dog_real_parents.dam_id')
- ->leftjoin('dog_owners','dog_owners.dog_id','=','dogs.dog_owner')
- ->leftjoin('users','users.id','=','dog_owners.owner_id')
- ->where('dogs.status','=','Active')
- ->orderBy('dogs.dog_name','ASC')
- ->get();
-
-                
-                  return response()->json(['profile_details' => $profile_details], 200);
-}
+    return response()->json(['profile_details' => $results], 200);
+  }
 
 }

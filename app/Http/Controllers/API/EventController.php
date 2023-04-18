@@ -70,6 +70,10 @@ class EventController extends Controller
             $breed_id = $request->input('breed_id');
             $query->where('dogs.breed_id', '=', $breed_id);
         }
+        if ($request->has('club_id')) {
+            $club_id = $request->input('club_id');
+            $query->where('events.club_id', '=', $club_id);
+        }
         $results = $query->orderBy('events.date', 'asc')->get();
         if($results){
             return response()->json(['event_result' => $results]);
