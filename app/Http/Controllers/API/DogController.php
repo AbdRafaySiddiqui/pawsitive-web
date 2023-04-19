@@ -136,7 +136,7 @@ public function profile_details(request $request,$id)
     'dam.dog_name as dam_name',
     'dogs.reg_no as registration',
     'dogs.breeders',
-    'users.name as owners'
+    // 'users.name as owners'
     // DB::raw('GROUP_CONCAT(users.name SEPARATOR ' , ') as owners')
     )
  
@@ -146,19 +146,25 @@ public function profile_details(request $request,$id)
  ->leftjoin('dogs as sire','sire.id','=','dog_real_parents.sire_id')
  ->leftjoin('dogs as dam','dam.id','=','dog_real_parents.dam_id')
 
- ->leftjoin('dog_owners','dog_owners.dog_id','=','dogs.dog_owner')
- ->leftjoin('users','users.id','=','dog_owners.owner_id')
-
+//  ->leftjoin('dog_owners','dog_owners.dog_id','=','dogs.dog_owner')
+//  ->leftjoin('users','users.id','=','dog_owners.owner_id')
+//  ->leftjoin('users', function ($join) {
+//   $join->on(DB::raw("FIND_IN_SET(users.id, dog_owners.owner_id)"), ">", DB::raw("'0'"));
+// })
 
  ->where('dogs.status','=','Active')
  ->where('dogs.id','=',$id)
 //  ->orderBy('dogs.dog_name','ASC')
 //  ->groupBY('users.name')
  ->get();
-$profile_details['owners']=array();
+
+  
+  
 
 
- $name=array();
+
+
+
 
  $own= Dogs::select(
 'users.name as owners')
@@ -172,18 +178,20 @@ $profile_details['owners']=array();
 ->where('dogs.id','=',$id)
 ->get();
 // $own['owners']=array();
- foreach($own as $owns) {
-      // if($award->awards)
-      
-      // $best[$award->awards][]=array(
-        // $own[]=array(
-        //   "owners"=>$owns->owners
-        // );
+ $result=[];
 
-    }   
-
-        //  $profile_details[]=$name;
-                  return response()->json(['profile_details' => $profile_details], 200);
+foreach($own as $owns) {
+  $id= $owns->id;
+  if(!empty($owns->owners)){
+    $result[]=$owns->owners;
+  }
+}
+         $fd[]=array(
+           'profile_details' => $profile_details,
+          'own'=>$result
+          )
+         ;
+                  return response()->json(['fd' => $fd,'result'=>$result], 200);
 }
 
 }

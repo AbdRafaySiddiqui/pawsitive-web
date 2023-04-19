@@ -9,4 +9,8 @@ class Dogs extends Model
 {
     use HasFactory;
     protected $table = 'dogs';
+    public function dog_owners()
+    {
+        return $this->belongsTo('App\Models\DogOwner','dog_id','id'); 
+    }
 }
