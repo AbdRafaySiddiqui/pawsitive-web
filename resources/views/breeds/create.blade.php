@@ -43,8 +43,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Clubs</label>
-                                                <select class="form-control select2" tabindex="-1" aria-hidden="true"
-                                                    name="club_id[]" id="club_id" multiple>
+                                                <select class="form-control js-data-example-ajax" tabindex="-1" aria-hidden="true"
+                                                    name="club_id[]" id="club_id">
                                                     <option value="0">{{ 'Select Club(s)' }}</option>
                                                     @foreach ($clubs as $club)
                                                         <option value="{{ $club->id }}">{{ $club->name }}</option>
@@ -57,7 +57,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>AKC Group</label>
-                                                <select class="form-control select2" tabindex="-1" aria-hidden="true"
+                                                <select class="form-control js-data-example-ajax" tabindex="-1" aria-hidden="true"
                                                     name="akc_group" id="akc_group">
                                                     <option value="0">{{ 'Select AKC Group' }}</option>
                                                     @foreach ($AKC as $akc)
@@ -92,7 +92,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>FCI Group</label>
-                                                <select class="form-control select2" tabindex="-1" aria-hidden="true"
+                                                <select class="form-control js-data-example-ajax" tabindex="-1" aria-hidden="true"
                                                     name="fci_group" id="fci_group">
                                                     <option value="0">{{ 'Select FCI Group' }}</option>
                                                     @foreach ($FCI as $fci)
@@ -702,9 +702,14 @@
     <div class="display-type"></div>
     </div>
     <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script>
-
+    <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
 
     <script type="text/javascript">
+$('#club_id').select2();
+$('#akc_group').select2();
+$('#fci_group').select2();
+        
 if ($('#ckeditor1').length) {
     CKEDITOR.replace('ckeditor1');
   }

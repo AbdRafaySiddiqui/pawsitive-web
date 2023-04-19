@@ -146,6 +146,9 @@
               Judge
               </th>
               <th>
+              Gender
+              </th>
+              <th>
               Action
               </th>
              
@@ -155,9 +158,8 @@
             <tr>
               
               <td>
-                 
-              <div class="form-group row">
-              <div class="col-sm-12">
+
+              <div class="col-md-12">
               <select class="form-control js-data-example-ajax dog" name="dog_id[]" id="all_dogs">
               @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
@@ -166,25 +168,20 @@
                 @endforeach
               </select>
               </div>
-            </div>
               </td>
               <td>
-              <div class="form-group row">
             
             <div class="col-sm-12"> 
               <input class="form-control" name="grading[]" placeholder="Enter Grade" type="text">
             </div>
               </td>
-              <td class="text-right">
-              <div class="form-group row">
+              <td>
               
               <div class="col-sm-12">
                 <input class="form-control" name="place[]" placeholder="Enter Place" type="text">
-              </div>
             </div>
               </td>
               <td>
-              <div class="form-group row">
              
              <div class="col-sm-12"> 
              <select class="form-control js-data-example-ajax" name="judge[]" id="judge">
@@ -195,7 +192,25 @@
                @endforeach
              </select>
              </div>
-           </div>
+</td>
+<td>
+          <div class="col-sm-12">
+          <select class="form-control" name="gender_dog[]">
+          <option value="">
+                  Select One
+                </option>
+                <option value="Male">
+                  Male
+                </option>
+                <option value="Female">
+                Female
+                </option>
+              </select>
+            </div>
+
+
+</td>
+
               </td>
            
               <td> <button id="add" name="add" class="btn btn-primary" type="button">Add</button></td>
@@ -206,12 +221,11 @@
         <button class="btn btn-primary"  type="submit"> Submit</button>
         </form>
       </div>
-      <!--            <!-- Modal -->
+      <!--           Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
-                <div class=
-       <!-- Modal -->
-<div class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           
+
   <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -362,6 +376,7 @@ $('#table').append(
               </select></td>
 <td>  <input class="form-control" name="grading[]" placeholder="Enter Grade" type="text"></td>
 <td>  <input class="form-control" name="place[]" placeholder="Enter place" type="text"></td>
+
 <td><select class="form-control js-data-example-ajax" name="judge[]" id="judge">
              @foreach($total_judges as $judge)
                <option  value="{{$judge->id}}">
@@ -370,6 +385,18 @@ $('#table').append(
                @endforeach
              </select>
 </td>
+<td>  <select class="form-control" name="gender_dog[]">
+          <option value="">
+                  Select One
+                </option>
+                <option value="Male">
+                  Male
+                </option>
+                <option value="Female">
+                Female
+                </option>
+              </select>
+            </td>
 <td> <button id="remove" class="btn btn-danger">Remove</button></td>
 
              </tr>`
@@ -440,16 +467,6 @@ $(document).on('click','#remove',function(){
 $(this).parents('tr').remove();
 
 });
-
-
-
-
-$(document).ready(function() {
- 
-  });
-
-
-  
 
 
 $('#selUser').select2({

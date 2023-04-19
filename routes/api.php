@@ -11,6 +11,7 @@ use App\Http\Controllers\API\DogController;
 use App\Http\Controllers\API\ClubController;
 use App\Http\Controllers\API\ApiController;
 use App\Http\Controllers\API\EventResultController;
+use App\Http\Controllers\API\SubscriptionController;
 
 
 /*
@@ -32,9 +33,13 @@ Route::get('breed-names', [BreedController::class, 'retrieve']);//working fine.
 Route::get('breed/{id}/info', [BreedController::class, 'breed_info']);//working fine.
 
 
+// Subscription Controller.
+Route::post('add-subscription', [App\Http\Controllers\API\SubscriptionController::class, 'add']);
+
 // Judges Controller.
 Route::get('judge-listings', [App\Http\Controllers\API\JudgeController::class, 'listing']);//working on live.
 Route::get('judge/{id}/details', [App\Http\Controllers\API\JudgeController::class, 'details']);//working fine.
+Route::get('/judges/{judgeId}', 'App\Http\Controllers\API\JudgeController@judge_details')->name('judge_details'); //working fine.
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -59,9 +64,6 @@ Route::get('/champions-listing/{breed_id}', [App\Http\Controllers\API\EventContr
 Route::get('club-listings', [ClubController::class, 'listing']);//working fine.
 Route::get('club/{id}/details', [ClubController::class, 'details']);//address and website clause removed working fine on live.
 Route::get('club-names', [ClubController::class, 'retrieve']);//working fine.
-
-//JudgeController routes
-Route::get('/judges/{judgeId}', 'App\Http\Controllers\API\JudgeController@judge_details')->name('judge_details'); //working fine.
 
 //CountryController API.
 Route::get('/countries/{countryId}', 'App\Http\Controllers\API\CountriesController@country_details')->name('country_details');//working fine.
@@ -121,4 +123,3 @@ Route::get('all-appointments', [VetController::class, 'all_appointments']);
 Route::get('appointment/{id}/details', [VetController::class, 'view_appointment_normal']);
 Route::get('appointment/{id}/history', [VetController::class, 'view_appointment_with_history']);
 Route::post('update-vet-profile', [VetController::class, 'update_vet_profile']);
-
