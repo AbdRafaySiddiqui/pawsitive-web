@@ -57,8 +57,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 
 
+// roles 
+Route::resource('roles', App\Http\Controllers\RolesController::class);
 
-
+// Permissions 
+Route::resource('permissions', App\Http\Controllers\PermissionsController::class);
 
 
 
