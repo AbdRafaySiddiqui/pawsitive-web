@@ -838,38 +838,38 @@ function previewImages() {
 
 }
 document.querySelector('#img').addEventListener("change", previewImages);
-function previewSignature() {
+// function previewSignature() {
 
-  var preview = document.querySelector('#preview_sig');
+//   var preview = document.querySelector('#preview_sig');
   
-  if (this.files) {
-    [].forEach.call(this.files, readAndPreview);
-  }
+//   if (this.files) {
+//     [].forEach.call(this.files, readAndPreview);
+//   }
 
-  function readAndPreview(file) {
+//   function readAndPreview(file) {
 
-    // Make sure `file.name` matches our extensions criteria
-    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
-      return alert(file.name + " is not an image");
-    } // else...
+//     // Make sure `file.name` matches our extensions criteria
+//     if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+//       return alert(file.name + " is not an image");
+//     } // else...
     
-    var reader = new FileReader();
+//     var reader = new FileReader();
     
-    reader.addEventListener("load", function() {
-      var image = new Image();
-      image.height = 100;
-      image.title  = file.name;
-      image.src    = this.result;
-      preview.appendChild(image);
-    });
+//     reader.addEventListener("load", function() {
+//       var image = new Image();
+//       image.height = 100;
+//       image.title  = file.name;
+//       image.src    = this.result;
+//       preview.appendChild(image);
+//     });
     
-    reader.readAsDataURL(file);
+//     reader.readAsDataURL(file);
     
-  }
+//   }
 
-}
+// }
 
-document.querySelector('#sig').addEventListener("change", previewSignature);
+// document.querySelector('#sig').addEventListener("change", previewSignature);
 
 
 
