@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Events;
+use App\Models\Dogs;
 
 class EventController extends Controller
 {
@@ -26,7 +27,7 @@ class EventController extends Controller
                         'judges.full_name AS judge',
                         'events.id AS eventId')
                 ->where('breeds.id', '=', $breed_id)
-                ->orderBy('events.date', 'asc')
+                ->orderBy('events.start_date', 'desc')
                 ->get();
         return response()->json(['event_detailz' => $results]);
     }
@@ -65,7 +66,7 @@ class EventController extends Controller
             $breed_id = $request->input('breed_id');
             $query->where('dogs.breed_id', '=', $breed_id);
         }
-        $results = $query->orderBy('events.date', 'asc')->get();
+        $results = $query->orderBy('events.start_date', 'desc')->get();
         if($results){
             return response()->json(['event_result' => $results]);
         }
