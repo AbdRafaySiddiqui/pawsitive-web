@@ -35,7 +35,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('club','App\Http\Controllers\ClubsController');
     Route::resource('judges','App\Http\Controllers\JudgesController');
     Route::resource('breeds','App\Http\Controllers\breedsController');
-    Route::resource('dogs','App\Http\Controllers\dogsController');
+    Route::resource('dogs','App\Http\Controllers\DogsController');
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::put('/users/{id}/update', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{id}/delete', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
@@ -53,7 +53,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/download-judge-csv', 'App\Http\Controllers\JudgesController@download')->name('download-judge-csv');
     Route::get('/download-breed-csv', 'App\Http\Controllers\BreedsController@download')->name('download-breed-csv');
     Route::get('/download-event-csv', 'App\Http\Controllers\EventsController@download')->name('download-event-csv');
-    Route::get('/download-dog-csv', 'App\Http\Controllers\dogsController@download')->name('download-dog-csv');
+    Route::get('/download-dog-csv', 'App\Http\Controllers\DogsController@download')->name('download-dog-csv');
 
 
 
