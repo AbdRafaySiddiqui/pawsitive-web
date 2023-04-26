@@ -32,6 +32,11 @@ Route::get('breed-short', [BreedController::class, 'breed_short']);//working fin
 Route::get('breed-names', [BreedController::class, 'retrieve']);//working fine.
 Route::get('breed/{id}/info', [BreedController::class, 'breed_info']);//working fine.
 
+Route::get('/countries', [App\Http\Controllers\API\CountryController::class, 'index']);//working fine.
+Route::get('/countries/{id}/cities', [App\Http\Controllers\API\CitiesController::class, 'getCities']);//working fine.
+
+
+
 
 // Subscription Controller.
 Route::post('add-subscription', [App\Http\Controllers\API\SubscriptionController::class, 'add']);
@@ -52,11 +57,11 @@ Route::get('dog/{breed_id}/listings', [DogController::class, 'listing']);//worki
 Route::get('dog/{id}/details', [DogController::class, 'details']);//working fine.
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);//working fine.
 Route::get('dog/dog-profile', [DogController::class, 'dog_profile']);//working fine.
-Route::get('dog/profile-details', [DogController::class, 'profile_details']);//working fine.
+Route::get('dog/{id}/profile-details', [DogController::class, 'profile_details']);//dog_owner table doesnt exist.
 
 //EventResultController routes
-Route::get('result-listing', [EventResultController::class, 'result']);//working fine.
-Route::get('event/{id}/result', [EventResultController::class, 'event_result']);//working fine.
+Route::get('result-listing', [EventResultController::class, 'result']);
+Route::get('event/{id}/result', [EventResultController::class, 'event_result']);
 
 //EventController routes
 Route::get('event-listing/{breed_id}', [App\Http\Controllers\API\EventController::class, 'retrieve']);//working fine.

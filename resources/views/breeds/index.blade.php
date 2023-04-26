@@ -2,18 +2,7 @@
 
 @section('content')
     <div class="content-w " style="width:100%">
-    <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="index.html">Home</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href="index.html"> Breed List</a>
-            </li>
-           
-          </ul>
-          <!--------------------
-          END - Breadcrumbs
-          -------------------->
+
           <div class="content-panel-toggler">
             <i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span>
           </div>
@@ -35,11 +24,7 @@
           <div class="col-sm-6">
             <a class="btn btn-sm btn-secondary" href="{{ route('download-breed-csv') }}">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('breeds.create')}}">Add Breed</a>
           </div>
-          <div class="col-sm-6">
-            <form class="form-inline justify-content-sm-end">
-              <input class="form-control form-control-sm rounded bright" placeholder="Search" type="text">
-            </form>
-          </div>
+
         </div>
       </div> 
 

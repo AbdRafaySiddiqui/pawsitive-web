@@ -18,7 +18,9 @@ class EventResultsController extends Controller
      */
     public function index()
     {
-        //
+        $event = Events::with('cities_name','country_name','club_name')->where('status','=','Active')->orderBy('id','DESC')->paginate('5');
+       
+        return view('event_results.index', compact('event'));
     }
 
     /**
@@ -54,15 +56,21 @@ class EventResultsController extends Controller
     $grading =  $request->input('grading');
     $place =  $request->input('place');
     $judge =  $request->input('judge');
+    $gender_dog =  $request->gender_dog;
+    $event_id =  $request->event_id;
   
         foreach($dog_id as $key => $value){
             $event_result = new Event_Result;
          $event_result->dog_id=$value;
          $event_result->grading=$grading[$key];
-         $event_result->place=$place[$key];
+           $event_result->place=$place[$key];
          $event_result->judge=$judge[$key];
-         $event_result->save();
+         $event_result->gender=$gender_dog[$key];
+         $event_result->event_id=$event_id;
+         
         }
+        
+        $event_result->save();
 
         return redirect()->back()->with('message', 'Record added successfully');
         //

@@ -27,7 +27,7 @@ class EventController extends Controller
                         'judges.full_name AS judge',
                         'events.id AS eventId')
                 ->where('breeds.id', '=', $breed_id)
-                ->orderBy('events.date', 'asc')
+                ->orderBy('events.start_date', 'desc')
                 ->get();
         return response()->json(['event_detailz' => $results]);
     }
@@ -70,15 +70,8 @@ class EventController extends Controller
             $breed_id = $request->input('breed_id');
             $query->where('dogs.breed_id', '=', $breed_id);
         }
-        if ($request->has('club_id')) {
-            $club_id = $request->input('club_id');
-            $query->where('events.club_id', '=', $club_id);
-        }
-        $results = $query->orderBy('events.date', 'asc')->get();
-            if($results){
-            foreach ($results as $result) {
-                $result->start_date = strtotime($result->start_date);
-            }
+        $results = $query->orderBy('events.start_date', 'desc')->get();
+        if($results){
             return response()->json(['event_result' => $results]);
         }
         else{

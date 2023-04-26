@@ -26,30 +26,23 @@
                 <input class="form-control" name="name" placeholder="Club Name" type="text">
               </div>
             </div>
-          <div class="form-group row">
-          <label class="col-form-label col-sm-4" for="" name="countries"> Countries</label>
-          <div class="col-sm-8">
-          <select class="form-control" name="country">
-          @foreach($total_countries as $countries)
-                <option value="{{$countries->idCountry}}">
-               {{$countries->countryName}}
-                </option>
-                @endforeach
-              </select>
-            </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> City</label>
-              <div class="col-sm-8">
-              <select class="form-control" name="city">
-              @foreach($total_cities as $cities)
-                <option  value="{{$cities->id}}">
-               {{$cities->city}}
-                </option>
-                @endforeach
-              </select>
-              </div>
-            </div>
+            <div class="form-group row">
+  <label class="col-form-label col-sm-4" for="" name="countries"> Countries</label>
+  <div class="col-sm-8">
+    <select class="form-control" name="country" id="country-dropdown">
+      <option value="">Select Country</option>
+    </select>
+  </div>
+</div>
+<div class="form-group row">
+  <label class="col-sm-4 col-form-label" for=""> City</label>
+  <div class="col-sm-8">
+    <select class="form-control" name="city" id="city-dropdown">
+      <option value="">Select City</option>
+    </select>
+  </div>
+</div>
+
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Your Email</label>
             <div class="col-sm-8">
@@ -98,6 +91,29 @@
     </div>
 
     <script>
+
+// JavaScript
+$(document).ready(function() {
+  $('#country-dropdown').change(function() {
+    var countryId = $(this).val();
+    if (countryId) {
+      $.ajax({
+        url: '/api/countries/' + countryId + '/cities',
+        type: 'GET',
+        success: function(response) {
+          var cityDropdown = $('#city-dropdown');
+          cityDropdown.empty();
+          cityDropdown.append($('<option>').text('Select City').attr('value', ''));
+          $.each(response.cities, function(index, city) {
+            cityDropdown.append($('<option>').text(city.city).attr('value', city.id));
+          });
+        }
+      });
+    }
+  });
+});
+
+
 
 function previewImages() {
 

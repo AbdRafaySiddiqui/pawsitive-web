@@ -13,6 +13,14 @@
                         <div class="form-desc">
                         </div>
                         <div class="element-box-tp">
+                        <div class="controls-above-table">
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <a class="btn btn-sm btn-secondary" href="#">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('akc_groups.create')}}">Add AKC</a>
+          </div>
+        </div>
+      </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-lg table-v2 table-striped">
                                     <thead>

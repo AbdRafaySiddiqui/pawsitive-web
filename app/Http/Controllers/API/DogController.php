@@ -15,6 +15,7 @@ class DogController extends Controller
         $dog = Dogs::select('dogs.id',
         'dogs.dog_name as dogs_name',
         'dob',
+        'dogs.profile_photo',
         'gender',
         'breeds.name as breed_name',
         'microchip',
@@ -26,7 +27,27 @@ class DogController extends Controller
           ->where('breed_id','=',$id)
           ->orderBy('dogs.dog_name','ASC')
           ->get();
-        
+       
+          foreach($dog as $dogs)
+                      {
+              
+                        if($dogs->profilePhoto != null)
+                        {
+                          if(file_exists(storage_path().'/app/public/dog_profile'.'/'.$dogs->image))
+                          {
+                            $dogs->profilePhoto = asset('storage/app/public/dog_profile').'/'.$dogs->image;
+                          }
+                          else
+                          {
+                            $dogs->profilePhoto = asset('storage/app/public/noimage.png');
+                          }
+                        }
+                        else
+                        {
+                          $dogs->profilePhoto = asset('storage/app/public/noimage.png');
+                        }
+                      }
+
         return response()->json(['dog' => $dog], 200);
     }
 
