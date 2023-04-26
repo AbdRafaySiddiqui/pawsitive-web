@@ -18,4 +18,11 @@ class CountriesController extends Controller
 
     return $country;
 }
+
+public function getCountries()
+{
+    $countries = Countries::select('idCountry', 'countryName')->get();
+    return response()->json(['countries' => $countries], 200);
+}
+
 }

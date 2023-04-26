@@ -34,16 +34,12 @@ class JudgesController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->hasFile('img') && $request->hasFile('sig') ) {
-            $imageName = time().'.'.request()->img->getClientoriginalName();
-            request()->img->move(storage_path('app/public/judge_imgs'), $imageName);
+        if($request->hasFile('img') && $request->hasFile('sig')) {
+            $imageName = $request->img->getClientOriginalName();
+            $request->img->storeAs('public/judge_images', $imageName);
             
-            $imagesig = time().'.'.request()->sig->getClientoriginalName();
-            request()->sig->move(storage_path('app/public/judge_sigs'), $imagesig);
-        }
-        else {
-            $imageName = "";
-            $imagesig = "";
+            $imagesig = $request->sig->getClientOriginalName();
+            $request->sig->storeAs('public/judge_signatures', $imagesig);
         }
         
         $create =  new Judges;
@@ -55,8 +51,8 @@ class JudgesController extends Controller
         $link = str_replace(" ", "-", $request->full_name);
         $create->url_link = $link; 
         $create->save();
-        
-            return redirect()->back()->with('success', 'New Judge Added');
+            
+                return redirect()->back()->with('success', 'New Judge Added');
     }
 
     /**
@@ -84,12 +80,12 @@ class JudgesController extends Controller
     {
         if(!empty(request()->img)){
             $imageName = time().'.'.request()->img->getClientOriginalExtension();
-                request()->img->move(storage_path('app/public/judge_imgs'), $imageName);
+                request()->img->move(storage_path('app/public/judge_images'), $imageName);
         }
 
         if(!empty(request()->sig)){
                 $imagesig = time().'.'.request()->sig->getClientOriginalExtension();
-                request()->sig->move(storage_path('app/public/judge_sigs'), $imagesig);
+                request()->sig->move(storage_path('app/public/judge_signatures'), $imagesig);
         }
 
         if(!empty($imageName) && !empty($imagesig)){

@@ -32,9 +32,17 @@ Route::get('breed-short', [BreedController::class, 'breed_short']);//working fin
 Route::get('breed-names', [BreedController::class, 'retrieve']);//working fine.
 Route::get('breed/{id}/info', [BreedController::class, 'breed_info']);//working fine.
 
+Route::get('/countries', [App\Http\Controllers\API\CountryController::class, 'index']);//working fine.
+Route::get('/countries/{id}/cities', [App\Http\Controllers\API\CitiesController::class, 'getCities']);//working fine.
+
+
+
 
 // Subscription Controller.
 Route::post('add-subscription', [App\Http\Controllers\API\SubscriptionController::class, 'add']);
+
+//contact
+Route::post('contact', [App\Http\Controllers\API\ContactController::class, 'add']);
 
 // Judges Controller.
 Route::get('judge-listings', [App\Http\Controllers\API\JudgeController::class, 'listing']);//working on live.

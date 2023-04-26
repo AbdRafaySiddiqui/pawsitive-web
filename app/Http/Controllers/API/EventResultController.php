@@ -20,9 +20,8 @@ class EventResultController extends Controller
                 ->join('events', 'event_results.event_id', '=', 'events.id')
                 // ->join('breeds', 'dogs.breed_id', '=', 'breeds.id')
                 ->join('clubs', 'events.club_id', '=', 'clubs.id')
-                ->join('countries', 'clubs.country', '=', 'countries.idCountry')
+                ->join('countries', 'events.country', '=', 'countries.idCountry')
                 ->select('events.start_date',
-                'breeds.name AS breedName',
                          'events.name AS event',
                         //  'breeds.name AS breedName',
                          'clubs.name AS club',
