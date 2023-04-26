@@ -62,6 +62,10 @@ class EventController extends Controller
             $country_id = $request->input('country_id');
             $query->where('events.country', '=', $country_id);
         }
+        if ($request->has('club_id')) {
+            $club_id = $request->input('club_id');
+            $query->where('events.club_id', '=', $club_id);
+        }
         if ($request->has('breed_id')) {
             $breed_id = $request->input('breed_id');
             $query->where('dogs.breed_id', '=', $breed_id);

@@ -4,74 +4,74 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Crypt;
+use App\Models\Roles;
+use Hash;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $user = User::orderBy('id','DESC')->paginate('5');
+        
+        return view('users.index',compact('user'));
+    }
+
     public function create()
     {
-        $roles = Role::all();
+        $roles = Roles::get();
+
         return view('users.create', compact('roles'));
     }
 
     public function store(Request $request)
     {
-        $user = new user;
+        $user = new User;
         $user->name =  $request->name;
         $user->username =  $request->username;
         $user->email =  $request->email;
-        $user->password = Crypt::encryptString($request->password);
-	
-        
+        $user->password = Hash::make($request->password);
 
-        $roleId = $request->input('role'); // retrieve the selected role from the form
-        $role = Role::find($roleId); // retrieve the role by name
-        $user->role_id = $role->id;
-        // $user->assignRole($role->id);
+        $user->role_id = $request->role_id;
 
         $user->save();
 
-        return redirect()->back()->with('message', 'Record added successfully');
+        return redirect()->route('users.index')->with('message', 'Record added successfully');
     }
 
-    public function edit(string $id)
+    public function edit($id)
     {
         $user = User::find($id);
-        return view('users.edit', compact('user')); 
+        $roles = Roles::get();
+        return view('users.edit', compact('user','roles')); 
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name'=>'required',
             'username'=>'required',
             'email'=>'required',
+            'role_id' => 'role_id'
         ]); 
         $user = User::find($id);
         // getting values from the blade template form
 	    $user->name = $request->name;
 	    $user->username = $request->username;
 	    $user->email = $request->email;
+        if(!empty($request->password))
+        {
+            $user->password = Hash::make($request->password);
+        }
 	
-        $user->save();
+        $user->update();
  
         return redirect()->back()->with('message', 'Record updated successfully');
     }
 
-    public function destroy(string $id)
+    public function destroy($id)
     {
         User::destroy($id);
         return redirect()->back()->with('message', 'Record deleted successfully');
-    }
-
-    public function index()
-    {
-        Paginator::useBootstrap();
-        $user = User::orderBy('id','DESC')->paginate('5');
-        
-        return view('users.index',compact('user'));
     }
 }
 

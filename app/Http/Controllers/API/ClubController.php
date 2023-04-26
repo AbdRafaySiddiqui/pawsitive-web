@@ -56,9 +56,9 @@ class ClubController extends Controller
         'countries.countryName as country_of_origin',
         'cities.city as city_of_origin',
         'affiliation as affiliatedBy',
-        'image as logo',
-        'address',
-        'website')
+        'image as logo')
+        // 'address',
+        // 'website')
         ->leftjoin('countries','countries.idCountry','=','clubs.country')
         ->leftjoin('cities','cities.id','=','clubs.city')
         ->where('clubs.id','=',$id)
@@ -90,7 +90,7 @@ class ClubController extends Controller
       $clubsdata = $clubs->map(function($club){
         return [
           'id' => $club->id,
-          'name' => $club->name,
+          'label' => $club->name,
         ];
       });
       return response()->json(['club' => $clubsdata]);
