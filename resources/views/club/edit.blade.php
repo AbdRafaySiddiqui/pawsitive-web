@@ -51,7 +51,7 @@
           <div class="col-sm-8">
           <select class="form-control" name="country">
           @foreach($total_countries as $countries)
-                <option value="{{$countries->id}}"  {{ $countries->idCountry == $et_club->country ? 'selected' : '' }}>
+                <option value="{{$countries->idCountry}}"  {{ $countries->idCountry == $et_club->country ? 'selected' : '' }}>
                {{$countries->countryName}}
                 </option>
                 @endforeach
@@ -91,7 +91,13 @@
             <input class="form-control" name="affiliation" value="{{$et_club->affiliation}}" placeholder="Affiliation with" type="text">
             </div>
           </div>
-         
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for=""> Image</label>
+              <div class="col-sm-8">
+              <input class="form-control" type="file" id="img" name="image" accept="image/png, image/jpeg">
+                <div id="preview_img"></div>
+              </div>
+            </div>
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
           </div>

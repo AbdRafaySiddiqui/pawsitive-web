@@ -20,6 +20,7 @@
           <div class="form-desc">
           </div>
          
+          
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Select Event</label>
             <div class="col-sm-8">
@@ -33,42 +34,55 @@
                 </select>
             </div>
         </div>
-        <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Date</label>
-              <div class="col-sm-8">
+        <div id="event_frm">
+        <div class="row">
+          <div class="col-sm-4">
+          <div class="form-group">
+              <label class="col-form-label" for="">Date</label>
                 <input class="form-control" name="date" id="event-date" type="date">
               </div>
-            </div>
+              </div>
+           
                 <input class="form-control" style="display: none;" name="date" id="club-id" placeholder="Enter Club" type="text">
                 <input class="form-control" style="display: none;" name="date" id="judge-id" placeholder="Enter Judge" type="text">
                 <input class="form-control" style="display: none;" name="date" id="country" placeholder="Enter country" type="text">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Club Name</label>
-              <div class="col-sm-8">
+
+                <div class="col-sm-4">
+            <div class="form-group">
+              <label class="col-form-label" for="">Club Name</label>
                 <input class="form-control" name="date" id="club-name" placeholder="Enter Club" type="text">
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Judge Name</label>
-              <div class="col-sm-8">
+              </div>
+          
+              <div class="col-sm-4">
+            <div class="form-group">
+              <label class="col-form-label" for="">Judge Name</label>
                 <input class="form-control" name="date" id="judge-name" placeholder="Enter judge" type="text">
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Country Name</label>
-              <div class="col-sm-8">
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+            <div class="form-group">
+              <label class="col-form-label" for="">Country Name</label>
                 <input class="form-control" name="date" id="country-name" placeholder="Enter country" type="text">
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Class</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="date" id="country-name" placeholder="Enter Class" type="text">
+            <div class="col-sm-4">
+            <div class="form-group">
+              <label class="col-form-label" for="">Class</label>
+              <select class="form-control" name="class" id="class">
+              @foreach($dog_class as $dog_classes)
+                        <option value="{{$dog_classes->id}}">
+                            {{$dog_classes->class}}
+                        </option>
+                    @endforeach
+</select>
               </div>
             </div>
-            <div class="form-group row">
-          <label class="col-form-label col-sm-4" for="" > Gender</label>
-          <div class="col-sm-8">
+            <div class="col-sm-4">
+            <div class="form-group">
+          <label class="col-form-label" for="" > Gender</label>
           <select class="form-control" name="gender">
           <option value="">
                   Select One
@@ -82,6 +96,22 @@
               </select>
             </div>
             </div>
+            </div>
+
+            <div class="form-group row mt-4">
+            <label class="col-form-label col-sm-4" for=""> Select Breed</label>
+            <div class="col-sm-8">
+                <select class="form-control" name="breed_id" id="breed_id">
+                    <option></option>
+                    @foreach($total_breeds as $total_breed)
+                        <option value="{{$total_breed->id}}">
+                            {{$total_breed->name}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+          
         <div id="event-details-container"></div>
             <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
@@ -90,7 +120,7 @@
               <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
             </a>
           </div>
-         
+          </div>
         <!-- </form> -->
       </div>
     </div>
@@ -127,7 +157,7 @@
         {{ session()->get('message') }}
     </div>
 @endif
-
+<div id='event_tbl'>
         <table class="table table-bordered table-lg table-v2 table-striped" id="table">
           <thead>
             <tr>
@@ -144,9 +174,9 @@
               <th>
               Judge
               </th>
-              <th>
+              <!-- <th>
               Gender
-              </th>
+              </th> -->
               <th>
               Action
               </th>
@@ -192,7 +222,7 @@
              </select>
              </div>
 </td>
-<td>
+<!-- <td>
           <div class="col-sm-12">
           <select class="form-control" name="gender_dog[]">
           <option value="">
@@ -208,7 +238,7 @@
             </div>
 
 
-</td>
+</td> -->
 
               </td>
            
@@ -219,6 +249,7 @@
         </table>
         <button class="btn btn-primary"  type="submit"> Submit</button>
         </form>
+      </div>
       </div>
       <!--           Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -409,6 +440,50 @@ $('#table').append(
      
 
 });
+$('#breed_id').on('change', function() {
+  $('#event_tbl').show();
+  var breed_id=$('#breed_id').val();
+
+});
+
+function get_breedid(select)
+{
+  console.log(select.value);
+
+  onchange="get_breedid(this)"
+
+  ajax: {
+      type: "get",
+      url: '{{ URL::to('api/dog/all-dogs') }}',
+      dataType: 'json',
+  
+      delay: 250,
+       data: function (params) {
+              return {
+                  q: $.trim(params.term)
+
+              };   
+
+
+          },
+      processResults: function (data) {
+        // console.log(data)
+        return {
+          results:  $.map(data, function (item) {
+                return {
+          //  _token: CSRF_TOKEN,
+  
+                    text: item.dog_name,
+                    id: item.id,
+                    
+                }
+            })
+        };
+      },
+      
+      cache: true
+    }
+}
 
 $('#all_dogs').select2({
     allowClear: true,
@@ -428,11 +503,13 @@ $('#all_dogs').select2({
       dataType: 'json',
   
       delay: 250,
-   
        data: function (params) {
               return {
                   q: $.trim(params.term)
+
               };   
+
+
           },
       processResults: function (data) {
         // console.log(data)
@@ -584,7 +661,10 @@ function fetchCountryDetails(countryId) {
         }
     });
 }
+
+
 $('#event_id').on('change', function() {
+  $('#event_frm').show();
     var event_id = $('#event_id').val();
     // Make AJAX request to fetch event details
     $.ajax({

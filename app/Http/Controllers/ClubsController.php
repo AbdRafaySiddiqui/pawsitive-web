@@ -29,6 +29,7 @@ class ClubsController extends Controller
     {
         $total_countries = Countries::get();
         $total_cities = Cities::get();
+       
 
         return view('club.create',compact('total_cities','total_countries'));
     }
@@ -89,8 +90,18 @@ class ClubsController extends Controller
             'email'=>'required',
             'city'=>'required',
             'country'=>'required',
-            'phone'=>'required'
+            'phone'=>'required',
+            'affiliation'=>'required'
+    
         ]); 
+        if($request->hasFile('image')) {
+            $imageName = time().'.'.request()->img->getClientoriginalName();
+            request()->img->move(public_path('club_images'), $imageName);
+        }
+        else {
+            $imageName = "";
+        }
+        
         $club = Clubs::find($id);
         // Getting values from the blade template form
 	    $club->name = $request->name;
@@ -99,13 +110,14 @@ class ClubsController extends Controller
 	    $club->country = $request->country;
 	    $club->phone = $request->phone;
         $club->affiliation = $request->affiliation;
-        $club->update();
+        $club->image = $imageName;
+        $club->save();
 
-        try {
-            $club->update();
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while updating the record. Please try again later.');
-        }
+        // try {
+        //     $club->update();
+        // } catch (\Exception $e) {
+        //     return redirect()->back()->with('error', 'An error occurred while updating the record. Please try again later.');
+        // }
     
         return redirect()->back()->with('message', 'Record updated successfully');
     

@@ -125,9 +125,9 @@ class RolesController extends Controller
         $DeleteData = Role::findOrFail($id);
 
         if($DeleteData->delete()){
-            return redirect()->route('roles.index')->with('success','Role has been deleted successfully :)','Success');
+            return redirect()->route('roles.index')->with('success','Role has been deleted successfully :)');
         }else{
-            return redirect()->route('permissions.index')->with('error','Something went wrong. Please try deleting a role again :(','Oops');
+            return redirect()->route('permissions.index')->with('error','Something went wrong. Please try deleting a role again :(');
         }
     }
 }

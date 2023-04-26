@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dogs;
+use App\Models\Clubs;
 use App\Models\Breeds;
 use Illuminate\Pagination\Paginator;
 use League\Csv\Writer;
@@ -31,7 +32,8 @@ class DogsController extends Controller
         $total_breeds = Breeds::get();
         $maleDogs = Dogs::where('gender', '=', 'Male')->get();
         $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
-        return view('dogs.create',compact('maleDogs', 'femaleDogs','total_breeds'));
+        $total_clubs = Clubs::get();
+        return view('dogs.create',compact('maleDogs', 'femaleDogs','total_breeds','total_clubs'));
     }
 
     /**
@@ -43,6 +45,7 @@ class DogsController extends Controller
         $dogs->dog_name =  $request->dog_name;
         $dogs->dob =  $request->dob;
         $dogs->reg_no =  $request->reg_no;
+        $dogs->reg_with =  $request->reg_with;
         $dogs->microchip =  $request->microchip;
         $dogs->gender =  $request->gender;
         $dogs->show_title =  $request->show_title;

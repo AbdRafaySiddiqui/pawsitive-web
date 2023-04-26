@@ -210,54 +210,6 @@
                 <input class="form-control" name="dog_name" placeholder="Enter Dog Name" type="text">
               </div>
             </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">DOB</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="dob" placeholder="Enter DOB" type="date">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Club Reg #</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="reg_no" placeholder="Enter Club Reg #" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Microchip</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="microchip" placeholder="Enter Microchip" type="text">
-              </div>
-            </div>
-       
-         
-            <div class="form-group row">
-          <label class="col-form-label col-sm-4" for="" > Gender</label>
-          <div class="col-sm-8">
-          <select class="form-control" name="gender">
-          <option value="">
-                  Select One
-                </option>
-                <option value="Male">
-                  Male
-                </option>
-                <option value="Female">
-                Female
-                </option>
-              </select>
-            </div>
-            </div>
-            <div class="form-group row">
-            <label class="col-form-label col-sm-4" for="">Show Title</label>
-            <div class="col-sm-8">
-              <input class="form-control" name="show_title" placeholder="Enter Show Title" type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Achievements </label>
-              <div class="col-sm-8">
-                <textarea class="form-control" name="achievements" id="" cols="30" rows="10"></textarea>
-              </div>
-            </div>
 
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Breed</label>
@@ -296,6 +248,70 @@
               </select>
               </div>
             </div>
+
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">DOB</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="dob" placeholder="Enter DOB" type="date">
+              </div>
+            </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Club Reg #</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="reg_no" placeholder="Enter Club Reg #" type="text">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Registered With</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="reg_with" id="reg_with">
+              @foreach($total_clubs as $total_club)
+                <option  value="{{$total_club->id}}">
+               {{$total_club->name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
+
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Microchip</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="microchip" placeholder="Enter Microchip" type="text">
+              </div>
+            </div>
+       
+         
+            <div class="form-group row">
+          <label class="col-form-label col-sm-4" for="" > Gender</label>
+          <div class="col-sm-8">
+          <select class="form-control" name="gender">
+          <option value="">
+                  Select One
+                </option>
+                <option value="Male">
+                  Male
+                </option>
+                <option value="Female">
+                Female
+                </option>
+              </select>
+            </div>
+            </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for="">Show Title</label>
+            <div class="col-sm-8">
+              <input class="form-control" name="show_title" placeholder="Enter Show Title" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Achievements </label>
+              <div class="col-sm-8">
+                <textarea class="form-control" name="achievements" id="" cols="30" rows="10"></textarea>
+              </div>
+            </div>
+
+          
           
          
           <div class="form-buttons-w mb-4">

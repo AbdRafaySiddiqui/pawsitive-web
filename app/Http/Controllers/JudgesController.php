@@ -16,7 +16,7 @@ class JudgesController extends Controller
      */
     public function index()
     {
-        $judge = Judges::where('status','=','1')->orderBy('id','DESC')->paginate('5');
+        $judge = Judges::where('status','=','Active')->orderBy('id','DESC')->paginate('5');
        
         return view('judges/index', compact('judge'));
     }

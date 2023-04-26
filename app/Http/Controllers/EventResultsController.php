@@ -8,6 +8,7 @@ use App\Models\Breeds;
 use App\Models\Event_Result;
 use App\Models\Judges;
 use App\Models\DogsRealParent;
+use App\Models\DogClass;
 use App\Models\Events;
 use League\Csv\Writer;
 
@@ -31,11 +32,13 @@ class EventResultsController extends Controller
         $dogs = Dogs::get();
         $total_breeds = Breeds::get();
         $total_judges = Judges::get();
+        $dog_class = DogClass::get();
+
         $maleDogs = Dogs::where('gender', '=', 'Male')->get();
         $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
         $Events = Events::all();
         
-        return view('event_results.create',compact('Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges'));
+        return view('event_results.create',compact('Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges','dog_class'));
     }
 
     /**
@@ -56,7 +59,7 @@ class EventResultsController extends Controller
     $grading =  $request->input('grading');
     $place =  $request->input('place');
     $judge =  $request->input('judge');
-    $gender_dog =  $request->gender_dog;
+    // $gender_dog =  $request->gender_dog;
     $event_id =  $request->event_id;
   
         foreach($dog_id as $key => $value){
@@ -65,7 +68,7 @@ class EventResultsController extends Controller
          $event_result->grading=$grading[$key];
            $event_result->place=$place[$key];
          $event_result->judge=$judge[$key];
-         $event_result->gender=$gender_dog[$key];
+        //  $event_result->gender=$gender_dog[$key];
          $event_result->event_id=$event_id;
          
         }
