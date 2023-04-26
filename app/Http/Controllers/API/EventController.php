@@ -51,7 +51,7 @@ class EventController extends Controller
                         'events.id AS eventId');
         // Apply filters based on request parameters
         if ($request->has('start_date')) {
-            $start_date = $request->input('start_date');
+            $start_date = strtotime($request->input('start_date'));
             $query->where('events.start_date', '>=', $start_date);
         }
         if ($request->has('end_date')) {
@@ -75,7 +75,10 @@ class EventController extends Controller
             $query->where('events.club_id', '=', $club_id);
         }
         $results = $query->orderBy('events.date', 'asc')->get();
-        if($results){
+            if($results){
+            foreach ($results as $result) {
+                $result->start_date = strtotime($result->start_date);
+            }
             return response()->json(['event_result' => $results]);
         }
         else{

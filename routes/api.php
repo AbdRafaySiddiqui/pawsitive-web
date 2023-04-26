@@ -36,6 +36,9 @@ Route::get('breed/{id}/info', [BreedController::class, 'breed_info']);//working 
 // Subscription Controller.
 Route::post('add-subscription', [App\Http\Controllers\API\SubscriptionController::class, 'add']);
 
+//contact
+Route::post('contact', [App\Http\Controllers\API\ContactController::class, 'add']);
+
 // Judges Controller.
 Route::get('judge-listings', [App\Http\Controllers\API\JudgeController::class, 'listing']);//working on live.
 Route::get('judge/{id}/details', [App\Http\Controllers\API\JudgeController::class, 'details']);//working fine.
