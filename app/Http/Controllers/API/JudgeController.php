@@ -43,20 +43,20 @@ class JudgeController extends Controller
 
         $judge->description = html_entity_decode($judge->description);
 
-        if($judge->image != null)
+        if($judge->profilePhoto != null)
         {
-            if(file_exists(storage_path().'app/public/judge_imgs/'.$judge->image))
+            if(file_exists(storage_path().'app/public/judge_imgs/'.$judge->profilePhoto))
             {
-                $judge->image = asset('storage/app/public/judge_imgs').'/'.$judge->image;
+                $judge->profilePhoto = asset('storage/app/public/judge_imgs').'/'.$judge->profilePhoto;
             }
             else
             {
-                $judge->image = asset('storage/app/public/noimage.png');
+                $judge->profilePhoto = asset('storage/app/public/noimage.png');
             }
         }
         else
         {
-            $judge->image = asset('storage/app/public/noimage.png');
+            $judge->profilePhoto = asset('storage/app/public/noimage.png');
         }
 
      
