@@ -11,9 +11,12 @@ class Role extends SpatieRole
 {
     use HasFactory;
 
-    public function no_of_users($id)
-    {
-        return Users::where('role_id','=',$id)->where('status','=','Active')->count();
-    }
+    protected $fillable = [ 'name' ];
+    protected $table = 'roles';
+
+    // public function no_of_users($id)
+    // {
+    //     return Users::where('role_id','=',$id)->where('status','=','Active')->count();
+    // }
 
 }
