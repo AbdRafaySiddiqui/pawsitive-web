@@ -6,6 +6,7 @@ use App\Models\Countries;
 use App\Models\Cities;
 use Illuminate\Pagination\Paginator;
 use League\Csv\Writer;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -28,9 +29,12 @@ class ClubsController extends Controller
     public function create()
     {
         $total_countries = Countries::get();
-        $total_cities = Cities::get();
+    $total_cities = Cities::get();
+    $countries = Countries::get();
 
-        return view('club.create',compact('total_cities','total_countries'));
+    // $countries = DB::table('countries')->select('idCountry', 'countryName')->get()->pluck('countryName', 'idCountry'); 
+
+    return view('club.create',compact('countries'));
     }
 
     /**
@@ -40,7 +44,7 @@ class ClubsController extends Controller
     {
         if($request->hasFile('img')) {
             $imageName = time().'.'.request()->img->getClientoriginalName();
-            request()->img->move(public_path('club_images'), $imageName);
+            request()->img->move(storage_path('app/public/club_images'), $imageName);
         }
         else {
             $imageName = "";
@@ -52,11 +56,21 @@ class ClubsController extends Controller
 	    $club->city = $request->city;
 	    $club->email = $request->email;
 	    $club->phone = $request->phone;
+	    $club->address = $request->address;
 	    $club->affiliation = $request->affiliation;
+	    $club->website = $request->website;
         $club->image = $imageName;
-        $club->save();
+        $res = $club->save();
+
+        if($res)
+        {
+            return redirect()->back()->with('message', 'Record added successfully');
+        }
+        else
+        {
+        return redirect()->back()->with('message', 'Error occured');
+        }
         
-        return redirect()->back()->with('message', 'Record added successfully');
     }
 
     /**
@@ -70,7 +84,7 @@ class ClubsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     { 
         $et_club = Clubs::find($id);
         $total_countries = Countries::get();

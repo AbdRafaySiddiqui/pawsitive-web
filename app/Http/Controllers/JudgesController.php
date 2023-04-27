@@ -36,10 +36,10 @@ class JudgesController extends Controller
     {
         if($request->hasFile('img') && $request->hasFile('sig')) {
             $imageName = $request->img->getClientOriginalName();
-            $request->img->storeAs('public/judge_images', $imageName);
+            $request->img->storage_path('app/public/judge_imgs', $imageName);
             
             $imagesig = $request->sig->getClientOriginalName();
-            $request->sig->storeAs('public/judge_signatures', $imagesig);
+            $request->sig->storage_path('app/public/judge_sigs', $imagesig);
         }
         
         $create =  new Judges;

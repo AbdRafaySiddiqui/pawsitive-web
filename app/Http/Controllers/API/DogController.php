@@ -12,10 +12,11 @@ class DogController extends Controller
 {
     public function listing(request $request, $id)
     {
-        $dog = Dogs::select('dogs.id',
+      $dog = collect();
+        DB::table('dogs')->select('dogs.id',
         'dogs.dog_name as dogs_name',
         'dob',
-        'dogs.profile_photo',
+        'dogs.profile_photo as profilePhoto',
         'gender',
         'breeds.name as breed_name',
         'microchip',
@@ -23,33 +24,28 @@ class DogController extends Controller
         'achievements',
         'show_title')
         ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
-        
           ->where('breed_id','=',$id)
+          ->where('dogs.status','=','Active')
           ->orderBy('dogs.dog_name','ASC')
-          ->get();
-       
-          foreach($dog as $dogs)
-                      {
-              
-                        if($dogs->profilePhoto != null)
-                        {
-                          if(file_exists(storage_path().'/app/public/dog_profile'.'/'.$dogs->image))
-                          {
-                            $dogs->profilePhoto = asset('storage/app/public/dog_profile').'/'.$dogs->image;
-                          }
-                          else
-                          {
-                            $dogs->profilePhoto = asset('storage/app/public/noimage.png');
-                          }
-                        }
-                        else
-                        {
-                          $dogs->profilePhoto = asset('storage/app/public/noimage.png');
-                        }
-                      }
+          ->chunk(100, function ($results) use ($dog) {
+            foreach ($results as $row) {
+                if($row->profilePhoto != null) {
+                    if(file_exists(storage_path('/app/public/dog_profile'.'/'.$row->profilePhoto))) {
+                        $row->profilePhoto = asset('storage/app/public/dog_profile').'/'.$row->profilePhoto;
+                    }
+                    else {
+                        $row->profilePhoto = asset('storage/app/public/noimage.png');
+                    }
+                }
+                else {
+                    $row->profilePhoto = asset('storage/app/public/noimage.png');
+                }
+                $dog->push($row);
+            }
+        });
 
-        return response()->json(['dog' => $dog], 200);
-    }
+    return response()->json(['dog' => $dog], 200);
+}
 
     public function details(request $request, $id)
     {

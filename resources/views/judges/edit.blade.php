@@ -23,34 +23,49 @@
           <div class="form-desc">
             Discharge best employed your phase each the of shine. Be met even reason consider logbook redesigns. Never a turned interfaces among asking
           </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Full Name</label>
-              <div class="col-sm-8">
-                <input id="full_name" class="form-control" name="full_name" value="{{$judge[0]->full_name}}" placeholder="Enter Full Name" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Position In Club</label>
-              <div class="col-sm-8">
-                <input   class="form-control" name="position_in_club" value="{{$judge[0]->position_in_club}}" id="position_in_club" placeholder="Enter Position In Club" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Image</label>
-              <div class="col-sm-8">
-              <img class="rounded img-thumbnail" id="preview" src="{{ URL::asset("/judge_images/{$judge[0]->image}") }}" alt="image not found" height="200" width="200" />
+
+          <div class="row">
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="col-form-label" for="">Full Name</label>
+                                              <input class="form-control" value="{{$judge[0]->full_name}}" name="full_name" placeholder="Enter Name" type="text">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label class="col-form-label" for="">Position In Club</label>
+                                              <input class="form-control" value="{{$judge[0]->position_in_club}}" name="position_in_club" placeholder="Enter Position In Club" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="col-form-label" for="">Image</label>
+                                              <img class="rounded img-thumbnail" id="preview" src="{{ URL::asset("/judge_images/{$judge[0]->image}") }}" alt="image not found" height="200" width="200" />
               <input class="form-control" type="file" id="img" name="img" accept="image/png, image/jpeg">
-               
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Signature</label>
-              <div class="col-sm-8">
-              <img class="rounded img-thumbnail" src="{{ URL::asset("/judge_signatures/{$judge[0]->signature}") }}" alt="signature not found" height="200" width="200" />
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label class="col-form-label" for="">Signature</label>
+                                              <img class="rounded img-thumbnail" src="{{ URL::asset("/judge_signatures/{$judge[0]->signature}") }}" alt="signature not found" height="200" width="200" />
                 <input class="form-control" type="file" id="sig" name="sig" accept="image/png, image/jpeg">
-                <div id="preview_sig"></div>
-              </div>
-            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+          
        
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Enter Description Below</label>

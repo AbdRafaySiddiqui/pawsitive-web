@@ -16,8 +16,8 @@ class JudgeController extends Controller
 
          foreach ($judges as $judge) {
         if ($judge->image != null) {
-            if (file_exists(storage_path('app/public/judge_images/'.$judge->image))) {
-                $judge->image = asset('storage/app/public/judge_images').'/'.$judge->image;
+            if (file_exists(storage_path('app/public/judge_imgs/'.$judge->image))) {
+                $judge->image = asset('storage/app/public/judge_imgs').'/'.$judge->image;
             } else {
                 $judge->image = asset('storage/app/public/noimage.png');
             }
@@ -37,7 +37,7 @@ class JudgeController extends Controller
 
         if($judge->image != null)
         {
-            if(file_exists(storage_path().'/app/public/judge_imgs/'.$judge->image))
+            if(file_exists(storage_path('/app/public/judge_imgs/'.$judge->image)))
                 {
                     $judge->profilePhoto = asset('storage/app/public/judge_imgs'.'/'.$judge->image);
                 }

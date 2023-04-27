@@ -9,66 +9,91 @@
   <div class="col-lg-12">
     <div class="element-wrapper">
       <h6 class="element-header">
-      Add Club
+      Create a new club.
       </h6>
       <div class="element-box">
         <form action="{{ route('club.store') }}" method="post" enctype="multipart/form-data">
         @csrf
           <h5 class="form-header">
-            Add Club
+            Create a new club.
           </h5>
-          <div class="form-desc">
+          <div class="form-desc" style='visibility:hidden;'>
             Discharge best employed your phase each the of shine. Be met even reason consider logbook redesigns. Never a turned interfaces among asking
           </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Club Name</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="name" placeholder="Club Name" type="text">
-              </div>
-            </div>
-            <div class="form-group row">
-  <label class="col-form-label col-sm-4" for="" name="countries"> Countries</label>
-  <div class="col-sm-8">
-    <select class="form-control" name="country" id="country-dropdown">
-      <option value="">Select Country</option>
-    </select>
-  </div>
-</div>
-<div class="form-group row">
-  <label class="col-sm-4 col-form-label" for=""> City</label>
-  <div class="col-sm-8">
-    <select class="form-control" name="city" id="city-dropdown">
-      <option value="">Select City</option>
-    </select>
-  </div>
-</div>
 
-            <div class="form-group row">
-            <label class="col-form-label col-sm-4" for=""> Your Email</label>
-            <div class="col-sm-8">
-              <input class="form-control" name="email" placeholder="Enter email" type="email">
-            </div>
-          </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Phone</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="phone" placeholder="Phone" type="tel" >
-              </div>
-            </div>
-          
-          <div class="form-group row">
-            <label class="col-form-label col-sm-4" for="" name="affiliation"> Affiliation with</label>
-            <div class="col-sm-8">
-            <input class="form-control" name="affiliation" placeholder="Affiliation with" type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Image</label>
-              <div class="col-sm-8">
-              <input class="form-control" type="file" id="img" name="img" accept="image/png, image/jpeg">
-                <div id="preview_img"></div>
-              </div>
-            </div>
+
+                                    <div class="row">
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label class="col-form-label" for="">Club Name</label>
+                                          <input class="form-control" name="name" placeholder="Enter Club Name" type="text">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label class="col-form-label" for=""> Country</label>
+                                              <select class="form-control" name="country" id="country">
+                                                  @foreach ($countries as $country)
+                                                      <option value="{{ $country->idCountry }}">
+                                                          {{ $country->countryName }}
+                                                      </option>
+                                                  @endforeach
+                                              </select>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label class="col-form-label" for=""> City</label>
+                                              <select class="form-control" name="city" id="city">
+                                              <option value="">Select City</option>
+                                              </select>
+                                          </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label class="col-form-label" for="">Your Email</label>
+                                          <input class="form-control" name="email" placeholder="Enter Your Email" type="email">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label class="col-form-label" for="">Your Address</label>
+                                          <input class="form-control" name="address" placeholder="Enter Your Address" type="text">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label class="col-form-label" for="">Your Phone</label>
+                                          <input class="form-control" name="phone" placeholder="Enter Your Phone" type="tel">
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label class="col-form-label" for="">Affiliation with</label>
+                                          <input class="form-control" name="affiliation" placeholder="Enter Your affiliation" type="text">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label class="col-form-label" for="">Your Website</label>
+                                          <input class="form-control" name="website" placeholder="Enter Your website" type="text">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label class="col-form-label" for="">Your Phone</label>
+                                          <input class="form-control" type="file" id="img" name="img" accept="image/png, image/jpeg">
+                                          <div id="preview_img"></div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
           </div>
@@ -77,6 +102,7 @@
         {{ session()->get('message') }}
     </div>
 @endif
+</div>
 
         </form>
       </div>
@@ -93,25 +119,31 @@
     <script>
 
 // JavaScript
-$(document).ready(function() {
-  $('#country-dropdown').change(function() {
-    var countryId = $(this).val();
-    if (countryId) {
-      $.ajax({
-        url: '/api/countries/' + countryId + '/cities',
-        type: 'GET',
-        success: function(response) {
-          var cityDropdown = $('#city-dropdown');
-          cityDropdown.empty();
-          cityDropdown.append($('<option>').text('Select City').attr('value', ''));
-          $.each(response.cities, function(index, city) {
-            cityDropdown.append($('<option>').text(city.city).attr('value', city.id));
-          });
-        }
-      });
-    }
-  });
-});
+    $(document).ready(function() {
+        $('#country').on('change', function() {
+            var idCountry = $(this).val();
+            if(idCountry) {
+                $.ajax({
+                    url: "{{ url('api/cities') }}/"+idCountry,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#city').empty();
+                        $('#city').append('<option value="">Select City</option>');
+                        $.each(data, function(key, value) {
+                            $('#city').append('<option value="'+ value.id +'">'+ value.city +'</option>');
+                        });
+                        $('#city').prop('disabled', false);
+                    }
+                });
+            } else {
+                $('#city').empty();
+                $('#city').prop('disabled', true);
+            }
+        });
+    });
+
+
 
 
 

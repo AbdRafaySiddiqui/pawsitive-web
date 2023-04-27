@@ -28,69 +28,73 @@
   <div class="col-lg-12">
     <div class="element-wrapper">
       <h6 class="element-header">
-        Horizontal Form Layout
+      Edit a Club:-
       </h6>
       <div class="element-box">
         <form action="{{ route('club.update', $et_club->id) }}" method="post" >
             @csrf
             @method('PUT') 
           <h5 class="form-header">
-          Add Club
+          Edit Club
           </h5>
-          <div class="form-desc">
+          <div class="form-desc" style='visibility:hidden;'>
             Discharge best employed your phase each the of shine. Be met even reason consider logbook redesigns. Never a turned interfaces among asking
           </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Club Name</label>
-              <div class="col-sm-8">
-                <input class="form-control" value="{{$et_club->name}}" name="name" placeholder="Club Name" type="text">
-              </div>
-            </div>
-            <div class="form-group row">
-          <label class="col-form-label col-sm-4" for="" > Countries</label>
-          <div class="col-sm-8">
-          <select class="form-control" name="country">
-          @foreach($total_countries as $countries)
-                <option value="{{$countries->id}}"  {{ $countries->idCountry == $et_club->country ? 'selected' : '' }}>
-               {{$countries->countryName}}
-                </option>
-                @endforeach
-              </select>
-            </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> City</label>
-              <div class="col-sm-8">
-              <select class="form-control" name="city">
-              @foreach($total_cities as $cities)
-                <option  value="{{$cities->id}} "  {{ $cities->id == $et_club->city ? 'selected' : '' }}>
-               {{$cities->city}}
-                </option>
-                @endforeach
-              </select>
-              </div>
-            </div>
-         
-            <div class="form-group row">
-            <label class="col-form-label col-sm-4" for=""> Your Email</label>
-            <div class="col-sm-8">
-              <input class="form-control" value="{{$et_club->email}}" name="email" placeholder="Enter email" type="email">
-            </div>
+
+          <div class="row">
+          <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="">Club Name</label>
+                                            <input class="form-control" value="{{$et_club->name}}" name="name" placeholder="Enter Name" type="text">
+                                        </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label class="col-form-label" for=""> Countries</label>
+                                              <select class="form-control" name="country" id="country">
+                                                  @foreach ($total_countries as $countries)
+                                                  <option value="{{$countries->id}}"  {{ $countries->idCountry == $et_club->country ? 'selected' : '' }}>
+                                                          {{ $countries->countryName }}
+                                                      </option>
+                                                  @endforeach
+                                              </select>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label class="col-form-label" for=""> Countries</label>
+                                              <select class="form-control" name="city" id="city">
+                                              @foreach($total_cities as $cities)
+                                                  <option  value="{{$cities->id}} "  {{ $cities->id == $et_club->city ? 'selected' : '' }}>
+                                                  {{$cities->city}}
+                                                      </option>
+                                                  @endforeach
+                                              </select>
+                                          </div>
+                                        </div>
           </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Phone</label>
-              <div class="col-sm-8">
-                <input class="form-control" value="{{$et_club->phone}}" name="phone" placeholder="Phone" type="text">
-              </div>
+
+          <div class="row">
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="">Your Email</label>
+                                            <input class="form-control" value="{{$et_club->email}}" name="email" placeholder="Enter Name" type="email">
+                                        </div>
+                                      </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                            <label class="col-form-label" for="">Phone</label>
+                                            <input class="form-control" value="{{$et_club->phone}}" name="phone" placeholder="Enter Username" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                            <label class="col-form-label" for="">Affiliation with</label>
+                                            <input class="form-control" value="{{$et_club->affiliation}}" name="affiliation" placeholder="Enter Email" type="email">
+                                            </div>
+                                        </div>
+                                    </div>
             </div>
-         
-          
-          <div class="form-group row">
-            <label class="col-form-label col-sm-4" for="" > Affiliation with</label>
-            <div class="col-sm-8">
-            <input class="form-control" name="affiliation" value="{{$et_club->affiliation}}" placeholder="Affiliation with" type="text">
-            </div>
-          </div>
          
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
