@@ -92,7 +92,31 @@ class DogController extends Controller
         return response()->json($data);
     }
 
-
+    public function breed_dog(request $request)
+    {
+      if($request->has('id')){
+        $search = $request->id;
+        $gender = $request->gender;
+        $data = Dogs::select('dogs.id',
+        'dog_name','breed_id','dogs.gender'
+          )
+          ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
+        
+          ->where('breed_id','=',$search)
+          ->where('dogs.gender','=',$gender)
+          // ->where('dog_name','LIKE',"%$search%")
+          ->orderBy('breed_id','ASC')
+          ->get();
+        }
+        else{
+          $data = Dogs::select('dogs.id',
+          'dog_name'
+            )
+            ->orderBy('dog_name','ASC')
+                  ->get();
+      }
+        return response()->json($data);
+    }
     public function dog_profile(request $request)
     {
         $dog = Dogs::select('id','dog_name as dogName','profile_photo as profilePhoto')

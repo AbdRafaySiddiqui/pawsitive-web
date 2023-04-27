@@ -49,6 +49,10 @@ class JudgesController extends Controller
         $create =  new Judges;
         $create->full_name = $request->full_name;
         $create->position_in_club = $request->position_in_club;
+        $create->facebook = $request->facebook;
+        $create->instagram = $request->instagram;
+        $create->linkedIn = $request->linkedIn;
+        $create->twitter = $request->twitter;
         $create->description = htmlentities($request->description);
         $create->image = $imageName;
         $create->signature = $imagesig;
@@ -99,6 +103,10 @@ class JudgesController extends Controller
                 $judge->image =  $imageName;
                 $judge->signature =  $imagesig; 
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }elseif(!empty($imageName) && empty($imagesig)){
                 $judge = Judges::find($id);
@@ -106,6 +114,10 @@ class JudgesController extends Controller
                 $judge->description = htmlentities($request->description); 
                 $judge->image =  $imageName; 
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }elseif(empty($imageName) && !empty($imagesig)){
                 $judge = Judges::find($id);
@@ -113,6 +125,10 @@ class JudgesController extends Controller
                 $judge->description = htmlentities($request->description); 
                 $judge->signature =  $imagesig; 
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }elseif(!empty($imageName)){
                 $judge = Judges::find($id);
@@ -120,6 +136,10 @@ class JudgesController extends Controller
                 $judge->description = htmlentities($request->description); 
                 $judge->image =  $imageName; 
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }elseif(!empty($imagesig)){
                 $judge = Judges::find($id);
@@ -127,12 +147,20 @@ class JudgesController extends Controller
                 $judge->description = htmlentities($request->description); 
                 $judge->signature =  $imagesig; 
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }else{
                 $judge = Judges::find($id);
                 $judge->full_name = $request->full_name; 
                 $judge->description = htmlentities($request->description);
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }
         return redirect()->route('judges.index')

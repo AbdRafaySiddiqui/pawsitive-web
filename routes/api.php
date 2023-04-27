@@ -48,6 +48,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('dog/{breed_id}/listings', [DogController::class, 'listing']);//working fine.
 Route::get('dog/{id}/details', [DogController::class, 'details']);//working fine.
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);//working fine.
+Route::get('dog/breed-dogs', [DogController::class, 'breed_dog']);//working fine.
 Route::get('dog/dog-profile', [DogController::class, 'dog_profile']);//working fine.
 Route::get('dog/{id}/profile-details', [DogController::class, 'profile_details']);//dog_owner table doesnt exist.
 

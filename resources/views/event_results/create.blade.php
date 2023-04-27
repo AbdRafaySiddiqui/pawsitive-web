@@ -82,8 +82,23 @@
             </div>
             <div class="col-sm-4">
             <div class="form-group">
-          <label class="col-form-label" for="" > Gender</label>
-          <select class="form-control" name="gender">
+          <label class="col-form-label" for="" >Select Breed </label>
+          <select class="form-control" name="breed_id" id="breed_id">
+                    <!-- <option> Select</option> -->
+                    @foreach($total_breeds as $total_breed)
+                        <option value="{{$total_breed->id}}">
+                            {{$total_breed->name}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            </div>
+            </div>
+
+            <div class="form-group row mt-4">
+            <label class="col-form-label col-sm-4" for=""> Gender</label>
+            <div class="col-sm-8">
+            <select class="form-control" name="gender" id="gender_dog">
           <option value="">
                   Select One
                 </option>
@@ -94,21 +109,7 @@
                 Female
                 </option>
               </select>
-            </div>
-            </div>
-            </div>
-
-            <div class="form-group row mt-4">
-            <label class="col-form-label col-sm-4" for=""> Select Breed</label>
-            <div class="col-sm-8">
-                <select class="form-control" name="breed_id" id="breed_id">
-                    <option></option>
-                    @foreach($total_breeds as $total_breed)
-                        <option value="{{$total_breed->id}}">
-                            {{$total_breed->name}}
-                        </option>
-                    @endforeach
-                </select>
+               
             </div>
         </div>
           
@@ -440,50 +441,17 @@ $('#table').append(
      
 
 });
-$('#breed_id').on('change', function() {
+
+
+
+$('#gender_dog').on('change', function() {
   $('#event_tbl').show();
-  var breed_id=$('#breed_id').val();
 
 });
 
-function get_breedid(select)
-{
-  console.log(select.value);
-
-  onchange="get_breedid(this)"
-
-  ajax: {
-      type: "get",
-      url: '{{ URL::to('api/dog/all-dogs') }}',
-      dataType: 'json',
-  
-      delay: 250,
-       data: function (params) {
-              return {
-                  q: $.trim(params.term)
-
-              };   
 
 
-          },
-      processResults: function (data) {
-        // console.log(data)
-        return {
-          results:  $.map(data, function (item) {
-                return {
-          //  _token: CSRF_TOKEN,
-  
-                    text: item.dog_name,
-                    id: item.id,
-                    
-                }
-            })
-        };
-      },
-      
-      cache: true
-    }
-}
+
 
 $('#all_dogs').select2({
     allowClear: true,
@@ -499,7 +467,12 @@ $('#all_dogs').select2({
     ,
     ajax: {
       type: "get",
-      url: '{{ URL::to('api/dog/all-dogs') }}',
+      url: function(){
+        var id=$('#breed_id :selected').val();
+        var gender=$('#gender_dog').val();
+        
+        return 'http://localhost/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
+      },
       dataType: 'json',
   
       delay: 250,
@@ -512,7 +485,7 @@ $('#all_dogs').select2({
 
           },
       processResults: function (data) {
-        // console.log(data)
+        // console.log(gender);
         return {
           results:  $.map(data, function (item) {
                 return {
@@ -521,7 +494,8 @@ $('#all_dogs').select2({
                     text: item.dog_name,
                     id: item.id,
                     
-                }
+                  }
+                  // $('#all_dogs').empty().append(item);
             })
         };
       },
@@ -529,20 +503,7 @@ $('#all_dogs').select2({
       cache: true
     }
   });         
-  // $('#table').find('#all_dogs').last().select2();
-// $('.js-data-example-ajax').select2({
-//   allowClear: true,
-//     placeholder: 'Select an item',
-//     language: {
-//       noResults: function (term) {
-//         return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-//       }
-//     },
-//     escapeMarkup: function(markup) {
-//       return markup;
-//     }
-
-//   });
+ 
 
 $(document).on('click','#remove',function(){
 $(this).parents('tr').remove();
