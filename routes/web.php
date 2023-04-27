@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 
+Route::get('dog/{id}/breed', 'App\Http\Controllers\Api\DogController@details')->name('dog_details');
 
 Route::get('api/search', 'App\Http\Controllers\ApisController@dataAjax');
 Route::get('api/dog', 'App\Http\Controllers\ApisController@AjaxDog');
@@ -34,7 +35,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('event_results','App\Http\Controllers\EventResultsController');
     Route::resource('club','App\Http\Controllers\ClubsController');
     Route::resource('judges','App\Http\Controllers\JudgesController');
-    Route::resource('breeds','App\Http\Controllers\breedsController');
+    Route::resource('breeds','App\Http\Controllers\BreedsController');
     Route::resource('dogs','App\Http\Controllers\DogsController');
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::put('/users/{id}/update', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');

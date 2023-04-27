@@ -25,7 +25,7 @@
       <div class="controls-above-table">
         <div class="row">
           <div class="col-sm-6">
-            <a class="btn btn-sm btn-secondary" href="{{ route('download-event-csv') }}">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('roles.create')}}">Add Event</a>
+            <a class="btn btn-sm btn-secondary" href="{{ route('download-event-csv') }}">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('roles.create')}}">Add Roles</a>
           </div>
         </div>
       </div>
@@ -57,7 +57,8 @@
                                                     <form action="{{ route('roles.destroy', $rol->id ) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                <button type="submit" class="trans_btn" onclick="return confirm('Are you sure to delete this user?')"><i class="os-icon os-icon-ui-15"></i></button>
+                                    {{$rol->id}}
+                                <button type="submit"  class="trans_btn" onclick="return confirm('Are you sure to delete this user?')"><i class="os-icon os-icon-ui-15"></i></button>
                               </form>
                                                 </td>
                                             </tr>

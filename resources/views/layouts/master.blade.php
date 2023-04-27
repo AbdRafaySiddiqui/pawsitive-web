@@ -745,7 +745,7 @@
         <script src="{{asset('public/bower_components/popper.js/dist/umd/popper.min.js')}}"></script>
         <script src="{{asset('public/bower_components/moment/moment.js')}}"></script>
         <script src="{{asset('public/bower_components/chart.js/dist/Chart.min.js')}}"></script>
-        <script src="{{asset('public/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+        <!-- <script src="{{asset('public/bower_components/select2/dist/js/select2.full.min.js')}}"></script> -->
         <script src="{{asset('public/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js')}}"></script>
         <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script>
         <script src="{{asset('public/bower_components/bootstrap-validator/dist/validator.min.js')}}"></script>

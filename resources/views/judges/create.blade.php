@@ -57,6 +57,30 @@
             <textarea class="form-control" cols="80" id="ckeditor1" name="description" rows="10"></textarea>
             </div>
           </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for=""> Facebook</label>
+            <div class="col-sm-8">
+            <input id="facebook" class="form-control" name="facebook" placeholder="Enter Facebook Url" type="text">
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for=""> Instagram</label>
+            <div class="col-sm-8">
+            <input id="instagram" class="form-control" name="instagram" placeholder="Enter Instagram Url" type="text">
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for="">LinkedIn</label>
+            <div class="col-sm-8">
+            <input id="linkedIn" class="form-control" name="linkedIn" placeholder="Enter LinkedIn Url" type="text">
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for=""> Twitter</label>
+            <div class="col-sm-8">
+            <input id="twitter" class="form-control" name="twitter" placeholder="Enter Twitter Url" type="text">
+            </div>
+          </div>
            
          
           <div class="form-buttons-w mb-4">
@@ -68,7 +92,7 @@
           </div>
           @if(session()->has('message'))
     <div class="alert alert-success">
-        {{ session()->get('message') }}
+        {{ session()->get('success') }}
     </div>
 @endif
 

@@ -9,6 +9,8 @@ use App\Models\Permissions;
 use Illuminate\Http\Request;
 
 
+
+
 class RolesController extends Controller
 {
     /**
@@ -46,14 +48,14 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        $role = Roles::create(['name' => $request->input('name')]);
+        $role = Role::create(['name' => $request->input('name')]);
 
         $role->syncPermissions($request->input('permission_id'));
 
         if($role){
-            return redirect()->route('roles.index')->with('message','New Role has been created successfully :)','Success');
+            return redirect()->route('roles.index')->with('success','New Role has been created successfully :)');
         }else{
-            return redirect()->route('permissions.index')->with('message','Something went wrong. Please try creating a new role again :(','Oops');
+            return redirect()->route('permissions.index')->with('error','Something went wrong. Please try creating a new role again :(');
         }
     }
 
@@ -106,9 +108,9 @@ class RolesController extends Controller
         $role->syncPermissions($request->input('permission_id'));
 
         if($role){
-            return redirect()->route('roles.index')->with(Toastr::success('Role has been updated successfully :)','Success'));
+            return redirect()->route('roles.index')->with('success','Role has been updated successfully :)');
         }else{
-            return redirect()->route('permissions.index')->with(Toastr::error('Something went wrong. Please try updating a role again :(','Oops'));
+            return redirect()->route('permissions.index')->with('error','Something went wrong. Please try updating a role again :(');
         }
     }
 
@@ -123,9 +125,9 @@ class RolesController extends Controller
         $DeleteData = Role::findOrFail($id);
 
         if($DeleteData->delete()){
-            return redirect()->route('roles.index')->with(Toastr::success('Role has been deleted successfully :)','Success'));
+            return redirect()->route('roles.index')->with('success','Role has been deleted successfully :)');
         }else{
-            return redirect()->route('permissions.index')->with(Toastr::error('Something went wrong. Please try deleting a role again :(','Oops'));
+            return redirect()->route('permissions.index')->with('error','Something went wrong. Please try deleting a role again :(');
         }
     }
 }

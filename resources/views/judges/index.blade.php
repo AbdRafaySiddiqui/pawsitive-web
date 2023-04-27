@@ -45,12 +45,7 @@
       START - Controls below table
       ------------------  -->
       <div class="controls-below-table">
-        <div class="table-records-info">
-          Showing records 1 - 5
-        </div>
-        <div class="table-records-pages">
-        {{$judge->links()}}
-        </div>
+      
       </div>
       <!--------------------
       END - Controls below table

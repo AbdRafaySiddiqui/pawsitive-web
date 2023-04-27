@@ -197,6 +197,19 @@ star rating style BY HAMZA end
     display: none;
   }
 
+
+
 /* ##########
 2nd star rating style BY HAMZA end
 ############ */
+
+
+#event_frm{
+  display: none;
+}
+#event_tbl{
+  display: none;
+}
+body.color-scheme-dark .form-control, .content-panel.color-scheme-dark .form-control{
+  color: #ffffff !important;
+}

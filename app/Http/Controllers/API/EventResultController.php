@@ -28,7 +28,7 @@ class EventResultController extends Controller
                          'countries.countryName AS country',
                          'countries.countryCode',
                          'events.id AS eventId')
-                ->orderBy('events.date', 'desc')
+                ->orderBy('events.start_date', 'desc')
                 ->take(10)
                 ->get();
                 return response()->json(['event_result' => $results]);
@@ -37,19 +37,24 @@ class EventResultController extends Controller
     public function event_result(request $request,$id)
     {
         $results = DB::table('event_results')
+ 
                 ->leftjoin('events', 'events.id', '=', 'event_results.event_id')
                 ->leftjoin('countries', 'countries.idCountry', '=', 'events.country')
                 ->leftjoin('cities', 'cities.id', '=', 'events.city')
                 ->leftjoin('clubs', 'clubs.id', '=', 'events.club_id')
+                       ->leftjoin('dogs', 'dogs.id', '=', 'event_results.dog_id')
+        ->leftjoin('breeds', 'breeds.id', '=', 'dogs.breed_id')
                 // ->leftjoin('breeds', 'dogs.breed_id', '=', 'breeds.id')
-                ->select('events.date',
+                ->select(
+                  'breeds.name AS breedName',
+                  'events.start_date',
                          'events.name AS event',
                         //  'breeds.name AS breedName',
                          'clubs.name AS club',
                          'countries.countryName AS country',
                          'cities.city',
                          'events.id AS eventId')
-                ->orderBy('events.date', 'asc')
+                ->orderBy('events.start_date', 'asc')
                 ->where('event_results.event_id','=',$id)
                 ->first();
 

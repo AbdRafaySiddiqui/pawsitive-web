@@ -13,9 +13,9 @@
       Roles
       </h6>
       <div class="element-box">
-        <form action="{{ route('roles.store') }}" method="post">
+        <form action="{{ route('roles.update',$id) }}" method="post">
         @csrf
-   
+           @method('PUT')
                     
           <h5 class="form-header">
           Create New Role
@@ -117,14 +117,14 @@
               <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
             </a>
           </div>
-          @if(session()->has('message'))
+          @if(session()->has('success'))
     <div class="alert alert-success">
-        {{ session()->get('message') }}
+        {{ session()->get('success') }}
     </div>
 @endif
 @if($errors->any())
 <div class="alert alert-danger">
-    {!! implode('', $errors->all('<div>:message</div>')) !!}
+    {!! implode('', $errors->all('<div>:error</div>')) !!}
     </div>
 @endif
 
