@@ -34,15 +34,19 @@ class JudgesController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->hasFile('img') && $request->hasFile('sig')) {
-            $imageName = $request->img->getClientOriginalName();
-            $request->img->storage_path('app/public/judge_imgs', $imageName);
-            
-            $imagesig = $request->sig->getClientOriginalName();
-            $request->sig->storage_path('app/public/judge_sigs', $imagesig);
+        if(!empty(request()->img)){
+            $imageName = time().'.'.request()->img->getClientOriginalExtension();
+                request()->img->move(storage_path('app/public/judge_images'), $imageName);
         }
-        
-        $create =  new Judges;
+
+        if(!empty(request()->sig)){
+                $imagesig = time().'.'.request()->sig->getClientOriginalExtension();
+                request()->sig->move(storage_path('app/public/judge_signatures'), $imagesig);
+        }
+
+        if(!empty($imageName) && !empty($imagesig)){
+
+             $create =  new Judges;
         $create->full_name = $request->full_name;
         $create->position_in_club = $request->position_in_club;
         $create->facebook = $request->facebook;
@@ -55,6 +59,83 @@ class JudgesController extends Controller
         $link = str_replace(" ", "-", $request->full_name);
         $create->url_link = $link; 
         $create->save();
+
+            }elseif(!empty($imageName) && empty($imagesig)){
+
+                $create =  new Judges;
+        $create->full_name = $request->full_name;
+        $create->position_in_club = $request->position_in_club;
+        $create->facebook = $request->facebook;
+        $create->instagram = $request->instagram;
+        $create->linkedIn = $request->linkedIn;
+        $create->twitter = $request->twitter;
+        $create->description = htmlentities($request->description);
+        $create->image = $imageName;
+        $link = str_replace(" ", "-", $request->full_name);
+        $create->url_link = $link; 
+        $create->save();
+
+            }elseif(empty($imageName) && !empty($imagesig)){
+
+                $create =  new Judges;
+                $create->full_name = $request->full_name;
+                $create->position_in_club = $request->position_in_club;
+                $create->facebook = $request->facebook;
+                $create->instagram = $request->instagram;
+                $create->linkedIn = $request->linkedIn;
+                $create->twitter = $request->twitter;
+                $create->description = htmlentities($request->description);
+                $create->signature = $imagesig;
+                $link = str_replace(" ", "-", $request->full_name);
+                $create->url_link = $link; 
+                $create->save();
+
+            }elseif(!empty($imageName)){
+
+                $create =  new Judges;
+        $create->full_name = $request->full_name;
+        $create->position_in_club = $request->position_in_club;
+        $create->facebook = $request->facebook;
+        $create->instagram = $request->instagram;
+        $create->linkedIn = $request->linkedIn;
+        $create->twitter = $request->twitter;
+        $create->description = htmlentities($request->description);
+        $create->image = $imageName;
+        $link = str_replace(" ", "-", $request->full_name);
+        $create->url_link = $link; 
+        $create->save();
+
+            }elseif(!empty($imagesig)){
+
+                $create =  new Judges;
+        $create->full_name = $request->full_name;
+        $create->position_in_club = $request->position_in_club;
+        $create->facebook = $request->facebook;
+        $create->instagram = $request->instagram;
+        $create->linkedIn = $request->linkedIn;
+        $create->twitter = $request->twitter;
+        $create->description = htmlentities($request->description);
+        $create->signature = $imagesig;
+        $link = str_replace(" ", "-", $request->full_name);
+        $create->url_link = $link; 
+        $create->save();
+
+            }else{
+
+                $create =  new Judges;
+        $create->full_name = $request->full_name;
+        $create->position_in_club = $request->position_in_club;
+        $create->facebook = $request->facebook;
+        $create->instagram = $request->instagram;
+        $create->linkedIn = $request->linkedIn;
+        $create->twitter = $request->twitter;
+        $create->description = htmlentities($request->description);
+        $link = str_replace(" ", "-", $request->full_name);
+        $create->url_link = $link; 
+        $create->save();
+
+            }
+  
             
                 return redirect()->back()->with('success', 'New Judge Added');
     }
@@ -159,6 +240,10 @@ class JudgesController extends Controller
                 $judge->twitter = $request->twitter;
                 $judge->update();
             }
+if( $judge->facebook == null){
+    $judge->facebook='https://www.facebook.com/';
+}
+
         return redirect()->route('judges.index')
             ->with('success','Judge Updated');
     }

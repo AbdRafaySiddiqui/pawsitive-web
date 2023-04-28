@@ -381,22 +381,9 @@
 </div>
 <!-- <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+<script>
 
-    <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
-    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
-
-    <script type="text/javascript">
-
-        $('#event_id').select2({
-            allowClear: true,
-            tags: true,
-            placeholder: 'Select an Event'
-        });
-
-      // var i=0;
-      $('#judge').select2();
-// $('.dg').select2();
-
+  // var i=0;
 $('#add').click(function(){
   // ++i;
 $('#table').append(
@@ -441,6 +428,24 @@ $('#table').append(
      
 
 });
+</script>
+
+
+    <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
+
+    <script type="text/javascript">
+
+        $('#event_id').select2({
+            allowClear: true,
+            tags: true,
+            placeholder: 'Select an Event'
+        });
+
+        $('#judge').select2();
+        // $('.dg').select2();
+        
+        
 
 
 

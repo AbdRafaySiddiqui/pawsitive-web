@@ -50,6 +50,7 @@ class DogsController extends Controller
         $dogs->reg_with =  $request->reg_with;
         $dogs->microchip =  $request->microchip;
         $dogs->gender =  $request->gender;
+        $dog->class = $request->class;
         $dogs->show_title =  $request->show_title;
         $dogs->achievements =  $request->achievements;
         $dogs->breed_id = $request->breed_id;
@@ -106,6 +107,7 @@ class DogsController extends Controller
 	    $dog->dob = $request->dob;
 	    $dog->reg_no = $request->reg_no;
 	    $dog->microchip = $request->microchip;
+	    $dog->class = $request->class;
 	    $dog->gender = $request->gender;
 	    $dog->show_title = $request->show_title;
 	    $dog->achievements = $request->achievements;
