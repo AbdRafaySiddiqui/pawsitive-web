@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class countries extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'idCountry';
+    // protected $primaryKey = 'idCountry';
     protected $table = 'countries';
 
 }

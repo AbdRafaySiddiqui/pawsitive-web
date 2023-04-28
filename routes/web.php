@@ -33,6 +33,7 @@ Route::post('/submit-Dogform-Female', 'App\Http\Controllers\DogsController@store
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     
     Route::resource('event_results','App\Http\Controllers\EventResultsController');
+    Route::resource('cities','App\Http\Controllers\CitiesController');
     Route::resource('club','App\Http\Controllers\ClubsController');
     Route::resource('judges','App\Http\Controllers\JudgesController');
     Route::resource('breeds','App\Http\Controllers\BreedsController');
