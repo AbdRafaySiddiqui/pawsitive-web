@@ -95,16 +95,17 @@ class DogController extends Controller
     public function breed_dog(request $request)
     {
       if($request->has('id')){
-        $search = $request->id;
+        $search = $request->q;
+        $id = $request->id;
         $gender = $request->gender;
         $data = Dogs::select('dogs.id',
-        'dog_name','breed_id','dogs.gender'
+        'dog_name','breed_id','dogs.gender','breeds.id'
           )
           ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
         
-          ->where('breed_id','=',$search)
+          ->where('breed_id','=',$id)
           ->where('dogs.gender','=',$gender)
-          // ->where('dog_name','LIKE',"%$search%")
+          ->where('dog_name','LIKE',"%$search%")
           ->orderBy('breed_id','ASC')
           ->get();
         }
