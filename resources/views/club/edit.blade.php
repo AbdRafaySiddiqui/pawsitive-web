@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="col-sm-4">
                                           <div class="form-group">
-                                              <label class="col-form-label" for=""> Countries</label>
+                                              <label class="col-form-label" for=""> Cities</label>
                                               <select class="form-control" name="city" id="city">
                                               @foreach($total_cities as $cities)
                                                   <option  value="{{$cities->id}} "  {{ $cities->id == $et_club->city ? 'selected' : '' }}>

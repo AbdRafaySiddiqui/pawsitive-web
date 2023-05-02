@@ -55,7 +55,12 @@
               {{$city->city}}
               </td>
               <td>
-              {{ $city->country  }}
+              <?php
+        $countryName = DB::table('countries')
+                          ->where('idCountry', $city->country)
+                          ->value('countryName');
+        echo $countryName;
+    ?>
               </td>
               <td class="text-center">
                 <div class="status-pill green" data-title="Complete" data-toggle="tooltip"></div>
@@ -76,6 +81,16 @@
       <!--------------------
       END - Table with actions
       ------------------            -->
+
+      <div class="controls-below-table">
+        <div class="table-records-info">
+          Showing records 1 - 5
+        </div>
+        <div class="table-records-pages">
+        {{$cities->links()}}
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

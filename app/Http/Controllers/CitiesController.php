@@ -15,7 +15,8 @@ class CitiesController extends Controller
      */
     public function index()
     {
-        $cities = Cities::get();
+        Paginator::useBootstrap();
+        $cities = Cities::orderBy('id','DESC')->paginate('10');
 
         return view('cities.index', compact('cities'));
     }
