@@ -8,11 +8,33 @@ use App\Models\Breeds;
 use App\Models\Clubs;
 use App\Models\Events;
 use App\Models\Event_Result;
+use App\Models\Dogs;
 use App\Models\Countries;
 use Illuminate\Support\Facades\DB;
 
 class EventResultController extends Controller
 {
+
+  public function judge(request $request)
+  {
+    if($request->has('id')){
+      $id = $request->id;
+      $data = Events::select('events.id','judges.id as jud_id','judges.full_name','events.judge_id')
+      ->leftjoin('judges','judges.id','=','events.judge_id')
+
+      ->where('events.id', '=', $id)
+      ->get();
+      }
+      else{
+        $data = Dogs::select('dogs.id',
+        'dog_name'
+          )
+          ->orderBy('dog_name','ASC')
+                ->get();
+    }
+    return response()->json($data);
+  }
+
     public function result()
     {
         $results = DB::table('event_results')

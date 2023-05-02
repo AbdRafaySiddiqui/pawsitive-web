@@ -41,7 +41,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Roles::get();
+        $roles = Roles::all();
         return view('users.edit', compact('user','roles')); 
     }
 
@@ -51,7 +51,7 @@ class UserController extends Controller
             'name'=>'required',
             'username'=>'required',
             'email'=>'required',
-            'role_id' => 'role_id'
+            'role_id' => 'required'
         ]); 
         $user = User::find($id);
         // getting values from the blade template form

@@ -115,11 +115,11 @@ class ClubsController extends Controller
         $club->affiliation = $request->affiliation;
         $club->update();
 
-        try {
-            $club->update();
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while updating the record. Please try again later.');
-        }
+        // try {
+        //     $club->update();
+        // } catch (\Exception $e) {
+        //     return redirect()->back()->with('error', 'An error occurred while updating the record. Please try again later.');
+        // }
     
         return redirect()->back()->with('message', 'Record updated successfully');
     

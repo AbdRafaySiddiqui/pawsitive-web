@@ -9,13 +9,13 @@
   <div class="col-lg-12">
     <div class="element-wrapper">
       <h6 class="element-header">
-       Add Event
+      Edit Result Event
       </h6>
       <div class="element-box">
         <!-- <form action="" method="post" enctype="multipart/form-data">
         @csrf -->
           <h5 class="form-header">
-          Add Event
+          Edit Result Event
           </h5>
           <div class="form-desc">
           </div>
@@ -27,9 +27,14 @@
                 <select class="form-control" name="event_id" id="event_id">
                     <option></option>
                     @foreach($Events as $Event)
-                        <option value="{{$Event->id}}">
+
+                        @if($Event->id == $event_result->event_id)
+                                                      <option selected value="{{$Event->id}}">   {{$Event->name}} | {{ (isset($Event->club_name->name)) ? '('.$Event->club_name->name.')' : ''}} | {{date('F d, Y',strtotime($Event->start_date))}}</option>
+                                                    @else
+                                                      <option value="{{$Event->id}}">  {{$Event->name}} | {{ (isset($Event->club_name->name)) ? '('.$Event->club_name->name.')' : ''}} | {{date('F d, Y',strtotime($Event->start_date))}}</option>
+                                                    @endif
                             {{$Event->name}} | {{ (isset($Event->club_name->name)) ? '('.$Event->club_name->name.')' : ''}} | {{date('F d, Y',strtotime($Event->start_date))}}
-                        </option>
+                
                     @endforeach
                 </select>
             </div>
@@ -73,9 +78,13 @@
               <label class="col-form-label" for="">Class</label>
               <select class="form-control" name="class" id="class">
               @foreach($dog_class as $dog_classes)
-                        <option value="{{$dog_classes->id}}">
-                            {{$dog_classes->class}}
-                        </option>
+
+              @if($dog_classes->id == $event_result->class)
+                                                      <option selected value="{{$dog_classes->id}}"> {{$dog_classes->class}}</option>
+                                                    @else
+                                                      <option value="{{ $dog_classes->id }}">{{ $dog_classes->class }}</option>
+                                                    @endif
+              
                     @endforeach
 </select>
               </div>
@@ -186,10 +195,10 @@
             </tr>
           </thead>
           <tbody>
+            @foreach($er_events as $index => $event_results)
             <tr>
               
               <td>
-
               <div class="col-md-12">
               <select class="form-control js-data-example-ajax dog" name="dog_id[]" id="all_dogs">
               @foreach($dogs as $dog)
@@ -244,9 +253,10 @@
 
               </td>
            
-              <td> <button id="add" name="add" class="btn btn-primary" type="button">Add</button></td>
+              
+            @endforeach
+            <td> <button id="add" name="add" class="btn btn-primary" type="button">Add</button></td>
             </tr>
-            
           </tbody>
         </table>
         <button class="btn btn-primary"  type="submit"> Submit</button>
@@ -433,15 +443,6 @@ $('#table').append(
 
         $('#judge').select2();
         // $('.dg').select2();
-        
-        
-
-
-
-
-
-
-
 
 
 $('#all_dogs').select2({

@@ -25,6 +25,10 @@ use App\Http\Controllers\API\SubscriptionController;
 |
 */
 
+
+
+
+
 // Breeds Controller.
 Route::get('breed-listings', [App\Http\Controllers\API\BreedController::class, 'listing']);//working fine.
 Route::get('breed/{id}/details', [App\Http\Controllers\API\BreedController::class, 'details']);//working fine.
@@ -60,6 +64,7 @@ Route::get('dog/{id}/profile-details', [DogController::class, 'profile_details']
 //EventResultController routes
 Route::get('result-listing', [EventResultController::class, 'result']);
 Route::get('event/{id}/result', [EventResultController::class, 'event_result']);
+Route::get('event_results/judge', [EventResultController::class, 'judge']);
 
 //EventController routes
 Route::get('event-listing/{breed_id}', [App\Http\Controllers\API\EventController::class, 'retrieve']);//working fine.
