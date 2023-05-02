@@ -10,7 +10,7 @@
                     <div class="col-lg-12">
                         <div class="element-wrapper">
                             <h6 class="element-header">
-                                Event Result
+                                Event
                             </h6>
                             <div class="element-box">
                                 <form action="{{ route('events.update', $events->id) }}" method="post"
@@ -19,7 +19,7 @@
                                     @method('PUT')
 
                                     <h5 class="form-header">
-                                        Event Result
+                                        Event
                                     </h5>
                                     <div class="form-desc">
                                     </div>

@@ -4,7 +4,8 @@
         <div class="content-w">
     
           <div class="content-i">
-            <div class="content-box"><div class="row">
+            <div class="content-box">
+              <div class="row">
   
   <div class="col-lg-12">
     <div class="element-wrapper">
@@ -18,9 +19,9 @@
           </h5>
           <div class="form-desc">
           </div>
-         
-          <form action="{{ route('event_results.store') }}" method="post">
-        @csrf 
+         <form action="{{ route('event_results.store') }}" method="post">
+        @csrf
+          
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Select Event</label>
             <div class="col-sm-8">
@@ -34,6 +35,7 @@
                 </select>
             </div>
         </div>
+           
         <div id="event_frm">
         <div class="row">
           <div class="col-sm-4">
@@ -119,32 +121,16 @@
       </div>
     </div>
   </div>
-</div>
+  </div>
 
-<div class="element-wrapper">
-  <div class="element-box-tp">
-    
-    <div class="form-desc">
-    </div>
-    <div class="element-box-tp">
-      <!--------------------
-      START - Controls Above Table
-      -------------------->
-      <div class="controls-above-table">
-        <div class="row">
-          <div class="col-sm-6">
-           
-          </div>
-          <div class="col-sm-6">
-           
-          </div>
-        </div>
-      </div>
+
+
    <!--------------------
       START - Table with actions
       ------------------  -->
-      <div class="table-responsive">
       
+      <div class="table-responsive">
+    
                
 <div id='event_tbl'>
         <table class="table table-bordered table-lg table-v2 table-striped" id="table">
@@ -239,7 +225,7 @@
         <button class="btn btn-primary"  type="submit"> Submit</button>
         </form>
 
-        @if(session()->has('message'))
+  @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
@@ -380,6 +366,14 @@
 <script>
 
   // var i=0;
+
+</script>
+
+
+    <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
+
+    <script type="text/javascript">
 $('#add').click(function(){
   // ++i;
 $('#table').append(
@@ -413,13 +407,7 @@ $('#table').append(
      
 
 });
-</script>
 
-
-    <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
-    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
-
-    <script type="text/javascript">
 
         $('#event_id').select2({
             allowClear: true,

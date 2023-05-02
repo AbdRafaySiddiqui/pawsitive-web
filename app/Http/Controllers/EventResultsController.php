@@ -70,7 +70,7 @@ class EventResultsController extends Controller
            $event_result->place=$place[$key];
          $event_result->judge=$judge[$key];
          $event_result->gender=$request->input('gender_dog');
-         $event_result->event_id=$request->input('event_id');
+        //  $event_result->event_id=$request->input('event_id');
          $event_result->class=$request->input('class');
         $event_result->save();
                 
