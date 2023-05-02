@@ -45,41 +45,34 @@ class EventResultsController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-    //     $request->validate([
-    //         // 'inputs.*.name' => 'required',
-    //         'inputs.*.dog_id' => 'required',
-    //         'inputs.*.grading' => 'required',
-    //         'inputs.*.place' => 'required',
-    //         'inputs.*.judge' => 'required'
-    //     ]
-    // );
-    
-    $dog_id =  $request->input('dog_id');
-    $grading =  $request->input('grading');
-    $place =  $request->input('place');
-    $judge =  $request->input('judge');
-    // $gender =  $request->input('gender_dog');
-    // $class =  $request->input('class');
-    // $event_id =  $request->input('event_id');
-  
-        foreach($dog_id as $key => $value){
-            $event_result = new Event_Result;
-         $event_result->dog_id=$value;
-         $event_result->grading=$grading[$key];
-           $event_result->place=$place[$key];
-         $event_result->judge=$judge[$key];
-         $event_result->gender=$request->input('gender_dog');
-         $event_result->event_id=$request->input('event_id');
-         $event_result->class=$request->input('class');
-        $event_result->save();
-                
-        }
-        
+{
+    $dog_id = $request->input('dog_id');
+    $grading = $request->input('grading');
+    $place = $request->input('place');
+    $judge = $request->input('judge');
+    $gender = $request->input('gender_dog');
+    $event_id = $request->input('event_id');
+    $class = $request->input('class');
 
-        return redirect()->back()->with('message', 'Record added successfully');
-        //
+    foreach ($dog_id as $key => $value) {
+        $event_result = new Event_Result;
+        $event_result->dog_id = $value;
+        $event_result->grading = $grading[$key];
+        $event_result->place = $place[$key];
+        $event_result->judge = $judge[$key];
+        $event_result->gender = $gender[$key];
+        $event_result->event_id = $event_id;
+        $event_result->class = $class;
+        $event_result->save();
     }
+
+    return redirect()->back()->with('message', 'Record added successfully');
+}
+
+
+
+
+
 
     /**
      * Display the specified resource.

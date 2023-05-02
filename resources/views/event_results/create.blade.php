@@ -114,39 +114,11 @@
         </div>
           
      
-          </div>
-  
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="element-wrapper">
-  <div class="element-box-tp">
-    
-    <div class="form-desc">
-    </div>
-    <div class="element-box-tp">
-      <!--------------------
-      START - Controls Above Table
-      -------------------->
-      <div class="controls-above-table">
-        <div class="row">
-          <div class="col-sm-6">
-           
-          </div>
-          <div class="col-sm-6">
-           
-          </div>
-        </div>
-      </div>
-   <!--------------------
-      START - Table with actions
-      ------------------  -->
       <div class="table-responsive">
       
                
-<div id='event_tbl'>
+      <div id='event_tbl'>
         <table class="table table-bordered table-lg table-v2 table-striped" id="table">
           <thead>
             <tr>
@@ -210,24 +182,24 @@
                @endforeach
              </select>
              </div>
-</td>
-<!-- <td>
-          <div class="col-sm-12">
-          <select class="form-control" name="gender_dog[]">
-          <option value="">
-                  Select One
-                </option>
-                <option value="Male">
-                  Male
-                </option>
-                <option value="Female">
-                Female
-                </option>
-              </select>
-            </div>
+            </td>
+            <!-- <td>
+                      <div class="col-sm-12">
+                      <select class="form-control" name="gender_dog[]">
+                      <option value="">
+                              Select One
+                            </option>
+                            <option value="Male">
+                              Male
+                            </option>
+                            <option value="Female">
+                            Female
+                            </option>
+                          </select>
+                        </div>
 
 
-</td> -->
+            </td> -->
 
               </td>
            
@@ -237,7 +209,7 @@
           </tbody>
         </table>
         <button class="btn btn-primary"  type="submit"> Submit</button>
-        </form>
+     </form>
 
         @if(session()->has('message'))
     <div class="alert alert-success">
@@ -247,133 +219,139 @@
 
       </div>
       </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
       <!--           Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
            
 
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Dog</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      <div class="modal-body">
-        <form id="my-form">
-            @csrf        
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for="">Dog Name</label>
-                <div class="col-sm-8">
-                  <input id="dog_name" class="form-control" name="dog_name" placeholder="Enter Dog Name" type="text">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Dog</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    <div class="modal-body">
+                      <form id="my-form">
+                          @csrf        
+                          <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="">Dog Name</label>
+                              <div class="col-sm-8">
+                                <input id="dog_name" class="form-control" name="dog_name" placeholder="Enter Dog Name" type="text">
+                              </div>
+                          </div>
+                          <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for=""> DOB</label>
+                              <div class="col-sm-8">
+                                <input   class="form-control" name="dob" id="dob" type="date">
+                              </div>
+                          </div>
+                          <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for=""> Club Reg</label>
+                            <div class="col-sm-8">
+                              <input class="form-control" type="text" id="reg_no" name="reg_no">
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for=""> Microchip</label>
+                            <div class="col-sm-8">
+                              <input class="form-control" type="text" id="microchip" name="microchip" >
+                            </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for=""> Title</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="title" name="show_title" >
+                            </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                              <label class="col-form-label col-sm-4" for=""> Achievements</label>
+                            <div class="col-sm-8">
+                              <textarea class="form-control" cols="80" id="achievements" name="achievements" rows="10"></textarea>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group row">
+                        <label class="col-form-label col-sm-4" for="" > Gender</label>
+                        <div class="col-sm-8">
+                        <select class="form-control" name="gender">
+                        <option value="">
+                                Select One
+                              </option>
+                              <option value="Male">
+                                Male
+                              </option>
+                              <option value="Female">
+                              Female
+                              </option>
+                            </select>
+                          </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" for="">Select Breed</label>
+                            <div class="col-sm-8">
+                            <select class="form-control js-data-example-ajax" name="breed_id" class="breed_id">
+                            @foreach($total_breeds as $total_breed)
+                              <option  value="{{$total_breed->id}}">
+                            {{$total_breed->name}}
+                              </option>
+                              @endforeach
+                            </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" for="">Select Sire</label>
+                            <div class="col-sm-8">
+                            <select class="form-control js-data-example-ajax" name="sire_id" id="selUser"  >
+                            @foreach($maleDogs as $maleDog)
+                              <option  value="{{$maleDog->id}}">
+                            {{$maleDog->dog_name}}
+                              </option>
+                              @endforeach
+                            </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label " for="">Select Dam</label>
+                            <div class="col-sm-8">
+                            <select class="form-control js-data-example-ajax" name="dam_id" id="selUser_fe">
+                            @foreach($femaleDogs as $femaleDog)
+                              <option  value="{{$femaleDog->id}}">
+                            {{$femaleDog->dog_name}}
+                              </option>
+                              @endforeach
+                            </select>
+                            </div>
+                          </div>
+                          <div id="success-msg"> </div>
+                      <div id="msg"> </div>
+                          <div class="form-buttons-w mb-4">
+                            <button class="btn btn-primary" id="m_sub" type="submit"> Submit</button>
+                            <button class="btn btn-secondary" type="reset"> Reset</button>
+                            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
+                              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
+                            </a>
+                          </div>
+
+                      </form>
+                    </div>
+                  </div>
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for=""> DOB</label>
-                <div class="col-sm-8">
-                  <input   class="form-control" name="dob" id="dob" type="date">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for=""> Club Reg</label>
-              <div class="col-sm-8">
-                <input class="form-control" type="text" id="reg_no" name="reg_no">
-              </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for=""> Microchip</label>
-              <div class="col-sm-8">
-                <input class="form-control" type="text" id="microchip" name="microchip" >
-              </div>
-            </div>
-
-
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for=""> Title</label>
-              <div class="col-sm-8">
-                  <input class="form-control" type="text" id="title" name="show_title" >
-              </div>
-            </div>
-
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4" for=""> Achievements</label>
-              <div class="col-sm-8">
-                <textarea class="form-control" cols="80" id="achievements" name="achievements" rows="10"></textarea>
-              </div>
-            </div>
-            
-            <div class="form-group row">
-          <label class="col-form-label col-sm-4" for="" > Gender</label>
-          <div class="col-sm-8">
-          <select class="form-control" name="gender">
-          <option value="">
-                  Select One
-                </option>
-                <option value="Male">
-                  Male
-                </option>
-                <option value="Female">
-                Female
-                </option>
-              </select>
-            </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Select Breed</label>
-              <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="breed_id" class="breed_id">
-              @foreach($total_breeds as $total_breed)
-                <option  value="{{$total_breed->id}}">
-               {{$total_breed->name}}
-                </option>
-                @endforeach
-              </select>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Select Sire</label>
-              <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="sire_id" id="selUser"  >
-              @foreach($maleDogs as $maleDog)
-                <option  value="{{$maleDog->id}}">
-               {{$maleDog->dog_name}}
-                </option>
-                @endforeach
-              </select>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label " for="">Select Dam</label>
-              <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="dam_id" id="selUser_fe">
-              @foreach($femaleDogs as $femaleDog)
-                <option  value="{{$femaleDog->id}}">
-               {{$femaleDog->dog_name}}
-                </option>
-                @endforeach
-              </select>
-              </div>
-            </div>
-            <div id="success-msg"> </div>
-         <div id="msg"> </div>
-            <div class="form-buttons-w mb-4">
-              <button class="btn btn-primary" id="m_sub" type="submit"> Submit</button>
-              <button class="btn btn-secondary" type="reset"> Reset</button>
-              <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
-                <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
-              </a>
-            </div>
-
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
