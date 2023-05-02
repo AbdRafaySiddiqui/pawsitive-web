@@ -12,15 +12,15 @@
        Add Event
       </h6>
       <div class="element-box">
-        <!-- <form action="" method="post" enctype="multipart/form-data">
-        @csrf -->
+     
           <h5 class="form-header">
           Add Event
           </h5>
           <div class="form-desc">
           </div>
          
-          
+          <form action="{{ route('event_results.store') }}" method="post">
+        @csrf 
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Select Event</label>
             <div class="col-sm-8">
@@ -98,7 +98,7 @@
             <div class="form-group row mt-4">
             <label class="col-form-label col-sm-4" for=""> Gender</label>
             <div class="col-sm-8">
-            <select class="form-control" name="gender" id="gender_dog">
+            <select class="form-control" name="gender_dog" id="gender_dog">
           <option value="">
                   Select One
                 </option>
@@ -113,16 +113,9 @@
             </div>
         </div>
           
-        <div id="event-details-container"></div>
-            <div class="form-buttons-w mb-4">
-            <button class="btn btn-primary" type="submit"> Submit</button>
-            <button class="btn btn-secondary" type="reset"> Reset</button>
-            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
-              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
-            </a>
+     
           </div>
-          </div>
-        <!-- </form> -->
+  
       </div>
     </div>
   </div>
@@ -151,13 +144,8 @@
       START - Table with actions
       ------------------  -->
       <div class="table-responsive">
-      <form action="{{ route('event_results.store') }}" method="post">
-                 @csrf
-                 @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
+      
+               
 <div id='event_tbl'>
         <table class="table table-bordered table-lg table-v2 table-striped" id="table">
           <thead>
@@ -250,6 +238,13 @@
         </table>
         <button class="btn btn-primary"  type="submit"> Submit</button>
         </form>
+
+        @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+
       </div>
       </div>
       <!--           Modal -->
@@ -379,6 +374,7 @@
     </div>
   </div>
 </div>
+
 <!-- <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
 <script>
@@ -408,18 +404,7 @@ $('#table').append(
                @endforeach
              </select>
 </td>
-<td>  <select class="form-control" name="gender_dog[]">
-          <option value="">
-                  Select One
-                </option>
-                <option value="Male">
-                  Male
-                </option>
-                <option value="Female">
-                Female
-                </option>
-              </select>
-            </td>
+
 <td> <button id="remove" class="btn btn-danger">Remove</button></td>
 
              </tr>`
