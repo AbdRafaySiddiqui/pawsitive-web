@@ -8,9 +8,9 @@ use App\Models\Countries;
 
 class CountriesController extends Controller
 {
-    public function country_details($countryId)
+    public function country_details($idCountry)
 {
-    $country = Countries::find($countryId);
+    $country = Countries::where($idCountry);
 
     if (!$country) {
         return response()->json(['error' => 'country not found'], 404);

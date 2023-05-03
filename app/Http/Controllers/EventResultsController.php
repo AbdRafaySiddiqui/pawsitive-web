@@ -52,6 +52,7 @@ class EventResultsController extends Controller
     $judge = $request->input('judge');
     $gender = $request->input('gender_dog');
     $event_id = $request->input('event_id');
+    $breed_id = $request->input('breed_id');
     $class = $request->input('class');
 
     foreach ($dog_id as $key => $value) {
@@ -62,6 +63,7 @@ class EventResultsController extends Controller
         $event_result->judge = $judge[$key];
         $event_result->gender = $gender[$key];
         $event_result->event_id = $event_id;
+        $event_result->breed_id = $breed_id;
         $event_result->class = $class;
         $event_result->save();
     }

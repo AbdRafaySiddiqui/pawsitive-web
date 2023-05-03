@@ -9,12 +9,12 @@
   <div class="col-lg-12">
     <div class="element-wrapper">
       <h6 class="element-header">
-       Add Event
+       Add Event Result
       </h6>
       <div class="element-box">
      
           <h5 class="form-header">
-          Add Event
+          Add Event Result
           </h5>
           <div class="form-desc">
           </div>
@@ -577,9 +577,9 @@ function fetchJudgeDetails(judgeId) {
         }
     });
 }
-function fetchCountryDetails(countryId) {
+function fetchCountryDetails(idCountry) {
     $.ajax({
-        url: '{{ route("country_details", ":idCountry") }}'.replace(':idCountry', countryId),
+        url: '{{ route("country_details", ":idCountry") }}'.replace(':idCountry', idCountry),
         type: 'GET',
         dataType: 'json',
         success: function(response) {

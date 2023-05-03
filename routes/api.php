@@ -72,7 +72,7 @@ Route::get('club/{id}/details', [ClubController::class, 'details']);//address an
 Route::get('club-names', [ClubController::class, 'retrieve']);//working fine.
 
 //CountryController API.
-Route::get('/countries/{countryId}', 'App\Http\Controllers\API\CountriesController@country_details')->name('country_details');//working fine.
+Route::get('/countries/{idCountry}', 'App\Http\Controllers\API\CountriesController@country_details')->name('country_details');//working fine.
 
 //MiscController routes
 Route::get('countries', [MiscController::class, 'countries']);//working fine.

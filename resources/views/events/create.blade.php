@@ -252,16 +252,19 @@
             placeholder: 'Select a Club'
         });
 
-        $('#country_id').select2({
+        $('select[name="country"]').select2({
             allowClear: true,
             tags: true,
             placeholder: 'Select a Country'
+        }).on('select2:select', function (e) {
+            $(this).trigger('change');
         });
 
-        $('#city_id').select2({
+
+        $('select[name="city"]').select2({
             allowClear: true,
             tags: true,
-            placeholder: 'Select a Country'
+            placeholder: 'Select a City'
         });
         
         $('#selUser').select2({

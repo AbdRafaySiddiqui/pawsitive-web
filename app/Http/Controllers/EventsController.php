@@ -21,7 +21,7 @@ class EventsController extends Controller
     public function index()
     {
         Paginator::useBootstrap();
-        $event = Events::with('cities_name','country_name','club_name')->where('status','=','Active')->orderBy('id','DESC')->paginate('5');
+        $event = Events::with('cities_name','country_name','club_name')->where('status','=','Active')->orderBy('id','DESC')->paginate('10');
        
         return view('events/index', compact('event'));
     }
@@ -52,7 +52,7 @@ class EventsController extends Controller
 	    $events->country = $request->country;
 	    $events->start_date = $request->start_date;
         $events->end_date = $request->end_date;
-	    // $events->judge_id = $request->judge_id;
+	    $events->judge_id = $request->judge_id;
         $events->save();
 
         if(is_array($request->judge_id))

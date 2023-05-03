@@ -18,7 +18,7 @@ class ClubsController extends Controller
     public function index()
     {
         Paginator::useBootstrap();
-        $club = Clubs::orderBy('id','DESC')->paginate('5');
+        $club = Clubs::where('status', 'Active')->orderBy('id', 'DESC')->paginate(10);
         
         return view('club.index',compact('club'));
     }
@@ -87,43 +87,40 @@ class ClubsController extends Controller
     public function edit($id)
     { 
         $et_club = Clubs::find($id);
-        $total_countries = Countries::get();
+        $countries = Countries::get();
         $total_cities = Cities::get();
 
-        return view('club.edit', compact('et_club','total_cities','total_countries')); 
+        return view('club.edit', compact('et_club','total_cities','countries')); 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required',
-            'city'=>'required',
-            'country'=>'required',
-            'phone'=>'required'
+            'name' => 'required',
+            'email' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'phone' => 'required'
         ]); 
         $club = Clubs::find($id);
-        // Getting values from the blade template form
-	    $club->name = $request->name;
-	    $club->email = $request->email;
-	    $club->city = $request->city;
-	    $club->country = $request->country;
-	    $club->phone = $request->phone;
-        $club->affiliation = $request->affiliation;
-        $club->update();
-
-        try {
-            $club->update();
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while updating the record. Please try again later.');
+        if (!$club) {
+            return redirect()->back()->with('error', 'The club could not be found.');
         }
-    
+        // Getting values from the blade template form
+        $club->name = $request->name;
+        $club->email = $request->email;
+        $club->city = $request->city;
+        $club->country = $request->country;
+        $club->phone = $request->phone;
+        $club->affiliation = $request->affiliation;
+        $club->save();
+
         return redirect()->back()->with('message', 'Record updated successfully');
-    
     }
+
 
     /**
      * Remove the specified resource from storage.

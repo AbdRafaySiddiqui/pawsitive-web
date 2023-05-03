@@ -13,7 +13,7 @@ class EventController extends Controller
     {
         $results = DB::table('event_results')
                 ->join('dogs', 'event_results.dog_id', '=', 'dogs.id')
-                ->join('breeds', 'dogs.breed_id', '=', 'breeds.id')
+                // ->join('breeds', 'dogs.breed_id', '=', 'breeds.id')
                 ->join('events', 'event_results.event_id', '=', 'events.id')
                 ->join('clubs', 'events.club_id', '=', 'clubs.id')
                 ->join('countries', 'events.country', '=', 'countries.idCountry')
@@ -31,6 +31,7 @@ class EventController extends Controller
                 ->get();
         return response()->json(['event_detailz' => $results]);
     }
+
    
     public function filterEvents(Request $request)
     {

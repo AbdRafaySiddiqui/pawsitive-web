@@ -29,7 +29,7 @@ class EventResultController extends Controller
                          'countries.countryCode',
                          'events.id AS eventId')
                 ->orderBy('events.start_date', 'desc')
-                ->take(10)
+                ->take(20)
                 ->get();
                 return response()->json(['event_result' => $results]);
     }

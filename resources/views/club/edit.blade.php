@@ -52,9 +52,9 @@
                                           <div class="form-group">
                                               <label class="col-form-label" for=""> Countries</label>
                                               <select class="form-control" name="country" id="country">
-                                                  @foreach ($total_countries as $countries)
-                                                  <option value="{{$countries->id}}"  {{ $countries->idCountry == $et_club->country ? 'selected' : '' }}>
-                                                          {{ $countries->countryName }}
+                                                  @foreach ($countries as $country)
+                                                      <option value="{{ $country->idCountry }}">
+                                                          {{ $country->countryName }}
                                                       </option>
                                                   @endforeach
                                               </select>
@@ -64,11 +64,7 @@
                                           <div class="form-group">
                                               <label class="col-form-label" for=""> Cities</label>
                                               <select class="form-control" name="city" id="city">
-                                              @foreach($total_cities as $cities)
-                                                  <option  value="{{$cities->id}} "  {{ $cities->id == $et_club->city ? 'selected' : '' }}>
-                                                  {{$cities->city}}
-                                                      </option>
-                                                  @endforeach
+                                              <option value="">Select City</option>
                                               </select>
                                           </div>
                                         </div>
@@ -90,7 +86,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                             <label class="col-form-label" for="">Affiliation with</label>
-                                            <input class="form-control" value="{{$et_club->affiliation}}" name="affiliation" placeholder="Enter Email" type="email">
+                                            <input class="form-control" value="{{$et_club->affiliation}}" name="affiliation" placeholder="Enter Affiliation." type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -116,4 +112,61 @@
       </div>
       <div class="display-type"></div>
     </div>
+
+
+    <script>
+    // JavaScript
+    $(document).ready(function() {
+        $('#country').on('change', function() {
+            var idCountry = $(this).val();
+            if(idCountry) {
+                $.ajax({
+                    url: "{{ url('api/cities') }}/"+idCountry,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#city').empty();
+                        $('#city').append('<option value="">Select City</option>');
+                        $.each(data, function(key, value) {
+                            $('#city').append('<option value="'+ value.id +'">'+ value.city +'</option>');
+                        });
+                        $('#city').prop('disabled', false);
+                    }
+                });
+            } else {
+                $('#city').empty();
+                $('#city').prop('disabled', true);
+            }
+        });
+    });
+
+    </script>
+
+    
+    <script src="{{ asset('public/select2-develop/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('public/select2-develop/dist/js/i18n/pt-BR.js') }}"></script>
+
+    <script>
+
+        $('#club_id').select2({
+            allowClear: true,
+            tags: true,
+            placeholder: 'Select a Club'
+        });
+
+        $('select[name="country"]').select2({
+            allowClear: true,
+            tags: true,
+            placeholder: 'Select a Country'
+        }).on('select2:select', function (e) {
+            $(this).trigger('change');
+        });
+
+
+        $('select[name="city"]').select2({
+            allowClear: true,
+            tags: true,
+            placeholder: 'Select a City'
+        });
+    </script>
 @endsection
