@@ -133,7 +133,7 @@
           ------------------  -->
                             <div class="controls-below-table">
                                 <div class="table-records-pages">
-                                    {{ $event->links() }}
+                                    <!-- {{ $event->links() }} -->
                                 </div>
                             </div>
 

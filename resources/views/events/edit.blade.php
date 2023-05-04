@@ -10,7 +10,7 @@
                     <div class="col-lg-12">
                         <div class="element-wrapper">
                             <h6 class="element-header">
-                                Event
+                                Edit Event
                             </h6>
                             <div class="element-box">
                                 <form action="{{ route('events.update', $events->id) }}" method="post"
@@ -19,7 +19,7 @@
                                     @method('PUT')
 
                                     <h5 class="form-header">
-                                        Event
+                                    Edit Event
                                     </h5>
                                     <div class="form-desc">
                                     </div>
@@ -85,7 +85,7 @@
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="col-form-label" for=""> Country</label>
-                                            <select class="form-control" name="country" id="country_id">
+                                            <select class="form-control" name="country" id="country">
                                               <option></option>
                                                 @foreach ($total_countries as $countries)
                                                     <option value="{{ $countries->idCountry }}"
@@ -99,8 +99,8 @@
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="col-form-label" for=""> City</label>
-                                            <select class="form-control" name="city" id="city_id">
-                                              <option></option>
+                                            <select class="form-control" name="city" id="city">
+                                            <option value="">Select City</option>
                                                 @foreach ($total_cities as $cities)
                                                     <option value="{{ $cities->id }}"
                                                         {{ $cities->id == $events->city ? 'selected' : '' }}>
@@ -228,26 +228,58 @@
     <div class="display-type"></div>
     </div>
 
+    <script>
+
+        // JavaScript
+        $(document).ready(function() {
+        $('#country').on('change', function() {
+            var idCountry = $(this).val();
+            if(idCountry) {
+                $.ajax({
+                    url: "{{ url('api/cities') }}/"+idCountry,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#city').empty();
+                        $('#city').append('<option value="">Select City</option>');
+                        $.each(data, function(key, value) {
+                            $('#city').append('<option value="'+ value.id +'">'+ value.city +'</option>');
+                        });
+                        $('#city').prop('disabled', false);
+                    }
+                });
+            } else {
+                $('#city').empty();
+                $('#city').prop('disabled', true);
+            }
+        });
+    });
+    
+    </script>
+
     <script src="{{ asset('public/select2-develop/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('public/select2-develop/dist/js/i18n/pt-BR.js') }}"></script>
     <script>
 
-$('#club_id').select2({
+        $('#club_id').select2({
             allowClear: true,
             tags: true,
             placeholder: 'Select a Club'
         });
 
-        $('#country_id').select2({
+        $('select[name="country"]').select2({
             allowClear: true,
             tags: true,
             placeholder: 'Select a Country'
+        }).on('select2:select', function (e) {
+            $(this).trigger('change');
         });
 
-        $('#city_id').select2({
+
+        $('select[name="city"]').select2({
             allowClear: true,
             tags: true,
-            placeholder: 'Select a Country'
+            placeholder: 'Select a City'
         });
 
         $('#selUser').select2({

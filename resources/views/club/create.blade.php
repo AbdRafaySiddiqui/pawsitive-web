@@ -143,9 +143,39 @@
         });
     });
 
+    </script>
+
+    
+    <script src="{{ asset('public/select2-develop/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('public/select2-develop/dist/js/i18n/pt-BR.js') }}"></script>
+
+    <script>
+
+        $('#club_id').select2({
+            allowClear: true,
+            tags: true,
+            placeholder: 'Select a Club'
+        });
+
+        $('select[name="country"]').select2({
+            allowClear: true,
+            tags: true,
+            placeholder: 'Select a Country'
+        }).on('select2:select', function (e) {
+            $(this).trigger('change');
+        });
+
+
+        $('select[name="city"]').select2({
+            allowClear: true,
+            tags: true,
+            placeholder: 'Select a City'
+        });
+    </script>
 
 
 
+<script>
 
 function previewImages() {
 
@@ -179,4 +209,6 @@ function readAndPreview(file) {
 }
 
     </script>
+
+    
 @endsection

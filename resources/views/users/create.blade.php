@@ -103,4 +103,5 @@
             placeholder: 'Select a Role'
         });
     </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 @endsection

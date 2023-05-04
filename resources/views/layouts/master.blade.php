@@ -20,7 +20,7 @@
     <link href="{{asset('public/bower_components/slick-carousel/slick/slick.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/fullcalendar/dist/fullcalendar.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('public/bower_components/datatables.net-bs/css/dataTables.bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/dropzone/dist/dropzone.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/custom/style.css')}}" rel="stylesheet">
     <!-- <link href="{{asset('public/select2-develop/dist/css/select2.min.css')}}" rel="stylesheet" /> -->
@@ -469,11 +469,7 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
-                    @if(Auth::user()->hasRole('admin'))
     <a href="{{route('club.create')}}">Add Club</a>
-@else
-    <a href="{{route('club.create')}}">Writer Club</a>
-@endif      
                       <a href="{{route('club.index')}}">All Club</a>
                     </li>
                     
@@ -795,6 +791,7 @@
         <script src="{{asset('public/bower_components/bootstrap/js/dist/popover.js')}}"></script>
         <script src="{{asset('public/js/demo_customizer.js?version=4.4.0')}}"></script>
         <script src="{{asset('public/js/main.js?version=4.4.0')}}"></script>
+        <script src="{{asset('public/js/dataTables.bootstrap4.min.js')}}"></script>
     <!-- <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script> -->
 
 <!-- <script src="{{asset('public/bower_components/summernote/summernote-bs4.js')}}"></script> -->
@@ -812,7 +809,7 @@
 
         </script>
  
- <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script> -->
 <!-- <script>
     var $j = jQuery.noConflict();
     // Use $j instead of $ to reference the jQuery library

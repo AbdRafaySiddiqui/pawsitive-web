@@ -1,5 +1,5 @@
 @extends('layouts.master')
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
+
 @section('content')
     <div class="content-w" style="width: 100%">
 
@@ -47,7 +47,7 @@
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label class="col-form-label" for="">Select Judge</label>
-                                          <select class="form-control js-data-example-ajax" name="judge_id" id="selUser">
+                                          <select class="form-control js-data-example-ajax" name="judge_id[]" id="selUser">
                                               <option value="0"> Select Judge </option>
                                               @foreach ($judges as $judge)
                                                   <option value="{{ $judge->id }}">
@@ -252,16 +252,19 @@
             placeholder: 'Select a Club'
         });
 
-        $('#country_id').select2({
+        $('select[name="country"]').select2({
             allowClear: true,
             tags: true,
             placeholder: 'Select a Country'
+        }).on('select2:select', function (e) {
+            $(this).trigger('change');
         });
 
-        $('#city_id').select2({
+
+        $('select[name="city"]').select2({
             allowClear: true,
             tags: true,
-            placeholder: 'Select a Country'
+            placeholder: 'Select a City'
         });
         
         $('#selUser').select2({

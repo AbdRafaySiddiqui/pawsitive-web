@@ -8,6 +8,7 @@ use App\Models\Breeds;
 use App\Models\Clubs;
 use App\Models\Events;
 use App\Models\Event_Result;
+use App\Models\EventJudges;
 use App\Models\Dogs;
 use App\Models\Countries;
 use Illuminate\Support\Facades\DB;
@@ -19,10 +20,10 @@ class EventResultController extends Controller
   {
     if($request->has('id')){
       $id = $request->id;
-      $data = Events::select('events.id','judges.id as jud_id','judges.full_name','events.judge_id')
-      ->leftjoin('judges','judges.id','=','events.judge_id')
+      $data = EventJudges::select('event_judges.id','judges.id as jud_id','judges.full_name','event_judges.judge_id')
+      ->leftjoin('judges','judges.id','=','event_judges.judge_id')
 
-      ->where('events.id', '=', $id)
+      ->where('event_judges.event_id', '=', $id)
       ->get();
       }
       else{
@@ -32,7 +33,7 @@ class EventResultController extends Controller
           ->orderBy('dog_name','ASC')
                 ->get();
     }
-    return response()->json($data);
+    return response()->json(["judge"=>$data]);
   }
 
     public function result()
@@ -51,7 +52,7 @@ class EventResultController extends Controller
                          'countries.countryCode',
                          'events.id AS eventId')
                 ->orderBy('events.start_date', 'desc')
-                ->take(10)
+                ->take(20)
                 ->get();
                 return response()->json(['event_result' => $results]);
     }
