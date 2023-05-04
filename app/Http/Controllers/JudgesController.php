@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Judges;
 use League\Csv\Writer;
+use Illuminate\Pagination\Paginator;
 
 
 class JudgesController extends Controller
@@ -16,7 +17,8 @@ class JudgesController extends Controller
      */
     public function index()
     {
-        $judge = Judges::where('status','=','Active')->orderBy('id','DESC')->paginate('5');
+        Paginator::useBootstrap();
+        $judge = Judges::where('status','=','1')->orderBy('id','DESC')->paginate('10');
        
         return view('judges/index', compact('judge'));
     }
@@ -46,7 +48,7 @@ class JudgesController extends Controller
 
         if(!empty($imageName) && !empty($imagesig)){
 
-             $create =  new Judges;
+        $create =  new Judges;
         $create->full_name = $request->full_name;
         $create->position_in_club = $request->position_in_club;
         $create->facebook = $request->facebook;

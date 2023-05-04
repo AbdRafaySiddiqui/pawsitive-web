@@ -28,6 +28,7 @@ class EventController extends Controller
                         'events.id AS eventId')
                 ->where('breeds.id', '=', $breed_id)
                 ->orderBy('events.start_date', 'desc')
+                ->distinct('events.id')
                 ->get();
         return response()->json(['event_detailz' => $results]);
     }
@@ -49,10 +50,11 @@ class EventController extends Controller
                         'countries.countryName AS country',
                         'countries.countryCode',
                         'judges.full_name AS judge',
-                        'events.id AS eventId');
+                        'events.id AS eventId')
+                        ->distinct('events.id');
         // Apply filters based on request parameters
         if ($request->has('start_date')) {
-            $start_date = strtotime($request->input('start_date'));
+            $start_date = $request->input('start_date');
             $query->where('events.start_date', '>=', $start_date);
         }
         if ($request->has('end_date')) {

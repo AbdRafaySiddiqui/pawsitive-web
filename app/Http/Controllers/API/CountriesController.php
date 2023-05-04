@@ -10,7 +10,7 @@ class CountriesController extends Controller
 {
     public function country_details($idCountry)
 {
-    $country = Countries::where($idCountry);
+    $country = Countries::find($idCountry);
 
     if (!$country) {
         return response()->json(['error' => 'country not found'], 404);

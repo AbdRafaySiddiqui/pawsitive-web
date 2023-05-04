@@ -9,7 +9,7 @@
   <div class="col-lg-12">
     <div class="element-wrapper">
       <h6 class="element-header">
-       Add Event Result
+       Add Event Result Result
       </h6>
       <div class="element-box">
      
@@ -38,7 +38,7 @@
         <div class="row">
           <div class="col-sm-4">
           <div class="form-group">
-              <label class="col-form-label" for="">Date</label>
+              <label class="col-form-label" for="">Start Date</label>
                 <input class="form-control" name="date" id="event-date" type="date">
               </div>
               </div>
@@ -57,7 +57,7 @@
               <div class="col-sm-4">
             <div class="form-group">
               <label class="col-form-label" for="">Judge Name</label>
-                <input class="form-control" name="date" id="judge-name" placeholder="Enter judge" type="text">
+                <input class="form-control" name="judge" id="judge-name" placeholder="Enter judge" type="text">
               </div>
             </div>
             </div>
@@ -71,12 +71,7 @@
             <div class="col-sm-4">
             <div class="form-group">
               <label class="col-form-label" for="">Class</label>
-              <select class="form-control" name="class" id="class">
-              @foreach($dog_class as $dog_classes)
-                        <option value="{{$dog_classes->id}}">
-                            {{$dog_classes->class}}
-                        </option>
-                    @endforeach
+              <input class="form-control" name="class" placeholder="Enter Class" type="text">
 </select>
               </div>
             </div>
@@ -84,7 +79,7 @@
             <div class="form-group">
           <label class="col-form-label" for="" >Select Breed </label>
           <select class="form-control" name="breed_id" id="breed_id">
-                    <!-- <option> Select</option> -->
+                     <option> Select</option> 
                     @foreach($total_breeds as $total_breed)
                         <option value="{{$total_breed->id}}">
                             {{$total_breed->name}}
@@ -151,6 +146,7 @@
 
               <div class="col-md-12">
               <select class="form-control js-data-example-ajax dog" name="dog_id[]" id="all_dogs">
+                  <option></option>
               @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
                {{$dog->dog_name}}
@@ -175,11 +171,11 @@
              
              <div class="col-sm-12"> 
              <select class="form-control js-data-example-ajax" name="judge[]" id="judge">
-             @foreach($total_judges as $judge)
-               <option  value="{{$judge->id}}">
-              {{$judge->full_name}}
+             
+               <option  value="">
+           
                </option>
-               @endforeach
+
              </select>
              </div>
             </td>
@@ -303,6 +299,7 @@
                             <label class="col-sm-4 col-form-label" for="">Select Breed</label>
                             <div class="col-sm-8">
                             <select class="form-control js-data-example-ajax" name="breed_id" class="breed_id">
+                                <option></option>
                             @foreach($total_breeds as $total_breed)
                               <option  value="{{$total_breed->id}}">
                             {{$total_breed->name}}
@@ -315,7 +312,8 @@
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="">Select Sire</label>
                             <div class="col-sm-8">
-                            <select class="form-control js-data-example-ajax" name="sire_id" id="selUser"  >
+                            <select class="form-control js-data-example-ajax" name="sire_id" id="selUser">
+                                                                <option></option>
                             @foreach($maleDogs as $maleDog)
                               <option  value="{{$maleDog->id}}">
                             {{$maleDog->dog_name}}
@@ -410,7 +408,55 @@ $('#table').append(
         
         
 
+ $('#judge').select2({
+    allowClear: true,
+    placeholder: 'Select an items',
+    language: {
+      noResults: function (term) {
+        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+      }
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    }
+    ,
+    ajax: {
+      type: "get",
+      url: function(){
+        var id=$('#event_id :selected').val();
+        console.log(id);
+        return 'https://inspedium.xyz/pawsitive-web/api/event_results/judge?id='+id;
+      },
+      dataType: 'json',
+  
+      delay: 250,
+       data: function (params) {
+              return {
+                  q: $.trim(params.term)
 
+              };   
+
+
+          },
+      processResults: function (data) {
+        // console.log(gender);
+        return {
+          results:  $.map(data, function (item) {
+                return {
+          //  _token: CSRF_TOKEN,
+  
+                    text: item.full_name,
+                    id: item.jud_id,
+                    
+                  }
+                  // $('#all_dogs').empty().append(item);
+            })
+        };
+      },
+      
+      cache: true
+    }
+  });         
 
 $('#gender_dog').on('change', function() {
   $('#event_tbl').show();
@@ -439,7 +485,7 @@ $('#all_dogs').select2({
         var id=$('#breed_id :selected').val();
         var gender=$('#gender_dog').val();
         
-        return 'http://localhost/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
+        return 'https://inspedium.xyz/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
       },
       dataType: 'json',
   
@@ -603,7 +649,7 @@ $('#event_id').on('change', function() {
         success: function(response) {
             // Update HTML content of container element with event details
             // Set values of input fields
-            $('#event-date').val(response.date);
+            $('#event-date').val(response.start_date);
             $('#club-id').val(response.club_id);
             $('#judge-id').val(response.judge_id);
             $('#country').val(response.country);
