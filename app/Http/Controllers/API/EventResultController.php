@@ -140,7 +140,7 @@ class EventResultController extends Controller
               ->leftjoin('dogs', 'dogs.id', '=', 'event_results.dog_id')
               ->leftjoin('award_system', 'award_system.id', '=', 'event_results.award_id')
               ->leftjoin('users', 'users.id', '=', 'dogs.dog_owner')
-              ->leftjoin('dog_classes', 'dog_classes.id', '=', 'event_results.class')
+              // ->leftjoin('dog_classes', 'dog_classes.id', '=', 'event_results.class')
                ->select(
                        //  'breeds.name AS breedName',
                        'event_results.grading AS grading',
@@ -148,9 +148,9 @@ class EventResultController extends Controller
                         'dogs.dog_name AS dogName',
                         
                         'award_system.award_title AS awards',
-                        'dog_classes.class AS class',
+                        'event_results.class AS class',
                         'dogs.id AS dogId',
-                        'dogs.gender AS gender'
+                        'event_results.gender AS gender'
                         )
                         ->where('event_results.event_id','=',$id)
                         ->get();

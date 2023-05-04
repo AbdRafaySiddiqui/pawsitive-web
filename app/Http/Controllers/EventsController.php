@@ -9,6 +9,7 @@ use App\Models\Breeds;
 use App\Models\Events;
 use App\Models\judges;
 use App\Models\Countries;
+use Illuminate\Pagination\Paginator;
 
 class EventsController extends Controller
 {
@@ -17,8 +18,8 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $event = Events::get();
-       
+        Paginator::useBootstrap();
+        $event = Events::paginate(10);
         return view('events/index', compact('event'));
     }
 
