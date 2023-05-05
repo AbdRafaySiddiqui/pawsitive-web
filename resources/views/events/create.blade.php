@@ -33,7 +33,7 @@
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for=""> Select Club</label>
-                                                <select class="form-control select2" name="club_id" id="club_id">
+                                                <select class="form-control js-data-example-ajax" name="club_id" id="club_id">
                                                     <option></option>
                                                     @foreach ($total_clubs as $clubs)
                                                         <option value="{{ $clubs->id }}">
@@ -47,7 +47,7 @@
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label class="col-form-label" for="">Select Judge</label>
-                                          <select class="form-control" name="judge_id[]" id="selUser" multiple>
+                                          <select class="form-control js-data-example-ajax" name="judge_id[]" id="selUser" multiple>
                                               @foreach ($judges as $judge)
                                                   <option value="{{ $judge->id }}">
                                                       {{ $judge->full_name }}
@@ -76,7 +76,7 @@
                                     <div class="row">
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label class="col-form-label" for=""> Country</label>
+                                            <label class="col-form-label js-data-example-ajax" for=""> Country</label>
                                             <select class="form-control" name="country" id="country">
                                                 <option></option>
                                                 @foreach ($total_countries as $countries)
@@ -90,7 +90,7 @@
                                       <div class="col-sm-6">
                                       <div class="form-group">
                                               <label class="col-form-label" for=""> City</label>
-                                              <select class="form-control" name="city" id="city">
+                                              <select class="form-control js-data-example-ajax" name="city" id="city">
                                               <option value="">Select City</option>
                                               </select>
                                           </div>
