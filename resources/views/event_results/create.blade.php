@@ -424,7 +424,7 @@ $('#table').append(
            </tr>`
         
 );
-if($("#judge").is("select")) {
+if($("#"+judgeId).is("select")) {
 $('#' + judgeId).select2();
 }
 $('#' + selectId).select2();
