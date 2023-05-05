@@ -213,3 +213,13 @@ star rating style BY HAMZA end
 body.color-scheme-dark .form-control, .content-panel.color-scheme-dark .form-control{
   color: #ffffff !important;
 }
+.span_judge{
+  display: none;
+}
+
+.select_judge{
+  display: none;
+}
+#judge.select2-container{
+  display: none;
+}
