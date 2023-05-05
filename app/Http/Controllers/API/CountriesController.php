@@ -8,21 +8,15 @@ use App\Models\Countries;
 
 class CountriesController extends Controller
 {
-    public function country_details($countryId)
+    public function country_details($idCountry)
 {
-    $country = Countries::find($countryId);
+    $country = Countries::find($idCountry);
 
     if (!$country) {
         return response()->json(['error' => 'country not found'], 404);
     }
 
     return $country;
-}
-
-public function getCountries()
-{
-    $countries = Countries::select('idCountry', 'countryName')->get();
-    return response()->json(['countries' => $countries], 200);
 }
 
 }

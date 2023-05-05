@@ -6,7 +6,7 @@
           <div class="content-panel-toggler">
             <i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span>
           </div>
-          <div class="content-i">
+          <div class="content-i" style="100%">
             <div class="content-box">
 <div class="element-wrapper">
   <div class="element-box-tp">
@@ -24,14 +24,16 @@
           <div class="col-sm-6">
             <a class="btn btn-sm btn-secondary" href="{{ route('download-breed-csv') }}">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('breeds.create')}}">Add Breed</a>
           </div>
+          <div class="col-sm-6">
+              <label></label>
+           <input type="text" class="form-control form-control" id="searchInput" placeholder="Search...">
+          </div>
 
         </div>
       </div> 
 
-    
-
                             <div class="table-responsive">
-                                <table class="table table-bordered table-lg table-v2 table-striped">
+                                <table id="myTable" class="table table-bordered table-lg table-v2 table-striped">
                                     <thead>
                                         <tr>
                                             <th>
@@ -90,7 +92,7 @@
 
                             <div class="controls-below-table">
         <div class="table-records-info">
-          Showing records 1 - 5
+          Showing records 1 - 10
         </div>
         <div class="table-records-pages">
         {{$breeds->links()}}
@@ -101,4 +103,32 @@
     </div>
     <div class="display-type"></div>
     </div>
+
+    <script>
+        
+       $(document).ready(function() {
+    $("#searchInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tbody tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    // Fix for pagination links
+    $(document).on('click', '.pagination a', function(event){
+        event.preventDefault(); 
+        var url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            success: function(data) {
+                $('#myTable').html(data);
+            }
+        });
+    });
+});
+
+
+
+        
+    </script>
 @endsection

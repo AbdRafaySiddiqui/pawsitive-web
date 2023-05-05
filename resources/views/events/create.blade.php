@@ -1,5 +1,5 @@
 @extends('layouts.master')
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
+
 @section('content')
     <div class="content-w" style="width: 100%">
 
@@ -47,7 +47,7 @@
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label class="col-form-label" for="">Select Judge</label>
-                                          <select class="form-control js-data-example-ajax" name="judge_id" id="selUser">
+                                          <select class="form-control js-data-example-ajax" name="judge_id[]" id="selUser">
                                               <option value="0"> Select Judge </option>
                                               @foreach ($judges as $judge)
                                                   <option value="{{ $judge->id }}">
@@ -78,7 +78,7 @@
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="col-form-label" for=""> Country</label>
-                                            <select class="form-control js-data-example-ajax" name="country" id="country_id">
+                                            <select class="form-control" name="country" id="country">
                                                 <option></option>
                                                 @foreach ($total_countries as $countries)
                                                     <option value="{{ $countries->idCountry }}">
@@ -89,16 +89,12 @@
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="col-form-label" for=""> City</label>
-                                            <select class="form-control select2" name="city" id="city_id">
-                                                <option></option>
-                                                @foreach ($total_cities as $cities)
-                                                    <option value="{{ $cities->id }}">
-                                                        {{ $cities->city }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                      <div class="form-group">
+                                              <label class="col-form-label" for=""> City</label>
+                                              <select class="form-control" name="city" id="city">
+                                              <option value="">Select City</option>
+                                              </select>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
@@ -213,6 +209,35 @@
     <div class="display-type"></div>
     </div>
 
+    <script>
+
+        // JavaScript
+    $(document).ready(function() {
+        $('#country').on('change', function() {
+            var idCountry = $(this).val();
+            if(idCountry) {
+                $.ajax({
+                    url: "{{ url('api/cities') }}/"+idCountry,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#city').empty();
+                        $('#city').append('<option value="">Select City</option>');
+                        $.each(data, function(key, value) {
+                            $('#city').append('<option value="'+ value.id +'">'+ value.city +'</option>');
+                        });
+                        $('#city').prop('disabled', false);
+                    }
+                });
+            } else {
+                $('#city').empty();
+                $('#city').prop('disabled', true);
+            }
+        });
+    });
+
+    </script>
+
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
     <script src="{{ asset('public/select2-develop/dist/js/select2.full.min.js') }}"></script>
@@ -227,16 +252,19 @@
             placeholder: 'Select a Club'
         });
 
-        $('#country_id').select2({
+        $('select[name="country"]').select2({
             allowClear: true,
             tags: true,
             placeholder: 'Select a Country'
+        }).on('select2:select', function (e) {
+            $(this).trigger('change');
         });
 
-        $('#city_id').select2({
+
+        $('select[name="city"]').select2({
             allowClear: true,
             tags: true,
-            placeholder: 'Select a Country'
+            placeholder: 'Select a City'
         });
         
         $('#selUser').select2({

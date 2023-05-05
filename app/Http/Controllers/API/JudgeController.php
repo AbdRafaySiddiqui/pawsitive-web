@@ -14,17 +14,15 @@ class JudgeController extends Controller
                          ->where('status','=','Active')
                          ->get();
 
-        foreach ($judges as $judge) {
-            if ($judge->image != null) {
-                if (file_exists(storage_path('app/public/judge_images/'.$judge->image))) {
-                    $judge->image = asset('storage/app/public/judge_images').'/'.$judge->image;
-                } else {
-                    $judge->image = asset('storage/app/public/noimage.png');
-                }
+         foreach ($judges as $judge) {
+        if ($judge->image != null) {
+            if (file_exists(storage_path('app/public/judge_imgs/'.$judge->image))) {
+                $judge->image = asset('storage/app/public/judge_imgs').'/'.$judge->image;
             } else {
                 $judge->image = asset('storage/app/public/noimage.png');
             }
         }
+    }
 
         return response()->json(['judges' => $judges], 200);
     }
@@ -37,14 +35,14 @@ class JudgeController extends Controller
 
         if($judge->image != null)
         {
-            if(file_exists(storage_path('app/public/judge_images/'.$judge->image)))
-            {
-                $judge->image = asset('storage/app/public/judge_images').'/'.$judge->image;
-            }
-            else
-            {
-                $judge->image = asset('storage/app/public/noimage.png');
-            }
+            if(file_exists(storage_path('/app/public/judge_imgs/'.$judge->image)))
+                {
+                    $judge->profilePhoto = asset('storage/app/public/judge_imgs'.'/'.$judge->image);
+                }
+                else
+                {
+                    $judge->profilePhoto = asset('storage/app/public/noimage.png');
+                }
         }
         else
         {

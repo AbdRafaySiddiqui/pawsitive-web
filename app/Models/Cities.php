@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class cities extends Model
 {
-    use HasFactory;
-    protected $table = 'cities';
+    public function country()
+    {
+        return $this->belongsTo('App\Models\Countries','country','idCountry');
+    }
 }

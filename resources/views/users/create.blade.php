@@ -20,45 +20,55 @@
                                     </h5>
                                     <div class="form-desc">
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label" for="">Name</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" name="name" placeholder="Enter Name"
-                                                type="text">
+
+
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="">Name</label>
+                                            <input class="form-control" name="name" placeholder="Enter Name" type="text">
+                                        </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                            <label class="col-form-label" for="">Username</label>
+                                            <input class="form-control" name="username" placeholder="Enter Username" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                            <label class="col-form-label" for="">Email</label>
+                                            <input class="form-control" name="email" placeholder="Enter Email" type="email">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label" for="">Username</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" name="username" placeholder="Enter Username"
-                                                type="text">
+
+                                    <div class="row">
+                                        
+                                     
+                                        <div class="col-sm-4">
+                                         <div class="form-group">
+                                            <label class="col-form-label" for="">Password</label>
+                                            <input class="form-control" name="password" placeholder="Enter Password" type="password">
+                                         </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label" for="">Email</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" name="email" placeholder="Enter Email"
-                                                type="email">
+                                    
+
+
+                                    <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="col-form-label" for=""> Role</label>
+                                              <select class="form-control" name="role_id" id="role_id">
+                                                  @foreach ($roles as $role)
+                                                      <option value="{{ $role->id }}">
+                                                          {{ $role->name }}
+                                                      </option>
+                                                  @endforeach
+                                              </select>
+                                          </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label" for="">Password</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control" name="password" placeholder="Enter Password"
-                                                type="password">
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label" for="">Role</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control " name="role_id" id="role_id">
-                                                <option></option>
-                                                @foreach ($roles as $role)
-                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
 
 
                                     <div class="form-buttons-w mb-4">
@@ -93,4 +103,5 @@
             placeholder: 'Select a Role'
         });
     </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 @endsection

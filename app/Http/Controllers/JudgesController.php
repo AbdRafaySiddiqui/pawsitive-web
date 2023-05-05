@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Judges;
 use League\Csv\Writer;
+use Illuminate\Pagination\Paginator;
 
 
 class JudgesController extends Controller
@@ -16,7 +17,8 @@ class JudgesController extends Controller
      */
     public function index()
     {
-        $judge = Judges::where('status','=','Active')->orderBy('id','DESC')->paginate('5');
+        Paginator::useBootstrap();
+        $judge = Judges::where('status','=','Active')->orderBy('id','DESC')->paginate('10');
        
         return view('judges/index', compact('judge'));
     }
@@ -34,23 +36,108 @@ class JudgesController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->hasFile('img') && $request->hasFile('sig')) {
-            $imageName = $request->img->getClientOriginalName();
-            $request->img->storeAs('public/judge_images', $imageName);
-            
-            $imagesig = $request->sig->getClientOriginalName();
-            $request->sig->storeAs('public/judge_signatures', $imagesig);
+        if(!empty(request()->img)){
+            $imageName = time().'.'.request()->img->getClientOriginalExtension();
+                request()->img->move(storage_path('app/public/judge_images'), $imageName);
         }
-        
+
+        if(!empty(request()->sig)){
+                $imagesig = time().'.'.request()->sig->getClientOriginalExtension();
+                request()->sig->move(storage_path('app/public/judge_signatures'), $imagesig);
+        }
+
+        if(!empty($imageName) && !empty($imagesig)){
+
         $create =  new Judges;
         $create->full_name = $request->full_name;
         $create->position_in_club = $request->position_in_club;
+        $create->facebook = $request->facebook;
+        $create->instagram = $request->instagram;
+        $create->linkedIn = $request->linkedIn;
+        $create->twitter = $request->twitter;
         $create->description = htmlentities($request->description);
         $create->image = $imageName;
         $create->signature = $imagesig;
         $link = str_replace(" ", "-", $request->full_name);
         $create->url_link = $link; 
         $create->save();
+
+            }elseif(!empty($imageName) && empty($imagesig)){
+
+                $create =  new Judges;
+        $create->full_name = $request->full_name;
+        $create->position_in_club = $request->position_in_club;
+        $create->facebook = $request->facebook;
+        $create->instagram = $request->instagram;
+        $create->linkedIn = $request->linkedIn;
+        $create->twitter = $request->twitter;
+        $create->description = htmlentities($request->description);
+        $create->image = $imageName;
+        $link = str_replace(" ", "-", $request->full_name);
+        $create->url_link = $link; 
+        $create->save();
+
+            }elseif(empty($imageName) && !empty($imagesig)){
+
+                $create =  new Judges;
+                $create->full_name = $request->full_name;
+                $create->position_in_club = $request->position_in_club;
+                $create->facebook = $request->facebook;
+                $create->instagram = $request->instagram;
+                $create->linkedIn = $request->linkedIn;
+                $create->twitter = $request->twitter;
+                $create->description = htmlentities($request->description);
+                $create->signature = $imagesig;
+                $link = str_replace(" ", "-", $request->full_name);
+                $create->url_link = $link; 
+                $create->save();
+
+            }elseif(!empty($imageName)){
+
+                $create =  new Judges;
+        $create->full_name = $request->full_name;
+        $create->position_in_club = $request->position_in_club;
+        $create->facebook = $request->facebook;
+        $create->instagram = $request->instagram;
+        $create->linkedIn = $request->linkedIn;
+        $create->twitter = $request->twitter;
+        $create->description = htmlentities($request->description);
+        $create->image = $imageName;
+        $link = str_replace(" ", "-", $request->full_name);
+        $create->url_link = $link; 
+        $create->save();
+
+            }elseif(!empty($imagesig)){
+
+                $create =  new Judges;
+        $create->full_name = $request->full_name;
+        $create->position_in_club = $request->position_in_club;
+        $create->facebook = $request->facebook;
+        $create->instagram = $request->instagram;
+        $create->linkedIn = $request->linkedIn;
+        $create->twitter = $request->twitter;
+        $create->description = htmlentities($request->description);
+        $create->signature = $imagesig;
+        $link = str_replace(" ", "-", $request->full_name);
+        $create->url_link = $link; 
+        $create->save();
+
+            }else{
+
+                $create =  new Judges;
+        $create->full_name = $request->full_name;
+        $create->position_in_club = $request->position_in_club;
+        $create->facebook = $request->facebook;
+        $create->instagram = $request->instagram;
+        $create->linkedIn = $request->linkedIn;
+        $create->twitter = $request->twitter;
+        $create->description = htmlentities($request->description);
+        $link = str_replace(" ", "-", $request->full_name);
+        $create->url_link = $link; 
+        $create->save();
+
+            }
+  
             
                 return redirect()->back()->with('success', 'New Judge Added');
     }
@@ -95,6 +182,10 @@ class JudgesController extends Controller
                 $judge->image =  $imageName;
                 $judge->signature =  $imagesig; 
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }elseif(!empty($imageName) && empty($imagesig)){
                 $judge = Judges::find($id);
@@ -102,6 +193,10 @@ class JudgesController extends Controller
                 $judge->description = htmlentities($request->description); 
                 $judge->image =  $imageName; 
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }elseif(empty($imageName) && !empty($imagesig)){
                 $judge = Judges::find($id);
@@ -109,6 +204,10 @@ class JudgesController extends Controller
                 $judge->description = htmlentities($request->description); 
                 $judge->signature =  $imagesig; 
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }elseif(!empty($imageName)){
                 $judge = Judges::find($id);
@@ -116,6 +215,10 @@ class JudgesController extends Controller
                 $judge->description = htmlentities($request->description); 
                 $judge->image =  $imageName; 
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }elseif(!empty($imagesig)){
                 $judge = Judges::find($id);
@@ -123,14 +226,26 @@ class JudgesController extends Controller
                 $judge->description = htmlentities($request->description); 
                 $judge->signature =  $imagesig; 
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }else{
                 $judge = Judges::find($id);
                 $judge->full_name = $request->full_name; 
                 $judge->description = htmlentities($request->description);
                 $judge->position_in_club = $request->position_in_club;
+                $judge->facebook = $request->facebook;
+                $judge->instagram = $request->instagram;
+                $judge->linkedIn = $request->linkedIn;
+                $judge->twitter = $request->twitter;
                 $judge->update();
             }
+if( $judge->facebook == null){
+    $judge->facebook='https://www.facebook.com/';
+}
+
         return redirect()->route('judges.index')
             ->with('success','Judge Updated');
     }
@@ -140,9 +255,8 @@ class JudgesController extends Controller
      */
     public function destroy(string $id)
     {
-        $DeleteData = Judges::findOrFail($id);
-        $DeleteData->delete();
-        return redirect()->back()->with('message', 'Record Permenantly Deleted!');
+        Judges::where('id',$id)->update(array('status' => 'Inactive'));
+        return redirect()->back()->with('message', 'Record Deleted!');
     }
 
     public function download()

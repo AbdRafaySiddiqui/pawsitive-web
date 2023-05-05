@@ -521,9 +521,6 @@
     
   }).on('select2:open', function() {
 });
-
-
-
   $('#selUser_fe').select2({
     allowClear: true,
     placeholder: 'Select an item',
@@ -567,6 +564,7 @@
     
   }).on('select2:open', function() {
 });
-
 </script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+
 @endsection

@@ -17,40 +17,68 @@
           <h5 class="form-header">
            Add Judge
           </h5>
-          <div class="form-desc">
+          <div class="form-desc" style='visibility:hidden;'>
             Discharge best employed your phase each the of shine. Be met even reason consider logbook redesigns. Never a turned interfaces among asking
           </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Full Name</label>
-              <div class="col-sm-8">
-                <input id="full_name" class="form-control" name="full_name" placeholder="Enter Full Name" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Position In Club</label>
-              <div class="col-sm-8">
-                <input   class="form-control" name="position_in_club" id="position_in_club" placeholder="Enter Position In Club" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Image</label>
-              <div class="col-sm-8">
-              <input class="form-control" type="file" id="img" name="img" accept="image/png, image/jpeg">
-                <div id="preview_img"></div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for=""> Signature</label>
-              <div class="col-sm-8">
-              <input class="form-control" type="file" id="sig" name="sig" accept="image/png, image/jpeg">
-                <div id="preview_sig"></div>
-              </div>
-            </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="col-form-label" for="">Full Name</label>
+                                              <input class="form-control" name="full_name" placeholder="Enter Name" type="text">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label class="col-form-label" for="">Position In Club</label>
+                                              <input class="form-control" name="position_in_club" placeholder="Enter Position In Club" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="col-form-label" for="">Image</label>
+                                              <input class="form-control" type="file" id="img" name="img" accept="image/png, image/jpeg">
+                                              <div id="preview_img"></div>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label class="col-form-label" for="">Signature</label>
+                                              <input class="form-control" type="file" id="sig" name="sig" accept="image/png, image/jpeg">
+                                              <div id="preview_sig"></div>
+                                            </div>
+                                        </div>
+                                    </div>
        
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Enter Description Below</label>
             <div class="col-sm-8">
             <textarea class="form-control" cols="80" id="ckeditor1" name="description" rows="10"></textarea>
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for=""> Facebook</label>
+            <div class="col-sm-8">
+            <input id="facebook" class="form-control" name="facebook" placeholder="Enter Facebook Url" type="text">
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for=""> Instagram</label>
+            <div class="col-sm-8">
+            <input id="instagram" class="form-control" name="instagram" placeholder="Enter Instagram Url" type="text">
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for="">LinkedIn</label>
+            <div class="col-sm-8">
+            <input id="linkedIn" class="form-control" name="linkedIn" placeholder="Enter LinkedIn Url" type="text">
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for=""> Twitter</label>
+            <div class="col-sm-8">
+            <input id="twitter" class="form-control" name="twitter" placeholder="Enter Twitter Url" type="text">
             </div>
           </div>
            
@@ -64,7 +92,7 @@
           </div>
           @if(session()->has('message'))
     <div class="alert alert-success">
-        {{ session()->get('message') }}
+        {{ session()->get('success') }}
     </div>
 @endif
 

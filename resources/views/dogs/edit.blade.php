@@ -202,57 +202,62 @@
         <h5 class="form-header">
            Edit Dog Form
           </h5>
-          <div class="form-desc">
+          <div class="form-desc" style='visibility:hidden;'>
             Discharge best employed your phase each the of shine. Be met even reason consider logbook redesigns. Never a turned interfaces among asking
           </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Dog Name</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="dog_name" value="{{$dog->dog_name}}" placeholder="Enter Dog Name" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">DOB</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="dob" value="{{date('Y-m-d', strtotime($dog->dob))}}" placeholder="Enter DOB" type="date">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Club Reg #</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="reg_no" value="{{$dog->reg_no}}"  placeholder="Enter Club Reg #" type="text">
-              </div>
-            </div>
-          <div class="form-group row">
-              <label class="col-sm-4 col-form-label" for="">Microchip</label>
-              <div class="col-sm-8">
-                <input class="form-control" name="microchip" value="{{$dog->microchip}}" placeholder="Enter Microchip" type="text">
-              </div>
-            </div>
-       
-         
-            <div class="form-group row">
-          <label class="col-form-label col-sm-4" for="" > Gender</label>
-          <div class="col-sm-8">
-          <select class="form-control" name="gender">
-          <option value="">
-                  Select One
-                </option>
-                <option value="Male"  {{ $dog->gender == 'Male' ? 'selected' : '' }}>
-                  Male
-                </option>
-                <option value="Female" {{ $dog->gender == 'Female' ? 'selected' : '' }}>
-                Female
-                </option>
-              </select>
-            </div>
-            </div>
-            <div class="form-group row">
-            <label class="col-form-label col-sm-4" for="">Show Title</label>
-            <div class="col-sm-8">
+
+
+          <div class="row">
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label class="col-form-label" for="">Dog Name</label>
+                                          <input class="form-control" value="{{$dog->dog_name}}" name="dog_name" placeholder="Enter Dog Name" type="text">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label class="col-form-label" for="">DOB</label>
+                                          <input class="form-control" value="{{date('Y-m-d', strtotime($dog->dob))}}" name="dob" placeholder="Enter DOB" type="date">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label class="col-form-label" for="">Club Reg #</label>
+                                          <input class="form-control" value="{{$dog->reg_no}}" name="reg_no" placeholder="Enter Club Reg #" type="text">
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label class="col-form-label" for="">Microchip</label>
+                                          <input class="form-control" value="{{$dog->microchip}}" name="microchip" placeholder="Enter Microchip" type="text">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <label class="col-form-label col-sm-4" for="" > Gender</label>
+                                        <div class="col-sm-12">
+                                        <select class="form-control" name="gender">
+                                        <option value="">
+                                                Select One
+                                              </option>
+                                              <option value="Male"  {{ $dog->gender == 'Male' ? 'selected' : '' }}>
+                                                Male
+                                              </option>
+                                              <option value="Female" {{ $dog->gender == 'Female' ? 'selected' : '' }}>
+                                              Female
+                                              </option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                        <label class="col-form-label col-sm-4" for="">Show Title</label>
+            <div class="col-sm-12">
               <input class="form-control" name="show_title" value="{{$dog->show_title}}"  placeholder="Enter Show Title" type="text">
             </div>
           </div>
+                                     </div>
+            
           <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Achievements </label>
               <div class="col-sm-8">

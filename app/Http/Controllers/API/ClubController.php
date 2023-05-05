@@ -14,6 +14,11 @@ class ClubController extends Controller
     {
         $club = Clubs::select('clubs.id',
                               'clubs.name as clubs_name',
+                              'clubs.website as clubs_website',
+                              'clubs.phone as clubs_phone',
+                              'clubs.address as clubs_address',
+                              'clubs.email as clubs_email',
+                              'clubs.affiliation as clubs_affiliation',
                               'countries.countryName as country_of_origin',
                              
                               'image as logo')
@@ -28,7 +33,7 @@ class ClubController extends Controller
 
           if($clubs->logo != null)
           {
-            if(file_exists(storage_path().'/app/public/club_images'.'/'.$clubs->image))
+            if(file_exists(storage_path('/app/public/club_images'.'/'.$clubs->image)))
             {
               $clubs->logo = asset('storage/app/public/club_images').'/'.$clubs->image;
             }

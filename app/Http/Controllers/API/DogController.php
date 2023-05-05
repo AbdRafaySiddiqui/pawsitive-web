@@ -12,10 +12,10 @@ class DogController extends Controller
 {
     public function listing(request $request, $id)
     {
-        $dog = Dogs::select('dogs.id',
+        $dog = DB::table('dogs')->select('dogs.id',
         'dogs.dog_name as dogs_name',
         'dob',
-        'dogs.profile_photo',
+        'dogs.profile_photo as profilePhoto',
         'gender',
         'breeds.name as breed_name',
         'microchip',
@@ -23,8 +23,8 @@ class DogController extends Controller
         'achievements',
         'show_title')
         ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
-        
           ->where('breed_id','=',$id)
+          ->where('dogs.status','=','Active')
           ->orderBy('dogs.dog_name','ASC')
           ->get();
        
@@ -33,9 +33,9 @@ class DogController extends Controller
               
                         if($dogs->profilePhoto != null)
                         {
-                          if(file_exists(storage_path().'/app/public/dog_profile'.'/'.$dogs->image))
+                          if(file_exists(storage_path('/app/public/dog_profile'.'/'.$dogs->profilePhoto)))
                           {
-                            $dogs->profilePhoto = asset('storage/app/public/dog_profile').'/'.$dogs->image;
+                            $dogs->profilePhoto = asset('storage/app/public/dog_profile').'/'.$dogs->profilePhoto;
                           }
                           else
                           {
@@ -65,7 +65,7 @@ class DogController extends Controller
         ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
         
           ->where('dogs.id','=',$id)
-          ->orderBy('dogs.dog_name','ASC')
+          ->orderBy('dogs.id','ASC')
           ->first();
         
         return response()->json(['dog' => $dog], 200);
@@ -92,7 +92,31 @@ class DogController extends Controller
         return response()->json($data);
     }
 
+    public function breed_dog(request $request)
+    {
+      if($request->has('breed_id')){
+        $search = $request->q;
+        $id = $request->breed_id;
+        $dog = Dogs::select('dogs.id as dog_id',
+        'dog_name','breed_id','breeds.id'
+          )
+          ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
+        
+          ->where('dogs.breed_id','=',$id)
 
+          ->where('dog_name','LIKE',"%$search%")
+          ->orderBy('breed_id','ASC')
+          ->get();
+        }
+        else{
+          $data = Dogs::select('dogs.id',
+          'dog_name'
+            )
+            ->orderBy('dog_name','ASC')
+                  ->get();
+      }
+        return response()->json(['dog' => $dog]);
+    }
     public function dog_profile(request $request)
     {
         $dog = Dogs::select('id','dog_name as dogName','profile_photo as profilePhoto')

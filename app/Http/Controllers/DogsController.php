@@ -8,6 +8,7 @@ use App\Models\Clubs;
 use App\Models\Breeds;
 use Illuminate\Pagination\Paginator;
 use League\Csv\Writer;
+use Illuminate\Support\Str;
 
 use App\Models\DogsRealParent;
 
@@ -32,6 +33,7 @@ class DogsController extends Controller
         $total_breeds = Breeds::get();
         $maleDogs = Dogs::where('gender', '=', 'Male')->get();
         $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
+        
         $total_clubs = Clubs::get();
         return view('dogs.create',compact('maleDogs', 'femaleDogs','total_breeds','total_clubs'));
     }
@@ -48,15 +50,18 @@ class DogsController extends Controller
         $dogs->reg_with =  $request->reg_with;
         $dogs->microchip =  $request->microchip;
         $dogs->gender =  $request->gender;
+        $dog->class = $request->class;
         $dogs->show_title =  $request->show_title;
         $dogs->achievements =  $request->achievements;
         $dogs->breed_id = $request->breed_id;
+        $dogs->ref_id = (string) Str::uuid();
         $dogs->save();
 
-        $new_dog_id = $dogs->id;
+        // $new_dog_id = $dogs->id;
+        $new_ref_id = $dogs->ref_id;
 
         $parent = new DogsRealParent;
-        $parent->dog_id = $new_dog_id;
+        $parent->dog_id = $new_ref_id;
         $parent->sire_id = $request->sire_id;
         $parent->dam_id = $request->dam_id;
         $parent->save();
@@ -102,6 +107,7 @@ class DogsController extends Controller
 	    $dog->dob = $request->dob;
 	    $dog->reg_no = $request->reg_no;
 	    $dog->microchip = $request->microchip;
+	    $dog->class = $request->class;
 	    $dog->gender = $request->gender;
 	    $dog->show_title = $request->show_title;
 	    $dog->achievements = $request->achievements;

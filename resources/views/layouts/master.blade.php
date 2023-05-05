@@ -20,7 +20,7 @@
     <link href="{{asset('public/bower_components/slick-carousel/slick/slick.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/fullcalendar/dist/fullcalendar.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('public/bower_components/datatables.net-bs/css/dataTables.bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/dropzone/dist/dropzone.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/custom/style.css')}}" rel="stylesheet">
     <!-- <link href="{{asset('public/select2-develop/dist/css/select2.min.css')}}" rel="stylesheet" /> -->
@@ -469,11 +469,7 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
-                    @if(Auth::user()->hasRole('admin'))
     <a href="{{route('club.create')}}">Add Club</a>
-@else
-    <a href="{{route('club.create')}}">Writer Club</a>
-@endif      
                       <a href="{{route('club.index')}}">All Club</a>
                     </li>
                     
@@ -554,7 +550,7 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="{{route('events.index')}}">
+              <a href="{{route('event_results.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -676,6 +672,30 @@
               </div>
             </li>
             <li class=" has-sub-menu">
+              <a href="{{route('cities.index')}}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Cities</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Cities
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('cities.create')}}">Add Cities</a>
+                      <a href="{{route('cities.index')}}">All Cities</a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
               <a href="{{route('species.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
@@ -745,7 +765,7 @@
         <script src="{{asset('public/bower_components/popper.js/dist/umd/popper.min.js')}}"></script>
         <script src="{{asset('public/bower_components/moment/moment.js')}}"></script>
         <script src="{{asset('public/bower_components/chart.js/dist/Chart.min.js')}}"></script>
-        <script src="{{asset('public/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+        <!-- <script src="{{asset('public/bower_components/select2/dist/js/select2.full.min.js')}}"></script> -->
         <script src="{{asset('public/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js')}}"></script>
         <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script>
         <script src="{{asset('public/bower_components/bootstrap-validator/dist/validator.min.js')}}"></script>
@@ -771,6 +791,7 @@
         <script src="{{asset('public/bower_components/bootstrap/js/dist/popover.js')}}"></script>
         <script src="{{asset('public/js/demo_customizer.js?version=4.4.0')}}"></script>
         <script src="{{asset('public/js/main.js?version=4.4.0')}}"></script>
+        <script src="{{asset('public/js/dataTables.bootstrap4.min.js')}}"></script>
     <!-- <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script> -->
 
 <!-- <script src="{{asset('public/bower_components/summernote/summernote-bs4.js')}}"></script> -->
@@ -788,7 +809,7 @@
 
         </script>
  
- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script> -->
 <!-- <script>
     var $j = jQuery.noConflict();
     // Use $j instead of $ to reference the jQuery library
@@ -872,12 +893,27 @@ document.querySelector('#img').addEventListener("change", previewImages);
 // document.querySelector('#sig').addEventListener("change", previewSignature);
 
 
-
-
-
-
-
     </script>
+
+<script>
+    $('.dataTable1_wrapper').addClass('container-fluid');
+    $('.dataTable1_wrapper').removeClass('form-inline');
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-XXXXXXX-9', 'auto');
+    ga('send', 'pageview');
+</script>
+
 </body>
     </html>
 
