@@ -48,7 +48,7 @@ class EventResultsController extends Controller
           ->where('gender', '=', "Male")
       ->get();
      
-        $Events = Events::all();
+        $Events = Events::where('status', 'active')->get();
         
         return view('event_results.create',compact('Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges','dog_class' ,'data'));
     }

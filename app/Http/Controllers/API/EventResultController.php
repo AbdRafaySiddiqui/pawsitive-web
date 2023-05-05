@@ -51,6 +51,7 @@ class EventResultController extends Controller
                          'countries.countryName AS country',
                          'countries.countryCode',
                          'events.id AS eventId')
+                ->where('events.status', '=', 'Active')
                 ->orderBy('events.start_date', 'desc')
                 ->distinct('events.id')
                 ->take(20)
@@ -149,7 +150,7 @@ class EventResultController extends Controller
                                         'event_results.place AS place',
                                           'dogs.dog_name AS dogName',
                                           'award_system.award_title AS awards',
-                                          'event_results.class AS event_results',
+                                          'event_results.class',
                                           'dogs.id AS dogId',
                                           'event_results.gender AS gender'
                                           )
