@@ -424,7 +424,7 @@ var breed_id=$('#breed_ide :selected').val();
         console.log(selectId);
         $.ajax({
            type:'get',
-           url:'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id,
+           url:'{{ route("breed-dogs") }}' + '?breed_id=' + breed_id,
            data:{id:breed_id},
            success:function(data)
            {
@@ -454,7 +454,7 @@ var id=$('#event_id :selected').val();
       // console.log(breed_id);
       $.ajax({
          type:'get',
-         url:'http://localhost/pawsitive-web/api/event_results/judge?id='+id,
+         url:'{{ route("event_judge") }}' + '?id=' + id,
          data:{id:id},
          success:function(data)
          {
@@ -516,7 +516,8 @@ var breed_id=$('#breed_ide :selected').val();
         // console.log(breed_id);
         $.ajax({
            type:'get',
-           url:'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id+'&gender='+gender,
+          
+           url: '{{ route("breed-dogs") }}' + '?breed_id=' + breed_id ,
            data:{id:breed_id},
            success:function(data)
            {
@@ -702,11 +703,10 @@ $('#event_id').on('change', function() {
   }
 var id=$('#event_id :selected').val();
 var judge_id=$('#judge').text();
-
       // console.log(breed_id);
       $.ajax({
          type:'get',
-         url:'http://localhost/pawsitive-web/api/event_results/judge?id='+id,
+         url:'{{ route("event_judge") }}' + '?id=' + id,
          data:{id:id},
          success:function(data)
          {
