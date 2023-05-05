@@ -12,21 +12,12 @@ class DogController extends Controller
 {
     public function listing(request $request, $id)
     {
-        $dog = DB::table('dogs')->select('dogs.id',
-        'dogs.dog_name as dogs_name',
-        'dob',
-        'dogs.profile_photo as profilePhoto',
-        'gender',
-        'breeds.name as breed_name',
-        'microchip',
-        'reg_no',
-        'achievements',
-        'show_title')
-        ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
-          ->where('breed_id','=',$id)
-          ->where('dogs.status','=','Active')
-          ->orderBy('dogs.dog_name','ASC')
-          ->get();
+      $dog = DB::table('dogs')->select(DB::raw('dogs.id,dogs.dog_name as dogs_name,dogs.profile_photo as profilePhoto'))
+      ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
+        ->where('breed_id','=',$id)
+        ->where('dogs.status','=','Active')
+        ->orderBy('dogs.dog_name','ASC')
+        ->get();
        
           foreach($dog as $dogs)
                       {
@@ -75,19 +66,16 @@ class DogController extends Controller
     {
       if($request->has('q')){
         $search = $request->q;
-        $data = Dogs::select('dogs.id',
-        'dog_name',
-          )
+        $data =  DB::table('dogs')
+  ->select(DB::raw('id,dog_name, status'))
           ->where('dog_name','LIKE',"%$search%")
           ->orderBy('dog_name','ASC')
           ->get();
         }
         else{
-          $data = Dogs::select('dogs.id',
-          'dog_name'
-            )
-            ->orderBy('dog_name','ASC')
-                  ->get();
+          $data=  DB::table('dogs')
+  ->select(DB::raw('id,dog_name, status'))
+  ->paginate(10);
       }
         return response()->json($data);
     }
@@ -97,9 +85,10 @@ class DogController extends Controller
       if($request->has('breed_id')){
         $search = $request->q;
         $id = $request->breed_id;
-        $dog = Dogs::select('dogs.id as dog_id',
-        'dog_name','breed_id','breeds.id'
-          )
+        $dog = DB::table('dogs')
+  ->select(DB::raw('dogs.id as dog_id,
+  dogs.dog_name as dog_name,dogs.breed_id,breeds.id'
+          ))
           ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
         
           ->where('dogs.breed_id','=',$id)
@@ -109,11 +98,12 @@ class DogController extends Controller
           ->get();
         }
         else{
-          $data = Dogs::select('dogs.id',
+          $dog = Dogs::select('dogs.id',
           'dog_name'
             )
-            ->orderBy('dog_name','ASC')
-                  ->get();
+            ->orderBy('dogs.id','ASC')
+            
+            ->paginate(10);
       }
         return response()->json(['dog' => $dog]);
     }

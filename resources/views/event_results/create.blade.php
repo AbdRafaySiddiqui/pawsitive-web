@@ -538,10 +538,11 @@ var breed_id=$('#breed_ide :selected').val();
                 
                 var x = document.getElementById('all_dogs');
                 var option = document.createElement("option");
-                var dg=$('#all_dogs').append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>');
+                var button='<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+                $('#all_dogs').empty().append('<option><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button></option>');
                 console.log(dg);
               // option.html = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-              option.text=dg;
+            
               // option.value = 0;
               x.add(option);
             }

@@ -12,6 +12,7 @@ use App\Models\DogsRealParent;
 use App\Models\DogClass;
 use App\Models\Events;
 use League\Csv\Writer;
+use DB;
 
 class EventResultsController extends Controller
 {
@@ -30,13 +31,23 @@ class EventResultsController extends Controller
      */
     public function create()
     {
-        $dogs = Dogs::get();
+        $dogs=  DB::table('dogs')
+        ->select(DB::raw('id,dog_name, status'))
+          ->where('status','=',"Active")
+      ->paginate(10);
+      $femaleDogs =  DB::table('dogs')
+        ->select(DB::raw('id,dog_name'))
+          ->where('gender', '=', "Female")
+      ->get();
         $total_breeds = Breeds::get();
         $total_judges = Judges::get();
         $dog_class = DogClass::get();
         $data = EventJudges::get();
-        $maleDogs = Dogs::where('gender', '=', 'Male')->get();
-        $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
+        $maleDogs = DB::table('dogs')
+        ->select(DB::raw('id,dog_name'))
+          ->where('gender', '=', "Male")
+      ->get();
+     
         $Events = Events::all();
         
         return view('event_results.create',compact('Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges','dog_class' ,'data'));

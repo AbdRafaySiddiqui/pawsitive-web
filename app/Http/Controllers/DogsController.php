@@ -11,6 +11,7 @@ use League\Csv\Writer;
 use Illuminate\Support\Str;
 
 use App\Models\DogsRealParent;
+use DB;
 
 class DogsController extends Controller
 {
@@ -31,9 +32,13 @@ class DogsController extends Controller
     public function create()
     {
         $total_breeds = Breeds::get();
-        $maleDogs = Dogs::where('gender', '=', 'Male')->get();
-        $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
+        $maleDogs =   DB::table('dogs')->select(DB::raw('dogs.id,dogs.dog_name as dog_name,gender'))
+        ->where('gender', '=', 'Male')
+         ->paginate(10);
         
+         $femaleDogs =   DB::table('dogs')->select(DB::raw('dogs.id,dogs.dog_name as dog_name,gender'))
+        ->where('gender', '=', 'Female')
+        ->paginate(10);
         $total_clubs = Clubs::get();
         return view('dogs.create',compact('maleDogs', 'femaleDogs','total_breeds','total_clubs'));
     }
