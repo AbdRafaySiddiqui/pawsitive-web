@@ -25,6 +25,10 @@ use App\Http\Controllers\API\SubscriptionController;
 |
 */
 
+
+
+
+
 // Breeds Controller.
 Route::get('breed-listings', [App\Http\Controllers\API\BreedController::class, 'listing']);//working fine.
 Route::get('breed/{id}/details', [App\Http\Controllers\API\BreedController::class, 'details']);//working fine.
@@ -59,7 +63,12 @@ Route::get('dog/{id}/profile-details', [DogController::class, 'profile_details']
 
 //EventResultController routes
 Route::get('result-listing', [EventResultController::class, 'result']);
+<<<<<<< HEAD
 Route::get('event/{id}/result', [EventResultController::class, 'event_result']);//is mey class ka naam nhi arha hy api mey.
+=======
+Route::get('event/{id}/result', [EventResultController::class, 'event_result']);
+Route::get('event_results/judge', [EventResultController::class, 'judge']);
+>>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
 
 //EventController routes
 Route::get('event-listing/{breed_id}', [App\Http\Controllers\API\EventController::class, 'retrieve']);//working fine.
@@ -72,7 +81,7 @@ Route::get('club/{id}/details', [ClubController::class, 'details']);//address an
 Route::get('club-names', [ClubController::class, 'retrieve']);//working fine.
 
 //CountryController API.
-Route::get('/countries/{idCountry}', 'App\Http\Controllers\API\CountriesController@country_details')->name('country_details');//working fine.
+Route::get('/countries/{countryId}', 'App\Http\Controllers\API\CountriesController@country_details')->name('country_details');//working fine.
 
 //MiscController routes
 Route::get('countries', [MiscController::class, 'countries']);//working fine.

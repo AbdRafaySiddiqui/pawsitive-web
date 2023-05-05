@@ -65,7 +65,7 @@ class DogController extends Controller
         ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
         
           ->where('dogs.id','=',$id)
-          ->orderBy('dogs.dog_name','ASC')
+          ->orderBy('dogs.id','ASC')
           ->first();
         
         return response()->json(['dog' => $dog], 200);
@@ -94,17 +94,16 @@ class DogController extends Controller
 
     public function breed_dog(request $request)
     {
-      if($request->has('id')){
+      if($request->has('breed_id')){
         $search = $request->q;
-        $id = $request->id;
-        $gender = $request->gender;
-        $data = Dogs::select('dogs.id',
-        'dog_name','breed_id','dogs.gender','breeds.id'
+        $id = $request->breed_id;
+        $dog = Dogs::select('dogs.id as dog_id',
+        'dog_name','breed_id','breeds.id'
           )
           ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
         
-          ->where('breed_id','=',$id)
-          ->where('dogs.gender','=',$gender)
+          ->where('dogs.breed_id','=',$id)
+
           ->where('dog_name','LIKE',"%$search%")
           ->orderBy('breed_id','ASC')
           ->get();
@@ -116,7 +115,7 @@ class DogController extends Controller
             ->orderBy('dog_name','ASC')
                   ->get();
       }
-        return response()->json($data);
+        return response()->json(['dog' => $dog]);
     }
     public function dog_profile(request $request)
     {

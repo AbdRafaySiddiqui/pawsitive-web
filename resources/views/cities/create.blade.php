@@ -32,7 +32,7 @@
                                       <div class="col-sm-4">
                                           <div class="form-group">
                                               <label class="col-form-label" for=""> Country</label>
-                                              <select class="form-control" name="country" id="country">
+                                              <select class="form-control select2" name="country" id="country">
                                                   @foreach ($countries as $country)
                                                       <option value="{{ $country->idCountry }}">
                                                           {{ $country->countryName }}
@@ -64,4 +64,7 @@
     </div>
     <div class="display-type"></div>
     </div>
+
+    <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
 @endsection

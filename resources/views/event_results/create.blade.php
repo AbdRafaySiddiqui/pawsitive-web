@@ -4,7 +4,8 @@
         <div class="content-w">
     
           <div class="content-i">
-            <div class="content-box"><div class="row">
+            <div class="content-box">
+              <div class="row">
   
   <div class="col-lg-12">
     <div class="element-wrapper">
@@ -18,14 +19,14 @@
           </h5>
           <div class="form-desc">
           </div>
-         
-          <form action="{{ route('event_results.store') }}" method="post">
-        @csrf 
+         <form action="{{ route('event_results.store') }}" method="post">
+        @csrf
+          
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Select Event</label>
             <div class="col-sm-8">
-                <select class="form-control" name="event_id" id="event_id">
-                    <option></option>
+                <select class="form-control select2" name="event_id" id="event_id">
+                    <option>Select Event</option>
                     @foreach($Events as $Event)
                         <option value="{{$Event->id}}">
                             {{$Event->name}} | {{ (isset($Event->club_name->name)) ? '('.$Event->club_name->name.')' : ''}} | {{date('F d, Y',strtotime($Event->start_date))}}
@@ -34,6 +35,7 @@
                 </select>
             </div>
         </div>
+           
         <div id="event_frm">
         <div class="row">
           <div class="col-sm-4">
@@ -71,15 +73,26 @@
             <div class="col-sm-4">
             <div class="form-group">
               <label class="col-form-label" for="">Class</label>
+<<<<<<< HEAD
               <input class="form-control" name="class" placeholder="Enter Class" type="text">
 </select>
+=======
+              <input class="form-control" name="class" id="class" placeholder="Enter class" type="text">
+             
+>>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
               </div>
             </div>
             <div class="col-sm-4">
             <div class="form-group">
           <label class="col-form-label" for="" >Select Breed </label>
+<<<<<<< HEAD
           <select class="form-control" name="breed_id" id="breed_id">
                      <option> Select</option> 
+=======
+          <select class="form-control select2" onchange="dogs_by_judge(this)" name="breed_id" id="breed_ide">
+          <option>Select Breed</option>
+                    <!-- <option> Select</option> -->
+>>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
                     @foreach($total_breeds as $total_breed)
                         <option value="{{$total_breed->id}}">
                             {{$total_breed->name}}
@@ -90,10 +103,10 @@
             </div>
             </div>
 
-            <div class="form-group row mt-4">
+            <!-- <div class="form-group row mt-4">
             <label class="col-form-label col-sm-4" for=""> Gender</label>
             <div class="col-sm-8">
-            <select class="form-control" name="gender_dog" id="gender_dog">
+            <select class="form-control" name="gender_dog"   id="gender_dog">
           <option value="">
                   Select One
                 </option>
@@ -106,12 +119,14 @@
               </select>
                
             </div>
-        </div>
+        </div> -->
           
      
 
       <div class="table-responsive">
       
+    
+    
                
       <div id='event_tbl'>
         <table class="table table-bordered table-lg table-v2 table-striped" id="table">
@@ -128,8 +143,12 @@
               Place
               </th>
               <th>
+              Awards
+              </th>
+              <th>
               Judge
               </th>
+            
               <!-- <th>
               Gender
               </th> -->
@@ -144,16 +163,21 @@
               
               <td>
 
+<<<<<<< HEAD
               <div class="col-md-12">
               <select class="form-control js-data-example-ajax dog" name="dog_id[]" id="all_dogs">
                   <option></option>
+=======
+              <!-- <div class="col-md-12"> -->
+              <select class="form-control select2 dog" name="dog_id[]" id="all_dogs">
+>>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
               @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
                {{$dog->dog_name}}
                 </option>
                 @endforeach
               </select>
-              </div>
+              <!-- </div> -->
               </td>
               <td>
             
@@ -168,15 +192,32 @@
             </div>
               </td>
               <td>
+              
+              <div class="col-sm-12">
+                <input class="form-control" name="awards[]" placeholder="Enter Awards" type="text">
+            </div>
+              </td>
+              <td>
              
              <div class="col-sm-12"> 
+<<<<<<< HEAD
              <select class="form-control js-data-example-ajax" name="judge[]" id="judge">
              
                <option  value="">
            
+=======
+              @if(count($data) > 1)
+             <select class="form-control select2" name="judge[]" id="judge">
+             @foreach($total_judges as $judge)
+               <option  value="{{$judge->id}}">
+              {{$judge->full_name}}
+>>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
                </option>
 
              </select>
+             @else
+             <span class="form-control" id="judge" name="judge[]"></span>
+             @endif
              </div>
             </td>
             <!-- <td>
@@ -207,11 +248,7 @@
         <button class="btn btn-primary"  type="submit"> Submit</button>
      </form>
 
-        @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
+
 
       </div>
       </div>
@@ -221,6 +258,11 @@
     </div>
   </div>
 </div>
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
       <!--           Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -298,8 +340,13 @@
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="">Select Breed</label>
                             <div class="col-sm-8">
+<<<<<<< HEAD
                             <select class="form-control js-data-example-ajax" name="breed_id" class="breed_id">
                                 <option></option>
+=======
+                            <select class="form-control select2" name="breed_id" class="breed_id">
+                            <option></option>
+>>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
                             @foreach($total_breeds as $total_breed)
                               <option  value="{{$total_breed->id}}">
                             {{$total_breed->name}}
@@ -312,8 +359,12 @@
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="">Select Sire</label>
                             <div class="col-sm-8">
+<<<<<<< HEAD
                             <select class="form-control js-data-example-ajax" name="sire_id" id="selUser">
                                                                 <option></option>
+=======
+                            <select class="form-control select2" name="sire_id" id="selUser"  >
+>>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
                             @foreach($maleDogs as $maleDog)
                               <option  value="{{$maleDog->id}}">
                             {{$maleDog->dog_name}}
@@ -326,7 +377,7 @@
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label " for="">Select Dam</label>
                             <div class="col-sm-8">
-                            <select class="form-control js-data-example-ajax" name="dam_id" id="selUser_fe">
+                            <select class="form-control select2" name="dam_id" id="selUser_fe">
                             @foreach($femaleDogs as $femaleDog)
                               <option  value="{{$femaleDog->id}}">
                             {{$femaleDog->dog_name}}
@@ -350,46 +401,14 @@
                   </div>
                 </div>
             </div>
+            <script>
+
+
+
+</script>
 
 <!-- <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
-<script>
-
-  // var i=0;
-$('#add').click(function(){
-  // ++i;
-$('#table').append(
-`<tr>
-<td><select class="form-control js-data-example-ajax dg" name="dog_id[]" id="all_dogs">
-             
-@foreach($dogs as $dog)
-                <option  value="{{$dog->id}}">
-               {{$dog->dog_name}}
-                </option>
-                @endforeach
-                
-              </select></td>
-<td>  <input class="form-control" name="grading[]" placeholder="Enter Grade" type="text"></td>
-<td>  <input class="form-control" name="place[]" placeholder="Enter place" type="text"></td>
-
-<td><select class="form-control js-data-example-ajax" name="judge[]" id="judge">
-             @foreach($total_judges as $judge)
-               <option  value="{{$judge->id}}">
-              {{$judge->full_name}}
-               </option>
-               @endforeach
-             </select>
-</td>
-
-<td> <button id="remove" class="btn btn-danger">Remove</button></td>
-
-             </tr>`
-          
-);
-     
-
-});
-</script>
 
 
     <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
@@ -397,13 +416,133 @@ $('#table').append(
 
     <script type="text/javascript">
 
+      
+  let i = 0; // Counter for generating unique IDs
+
+$('#add').click(function(){
+  var selectId = 'all_dogsb_' + i; // Generate a unique ID for the select element
+  let judgeId = 'all_judgeb_' + i; // Generate a unique ID for the select element
+$('#table').append(
+`<tr>
+<td><select class="form-control select2 dg" name="dog_id[]" id="${selectId}">
+           
+@foreach($dogs as $dog)
+              <option  value="{{$dog->id}}">
+             {{$dog->dog_name}}
+              </option>
+              @endforeach
+              
+            </select></td>
+<td>  <input class="form-control" name="grading[]" placeholder="Enter Grade" type="text"></td>
+<td>  <input class="form-control" name="place[]" placeholder="Enter place" type="text"></td>
+<td>  <input class="form-control" name="awards[]" placeholder="Enter awards" type="text"></td>
+
+<td>
+
+             @if(count($total_judges) < 1)
+<select class="form-control select2" name="judge[]" id="${judgeId}">
+           @foreach($total_judges as $judge)
+             <option  value="{{$judge->id}}">
+            {{$judge->full_name}}
+             </option>
+             @endforeach
+           </select>
+           @else
+             <span class="form-control" id="${judgeId}" name="judge[]"></span>
+             @endif
+</td>
+
+<td> <button id="remove" class="btn btn-danger">Remove</button></td>
+
+           </tr>`
+        
+);
+if($("#"+judgeId).is("select")) {
+$('#' + judgeId).select2();
+}
+$('#' + selectId).select2();
+
+
+  
+  $('#' +selectId).empty().append('<option value="0">Select Dog</option>');
+
+        
+//         return 'http://localhost/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
+var breed_id=$('#breed_ide :selected').val();
+        var gender=$('#gender_dog').val();
+        console.log(selectId);
+        $.ajax({
+           type:'get',
+           url:'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id,
+           data:{id:breed_id},
+           success:function(data)
+           {
+              for(let i = 0; i < data.dog.length; i++)
+              {
+                var x = document.getElementById(selectId);
+                var option = document.createElement("option");
+                option.text = data.dog[i].dog_name;
+                option.value = data.dog[i].dog_id;
+                x.add(option);
+                console.log(data);
+              }
+           }
+      
+      });
+
+      if($("#judge").is("select")) {
+
+  $('#'+judgeId).empty().append('<option value="0">Select Judge</option>');
+      }
+
+  var judge_id=$('#judge').text();
+var id=$('#event_id :selected').val();
+
+      // console.log(breed_id);
+      $.ajax({
+         type:'get',
+         url:'http://localhost/pawsitive-web/api/event_results/judge?id='+id,
+         data:{id:id},
+         success:function(data)
+         {
+          for(let i = 0; i < data.judge.length; i++)
+            {
+              if($("#"+judgeId).is("span")) {
+
+              
+              var x = document.getElementById(judgeId);
+            
+              judge_id.text = data.judge[i].full_name;
+              judge_id.value = data.judge[i].judge_id;
+              $('#'+judgeId).text(data.judge[i].full_name);
+              // x.add(judge_id);
+            }else{
+              var x = document.getElementById(judgeId);
+              var option = document.createElement("option");
+              option.text = data.judge[i].full_name;
+              option.value = data.judge[i].judge_id;
+              
+              x.add(option);
+            }
+            }
+
+         
+         }
+ 
+ 
+});
+   i++; // Increment the counter for the next iteration
+   
+});
+
+
         $('#event_id').select2({
             allowClear: true,
             tags: true,
             placeholder: 'Select an Event'
         });
 
-        $('#judge').select2();
+        // $('#judge').select2();
         // $('.dg').select2();
         
         
@@ -458,11 +597,26 @@ $('#table').append(
     }
   });         
 
-$('#gender_dog').on('change', function() {
+$('#breed_ide').on('change', function() {
   $('#event_tbl').show();
+  if($("#judge").is("select")) {
+  $('#judge').empty().append('<option value="0">Select Judge</option>');
+  }
+var id=$('#event_id :selected').val();
+var judge_id=$('#judge').text();
 
-});
+      // console.log(breed_id);
+      $.ajax({
+         type:'get',
+         url:'http://localhost/pawsitive-web/api/event_results/judge?id='+id,
+         data:{id:id},
+         success:function(data)
+         {
+            for(let i = 0; i < data.judge.length; i++)
+            {
+              if($("#judge").is("span")) {
 
+<<<<<<< HEAD
 
 
 
@@ -517,7 +671,74 @@ $('#all_dogs').select2({
       cache: true
     }
   });         
+=======
+              
+              var x = document.getElementById('judge');
+            
+              judge_id.text = data.judge[i].full_name;
+              judge_id.value = data.judge[i].judge_id;
+              $('#judge').text(data.judge[i].full_name);
+              // x.add(judge_id);
+            }else{
+              var x = document.getElementById('judge');
+              var option = document.createElement("option");
+              option.text = data.judge[i].full_name;
+              option.value = data.judge[i].judge_id;
+              
+              x.add(option);
+            }
+            }
+         }
+      });
+>>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
  
+});
+ 
+
+function dogs_by_judge(select){
+  
+  $('#all_dogs').empty().append('<option value="0">Select Dog</option>');
+
+        
+//         return 'http://localhost/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
+var breed_id=$('#breed_ide :selected').val();
+        var gender=$('#gender_dog').val();
+        // console.log(breed_id);
+        $.ajax({
+           type:'get',
+           url:'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id+'&gender='+gender,
+           data:{id:breed_id},
+           success:function(data)
+           {
+            
+            if(data.dog.length > 0 ){
+              for(let i = 0; i < data.dog.length; i++)
+              {
+              var x = document.getElementById('all_dogs');
+                var option = document.createElement("option");
+                option.text = data.dog[i].dog_name;
+                option.value = data.dog[i].dog_id;
+                x.add(option);
+          }
+
+            }
+            else{
+             
+                
+                var x = document.getElementById('all_dogs');
+                var option = document.createElement("option");
+                var dg=$('#all_dogs').append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>');
+                console.log(dg);
+              // option.html = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+              option.text=dg;
+              // option.value = 0;
+              x.add(option);
+            }
+           }
+
+        });
+
+}       
 
 $(document).on('click','#remove',function(){
 $(this).parents('tr').remove();
@@ -630,6 +851,7 @@ function fetchCountryDetails(idCountry) {
         dataType: 'json',
         success: function(response) {
             $('#country-name').val(response.countryName);
+            console.log(idCountry);
         },
         error: function(xhr, status, error) {
             console.log(error);
