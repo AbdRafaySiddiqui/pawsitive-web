@@ -32,18 +32,15 @@ class MiscController extends Controller
 
     public function statistic()
     {
-        $clubs = Clubs::where('status','=','Active')->get();
-        $totalNoClubs= $clubs->count();
 
-        $dogs = Dogs::where('status','=','Active')->get();
-        $totalNoDogs= $dogs->count();
+        
+        $totalNoClubs = Clubs::where('status','=','Active')->count();
 
-        $breeds = Breeds::where('status','=','Active')->get();
-        $totalNoBreeds= $breeds->count();
+        $totalNoDogs = Dogs::where('status','=','Active')->count();
 
+        $totalNoBreeds = Breeds::where('status','=','Active')->count();
 
-        $events = Events::where('status','=','Active')->get();
-        $totalNoEvents= $events->count();
+        $totalNoEvents = Events::where('status', '=', 'Active')->count();
         
         return response()->json(['totalNoClubs' => $totalNoClubs,'totalNoDogs' => $totalNoDogs,'totalNoBreeds' => $totalNoBreeds,'totalNoEvents' => $totalNoEvents], 200);
     }
