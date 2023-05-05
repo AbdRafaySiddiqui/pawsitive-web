@@ -36,7 +36,7 @@ Route::get('breed-short', [BreedController::class, 'breed_short']);//working fin
 Route::get('breed-names', [BreedController::class, 'retrieve']);//working fine.
 Route::get('breed/{id}/info', [BreedController::class, 'breed_info']);//working fine.
 
-Route::get('/cities/{country}', [App\Http\Controllers\API\CitiesController::class, 'getCities']);//working fine.
+Route::get('/cities/{idCountry}', [App\Http\Controllers\API\CitiesController::class, 'getCities']);//working fine.
 
 
 // Subscription Controller.
