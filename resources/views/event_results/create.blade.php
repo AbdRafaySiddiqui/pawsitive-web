@@ -193,7 +193,9 @@
               @endforeach
              </select>
              
-             <span class="form-control span_judge" id="judge_span" name="judge[]"></span>
+             <span class="form-control span_judge" id="judge_span" ></span>
+             <input class="form-control" id="judge_hidden" name="judge_span[]" value="" type="hidden">
+
             
              </div>
             </td>
@@ -373,6 +375,7 @@ $('#add').click(function(){
   var selectId = 'all_dogsb_' + i; // Generate a unique ID for the select element
   var judgeId = 'all_judgeb_' + i; // Generate a unique ID for the select element
   var judge_span = 'judge_span_b' + i; // Generate a unique ID for the select element
+  var judge_hidden = 'judge_hidden_' + i; // Generate a unique ID for the select element
 $('#table').append(
 `<tr>
 <td><select class="form-control select2 dg" name="dog_id[]" id="${selectId}">
@@ -399,8 +402,8 @@ $('#table').append(
            
          @endforeach  </select>
          
-             <span class="form-control" id="${judge_span}" name="judge[]"></span>
-       
+             <span class="form-control" id="${judge_span}"></span>
+             <input class="form-control span_judge" id="${judge_hidden}" name="judge_span[]" type="hidden">
 </td>
 
 <td> <button id="remove" class="btn btn-danger">Remove</button></td>
@@ -421,7 +424,7 @@ $('#' + selectId).select2();
 //         return 'http://localhost/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
 var breed_id=$('#breed_ide :selected').val();
         var gender=$('#gender_dog').val();
-        console.log(selectId);
+        // console.log(selectId);
         $.ajax({
            type:'get',
            url:'{{ route("breed-dogs") }}' + '?breed_id=' + breed_id,
@@ -436,7 +439,7 @@ var breed_id=$('#breed_ide :selected').val();
                 option.text = data.dog[i].dog_name;
                 option.value = data.dog[i].dog_id;
                 x.add(option);
-                console.log(data);
+                // console.log(data);
               }
            }
       
@@ -470,6 +473,7 @@ $('#'+judge_span).show();
               judge_span.text = data.judge[i].full_name;
               judge_span.value = data.judge[i].judge_id;
               $('#'+judge_span).text(data.judge[i].full_name);
+              $('#'+judge_hidden).val(data.judge[i].judge_id);
               // x.add(judge_id);
             }else{
               $('#'+judge_span).hide();
@@ -539,12 +543,12 @@ var breed_id=$('#breed_ide :selected').val();
                 var x = document.getElementById('all_dogs');
                 var option = document.createElement("option");
                 var button='<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-                $('#all_dogs').empty().append('<option><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button></option>');
-                console.log(dg);
+                var button=$('#all_dogs').html(button+option);
+
               // option.html = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
             
               // option.value = 0;
-              x.add(option);
+              // x.add(option);
             }
            }
 
@@ -579,9 +583,7 @@ $.ajax({
   success: function(response){
     // Handle successful form submission
     
-    // console.log(response);
-    // console.log(response.response.full_name);
-    // console.log(response.response.message);
+ 
     $('.dog').append($('<option>', {
     value: response.response.id,
 
@@ -663,7 +665,7 @@ function fetchCountryDetails(idCountry) {
         dataType: 'json',
         success: function(response) {
             $('#country-name').val(response.countryName);
-            console.log(idCountry);
+            // console.log(idCountry);
         },
         error: function(xhr, status, error) {
             console.log(error);
@@ -728,7 +730,7 @@ var judge_id=$('#judge').text();
               judge_span.text = data.judge[i].full_name;
               judge_span.value = data.judge[i].judge_id;
               $('#judge_span').text(data.judge[i].full_name);
-              $('#judge_span').value(data.judge[i].judge_id);
+              $('#judge_hidden').val(data.judge[i].judge_id);
               // x.add(judge_id);
             
           }else{
