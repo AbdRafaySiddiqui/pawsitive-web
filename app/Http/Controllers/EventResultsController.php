@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Dogs;
 use App\Models\Breeds;
 use App\Models\Event_Result;
+use App\Models\EventJudges;
 use App\Models\Judges;
 use App\Models\DogsRealParent;
 use App\Models\DogClass;
@@ -33,12 +34,12 @@ class EventResultsController extends Controller
         $total_breeds = Breeds::get();
         $total_judges = Judges::get();
         $dog_class = DogClass::get();
-
+        $data = EventJudges::get();
         $maleDogs = Dogs::where('gender', '=', 'Male')->get();
         $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
         $Events = Events::all();
         
-        return view('event_results.create',compact('Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges','dog_class'));
+        return view('event_results.create',compact('Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges','dog_class' ,'data'));
     }
 
     /**
@@ -50,7 +51,7 @@ class EventResultsController extends Controller
     $grading = $request->input('grading');
     $place = $request->input('place');
     $judge = $request->input('judge');
-    $gender = $request->input('gender_dog');
+    $award_id = $request->input('awards');
     $event_id = $request->input('event_id');
     $breed_id = $request->input('breed_id');
     $class = $request->input('class');
@@ -58,10 +59,15 @@ class EventResultsController extends Controller
     foreach ($dog_id as $key => $value) {
         $event_result = new Event_Result;
         $event_result->dog_id = $value;
+        $gender = Dogs::select('dogs.gender As gender')
+      ->where('dogs.id','=',$value)
+      ->first();
+      
         $event_result->grading = $grading[$key];
         $event_result->place = $place[$key];
         $event_result->judge = $judge[$key];
-        $event_result->gender = $gender[$key];
+        $event_result->award_id = $award_id[$key];
+        $event_result->gender = $gender->gender;
         $event_result->event_id = $event_id;
         $event_result->breed_id = $breed_id;
         $event_result->class = $class;
@@ -87,19 +93,23 @@ class EventResultsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request,string $id)
     {
         $event_result = Event_Result::find($id);
         $dogs = Dogs::get();
         $total_breeds = Breeds::get();
         $total_judges = Judges::get();
         $dog_class = DogClass::get();
-
+        $event_id = $request->input('event_id');
         $maleDogs = Dogs::where('gender', '=', 'Male')->get();
         $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
         $Events = Events::all();
+        $er_events =  Event_Result::select('event_results.event_id','events.id','event_results.event_id')
+        ->leftjoin('events','events.id','=','event_results.event_id')
+        ->where('event_results.event_id', '=', $event_id)
+        ->get();
         
-        return view('event_results.edit', compact('event_result','Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges','dog_class'));
+        return view('event_results.edit', compact('er_events','event_result','Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges','dog_class'));
     }
 
     /**

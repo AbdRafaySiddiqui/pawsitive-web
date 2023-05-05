@@ -550,7 +550,7 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="{{route('events.index')}}">
+              <a href="{{route('event_results.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -809,7 +809,7 @@
 
         </script>
  
- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script> -->
 <!-- <script>
     var $j = jQuery.noConflict();
     // Use $j instead of $ to reference the jQuery library

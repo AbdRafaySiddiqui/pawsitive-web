@@ -23,4 +23,7 @@ class Events extends Model
   public function judge_name(){
     return $this->belongsTo('App\Models\Judges','judge_id','id');
   }
+  public function judge(){
+    return $this->hasMany('App\Models\EventJudges','id','judge_id');
+  }
 }

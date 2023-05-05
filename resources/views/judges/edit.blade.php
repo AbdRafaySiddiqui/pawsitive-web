@@ -50,7 +50,7 @@
                 <input class="form-control" type="file" id="sig" name="sig" accept="image/png, image/jpeg">
                                             </div>
                                         </div>
-                                    </div>                       
+                                                        
        
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Enter Description Below</label>

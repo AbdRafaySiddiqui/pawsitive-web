@@ -167,6 +167,7 @@ START - Support Agents
       </div>
       <div class="display-type"></div>
     </div>
+<<<<<<< HEAD
     
     <script>
          $(document).ready(function(){
@@ -178,4 +179,7 @@ START - Support Agents
   });
 });
     </script>
+=======
+
+>>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
     @endsection

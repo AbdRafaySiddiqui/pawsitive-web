@@ -9,6 +9,7 @@ use App\Models\Breeds;
 use App\Models\Events;
 use App\Models\Judges;
 use App\Models\Countries;
+use App\Models\EventJudges;
 use Illuminate\Pagination\Paginator;
 use League\Csv\Writer;
 
