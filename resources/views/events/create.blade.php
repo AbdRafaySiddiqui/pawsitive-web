@@ -47,8 +47,7 @@
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label class="col-form-label" for="">Select Judge</label>
-                                          <select class="form-control js-data-example-ajax" name="judge_id[]" id="selUser">
-                                              <option value="0"> Select Judge </option>
+                                          <select class="form-control" name="judge_id[]" id="selUser" multiple>
                                               @foreach ($judges as $judge)
                                                   <option value="{{ $judge->id }}">
                                                       {{ $judge->full_name }}
@@ -268,9 +267,6 @@
         });
         
         $('#selUser').select2({
-            allowClear: true,
-            tags: true,
-            placeholder: 'Select an item',
             language: {
                 noResults: function(term) {
                     return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Judge</button>';
@@ -333,8 +329,8 @@
 
                         text: response.response.full_name
                     }));
-                    $('#selUser').val(response.response.id).trigger('change');
-                    $('#success-msg').html('<p class="success">' + response.message + '</p>');
+                    // $('#selUser').val(response.response.id).trigger('change');
+                    // $('#success-msg').html('<p class="success">' + response.message + '</p>');
                 },
                 error: function(response, xhr, status, error) {
 
@@ -371,4 +367,5 @@
     </script>
 
     <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 @endsection
