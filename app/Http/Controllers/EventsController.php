@@ -23,7 +23,7 @@ class EventsController extends Controller
         Paginator::useBootstrap();
         $event = Events::with('cities_name','country_name','club_name','judge_name')->WHERE('status', 'Active')->orderBy('id','DESC')->paginate('10');
        
-        return view('events/index', compact('event'));
+        return view('events.index', compact('event'));
     }
 
     /**
@@ -52,7 +52,6 @@ class EventsController extends Controller
 	    $events->country = $request->country;
 	    $events->start_date = $request->start_date;
 	    $events->end_date = $request->end_date;
-	    $events->judge_id = $request->judge_id;
         $events->save();
 
         $event_judges = new EventJudges;
@@ -92,7 +91,7 @@ class EventsController extends Controller
         $total_countries = Countries::get();
         $total_cities = Cities::get();
         $judges = Judges::get();
-        return view('events/edit', compact('events','total_countries','total_cities','total_clubs','judges'));
+        return view('events.edit', compact('events','total_countries','total_cities','total_clubs','judges'));
     }
 
     /**
