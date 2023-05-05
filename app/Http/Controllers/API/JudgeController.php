@@ -21,17 +21,15 @@ class JudgeController extends Controller
             } else {
                 $judge->image = asset('storage/app/public/noimage.png');
             }
-        } else {
-            $judge->image = asset('storage/app/public/noimage.png');
         }
-        }
+    }
 
         return response()->json(['judges' => $judges], 200);
     }
 
     public function details($id)
     {
-        $judge = Judges::select('id','full_name as judgeName','description','image as profilePhoto','facebook','instagram','linkedIn','twitter')->find($id);
+        $judge = Judges::select('id','full_name','position_in_club','description','image','signature','facebook','instagram','linkedIn','twitter')->find($id);
 
         $judge->description = html_entity_decode($judge->description);
 
@@ -51,7 +49,21 @@ class JudgeController extends Controller
             $judge->image = asset('storage/app/public/noimage.png');
         }
 
-     
+        if($judge->signature != null)
+        {
+            if(file_exists(storage_path('app/public/judge_signatures/'.$judge->signature)))
+            {
+                $judge->signature = asset('storage/app/public/judge_signatures').'/'.$judge->signature;
+            }
+            else
+            {
+                $judge->signature = null;
+            }
+        }
+        else
+        {
+            $judge->signature = null;
+        }
 
         return response()->json(['judge' => $judge], 200);
     }

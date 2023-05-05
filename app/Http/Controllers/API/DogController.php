@@ -22,21 +22,23 @@ class DogController extends Controller
           foreach($dog as $dogs)
                       {
               
-                        if($dogs->profilePhoto != null)
+                      if($dogs->profilePhoto != null)
+                      {
+                        // Check if profile photo starts with "https://"
+                      if (strpos($dogs->profilePhoto, 'https://') === 0)
                         {
-                          if(file_exists(storage_path('/app/public/dog_profile'.'/'.$dogs->profilePhoto)))
-                          {
-                            $dogs->profilePhoto = asset('storage/app/public/dog_profile').'/'.$dogs->profilePhoto;
-                          }
-                          else
-                          {
-                            $dogs->profilePhoto = asset('storage/app/public/noimage.png');
-                          }
+                        $dogs->profilePhoto = $dogs->profilePhoto;
                         }
-                        else
-                        {
-                          $dogs->profilePhoto = asset('storage/app/public/noimage.png');
-                        }
+                        // Check if profile photo exists in local storage
+                      elseif (file_exists(storage_path('/app/public/dog_profile'.'/'.$dogs->profilePhoto)))
+                      {
+                        $dogs->profilePhoto = asset('storage/app/public/dog_profile').'/'.$dogs->profilePhoto;
+                      }
+                      }
+                      else
+                      {
+                        $dogs->profilePhoto = asset('storage/app/public/noimage.png');
+                      }
                       }
 
         return response()->json(['dog' => $dog], 200);
@@ -120,7 +122,11 @@ class DogController extends Controller
               
                         if($dogs->profilePhoto != null)
                         {
-                          if(file_exists(storage_path().'/app/public/dog_profile'.'/'.$dogs->image))
+                          if (strpos($dogs->profilePhoto, 'https://') === 0)
+                            {
+                            $dogs->profilePhoto = $dogs->profilePhoto;
+                            }
+                          elseif(file_exists(storage_path().'/app/public/dog_profile'.'/'.$dogs->image))
                           {
                             $dogs->profilePhoto = asset('storage/app/public/dog_profile').'/'.$dogs->image;
                           }

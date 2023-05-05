@@ -255,9 +255,8 @@ if( $judge->facebook == null){
      */
     public function destroy(string $id)
     {
-        $DeleteData = Judges::findOrFail($id);
-        $DeleteData->delete();
-        return redirect()->back()->with('message', 'Record Permenantly Deleted!');
+        Judges::where('id',$id)->update(array('status' => 'Inactive'));
+        return redirect()->back()->with('message', 'Record Deleted!');
     }
 
     public function download()
