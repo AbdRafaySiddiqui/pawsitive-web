@@ -52,6 +52,7 @@ class EventResultController extends Controller
                          'countries.countryCode',
                          'events.id AS eventId')
                 ->orderBy('events.start_date', 'desc')
+                ->distinct('events.id')
                 ->take(20)
                 ->get();
                 return response()->json(['event_result' => $results]);
