@@ -366,6 +366,5 @@
         });
     </script>
 
-    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 @endsection

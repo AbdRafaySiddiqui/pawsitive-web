@@ -57,14 +57,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('dog/{breed_id}/listings', [DogController::class, 'listing']);//working fine.
 Route::get('dog/{id}/details', [DogController::class, 'details']);//working fine.
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);//working fine.
-Route::get('dog/breed-dogs', [DogController::class, 'breed_dog']);//working fine.
+Route::get('dog/breed-dogs', [DogController::class, 'breed_dog'])->name('breed-dogs');//working fine.
 Route::get('dog/dog-profile', [DogController::class, 'dog_profile']);//working fine.
 Route::get('dog/{id}/profile-details', [DogController::class, 'profile_details']);//dog_owner table doesnt exist.
 
 //EventResultController routes
 Route::get('result-listing', [EventResultController::class, 'result']);
 Route::get('event/{id}/result', [EventResultController::class, 'event_result']);
-Route::get('event_results/judge', [EventResultController::class, 'judge']);
+Route::get('event_results/judge', [EventResultController::class, 'judge'])->name('event_judge');
 
 //EventController routes
 Route::get('event-listing/{breed_id}', [App\Http\Controllers\API\EventController::class, 'retrieve']);//working fine.

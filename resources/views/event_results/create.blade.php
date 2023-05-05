@@ -10,7 +10,7 @@
   <div class="col-lg-12">
     <div class="element-wrapper">
       <h6 class="element-header">
-       Add Event Result Result
+       Add Event Result
       </h6>
       <div class="element-box">
      
@@ -40,7 +40,7 @@
         <div class="row">
           <div class="col-sm-4">
           <div class="form-group">
-              <label class="col-form-label" for="">Start Date</label>
+              <label class="col-form-label" for="">Date</label>
                 <input class="form-control" name="date" id="event-date" type="date">
               </div>
               </div>
@@ -59,7 +59,7 @@
               <div class="col-sm-4">
             <div class="form-group">
               <label class="col-form-label" for="">Judge Name</label>
-                <input class="form-control" name="judge" id="judge-name" placeholder="Enter judge" type="text">
+                <input class="form-control" name="date" id="judge-name" placeholder="Enter judge" type="text">
               </div>
             </div>
             </div>
@@ -184,39 +184,21 @@
               <td>
              
              <div class="col-sm-12"> 
-              @if(count($data) > 1)
-             <select class="form-control select2" name="judge[]" id="judge">
+          
+             <select class="form-control select2 select_judge" name="judge[]" id="judge">
              @foreach($total_judges as $judge)
                <option  value="{{$judge->id}}">
               {{$judge->full_name}}
                </option>
-
+              @endforeach
              </select>
-             @else
-             <span class="form-control" id="judge" name="judge[]"></span>
-             @endif
-             @endforeach
+             
+             <span class="form-control span_judge" id="judge_span" name="judge[]"></span>
+            
              </div>
             </td>
-            <!-- <td>
-                      <div class="col-sm-12">
-                      <select class="form-control" name="gender_dog[]">
-                      <option value="">
-                              Select One
-                            </option>
-                            <option value="Male">
-                              Male
-                            </option>
-                            <option value="Female">
-                            Female
-                            </option>
-                          </select>
-                        </div>
+            
 
-
-            </td> -->
-
-              </td>
            
               <td> <button id="add" name="add" class="btn btn-primary" type="button">Add</button></td>
             </tr>
@@ -389,7 +371,8 @@
 
 $('#add').click(function(){
   var selectId = 'all_dogsb_' + i; // Generate a unique ID for the select element
-  let judgeId = 'all_judgeb_' + i; // Generate a unique ID for the select element
+  var judgeId = 'all_judgeb_' + i; // Generate a unique ID for the select element
+  var judge_span = 'judge_span_b' + i; // Generate a unique ID for the select element
 $('#table').append(
 `<tr>
 <td><select class="form-control select2 dg" name="dog_id[]" id="${selectId}">
@@ -407,17 +390,17 @@ $('#table').append(
 
 <td>
 
-             @if(count($total_judges) < 1)
+           
 <select class="form-control select2" name="judge[]" id="${judgeId}">
            @foreach($total_judges as $judge)
              <option  value="{{$judge->id}}">
             {{$judge->full_name}}
              </option>
-             @endforeach
-           </select>
-           @else
-             <span class="form-control" id="${judgeId}" name="judge[]"></span>
-             @endif
+           
+         @endforeach  </select>
+         
+             <span class="form-control" id="${judge_span}" name="judge[]"></span>
+       
 </td>
 
 <td> <button id="remove" class="btn btn-danger">Remove</button></td>
@@ -425,9 +408,9 @@ $('#table').append(
            </tr>`
         
 );
-if($("#"+judgeId).is("select")) {
+
 $('#' + judgeId).select2();
-}
+
 $('#' + selectId).select2();
 
 
@@ -441,12 +424,13 @@ var breed_id=$('#breed_ide :selected').val();
         console.log(selectId);
         $.ajax({
            type:'get',
-           url:'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id,
+           url:'{{ route("breed-dogs") }}' + '?breed_id=' + breed_id,
            data:{id:breed_id},
            success:function(data)
            {
               for(let i = 0; i < data.dog.length; i++)
               {
+                
                 var x = document.getElementById(selectId);
                 var option = document.createElement("option");
                 option.text = data.dog[i].dog_name;
@@ -458,33 +442,37 @@ var breed_id=$('#breed_ide :selected').val();
       
       });
 
-      if($("#judge").is("select")) {
+  
 
   $('#'+judgeId).empty().append('<option value="0">Select Judge</option>');
-      }
+      
 
-  var judge_id=$('#judge').text();
+  // var judge_id=$('#judge').text();
+  // var judge_span=$('#judge_span').text();
 var id=$('#event_id :selected').val();
 
       // console.log(breed_id);
       $.ajax({
          type:'get',
-         url:'http://localhost/pawsitive-web/api/event_results/judge?id='+id,
+         url:'{{ route("event_judge") }}' + '?id=' + id,
          data:{id:id},
          success:function(data)
          {
           for(let i = 0; i < data.judge.length; i++)
             {
-              if($("#"+judgeId).is("span")) {
-
+              if(data.judge.length <=1) {
+$('#'+judgeId).select2('destroy');
+$('#'+judgeId).hide();
+$('#'+judge_span).show();
               
               var x = document.getElementById(judgeId);
             
-              judge_id.text = data.judge[i].full_name;
-              judge_id.value = data.judge[i].judge_id;
-              $('#'+judgeId).text(data.judge[i].full_name);
+              judge_span.text = data.judge[i].full_name;
+              judge_span.value = data.judge[i].judge_id;
+              $('#'+judge_span).text(data.judge[i].full_name);
               // x.add(judge_id);
             }else{
+              $('#'+judge_span).hide();
               var x = document.getElementById(judgeId);
               var option = document.createElement("option");
               option.text = data.judge[i].full_name;
@@ -510,99 +498,10 @@ var id=$('#event_id :selected').val();
             placeholder: 'Select an Event'
         });
 
-        // $('#judge').select2();
-        // $('.dg').select2();
-        
-        
-
- $('#judge').select2({
-    allowClear: true,
-    placeholder: 'Select an items',
-    language: {
-      noResults: function (term) {
-        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-      }
-    },
-    escapeMarkup: function(markup) {
-      return markup;
-    }
-    ,
-    ajax: {
-      type: "get",
-      url: function(){
-        var id=$('#event_id :selected').val();
-        console.log(id);
-        return 'https://inspedium.xyz/pawsitive-web/api/event_results/judge?id='+id;
-      },
-      dataType: 'json',
-  
-      delay: 250,
-       data: function (params) {
-              return {
-                  q: $.trim(params.term)
-
-              };   
-
-
-          },
-      processResults: function (data) {
-        // console.log(gender);
-        return {
-          results:  $.map(data, function (item) {
-                return {
-          //  _token: CSRF_TOKEN,
-  
-                    text: item.full_name,
-                    id: item.jud_id,
-                    
-                  }
-                  // $('#all_dogs').empty().append(item);
-            })
-        };
-      },
-      
-      cache: true
-    }
-  });         
 
 $('#breed_ide').on('change', function() {
   $('#event_tbl').show();
-  if($("#judge").is("select")) {
-  $('#judge').empty().append('<option value="0">Select Judge</option>');
-  }
-var id=$('#event_id :selected').val();
-var judge_id=$('#judge').text();
-
-      // console.log(breed_id);
-      $.ajax({
-         type:'get',
-         url:'http://localhost/pawsitive-web/api/event_results/judge?id='+id,
-         data:{id:id},
-         success:function(data)
-         {
-            for(let i = 0; i < data.judge.length; i++)
-            {
-              if($("#judge").is("span")) {
-
-              
-              var x = document.getElementById('judge');
-            
-              judge_id.text = data.judge[i].full_name;
-              judge_id.value = data.judge[i].judge_id;
-              $('#judge').text(data.judge[i].full_name);
-              // x.add(judge_id);
-            }else{
-              var x = document.getElementById('judge');
-              var option = document.createElement("option");
-              option.text = data.judge[i].full_name;
-              option.value = data.judge[i].judge_id;
-              
-              x.add(option);
-            }
-            }
-         }
-      });
- 
+  
 });
  
 
@@ -617,7 +516,8 @@ var breed_id=$('#breed_ide :selected').val();
         // console.log(breed_id);
         $.ajax({
            type:'get',
-           url:'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id+'&gender='+gender,
+          
+           url: '{{ route("breed-dogs") }}' + '?breed_id=' + breed_id ,
            data:{id:breed_id},
            success:function(data)
            {
@@ -638,10 +538,11 @@ var breed_id=$('#breed_ide :selected').val();
                 
                 var x = document.getElementById('all_dogs');
                 var option = document.createElement("option");
-                var dg=$('#all_dogs').append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>');
+                var button='<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+                $('#all_dogs').empty().append('<option><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button></option>');
                 console.log(dg);
               // option.html = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-              option.text=dg;
+            
               // option.value = 0;
               x.add(option);
             }
@@ -795,6 +696,58 @@ $('#event_id').on('change', function() {
             console.log(error);
         }
     });
+
+
+
+
+  $('#judge').empty().append('<option value="0">Select Judge</option>');
+
+var id=$('#event_id :selected').val();
+var judge_id=$('#judge').text();
+      // console.log(breed_id);
+      $.ajax({
+         type:'get',
+         url:'{{ route("event_judge") }}' + '?id=' + id,
+         data:{id:id},
+         success:function(data)
+         {
+
+            for(let i = 0; i < data.judge.length; i++)
+            {
+              if(data.judge.length <= 1) {
+
+                $('#judge').select2('destroy');
+                $('#judge').hide();
+
+                // $('#judge').removeClass('select2');
+                
+                $('#judge_span').show();
+              
+              var x = document.getElementById('judge_span');
+            
+              judge_span.text = data.judge[i].full_name;
+              judge_span.value = data.judge[i].judge_id;
+              $('#judge_span').text(data.judge[i].full_name);
+              $('#judge_span').value(data.judge[i].judge_id);
+              // x.add(judge_id);
+            
+          }else{
+            $('#judge_span').hide();
+            $('#judge').show();
+            $('#judge').select2();
+              // $('#judge').addClass('select2');
+              
+              var x = document.getElementById('judge');
+              var option = document.createElement("option");
+              option.text = data.judge[i].full_name;
+              option.value = data.judge[i].judge_id;
+              
+              x.add(option);
+            }
+            }
+         }
+      });
+ 
 });
 // clear modal 
 $('#exampleModal').on('hidden.bs.modal', function () {

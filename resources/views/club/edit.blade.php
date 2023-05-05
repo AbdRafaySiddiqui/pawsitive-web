@@ -52,15 +52,9 @@
                                           <div class="form-group">
                                               <label class="col-form-label" for=""> Countries</label>
                                               <select class="form-control" name="country" id="country">
-<<<<<<< HEAD
-                                                  @foreach ($total_countries as $countries)
-                                                  <option value="{{$countries->idCountry}}"  {{ $countries->idCountry == $et_club->country ? 'selected' : '' }}>
-                                                          {{ $countries->countryName }}
-=======
                                                   @foreach ($countries as $country)
                                                       <option value="{{ $country->idCountry }}">
                                                           {{ $country->countryName }}
->>>>>>> 886435092e88f404d9488d9c185bec45eb7ecbcb
                                                       </option>
                                                   @endforeach
                                               </select>
@@ -92,11 +86,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                             <label class="col-form-label" for="">Affiliation with</label>
-<<<<<<< HEAD
                                             <input class="form-control" value="{{$et_club->affiliation}}" name="affiliation" placeholder="Enter Email" type="text">
-=======
-                                            <input class="form-control" value="{{$et_club->affiliation}}" name="affiliation" placeholder="Enter Affiliation." type="text">
->>>>>>> 886435092e88f404d9488d9c185bec45eb7ecbcb
                                             </div>
                                         </div>
                                     </div>
@@ -179,4 +169,5 @@
             placeholder: 'Select a City'
         });
     </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 @endsection
