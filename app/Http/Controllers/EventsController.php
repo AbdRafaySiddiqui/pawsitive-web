@@ -35,7 +35,7 @@ class EventsController extends Controller
         $total_cities = Cities::get();
         $total_countries = Countries::get();
         $total_breeds = Breeds::get();
-        $judges = Judges::all();
+        $judges = Judges::get();
         return view('events.create',compact('total_clubs','total_cities','total_breeds','total_countries','judges'));
        
     }
@@ -54,6 +54,22 @@ class EventsController extends Controller
 	    $events->end_date = $request->end_date;
 	    $events->judge_id = $request->judge_id;
         $events->save();
+
+        $event_judges = new EventJudges;
+        $event_judges->event_id = $events->id; // use the last inserted event ID
+
+        if(is_array($request->judge_id) && count($request->judge_id) > 1) {
+            foreach($request->judge_id as $judgeId) {
+                $event_judges = new EventJudges;
+                $event_judges->event_id = $events->id;
+                $event_judges->judge_id = $judgeId;
+                $event_judges->save();
+            }
+        } else {
+            $event_judges->judge_id = $request->judge_id[0];
+            $event_judges->save();
+        }
+
         
         return redirect()->back()->with('message', 'Record added successfully',compact('request'));
     }

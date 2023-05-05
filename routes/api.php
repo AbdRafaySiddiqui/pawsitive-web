@@ -63,12 +63,8 @@ Route::get('dog/{id}/profile-details', [DogController::class, 'profile_details']
 
 //EventResultController routes
 Route::get('result-listing', [EventResultController::class, 'result']);
-<<<<<<< HEAD
-Route::get('event/{id}/result', [EventResultController::class, 'event_result']);//is mey class ka naam nhi arha hy api mey.
-=======
 Route::get('event/{id}/result', [EventResultController::class, 'event_result']);
 Route::get('event_results/judge', [EventResultController::class, 'judge']);
->>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
 
 //EventController routes
 Route::get('event-listing/{breed_id}', [App\Http\Controllers\API\EventController::class, 'retrieve']);//working fine.
