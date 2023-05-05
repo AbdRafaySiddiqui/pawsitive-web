@@ -54,7 +54,7 @@ class EventController extends Controller
                         ->distinct('events.id');
         // Apply filters based on request parameters
         if ($request->has('start_date')) {
-            $start_date = $request->input('start_date');
+            $start_date = strtotime($request->input('start_date'));
             $query->where('events.start_date', '>=', $start_date);
         }
         if ($request->has('end_date')) {

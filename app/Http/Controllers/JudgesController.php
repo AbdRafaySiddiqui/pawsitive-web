@@ -18,7 +18,7 @@ class JudgesController extends Controller
     public function index()
     {
         Paginator::useBootstrap();
-        $judge = Judges::where('status','=','1')->orderBy('id','DESC')->paginate('10');
+        $judge = Judges::where('status','=','Active')->orderBy('id','DESC')->paginate('10');
        
         return view('judges/index', compact('judge'));
     }
@@ -255,9 +255,8 @@ if( $judge->facebook == null){
      */
     public function destroy(string $id)
     {
-        $DeleteData = Judges::findOrFail($id);
-        $DeleteData->delete();
-        return redirect()->back()->with('message', 'Record Permenantly Deleted!');
+        Judges::where('id',$id)->update(array('status' => 'Inactive'));
+        return redirect()->back()->with('message', 'Record Deleted!');
     }
 
     public function download()
