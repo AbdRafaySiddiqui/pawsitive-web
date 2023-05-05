@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 class CitiesController extends Controller
 {
-    public function getCities($countryName)
-{
-    $cities = Cities::where('country', $countryName)->get(['id', 'city']);
-    return response()->json($cities);
-}
+    public function getCities(Request $request)
+    {
+        $countryId = $request->input('countryId');
+
+        $cities = Cities::where('country', $countryId)->select('id', 'city')->get();
+        return response()->json(['cities' => $cities], 200);
+    }
 
 
 }

@@ -52,6 +52,7 @@
                                           <div class="form-group">
                                               <label class="col-form-label" for=""> Countries</label>
                                               <select class="form-control" name="country" id="country">
+                                                <option>Select Country</option>
                                                   @foreach ($total_countries as $countries)
                                                   <option value="{{$countries->idCountry}}"  {{ $countries->idCountry == $edit->country ? 'selected' : '' }}>
                                                           {{ $countries->countryName }}
@@ -82,4 +83,10 @@
       </div>
       <div class="display-type"></div>
     </div>
+    <script src="{{ asset('public/select2-develop/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('public/select2-develop/dist/js/i18n/pt-BR.js') }}"></script>
+    <script>
+        $('#country').select2();
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 @endsection

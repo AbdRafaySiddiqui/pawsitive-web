@@ -28,7 +28,6 @@ class ClubsController extends Controller
      */
     public function create()
     {
-    $total_countries = Countries::get();
     $total_cities = Cities::get();
     $countries = Countries::get();
 
