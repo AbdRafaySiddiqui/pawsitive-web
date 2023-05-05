@@ -699,9 +699,9 @@ $('#event_id').on('change', function() {
 
 
 
-    if($("#judge").is("select")) {
+
   $('#judge').empty().append('<option value="0">Select Judge</option>');
-  }
+
 var id=$('#event_id :selected').val();
 var judge_id=$('#judge').text();
       // console.log(breed_id);
@@ -725,9 +725,10 @@ var judge_id=$('#judge').text();
               
               var x = document.getElementById('judge_span');
             
-              judge_id.text = data.judge[i].full_name;
-              judge_id.value = data.judge[i].judge_id;
+              judge_span.text = data.judge[i].full_name;
+              judge_span.value = data.judge[i].judge_id;
               $('#judge_span').text(data.judge[i].full_name);
+              $('#judge_span').value(data.judge[i].judge_id);
               // x.add(judge_id);
             
           }else{
