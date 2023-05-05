@@ -73,26 +73,16 @@
             <div class="col-sm-4">
             <div class="form-group">
               <label class="col-form-label" for="">Class</label>
-<<<<<<< HEAD
-              <input class="form-control" name="class" placeholder="Enter Class" type="text">
-</select>
-=======
               <input class="form-control" name="class" id="class" placeholder="Enter class" type="text">
              
->>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
               </div>
             </div>
             <div class="col-sm-4">
             <div class="form-group">
           <label class="col-form-label" for="" >Select Breed </label>
-<<<<<<< HEAD
-          <select class="form-control" name="breed_id" id="breed_id">
-                     <option> Select</option> 
-=======
           <select class="form-control select2" onchange="dogs_by_judge(this)" name="breed_id" id="breed_ide">
           <option>Select Breed</option>
                     <!-- <option> Select</option> -->
->>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
                     @foreach($total_breeds as $total_breed)
                         <option value="{{$total_breed->id}}">
                             {{$total_breed->name}}
@@ -163,14 +153,8 @@
               
               <td>
 
-<<<<<<< HEAD
-              <div class="col-md-12">
-              <select class="form-control js-data-example-ajax dog" name="dog_id[]" id="all_dogs">
-                  <option></option>
-=======
               <!-- <div class="col-md-12"> -->
               <select class="form-control select2 dog" name="dog_id[]" id="all_dogs">
->>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
               @foreach($dogs as $dog)
                 <option  value="{{$dog->id}}">
                {{$dog->dog_name}}
@@ -200,24 +184,18 @@
               <td>
              
              <div class="col-sm-12"> 
-<<<<<<< HEAD
-             <select class="form-control js-data-example-ajax" name="judge[]" id="judge">
-             
-               <option  value="">
-           
-=======
               @if(count($data) > 1)
              <select class="form-control select2" name="judge[]" id="judge">
              @foreach($total_judges as $judge)
                <option  value="{{$judge->id}}">
               {{$judge->full_name}}
->>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
                </option>
 
              </select>
              @else
              <span class="form-control" id="judge" name="judge[]"></span>
              @endif
+             @endforeach
              </div>
             </td>
             <!-- <td>
@@ -340,13 +318,8 @@
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="">Select Breed</label>
                             <div class="col-sm-8">
-<<<<<<< HEAD
-                            <select class="form-control js-data-example-ajax" name="breed_id" class="breed_id">
-                                <option></option>
-=======
                             <select class="form-control select2" name="breed_id" class="breed_id">
                             <option></option>
->>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
                             @foreach($total_breeds as $total_breed)
                               <option  value="{{$total_breed->id}}">
                             {{$total_breed->name}}
@@ -359,12 +332,7 @@
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="">Select Sire</label>
                             <div class="col-sm-8">
-<<<<<<< HEAD
-                            <select class="form-control js-data-example-ajax" name="sire_id" id="selUser">
-                                                                <option></option>
-=======
                             <select class="form-control select2" name="sire_id" id="selUser"  >
->>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
                             @foreach($maleDogs as $maleDog)
                               <option  value="{{$maleDog->id}}">
                             {{$maleDog->dog_name}}
@@ -616,62 +584,6 @@ var judge_id=$('#judge').text();
             {
               if($("#judge").is("span")) {
 
-<<<<<<< HEAD
-
-
-
-
-$('#all_dogs').select2({
-    allowClear: true,
-    placeholder: 'Select an items',
-    language: {
-      noResults: function (term) {
-        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-      }
-    },
-    escapeMarkup: function(markup) {
-      return markup;
-    }
-    ,
-    ajax: {
-      type: "get",
-      url: function(){
-        var id=$('#breed_id :selected').val();
-        var gender=$('#gender_dog').val();
-        
-        return 'https://inspedium.xyz/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
-      },
-      dataType: 'json',
-  
-      delay: 250,
-       data: function (params) {
-              return {
-                  q: $.trim(params.term)
-
-              };   
-
-
-          },
-      processResults: function (data) {
-        // console.log(gender);
-        return {
-          results:  $.map(data, function (item) {
-                return {
-          //  _token: CSRF_TOKEN,
-  
-                    text: item.dog_name,
-                    id: item.id,
-                    
-                  }
-                  // $('#all_dogs').empty().append(item);
-            })
-        };
-      },
-      
-      cache: true
-    }
-  });         
-=======
               
               var x = document.getElementById('judge');
             
@@ -690,7 +602,6 @@ $('#all_dogs').select2({
             }
          }
       });
->>>>>>> f4a5ed9a79e27a70ddcd56d2eeb201041ad48629
  
 });
  

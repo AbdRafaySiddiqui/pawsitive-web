@@ -19,7 +19,7 @@
                                     @method('PUT')
 
                                     <h5 class="form-header">
-                                    Edit Event
+                                        Edit Event
                                     </h5>
                                     <div class="form-desc">
                                     </div>
@@ -49,19 +49,16 @@
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label class="col-form-label" for="">Select Judge</label>
-                                              <select class="form-control js-data-example-ajax" name="judge_id"
-                                                  id="selUser">
-                                                  @foreach ($judges as $judge)
-                                                    @foreach ($events->judges as $judges)
-                                                      <option value="{{ $judge->id }}"
-                                                          {{ $judge->id == $judges->judge_id ? 'selected' : '' }}>
-  
-  
-                                                          {{ $judge->full_name }}
-                                                      </option>
-                                                    @endforeach
-                                                  @endforeach
-                                              </select>
+                                              <select class="form-control js-data-example-ajax" name="judge_id" id="selUser">
+                                                @foreach ($judges as $judge)
+                                                    @if($judge->id == $events->judge_id)
+                                                        <option selected value="{{ $judge->id }}">{{ $judge->full_name }}</option>
+                                                    @else
+                                                        <option value="{{ $judge->id }}">{{ $judge->name }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+
                                         </div>
                                       </div>
                                     </div>
@@ -100,7 +97,7 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for=""> City</label>
                                             <select class="form-control" name="city" id="city">
-                                            <option value="">Select City</option>
+                                              <option value="">Select City</option>
                                                 @foreach ($total_cities as $cities)
                                                     <option value="{{ $cities->id }}"
                                                         {{ $cities->id == $events->city ? 'selected' : '' }}>
@@ -227,7 +224,7 @@
     </div>
     <div class="display-type"></div>
     </div>
-
+    
     <script>
 
         // JavaScript
@@ -261,7 +258,7 @@
     <script src="{{ asset('public/select2-develop/dist/js/i18n/pt-BR.js') }}"></script>
     <script>
 
-        $('#club_id').select2({
+$('#club_id').select2({
             allowClear: true,
             tags: true,
             placeholder: 'Select a Club'
@@ -383,4 +380,6 @@
             $('#msg').text(''); // clear the error message
         });
     </script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 @endsection

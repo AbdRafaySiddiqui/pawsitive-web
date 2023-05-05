@@ -83,16 +83,11 @@
           @foreach ($event as  $e)
             <tr>
             <td>{{ $i++ }}</td>
-            
-              
               <td>
               {{$e->name}}
-              </td>
-             
-              
+              </td>              
               <td>{{ $created=date('d-m-Y', strtotime($e->start_date)) }}</td>
               <td>{{ $created=date('d-m-Y', strtotime($e->end_date)) }}</td>
-
               @if(isset($e->cities_name->city))
               <td>
               {{$e->country_name->countryName}}
@@ -100,13 +95,11 @@
               @else
                 <td></td>
               @endif
-              
               @if(isset($e->cities_name->city))
                 <td>{{$e->cities_name->city}}</td>
                 @else
                 <td></td>
               @endif
-
               @if(isset($e->club_name->name))
               <td>
               {{$e->club_name->name}}
@@ -114,14 +107,13 @@
               @else
                 <td></td>
               @endif
-
-              @if(isset($e->judge_name->full_name))
-              <td>
-              {{$e->judge_name->full_name}}
-              </td>
-              @else
-                <td></td>
-              @endif
+        <td>
+            @if ($e->judge()->count() > 0)
+                @foreach ($e->judge as $judge)
+                    {{ $judge->full_name }}@if (!$loop->last),@endif
+                @endforeach
+            @endif
+        </td>
               <td class="row-actions">
                 <a href="{{route('events.edit',$e->id)}}"><i class="os-icon os-icon-ui-49"></i></a>
                 <form action="{{ route('events.destroy', $e->id ) }}" method="post">
