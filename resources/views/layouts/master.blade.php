@@ -13,16 +13,19 @@
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet" type="text/css">
     <link href="{{asset('public/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/bower_components/summernote/summernote-bs4.css')}}">
+    <link rel="stylesheet" href="{{asset('public/bower_components/jquery-selectric/selectric.css')}}">
     <link href="{{asset('public/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
     <link href="{{asset('public/css/main.css?version=4.4.0')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/slick-carousel/slick/slick.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/fullcalendar/dist/fullcalendar.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('public/bower_components/datatables.net-bs/css/dataTables.bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/dropzone/dist/dropzone.css')}}" rel="stylesheet">
     <link href="{{asset('public/bower_components/custom/style.css')}}" rel="stylesheet">
-
+    <!-- <link href="{{asset('public/select2-develop/dist/css/select2.min.css')}}" rel="stylesheet" /> -->
+    <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
+    
   </head>
   <body class="menu-position-side menu-side-left full-screen color-scheme-dark">
     <div class="all-wrapper solid-bg-all">
@@ -164,7 +167,7 @@
                       {{ Auth::user()->name }}
                     </div>
                     <div class="logged-user-role">
-                      Administrator
+                    {{ Auth::user()->user_role->name ?? '' }}
                     </div>
                   </div>
                 </div>
@@ -386,7 +389,7 @@
         --------------------><!--------------------
         START - Main Menu
         -------------------->
-        <div class="menu-w menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright menu-activated-on-hover menu-has-selected-link color-scheme-dark color-style-transparent selected-menu-color-bright">
+        <div class="menu-w menu-position-side menu-side-left menu-layout-compact sub-menu-style-flyout sub-menu-color-bright menu-activated-on-hover menu-has-selected-link color-scheme-dark color-style-transparent selected-menu-color-bright">
           <div class="logged-user-w avatar-inline">
             <div class="logged-user-i">
               <div class="avatar-w">
@@ -451,7 +454,7 @@
                 <span>Dashboard</span></a>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('club.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -466,7 +469,7 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
-                      <a href="{{route('club.create')}}">Add Club</a>
+    <a href="{{route('club.create')}}">Add Club</a>
                       <a href="{{route('club.index')}}">All Club</a>
                     </li>
                     
@@ -475,7 +478,7 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('judges.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -499,7 +502,7 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('breeds.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -523,7 +526,55 @@
               </div>
             </li>
             <li class=" has-sub-menu">
-              <a href="#">
+              <a href="{{route('events.index')}}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Events</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Events
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('events.create')}}">Add Events</a>
+                      <a href="{{route('events.index')}}">All Events</a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="{{route('events.index')}}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Event Result</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Event Result
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('event_results.create')}}">Add Event Result</a>
+                      <a href="{{route('event_results.index')}}">All Event Result</a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="{{route('dogs.index')}}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -540,14 +591,169 @@
                     <li>
                       <a href="{{route('dogs.create')}}">Add Dogs</a>
                       <a href="{{route('dogs.index')}}">All Dogs</a>
+                    </li>             
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="{{route('users.index')}}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Users</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Users
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('users.create')}}">Add Users</a>
+                    </li>
+                    <li>
+                      <a href="{{route('users.index')}}">All Users</a>
+                    </li>     
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="{{route('akc_groups.index')}}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>AKC Groups</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                AKC Groups
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('akc_groups.create')}}">Add Groups</a>
+                    </li>
+                    <li>
+                      <a href="{{route('akc_groups.index')}}">All Groups</a>
+                    </li>     
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="{{route('fci_groups.index')}}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>FCI Groups</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                FCI Groups
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('fci_groups.create')}}">Add Groups</a>
+                    </li>
+                    <li>
+                      <a href="{{route('fci_groups.index')}}">All Groups</a>
+                    </li>     
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="{{route('cities.index')}}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Cities</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Cities
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('cities.create')}}">Add Cities</a>
+                      <a href="{{route('cities.index')}}">All Cities</a>
                     </li>
                     
                   </ul>
                 </div>
               </div>
             </li>
+            <li class=" has-sub-menu">
+              <a href="{{route('species.index')}}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Species</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Species
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{{route('species.create')}}">Add Species</a>
+                    </li>
+                    <li>
+                      <a href="{{route('species.index')}}">All Species</a>
+                    </li>     
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>Logged in as:</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                Logged in as:
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <!-- check if the user have logged in as admin  -->
+                    @if(Auth::check() && Auth::user()->role_id == '1')
+                      <a href="">Admin</a>
+                      @endif
+                      <!-- check in if the user have logged in as writer  -->
+                      @if(Auth::check() && Auth::user()->role_id == '2')
+                      <a href="">Writer</a>
+                      @endif
+                      <!-- check if the user have logged in as user  -->
+                      @if(Auth::check() && Auth::user()->role_id == '3')
+                      <a href="">User</a>
+                      @endif
+                    </li>                   
+                  </ul>
+                </div>
+              </div>
+            </li>
           </ul>
-          
         </div>
         <!--------------------
         END - Main Menu
@@ -555,11 +761,11 @@
 
         @yield('content')
 
-        <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script>
+       
         <script src="{{asset('public/bower_components/popper.js/dist/umd/popper.min.js')}}"></script>
         <script src="{{asset('public/bower_components/moment/moment.js')}}"></script>
         <script src="{{asset('public/bower_components/chart.js/dist/Chart.min.js')}}"></script>
-        <script src="{{asset('public/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+        <!-- <script src="{{asset('public/bower_components/select2/dist/js/select2.full.min.js')}}"></script> -->
         <script src="{{asset('public/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js')}}"></script>
         <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script>
         <script src="{{asset('public/bower_components/bootstrap-validator/dist/validator.min.js')}}"></script>
@@ -585,6 +791,11 @@
         <script src="{{asset('public/bower_components/bootstrap/js/dist/popover.js')}}"></script>
         <script src="{{asset('public/js/demo_customizer.js?version=4.4.0')}}"></script>
         <script src="{{asset('public/js/main.js?version=4.4.0')}}"></script>
+        <script src="{{asset('public/js/dataTables.bootstrap4.min.js')}}"></script>
+    <!-- <script src="{{asset('public/bower_components/ckeditor/ckeditor.js')}}"></script> -->
+
+<!-- <script src="{{asset('public/bower_components/summernote/summernote-bs4.js')}}"></script> -->
+
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -593,6 +804,119 @@
           
           ga('create', 'UA-XXXXXXX-9', 'auto');
           ga('send', 'pageview');
+
+
+
         </script>
-      </body>
+ 
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<!-- <script>
+    var $j = jQuery.noConflict();
+    // Use $j instead of $ to reference the jQuery library
+</script> -->
+
+
+
+<script>
+
+  
+
+// hover 
+$(".has-sub-menu").hover(
+  function(){ $(this).addClass('active') },
+  function(){ $(this).removeClass('active') }
+);
+
+
+    
+function previewImages() {
+
+  
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+    
+    var reader = new FileReader();
+    
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    });
+    
+    reader.readAsDataURL(file);
+    
+  }
+
+}
+document.querySelector('#img').addEventListener("change", previewImages);
+// function previewSignature() {
+
+//   var preview = document.querySelector('#preview_sig');
+  
+//   if (this.files) {
+//     [].forEach.call(this.files, readAndPreview);
+//   }
+
+//   function readAndPreview(file) {
+
+//     // Make sure `file.name` matches our extensions criteria
+//     if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+//       return alert(file.name + " is not an image");
+//     } // else...
+    
+//     var reader = new FileReader();
+    
+//     reader.addEventListener("load", function() {
+//       var image = new Image();
+//       image.height = 100;
+//       image.title  = file.name;
+//       image.src    = this.result;
+//       preview.appendChild(image);
+//     });
+    
+//     reader.readAsDataURL(file);
+    
+//   }
+
+// }
+
+// document.querySelector('#sig').addEventListener("change", previewSignature);
+
+
+    </script>
+
+<script>
+    $('.dataTable1_wrapper').addClass('container-fluid');
+    $('.dataTable1_wrapper').removeClass('form-inline');
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-XXXXXXX-9', 'auto');
+    ga('send', 'pageview');
+</script>
+
+</body>
     </html>
+
+
+
+
