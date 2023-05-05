@@ -1,6 +1,6 @@
 <?php
 
-// namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,20 +17,23 @@ class EventController extends Controller
                 ->join('events', 'event_results.event_id', '=', 'events.id')
                 ->join('clubs', 'events.club_id', '=', 'clubs.id')
                 ->join('countries', 'events.country', '=', 'countries.idCountry')
+                ->leftJoin('event_judges', 'events.id', '=', 'event_judges.event_id')
+                ->leftJoin('judges', 'event_judges.judge_id', '=', 'judges.id')
                 ->select('events.start_date',
                          'events.end_date',
-                        'events.name AS event',
-                        'clubs.name AS club',
-                        'countries.countryName AS country',
-                        'countries.countryCode',
-                        'judges.full_name AS judge',
-                        'events.id AS eventId')
+                         'events.name AS event',
+                         'clubs.name AS club',
+                         'countries.countryName AS country',
+                         'countries.countryCode',
+                         'judges.full_name AS judge',
+                         'events.id AS eventId')
                 ->where('event_results.breed_id', '=', $breed_id)
                 ->orderBy('events.start_date', 'desc')
                 ->distinct('events.id')
                 ->get();
         return response()->json(['event_detailz' => $results]);
     }
+    
    
     public function filterEvents(Request $request)
     {

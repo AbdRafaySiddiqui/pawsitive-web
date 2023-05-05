@@ -12,6 +12,6 @@ class EventJudges extends Model
     protected $table = 'event_judges';
 
     public function judge(){
-        return $this->belongsTo('App\Models\Judges','judge_id','id');
-      }
+      return $this->belongsTo('App\Models\Judges','judge_id','id');
+    }
 }
