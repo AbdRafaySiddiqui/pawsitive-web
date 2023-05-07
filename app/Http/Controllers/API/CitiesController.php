@@ -9,12 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class CitiesController extends Controller
 {
-    public function getCities(Request $request)
+    public function getCities($idCountry)
     {
-        $countryId = $request->input('countryId');
-
-        $cities = Cities::where('country', $countryId)->select('id', 'city')->get();
-        return response()->json(['cities' => $cities], 200);
+        $cities = Cities::where('country', $idCountry)->select('id', 'city')->get();
+        return response()->json($cities);
     }
 
 

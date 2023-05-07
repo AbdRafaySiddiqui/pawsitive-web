@@ -12,22 +12,22 @@ class DogController extends Controller
 {
 
 
-  function add(Request $req)
-  {
-      $dog = Dogs::where('ref_id', $req->ref_id)->first();
-      if ($dog) {
-          // Update the existing record
-          $dog->profile_photo = $req->profile_photo;
-          $result = $dog->save();
-          if ($result) {
-              return ["Result" => "Updated successfully."];
-          } else {
-              return ["Result" => "Some error occurred while updating."];
-          }
-      } else {
-              return ["Result" => "Some error occurred while inserting."];
-          }
-  }  
+    function add(Request $req)
+    {
+        $dog = Dogs::where('ref_id', $req->ref_id)->first();
+        if ($dog) {
+            // Update the existing record
+            $dog->profile_photo = $req->profile_photo;
+            $result = $dog->save();
+            if ($result) {
+                return ["Result" => "Updated successfully."];
+            } else {
+                return ["Result" => "Some error occurred while updating."];
+            }
+        } else {
+                return ["Result" => "Some error occurred while inserting."];
+            }
+    }  
 
     public function listing(request $request, $id)
     {
