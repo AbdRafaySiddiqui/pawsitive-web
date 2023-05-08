@@ -536,10 +536,11 @@ function dogs_by_judge(select) {
 
       } else {
         var x = document.getElementById('all_dogs');
-        var option = document.createElement("option");
-        var button = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-        option.innerHTML = button;
-        x.add(option);
+        // create a new option for "Add a New dog"
+        var newDogOption = document.createElement('option');
+        newDogOption.text = 'Add a New dog';
+        newDogOption.value = 'new_dog';
+        x.add(newDogOption);
       }
     }
   });

@@ -209,5 +209,18 @@ class EventResultController extends Controller
                                   return response()->json(['details' => $results,'bestInGroup'=> $bestInGroup,'bestInShow'=> $bestInShow,'classData' => $dog_class]);
     }
 
+    public function class_dog(request $request)
+  {
+
+    $class_name = $request->input('class');
+    $class = Event_Result::select('breed_id','award_id','dog_id','grading','event_id','place','judge')
+    ->where('class', $class_name)
+    ->get();
+
+    return response()->json(['class' => $class]);
+  }
+
     
 }
+
+
