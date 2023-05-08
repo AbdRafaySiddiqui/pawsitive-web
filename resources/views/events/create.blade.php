@@ -104,18 +104,10 @@
                                         <button class="btn btn-secondary" type="reset"> Reset</button>
                                         <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
                                             <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
+                                            
                                         </a>
                                     </div>
-                                    @if (session()->has('message'))
-                                        <div class="alert alert-success">
-                                            {{ session()->get('message') }}
-                                        </div>
-                                    @endif
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger">
-                                            {!! implode('', $errors->all('<div>:message</div>')) !!}
-                                        </div>
-                                    @endif
+                                    
 
                                 </form>
                             </div>

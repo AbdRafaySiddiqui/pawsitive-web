@@ -83,9 +83,9 @@
           <select class="form-control select2" onchange="dogs_by_judge(this)" name="breed_id" id="breed_ide">
           <option>Select Breed</option>
                     <!-- <option> Select</option> -->
-                    @foreach($total_breeds as $total_breed)
-                        <option value="{{$total_breed->id}}">
-                            {{$total_breed->name}}
+                    @foreach($classes as $class)
+                        <option value="{{$class->class}}">
+                            {{$class->class}}
                         </option>
                     @endforeach
                 </select>

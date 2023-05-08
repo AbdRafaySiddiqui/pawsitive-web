@@ -21,9 +21,17 @@ class EventsController extends Controller
     public function index()
     {
         Paginator::useBootstrap();
-        $event = Events::with('cities_name','country_name','club_name','judge_name')->WHERE('status', 'Active')->orderBy('id','DESC')->paginate('10');
-       
-        return view('events.index', compact('event'));
+        $events = Events::with('cities_name', 'country_name', 'club_name')->where('status', 'Active')->orderBy('id', 'DESC')->paginate(10);
+
+        foreach ($events as $event) {
+            $event_judge = EventJudges::where('event_id', $event->id)->first();
+            if ($event_judge) {
+                $event->judge_id = $event_judge->judge_id;
+            }
+        }
+
+        return view('events.index', compact('events'));
+
     }
 
     /**
@@ -70,7 +78,8 @@ class EventsController extends Controller
         }
 
         
-        return redirect()->back()->with('message', 'Record added successfully',compact('request'));
+        return redirect()->route('events.index')->with('message', 'Record added successfully');
+
     }
 
     /**

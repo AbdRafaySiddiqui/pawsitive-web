@@ -115,7 +115,7 @@ class EventResultsController extends Controller
         $maleDogs = Dogs::where('gender', '=', 'Male')->get();
         $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
         $Events = Events::all();
-        $er_events =  Event_Result::select('event_results.event_id','events.id','event_results.event_id')
+        $er_events =  Event_Result::select('event_results.event_id','events.id','event_results.event_id','event_results.class')
         ->leftjoin('events','events.id','=','event_results.event_id')
         ->where('event_results.event_id', '=', $event_id)
         ->get();
@@ -183,6 +183,31 @@ class EventResultsController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function updating()
+    {
+        $dogs=  DB::table('dogs')
+        ->select(DB::raw('id,dog_name, status'))
+          ->where('status','=',"Active")
+      ->paginate(10);
+      $femaleDogs =  DB::table('dogs')
+        ->select(DB::raw('id,dog_name'))
+          ->where('gender', '=', "Female")
+      ->get();
+        $total_breeds = Breeds::get();
+        $total_judges = Judges::get();
+        $dog_class = DogClass::get();
+        $data = EventJudges::get();
+        $maleDogs = DB::table('dogs')
+        ->select(DB::raw('id,dog_name'))
+          ->where('gender', '=', "Male")
+      ->get();
+     
+        $Events = Events::where('status', 'active')->get();
+        $classes = Event_Result::select('class')->distinct()->get();
+        
+        return view('event_results.update',compact('Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges','dog_class' ,'data','classes'));
     }
 
 }

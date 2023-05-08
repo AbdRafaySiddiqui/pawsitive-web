@@ -27,6 +27,7 @@ Route::get('api/dogs', 'App\Http\Controllers\ApisController@AjaxDogs');
 Route::get('api/fe_dog', 'App\Http\Controllers\ApisController@AjaxDog_Fe');
 Route::post('/submit-form', 'App\Http\Controllers\EventsController@submitForm');
 Route::post('/event-dog', 'App\Http\Controllers\EventResultsController@dog_submit');
+Route::get('event_results/updating', 'App\Http\Controllers\EventResultsController@updating');
 Route::post('/submit-Dogform', 'App\Http\Controllers\DogsController@storeMale');
 Route::post('/submit-Dogform-Female', 'App\Http\Controllers\DogsController@storeFemale');
 

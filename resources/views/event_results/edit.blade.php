@@ -22,19 +22,14 @@
          
           
             <div class="form-group row">
-            <label class="col-form-label col-sm-4" for=""> Select Event</label>
+            <label class="col-form-label col-sm-4" for=""> Select Class</label>
             <div class="col-sm-8">
                 <select class="form-control" name="event_id" id="event_id">
                     <option></option>
-                    @foreach($Events as $Event)
-
-                        @if($Event->id == $event_result->event_id)
-                                                      <option selected value="{{$Event->id}}">   {{$Event->name}} | {{ (isset($Event->club_name->name)) ? '('.$Event->club_name->name.')' : ''}} | {{date('F d, Y',strtotime($Event->start_date))}}</option>
-                                                    @else
-                                                      <option value="{{$Event->id}}">  {{$Event->name}} | {{ (isset($Event->club_name->name)) ? '('.$Event->club_name->name.')' : ''}} | {{date('F d, Y',strtotime($Event->start_date))}}</option>
-                                                    @endif
-                            {{$Event->name}} | {{ (isset($Event->club_name->name)) ? '('.$Event->club_name->name.')' : ''}} | {{date('F d, Y',strtotime($Event->start_date))}}
-                
+                    @foreach($er_events as $class)
+                          <option selected value="{{$class->id}}">
+                            {{$class->class}}
+                          </option>
                     @endforeach
                 </select>
             </div>
