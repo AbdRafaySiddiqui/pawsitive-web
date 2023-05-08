@@ -424,7 +424,7 @@ var breed_id=$('#breed_ide :selected').val();
         console.log(selectId);
         $.ajax({
            type:'get',
-           url:'{{ route("breed-dogs") }}' + '?breed_id=' + breed_id,
+           url:'{{  url("api/dog/breed-dogs") }}' + '?breed_id=' + breed_id,
            data:{id:breed_id},
            success:function(data)
            {
@@ -454,7 +454,7 @@ var id=$('#event_id :selected').val();
       // console.log(breed_id);
       $.ajax({
          type:'get',
-         url:'{{ route("event_judge") }}' + '?id=' + id,
+         url:'{{  url("api/dog/event_judge") }}' + '?id=' + id,
          data:{id:id},
          success:function(data)
          {
@@ -517,7 +517,7 @@ var breed_id=$('#breed_ide :selected').val();
         $.ajax({
            type:'get',
           
-           url: '{{ route("breed-dogs") }}' + '?breed_id=' + breed_id ,
+           url: '{{  url("api/dog/breed-dogs") }}' + '?breed_id=' + breed_id ,
            data:{id:breed_id},
            success:function(data)
            {
@@ -677,7 +677,7 @@ $('#event_id').on('change', function() {
     var event_id = $('#event_id').val();
     // Make AJAX request to fetch event details
     $.ajax({
-        url: '{{ route("event_details", ":event_id") }}'.replace(':event_id', event_id),
+        url: '{{ url("api/event_details", ":event_id") }}'.replace(':event_id', event_id),
         type: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -707,7 +707,7 @@ var judge_id=$('#judge').text();
       // console.log(breed_id);
       $.ajax({
          type:'get',
-         url:'{{ route("event_judge") }}' + '?id=' + id,
+         url:'{{ url("api/dog/event_judge") }}' + '?id=' + id,
          data:{id:id},
          success:function(data)
          {
