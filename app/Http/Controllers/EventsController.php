@@ -70,7 +70,7 @@ class EventsController extends Controller
         }
 
         
-        return redirect()->back()->with('message', 'Record added successfully',compact('request'));
+        return redirect()->route('events.index')->with('message', 'Record added successfully');
     }
 
     /**

@@ -5,7 +5,16 @@
         END - Main Menu
         -------------------->
         <div class="content-w">
-
+@if (session()->has('message'))
+                                        <div class="alert alert-success">
+                                            {{ session()->get('message') }}
+                                        </div>
+                                    @endif
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            {!! implode('', $errors->all('<div>:message</div>')) !!}
+                                        </div>
+                                    @endif
           <div class="content-panel-toggler">
             <i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span>
           </div>

@@ -34,7 +34,7 @@
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for=""> Select Club</label>
-                                            <select class="form-control" name="club_id" id="club_id">
+                                            <select class="form-control js-data-example-ajax" name="club_id" id="club_id">
                                               <option></option>
                                                 @foreach ($total_clubs as $clubs)
                                                     @if($clubs->id == $events->club_id)

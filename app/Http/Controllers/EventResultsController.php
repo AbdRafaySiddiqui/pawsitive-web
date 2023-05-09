@@ -61,8 +61,7 @@ class EventResultsController extends Controller
     $dog_id = $request->input('dog_id');
     $grading = $request->input('grading');
     $place = $request->input('place');
-        $judge = $request->input('judge');
-        $judge_span = $request->input('judge_span');
+    $judge = $request->input('judge');
     $award_id = $request->input('awards');
     $event_id = $request->input('event_id');
     $breed_id = $request->input('breed_id');
@@ -77,12 +76,7 @@ class EventResultsController extends Controller
       
         $event_result->grading = $grading[$key];
         $event_result->place = $place[$key];
-        if($judge_span[$key] != null){
-
-            $event_result->judge = $judge_span[$key];
-        }else{
-            $event_result->judge = $judge[$key];
-        }
+        $event_result->judge = $judge[$key];
         $event_result->award_id = $award_id[$key];
         $event_result->gender = $gender->gender;
         $event_result->event_id = $event_id;

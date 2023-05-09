@@ -77,7 +77,7 @@
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="col-form-label" for=""> Country</label>
-                                            <select class="form-control js-data-example-ajax" name="country" id="country">
+                                            <select class="form-control" name="country" id="country">
                                                 <option></option>
                                                 @foreach ($total_countries as $countries)
                                                     <option value="{{ $countries->idCountry }}">
@@ -90,7 +90,7 @@
                                       <div class="col-sm-6">
                                       <div class="form-group">
                                               <label class="col-form-label" for=""> City</label>
-                                              <select class="form-control js-data-example-ajax" name="city" id="city">
+                                              <select class="form-control" name="city" id="city">
                                               <option value="">Select City</option>
                                               </select>
                                           </div>
@@ -106,16 +106,7 @@
                                             <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
                                         </a>
                                     </div>
-                                    @if (session()->has('message'))
-                                        <div class="alert alert-success">
-                                            {{ session()->get('message') }}
-                                        </div>
-                                    @endif
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger">
-                                            {!! implode('', $errors->all('<div>:message</div>')) !!}
-                                        </div>
-                                    @endif
+                                    
 
                                 </form>
                             </div>

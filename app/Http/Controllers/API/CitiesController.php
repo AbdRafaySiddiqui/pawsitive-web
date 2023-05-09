@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class CitiesController extends Controller
 {
-    public function getCities($idCountry)
+ public function getCities($idCountry)
     {
         $cities = Cities::where('country', $idCountry)->select('id', 'city')->get();
         return response()->json($cities);

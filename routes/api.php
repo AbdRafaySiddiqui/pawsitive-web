@@ -36,7 +36,7 @@ Route::get('breed-short', [BreedController::class, 'breed_short']);//working fin
 Route::get('breed-names', [BreedController::class, 'retrieve']);//working fine.
 Route::get('breed/{id}/info', [BreedController::class, 'breed_info']);//working fine.
 
-Route::get('/cities/{idcountry}', [App\Http\Controllers\API\CitiesController::class, 'getCities']);//working fine.
+Route::get('/cities/{idcountry}', [App\Http\Controllers\API\CitiesController::class, 'getCities']);
 
 
 // Subscription Controller.
@@ -55,7 +55,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //DogController routes
 Route::get('dog/{breed_id}/listings', [DogController::class, 'listing']);//working fine.
-Route::post('add/image', [DogController::class, 'add']);//working fine.
+Route::get('add/image', [DogController::class, 'add']);//working fine.
 Route::get('dog/{id}/details', [DogController::class, 'details']);//working fine.
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);//working fine.
 Route::get('dog/breed-dogs', [DogController::class, 'breed_dog'])->name('breed-dogs');//working fine.
