@@ -198,5 +198,4 @@ public function profile_details(request $request)
 
     return response()->json(['profile_details' => $results], 200);
   }
-
 }

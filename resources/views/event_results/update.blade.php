@@ -72,16 +72,9 @@
             </div>
             <div class="col-sm-4">
             <div class="form-group">
-              <label class="col-form-label" for="">Class</label>
-              <input class="form-control" name="class" id="class" placeholder="Enter class" type="text">
-             
-              </div>
-            </div>
-            <div class="col-sm-4">
-            <div class="form-group">
-          <label class="col-form-label" for="" >Select Breed </label>
-          <select class="form-control select2" onchange="dogs_by_judge(this)" name="breed_id" id="breed_ide">
-          <option>Select Breed</option>
+          <label class="col-form-label" for="" >Select Class </label>
+          <select class="form-control select2" onchange="fetchClassDogs(this)" name="class" id="class">
+          <option>Select Class</option>
                     <!-- <option> Select</option> -->
                     @foreach($classes as $class)
                         <option value="{{$class->class}}">
@@ -113,243 +106,38 @@
           
      
 
-      <div class="table-responsive">
+        <div class="table-responsive">
       
     
     
                
-      <div id='event_tbl'>
-        <table class="table table-bordered table-lg table-v2 table-striped" id="table">
-          <thead>
-            <tr>
-           
-              <th>
-             Dog
-              </th>
-              <th>
-        Grade
-              </th>
-              <th>
-              Place
-              </th>
-              <th>
-              Awards
-              </th>
-              <th>
-              Judge
-              </th>
-            
-              <!-- <th>
-              Gender
-              </th> -->
-              <th>
-              Action
-              </th>
-             
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              
-              <td>
+      <table id="class-results-table">
+  <thead>
+    <tr>
+      <th>Breed ID</th>
+      <th>Award ID</th>
+      <th>Dog ID</th>
+      <th>Event ID</th>
+      <th>Grading</th>
+      <th>Place</th>
+      <th>Judge</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
 
-              <!-- <div class="col-md-12"> -->
-              <select class="form-control select2 dog" name="dog_id[]" id="all_dogs" onchange="verify_if_dog(this)">
-                <option  value="0">
-               Select dog
-                </option>
-              </select>
-              <!-- </div> -->
-              </td>
-              <td>
-            
-            <div class="col-sm-12"> 
-              <input class="form-control" name="grading[]" placeholder="Enter Grade" type="text">
-            </div>
-              </td>
-              <td>
-              
-              <div class="col-sm-12">
-                <input class="form-control" name="place[]" placeholder="Enter Place" type="text">
-            </div>
-              </td>
-              <td>
-              
-              <div class="col-sm-12">
-                <input class="form-control" name="awards[]" placeholder="Enter Awards" type="text">
-            </div>
-              </td>
-              <td>
-             
-             <div class="col-sm-12"> 
-          
-             <select class="form-control select2 select_judge" name="judge[]" id="judge">
-             @foreach($total_judges as $judge)
-               <option  value="{{$judge->id}}">
-              {{$judge->full_name}}
-               </option>
-              @endforeach
-             </select>
-             
-             <span class="form-control span_judge" id="judge_span" name="judge[]"></span>
-            
-             </div>
-            </td>
-            
-
-           
-              <td> <button id="add" name="add" class="btn btn-primary" type="button">Add</button></td>
-            </tr>
-            
-          </tbody>
-        </table>
-        <button class="btn btn-primary"  type="submit"> Submit</button>
-     </form>
 
 
 
       </div>
       </div>
       </div>
-
+      
       </div>
     </div>
   </div>
 </div>
-@if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
-      <!--           Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-           
-
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Dog</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                    <div class="modal-body">
-                      <form id="my-form">
-                          @csrf        
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for="">Dog Name</label>
-                              <div class="col-sm-8">
-                                <input id="dog_name" class="form-control" name="dog_name" placeholder="Enter Dog Name" type="text">
-                              </div>
-                          </div>
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> DOB</label>
-                              <div class="col-sm-8">
-                                <input   class="form-control" name="dob" id="dob" type="date">
-                              </div>
-                          </div>
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> Club Reg</label>
-                            <div class="col-sm-8">
-                              <input class="form-control" type="text" id="reg_no" name="reg_no">
-                            </div>
-                          </div>
-
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> Microchip</label>
-                            <div class="col-sm-8">
-                              <input class="form-control" type="text" id="microchip" name="microchip" >
-                            </div>
-                          </div>
-
-
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> Title</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" id="title" name="show_title" >
-                            </div>
-                          </div>
-
-
-                          <div class="form-group row">
-                              <label class="col-form-label col-sm-4" for=""> Achievements</label>
-                            <div class="col-sm-8">
-                              <textarea class="form-control" cols="80" id="achievements" name="achievements" rows="10"></textarea>
-                            </div>
-                          </div>
-                          
-                          <div class="form-group row">
-                        <label class="col-form-label col-sm-4" for="" > Gender</label>
-                        <div class="col-sm-8">
-                        <select class="form-control" name="gender">
-                        <option value="">
-                                Select One
-                              </option>
-                              <option value="Male">
-                                Male
-                              </option>
-                              <option value="Female">
-                              Female
-                              </option>
-                            </select>
-                          </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" for="">Select Breed</label>
-                            <div class="col-sm-8">
-                            <select class="form-control select2" name="breed_id" class="breed_id">
-                            <option></option>
-                            @foreach($total_breeds as $total_breed)
-                              <option  value="{{$total_breed->id}}">
-                            {{$total_breed->name}}
-                              </option>
-                              @endforeach
-                            </select>
-                            </div>
-                          </div>
-
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" for="">Select Sire</label>
-                            <div class="col-sm-8">
-                            <select class="form-control select2" name="sire_id" id="selUser"  >
-                            @foreach($maleDogs as $maleDog)
-                              <option  value="{{$maleDog->id}}">
-                            {{$maleDog->dog_name}}
-                              </option>
-                              @endforeach
-                            </select>
-                            </div>
-                          </div>
-
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label " for="">Select Dam</label>
-                            <div class="col-sm-8">
-                            <select class="form-control select2" name="dam_id" id="selUser_fe">
-                            @foreach($femaleDogs as $femaleDog)
-                              <option  value="{{$femaleDog->id}}">
-                            {{$femaleDog->dog_name}}
-                              </option>
-                              @endforeach
-                            </select>
-                            </div>
-                          </div>
-
-                          <div id="success-msg"> </div>
-                      <div id="msg"> </div>
-                          <div class="form-buttons-w mb-4">
-                            <button class="btn btn-primary" id="m_sub" type="submit"> Submit</button>
-                            <button class="btn btn-secondary" type="reset"> Reset</button>
-                            <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
-                              <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
-                            </a>
-                          </div>
-
-                      </form>
-                    </div>
-                  </div>
-                </div>
-            </div>
             <script>
 
 
@@ -503,47 +291,43 @@ $('#'+judge_span).show();
 
 
 $('#breed_ide').on('change', function() {
-  $('#event_tbl').show();
   
 });
  
 
-function dogs_by_judge(select) {
-  $('#all_dogs').empty().append('<option value="0">Select Dog</option>');
-
-  var breed_id=$('#breed_ide :selected').val();
-  var gender=$('#gender_dog').val();
-
+function fetchClassDogs() {
+  var selectedClass = $('#class').val();
   $.ajax({
     type: 'get',
-    url: '{{ route("breed-dogs") }}' + '?breed_id=' + breed_id,
-    data: {id: breed_id},
+    url: '{{ route("class-dogs") }}',
+    data: { class: selectedClass },
     success: function(data) {
-      if(data.dog.length > 0) {
-        for(let i = 0; i < data.dog.length; i++) {
-          var x = document.getElementById('all_dogs');
-          var option = document.createElement("option");
-          option.text = data.dog[i].dog_name;
-          option.value = data.dog[i].dog_id;
-          x.add(option);
-        }
-
-        // create a new option for "Add a New dog"
-        var newDogOption = document.createElement('option');
-        newDogOption.text = 'Add a New dog';
-        newDogOption.value = 'new_dog';
-        x.add(newDogOption);
-
-      } else {
-        var x = document.getElementById('all_dogs');
-        var option = document.createElement("option");
-        var button = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-        option.innerHTML = button;
-        x.add(option);
-      }
+      console.log(data);
+      var tableBody = $('#class-results-table tbody');
+      tableBody.empty();
+      $.each(data.class, function(i, item) {
+        var row = $('<tr>');
+        row.append($('<td>', {text: item.breed_id}));
+        row.append($('<td>', {text: item.award_id}));
+        row.append($('<td>', {text: item.dog_id}));
+        row.append($('<td>', {text: item.event_id}));
+        row.append($('<td>', {text: item.grading}));
+        row.append($('<td>', {text: item.place}));
+        row.append($('<td>', {text: item.judge}));
+        tableBody.append(row);
+      });
+    },
+    error: function(xhr, status, error) {
+      console.log(xhr.responseText);
     }
   });
 }
+
+
+
+// Bind the update function to the change event of the class dropdown
+$('#class').on('change', fetchClassDogs);
+
 
 
 $(document).on('click','#remove',function(){
