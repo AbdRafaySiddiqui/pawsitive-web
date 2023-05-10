@@ -113,7 +113,6 @@ class DogController extends Controller
         $id = $request->breed_id;
         $dog = DB::table('dogs')
             ->select(DB::raw('dogs.id as dog_id, dog_name, breed_id, breeds.id'))
-            ->leftJoin('breeds', 'breeds.id', '=', 'dogs.breed_id')
             ->where('dogs.breed_id', '=', $id)
             ->where('dog_name', 'LIKE', "%$search%")
             ->orderBy('breed_id', 'ASC')
