@@ -112,17 +112,19 @@ class DogController extends Controller
         $search = $request->q;
         $id = $request->breed_id;
         $dog = DB::table('dogs')
-            ->select(DB::raw('dogs.id as dog_id, dog_name, breed_id, breeds.id'))
+            ->select(DB::raw('dogs.id as dog_id, dogs.dog_name as dog_name, dogs.breed_id, breeds.id'))
+            ->leftJoin('breeds', 'breeds.id', '=', 'dogs.breed_id')
             ->where('dogs.breed_id', '=', $id)
-            ->where('dog_name', 'LIKE', "%$search%")
+           ->where('dog_name', 'LIKE', "%$search%")
             ->orderBy('breed_id', 'ASC')
-            ->get();
+            ->paginate(10);
+            // ->get();
     } else {
         $data = Dogs::select('dogs.id', 'dog_name')
             ->orderBy('dog_name', 'ASC')
             ->get();
     }
-    return response()->json(['dog' => $dog]);
+    return response()->json(['dog' => $dog], 200);
 }
 
 
