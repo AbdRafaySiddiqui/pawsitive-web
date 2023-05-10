@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
+use Illuminate\Support\Collection;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -29,40 +30,37 @@ class DogController extends Controller
             }
     }  
 
-    public function listing(request $request, $id)
+    public function listing(Request $request, $id)
     {
-        $dog = DB::table('dogs')->select('dogs.id',
-        'dogs.dog_name as dogs_name',
-        'dogs.profile_photo as profilePhoto')
-        ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
-          ->where('breed_id','=',$id)
-          ->where('dogs.status','=','Active')
-          ->orderBy('dogs.dog_name','ASC')
-          ->get();
-       
-          foreach($dog as $dogs)
-                      {
-              
-                      if($dogs->profilePhoto != null)
-                      {
-                        // Check if profile photo starts with "https://"
-                      if (strpos($dogs->profilePhoto, 'https://') === 0)
-                        {
-                        $dogs->profilePhoto = $dogs->profilePhoto;
-                        }
-                        // Check if profile photo exists in local storage
-                      elseif (file_exists(storage_path('/app/public/dog_profile'.'/'.$dogs->profilePhoto)))
-                      {
-                        $dogs->profilePhoto = asset('storage/app/public/dog_profile').'/'.$dogs->profilePhoto;
-                      }
-                      }
-                      else
-                      {
-                        $dogs->profilePhoto = asset('storage/app/public/noimage.png');
-                      }
-                      }
-
-        return response()->json(['dog' => $dog], 200);
+        $dogs = DB::table('dogs')
+            ->select(
+                'dogs.id',
+                'dogs.dog_name as dogs_name',
+                'dogs.profile_photo as profilePhoto'
+            )
+            ->leftJoin('breeds', 'breeds.id', '=', 'dogs.breed_id')
+            ->where('breed_id', '=', $id)
+            ->where('dogs.status', '=', 'Active')
+            ->orderBy('dogs.dog_name', 'ASC')
+            ->get();
+    
+        $dogCollection = collect($dogs)->map(function ($dog) {
+            if ($dog->profilePhoto != null) {
+                // Check if profile photo starts with "https://"
+                if (strpos($dog->profilePhoto, 'https://') === 0) {
+                    $dog->profilePhoto = $dog->profilePhoto;
+                }
+                // Check if profile photo exists in local storage
+                elseif (file_exists(storage_path('/app/public/dog_profile'.'/'.$dog->profilePhoto))) {
+                    $dog->profilePhoto = asset('storage/app/public/dog_profile').'/'.$dog->profilePhoto;
+                }
+            } else {
+                $dog->profilePhoto = asset('storage/app/public/noimage.png');
+            }
+            return $dog;
+        });
+    
+        return response()->json(['dog' => $dogCollection], 200);
     }
 
     public function details(request $request, $id)

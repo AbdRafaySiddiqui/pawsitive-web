@@ -213,9 +213,22 @@ class EventResultController extends Controller
   {
 
     $class_name = $request->input('class');
-    $class = Event_Result::select('breed_id','award_id','dog_id','grading','event_id','place','judge')
-    ->where('class', $class_name)
-    ->get();
+    $class = Event_Result::select(
+      'breeds.name as breed_name',
+      'dogs.dog_name as dog_name',
+      'events.name as event_name',
+      'event_results.grading',
+      'event_results.place',
+      'event_results.award_id',
+      'event_results.id',
+      'event_results.judge'
+  )
+  ->join('breeds', 'breeds.id', '=', 'event_results.breed_id')
+  ->join('dogs', 'dogs.id', '=', 'event_results.dog_id')
+  ->join('events', 'events.id', '=', 'event_results.event_id')
+  ->where('class', $class_name)
+  ->get();
+
 
     return response()->json(['class' => $class]);
   }
