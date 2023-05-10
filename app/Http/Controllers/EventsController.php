@@ -10,6 +10,7 @@ use App\Models\Events;
 use App\Models\Judges;
 use App\Models\Countries;
 use App\Models\EventJudges;
+use App\Models\Event_Result;
 use Illuminate\Pagination\Paginator;
 use League\Csv\Writer;
 
@@ -181,6 +182,8 @@ public function submitForm(Request $request)
 public function details($eventId)
 {
     $event = Events::find($eventId);
+    $class = Event_Result::select('class')->where('event_id', $eventId)->distinct()->get()->pluck('class')->toArray();
+    $event['class'] = $class;
     return response()->json($event);
 }
 

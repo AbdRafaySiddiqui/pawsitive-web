@@ -104,23 +104,12 @@ class EventResultsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request,string $id)
+    public function edit($id)
     {
-        $event_result = Event_Result::find($id);
-        $dogs = Dogs::get();
-        $total_breeds = Breeds::get();
-        $total_judges = Judges::get();
-        $dog_class = DogClass::get();
-        $event_id = $request->input('event_id');
-        $maleDogs = Dogs::where('gender', '=', 'Male')->get();
-        $femaleDogs = Dogs::where('gender', '=', 'Female')->get();
-        $Events = Events::all();
-        $er_events =  Event_Result::select('event_results.event_id','events.id','event_results.event_id')
-        ->leftjoin('events','events.id','=','event_results.event_id')
-        ->where('event_results.event_id', '=', $event_id)
-        ->get();
+        $event = Events::find($id);
+        $classes = Event_Result::select('class')->where('event_id', $id)->distinct()->get();
         
-        return view('event_results.edit', compact('er_events','event_result','Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges','dog_class'));
+        return view('event_results.edit', compact('event','classes'));
     }
 
     /**
@@ -128,7 +117,22 @@ class EventResultsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'award'=>'required',
+            'grading'=>'required',
+            'place'=>'required',
+            'judge'=>'required',
+        ]); 
+        $event_result = Event_Result::find($id);
+
+        // Getting values from the blade template form
+        $event_result->award_id =  $request->award;
+	    $event_result->grading = $request->grading;
+	    $event_result->place = $request->place;
+	    $event_result->judge = $request->judge;
+        $event_result->update();
+ 
+        return redirect()->back()->with('message', 'Record updated successfully');
     }
     public function dog_submit(Request $request)
     {
