@@ -21,7 +21,7 @@ class EventResultsController extends Controller
      */
     public function index()
     {
-        $event = Events::with('cities_name','country_name','club_name')->where('status','=','Active')->orderBy('id','DESC')->paginate('5');
+        $event = Events::where('status','=','Active')->orderBy('id','DESC')->paginate('5');
        
         return view('event_results.index', compact('event'));
     }

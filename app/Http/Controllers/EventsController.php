@@ -22,7 +22,7 @@ class EventsController extends Controller
     public function index()
     {
         Paginator::useBootstrap();
-        $event = Events::with('cities_name','country_name','club_name','judge_name')->WHERE('status', 'Active')->orderBy('id','DESC')->paginate('10');
+        $event = Events::where('status', 'Active')->orderBy('id','DESC')->paginate('10');
        
         return view('events.index', compact('event'));
     }
@@ -122,7 +122,7 @@ class EventsController extends Controller
 	    $events->judge_id = $request->judge_id;
         $events->update();
  
-        return redirect()->back()->with('message', 'Record updated successfully');
+        return redirect()->route('events.index')->with('message', 'Record updated successfully');
     }
 
     /**
@@ -132,7 +132,7 @@ class EventsController extends Controller
     {
         //
         Events::where('id',$id)->update(array('status' => 'Inactive'));
-        return redirect()->back()->with('message', 'Record Permenantly Deleted!');
+        return redirect()->route('events.index')->with('message', 'Record Permenantly Deleted!');
     }
 
 
