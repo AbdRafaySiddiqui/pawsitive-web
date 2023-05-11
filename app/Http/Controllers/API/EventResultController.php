@@ -54,7 +54,6 @@ class EventResultController extends Controller
                 ->where('events.status', '=', 'Active')
                 ->orderBy('events.start_date', 'desc')
                 ->distinct('events.id')
-                ->take(20)
                 ->get();
                 return response()->json(['event_result' => $results]);
     }
