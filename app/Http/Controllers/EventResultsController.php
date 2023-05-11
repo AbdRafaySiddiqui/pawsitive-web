@@ -57,41 +57,54 @@ class EventResultsController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $dog_id = $request->input('dog_id');
-    $grading = $request->input('grading');
-    $place = $request->input('place');
-    $judge = $request->input('judge');
-    $award_id = $request->input('awards');
-    $event_id = $request->input('event_id');
-    $breed_id = $request->input('breed_id');
-    $class = $request->input('class');
-
-    foreach ($dog_id as $key => $value) {
-        $event_result = new Event_Result;
-        $event_result->dog_id = $value;
-        $gender = Dogs::select('dogs.gender As gender')
-      ->where('dogs.id','=',$value)
-      ->first();
-      
-        $event_result->grading = $grading[$key];
-        $event_result->place = $place[$key];
-        $event_result->judge = $judge[$key];
-        $event_result->award_id = $award_id[$key];
-        $event_result->gender = $gender->gender;
-        $event_result->event_id = $event_id;
-        $event_result->breed_id = $breed_id;
-        $event_result->class = $class;
-        $event_result->save();
+    {
+        $dog_id = $request->input('dog_id');
+        $grading = $request->input('grading');
+        $place = $request->input('place');
+        $judge = $request->input('judge');
+        $award_id = $request->input('awards');
+        $event_id = $request->input('event_id');
+        $breed_id = $request->input('breed_id');
+        $class = $request->input('class');
+    
+        foreach ($dog_id as $key => $value) {
+     $event_result = new Event_Result;
+            $event_result->dog_id = $value;
+            
+            $gender = Dogs::select('dogs.gender As gender')
+          ->where('dogs.id','=',$value)
+          ->first();
+          
+            $event_result->grading = $grading[$key];
+            $event_result->place = $place[$key];
+               $judge_one = EventJudges::select('event_id','judge_id')
+                ->where('event_id','=',$event_id)
+                ->get();
+                if(count($judge_one) ==1){
+            $event_result->judge = $judge_one[0]->judge_id;
+    
+            }else{
+            $event_result->judge = $judge[$key];
+    
+            }
+            if($gender->gender== null){
+                 $event_result->gender = 'Male';
+            }else{
+                $event_result->gender = $gender->gender;
+            }
+            $event_result->award_id = $award_id[$key];
+            
+            $event_result->event_id = $event_id;
+            $event_result->breed_id = $breed_id;
+            $event_result->class = $class;
+            $event_result->save();
+        }
+    
+        return redirect()->back()->with('message', 'Record added successfully');
     }
+    
 
-    return redirect()->back()->with('message', 'Record added successfully');
-}
-
-
-
-
-
+   
 
     /**
      * Display the specified resource.
@@ -106,10 +119,11 @@ class EventResultsController extends Controller
      */
     public function edit($id)
     {
+        $total_breeds = Breeds::get();
         $event = Events::find($id);
         $classes = Event_Result::select('class')->where('event_id', $id)->distinct()->get();
         
-        return view('event_results.edit', compact('event','classes'));
+        return view('event_results.edit', compact('event','classes','total_breeds'));
     }
 
     /**

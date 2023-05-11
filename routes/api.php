@@ -55,6 +55,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //DogController routes
 Route::get('dog/{breed_id}/listings', [DogController::class, 'listing']);//working fine.
+Route::get('dog/male-dogs', [DogController::class, 'male']);
+Route::get('dog/female-dogs', [DogController::class, 'female']);
 Route::get('add/image', [DogController::class, 'add']);//working fine.
 Route::get('dog/{id}/details', [DogController::class, 'details']);//working fine.
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);//working fine.
@@ -67,6 +69,7 @@ Route::get('dog/{id}/profile-details', [DogController::class, 'profile_details']
 Route::get('result-listing', [EventResultController::class, 'result']);
 Route::get('event/{id}/result', [EventResultController::class, 'event_result']);
 Route::get('event_results/judge', [EventResultController::class, 'judge'])->name('event_judge');
+Route::post('/edit-event_result', [EventResultController::class, 'edit_event_result']);
 
 //EventController routes
 Route::get('event-listing/{breed_id}', [App\Http\Controllers\API\EventController::class, 'retrieve']);//working fine.

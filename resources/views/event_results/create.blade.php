@@ -153,7 +153,7 @@
               
               <td>
 
-              <!-- <div class="col-md-12"> -->
+              <div class="col-md-12">
               <select class="form-control select2 dog"  name="dog_id[]" id="all_dogs">
            
                 <option  value="">
@@ -161,7 +161,7 @@
                 </option>
         
               </select>
-              <!-- </div> -->
+              </div>
               </td>
               <td>
             
@@ -300,8 +300,8 @@
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="">Select Breed</label>
                             <div class="col-sm-8">
-                            <select class="form-control select2" onchange="verify_if_dog" name="breed_id" class="breed_id">
-                            <option></option>
+                            <select class="form-control select2"  onchange="verify_if_dog" id="breed_id" name="breed_id" class="breed_id">
+                            <option>Select Breed</option>
                             @foreach($total_breeds as $total_breed)
                               <option  value="{{$total_breed->id}}">
                             {{$total_breed->name}}
@@ -315,6 +315,7 @@
                             <label class="col-sm-4 col-form-label" for="">Select Sire</label>
                             <div class="col-sm-8">
                             <select class="form-control select2" name="sire_id" id="selUser"  >
+                            <option>Select Sire</option>
                             @foreach($maleDogs as $maleDog)
                               <option  value="{{$maleDog->id}}">
                             {{$maleDog->dog_name}}
@@ -328,6 +329,7 @@
                             <label class="col-sm-4 col-form-label " for="">Select Dam</label>
                             <div class="col-sm-8">
                             <select class="form-control select2" name="dam_id" id="selUser_fe">
+                            <option>Select Dam</option>
                             @foreach($femaleDogs as $femaleDog)
                               <option  value="{{$femaleDog->id}}">
                             {{$femaleDog->dog_name}}
@@ -367,7 +369,7 @@
     <script type="text/javascript">
 
       
-  let i = 0; // Counter for generating unique IDs
+  var i = 0; // Counter for generating unique IDs
 
 $('#add').click(function(){
   var selectId = 'all_dogsb_' + i; // Generate a unique ID for the select element
@@ -377,11 +379,11 @@ $('#table').append(
 `<tr>
 <td><select class="form-control select2 dg" name="dog_id[]" id="${selectId}">
            
-@foreach($dogs as $dog)
-              <option  value="{{$dog->id}}">
-             {{$dog->dog_name}}
+
+              <option  value="">
+            
               </option>
-              @endforeach
+           
               
             </select></td>
 <td>  <input class="form-control" name="grading[]" placeholder="Enter Grade" type="text"></td>
@@ -469,29 +471,6 @@ $('#' + selectId).select2({
   $('#' +selectId).empty().append('<option value="0">Select Dog</option>');
 
         
-//         return 'http://localhost/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
-// var breed_id=$('#breed_ide :selected').val();
-//         var gender=$('#gender_dog').val();
-//         console.log(selectId);
-//         $.ajax({
-//            type:'get',
-//            url:'{{  url("api/dog/breed-dogs") }}' + '?breed_id=' + breed_id,
-//            data:{id:breed_id},
-//            success:function(data)
-//            {
-//               for(let i = 0; i < data.dog.length; i++)
-//               {
-                
-//                 var x = document.getElementById(selectId);
-//                 var option = document.createElement("option");
-//                 option.text = data.dog[i].dog_name;
-//                 option.value = data.dog[i].dog_id;
-//                 x.add(option);
-//                 console.log(data);
-//               }
-//            }
-      
-//       });
 
   
 
@@ -538,7 +517,6 @@ $('#'+judge_span).show();
  
  
 });
-   i++; // Increment the counter for the next iteration
    
 });
 
@@ -552,16 +530,20 @@ $('#'+judge_span).show();
 
 $('#breed_ide').on('change', function() {
   $('#event_tbl').show();
-  // $('#all_dogs').empty().append('<option value="0">Select Dog</option>');
+  $('#all_dogs').empty().append('<option value="0">Select Dog</option>');
+ 
   $('#all_dogs').select2({
-                  allowClear: true,
-    // placeholder: 'Select a dog',
+    placeholder: 'Select a dog',
+    // allowClear: true,
+    // width: '100%',
+
     language: {
       noResults: function (term) {
         return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
       }
     },
-    minimumInputLength: 3,
+ 
+    minimumInputLength: 1,
     ajax: {
       url: function(){
         var breed_id=$('#breed_ide :selected').val();
@@ -578,15 +560,18 @@ $('#breed_ide').on('change', function() {
         },
         processResults: function(data, params) {
           console.log(data.dog.data);
+          // debugger;
+    // $('#all_dogs').val(null).trigger('change');
             params.page = params.page || 1;
             return {
                 results: data.dog.data,
+                
                 pagination: {
                     more: (params.page * 30) < data.total_count
                 }
             };
         },
-        cache: true
+        cache: false
     },
     escapeMarkup: function(markup) {
         return markup;
@@ -597,78 +582,178 @@ $('#breed_ide').on('change', function() {
            return  dog.text;
          
         }
-        var markup = "<option>" + dog.dog_name + "</option>";
+        var markup = "<option value="+ dog.id +">" + dog.dog_name + "</option>";
         return markup;
+        if(dog.dog_name){
+          $('#all_dogs').empty();
+        }
+  
     },
     templateSelection: function(dog) {
         return dog.dog_name || dog.text;
-        
+       
     }
 });
 
-
   }); 
 
-  $('#all_dogs').on('change', function() {
-    
- 
+  $( document ).ready(function() {
+    $('#all_dogs').on('change', function() {
+      
+    var id =$('#all_dogs').val();
+    console.log( id );
+    });
+//     $("#all_dogs > option").removeAttr("selected");
+// $("#all_dogs").trigger("change");
+
+i++; // Increment the counter for the next iteration
+  
 });
-  
-// $('#breed_ide').on('change', function() {
-//   $('#event_tbl').show();
-  
-//   $('#all_dogs').empty().append('<option value="0">Select Dog</option>');
 
-        
-// //         return 'http://localhost/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
-// var breed_id=$('#breed_ide :selected').val();
-//         var gender=$('#gender_dog').val();
-//         // console.log(breed_id);
-//         $.ajax({
-//            type:'get',
-          
-//            url: '{{ route("breed-dogs") }}',
-//           //  url:'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id,
-          
-//            data:  {
-//              q:text,
-//             breed_id:breed_id,
-//           },
-//           dataType: 'json',
-//            success:function(data)
-//            {
-
-
-//                for(let i = 0; i < data.dog.length; i++)
-//                {
-//               var x = document.getElementById('all_dogs');
-//                 var option = document.createElement("option");
-//                 option.text = data.dog[i].dog_name;
-//                 option.value = data.dog[i].dog_id;
-//                 x.add(option);
-
-//             }
-    
-//            }
-
-//         });
-
-//       });       
+      
 
 $(document).on('click','#remove',function(){
 $(this).parents('tr').remove();
 
 });
 
-
-$('#selUser').select2({
+$('#exampleModal').on('shown.bs.modal', function () {
+  $('#selUser').select2({
+  
   dropdownParent: $("#exampleModal .modal-content"),
-});
+  placeholder: 'Select a dog',
+    // allowClear: true,
+    // width: '100%',
 
+    // language: {
+    //   noResults: function (term) {
+    //     return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+    //   }
+    // },
+ 
+    // minimumInputLength: 1,
+    ajax: {
+      url: function(){
+        var breed_id=$('#breed_id :selected').val();
+        
+        return 'http://localhost/pawsitive-web/api/dog/male-dogs';
+      },
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+            return {
+                q: params.term,
+                page: params.page || 1
+            };
+        },
+        processResults: function(data, params) {
+          console.log(data.dog.data);
+          // debugger;
+    // $('#all_dogs').val(null).trigger('change');
+            params.page = params.page || 1;
+            return {
+                results: data.dog.data,
+                
+                pagination: {
+                    more: (params.page * 30) < data.total_count
+                }
+            };
+        },
+        cache: false
+    },
+    escapeMarkup: function(markup) {
+        return markup;
+    },
+    templateResult: function(dog) {
+        if (dog.loading) {
+         
+           return  dog.text;
+         
+        }
+        var markup = "<option value="+ dog.id +">" + dog.dog_name + "</option>";
+        return markup;
+        if(dog.dog_name){
+          $('#selUser_fe').empty();
+        }
+  
+    },
+    templateSelection: function(dog) {
+        return dog.dog_name || dog.text;
+       
+    }
+  
+});
 
 $('#selUser_fe').select2({
-  dropdownParent: $("#exampleModal .modal-content")
+  dropdownParent: $("#exampleModal .modal-content"),
+  placeholder: 'Select a dog',
+    // allowClear: true,
+    // width: '100%',
+
+    // language: {
+    //   noResults: function (term) {
+    //     return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+    //   }
+    // },
+ 
+    minimumInputLength: 1,
+    ajax: {
+      url: function(){
+        var breed_id=$('#breed_id :selected').val();
+        
+        return 'http://localhost/pawsitive-web/api/dog/female-dogs';
+      },
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+            return {
+                q: params.term,
+                page: params.page || 1
+            };
+        },
+        processResults: function(data, params) {
+          console.log(data.dog.data);
+          // debugger;
+    // $('#all_dogs').val(null).trigger('change');
+            params.page = params.page || 1;
+            return {
+                results: data.dog.data,
+                
+                pagination: {
+                    more: (params.page * 30) < data.total_count
+                }
+            };
+        },
+        cache: false
+    },
+    escapeMarkup: function(markup) {
+        return markup;
+    },
+    templateResult: function(dog) {
+        if (dog.loading) {
+         
+           return  dog.text;
+         
+        }
+        var markup = "<option value="+ dog.id +">" + dog.dog_name + "</option>";
+        return markup;
+        if(dog.dog_name){
+          $('#selUser_fe').empty();
+        }
+  
+    },
+    templateSelection: function(dog) {
+        return dog.dog_name || dog.text;
+       
+    }
 });
+$('#breed_id').select2({
+  dropdownParent: $("#exampleModal .modal-content")
+  
+});
+
+});
+
 
 // modal submit 
 $('#my-form').on('submit', function(e){

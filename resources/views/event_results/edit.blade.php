@@ -12,8 +12,8 @@
       Edit Result Event
       </h6>
       <div class="element-box">
-        <!-- <form action="" method="post" enctype="multipart/form-data">
-        @csrf -->
+        <form id="my-form" action="" method="post" enctype="multipart/form-data">
+        @csrf
           <h5 class="form-header">
           Edit Result Event
           </h5>
@@ -25,6 +25,7 @@
             <label class="col-form-label col-sm-2" for=""> Event Name</label>
             <div class="col-sm-2">
             <span>{{ $event->name }}</span>
+            <input type="hidden" id="event_id" value="{{ $event->id }}" class="form-control">
             </div>
         </div>
         <div id="ed_event_frm">
@@ -107,7 +108,8 @@
   <tbody>
   </tbody>
 </table>
-
+<button class="btn btn-primary" id="m_sub" type="submit"> Submit</button>
+</form>
 
 
 
@@ -191,7 +193,8 @@
                     </div>
                   </div>
                 </div>
-            </div>
+                
+              </div>
 
 
     <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
@@ -199,6 +202,7 @@
 
     <script type="text/javascript">
 
+var i =0;
   
   function fetchClassDogs() {
   var selectedClass = $('#class').val();
@@ -212,7 +216,7 @@
       tableBody.empty();
       $.each(data.class, function(i, item) {
         var row = $('<tr>');
-        row.append($('<td>', {text: item.id}));
+        row.append($('<td>', {text: i}));
         row.append($('<td>', {text: item.breed_name}));
         row.append($('<td>', {text: item.award_id}));
         row.append($('<td>', {text: item.dog_name}));
@@ -230,20 +234,195 @@
           $('#place').val(item.place);
           // $('#judge').val(item.judge);
         });
-        row.append($('<td>').append(editButton));
+        var selectId = 'all_dogsb_' + i; // Generate a unique ID for the select element
+  var judgeId = 'all_judgeb_' + i; // Generate a unique ID for the select element
+  var judge_span = 'judge_span_b' + i; // Generate a unique ID for the select element
+        var addButton = $('<button>', {text: 'Add', class: 'btn btn-primary btn-sm'});
+        addButton.on('click', function() {
+          $('#class-results-table').append(
+`<tr>
+<td>  </td>
+<td>  <select class="form-control select2" name="breed_id" id="breed_ide">
+          <option>Select Breed</option>
+                    <!-- <option> Select</option> -->
+                    @foreach($total_breeds as $total_breed)
+                        <option value="{{$total_breed->id}}">
+                            {{$total_breed->name}}
+                        </option>
+                    @endforeach
+                </select></td>
+  <td>  <input class="form-control" name="awards[]" placeholder="Enter awards" type="text"></td>
+
+<td><select class="form-control select2 dg" name="dog_id[]" id="${selectId}">
+           
+
+              <option  value="">
+             
+              </option>
+              
+              
+            </select></td>
+            <td>  <input class="form-control" name="grading[]" placeholder="Enter Grade" type="text"></td>
+            <td>  <input class="form-control" name="place[]" placeholder="Enter place" type="text"></td>
+
+            <td>
+
+           
+<select class="form-control select2" name="judge[]" id="${judgeId}">
+            @foreach($event->judges as $judge)
+             <option  value="{{ $judge->getjudge->id }}">{{ $judge->getjudge->full_name }}</option>
+            @endforeach  
+</select>
+         
+    
+       
+</td>
+
+
+
+
+
+
+<td> <button id="remove" class="btn btn-danger">Remove</button></td>
+
+           </tr>`
+        
+);
+
+$('#' + judgeId).select2();
+$('#breed_ide').select2();
+
+$('#' + selectId).select2({
+  allowClear: true,
+    placeholder: 'Select a dog',
+    language: {
+      noResults: function (term) {
+        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+      }
+    },
+    minimumInputLength: 1,
+    ajax: {
+      url: function(){
+        var breed_id=$('#breed_ide :selected').val();
+        
+        return 'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id;
+      },
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+            return {
+                q: params.term,
+                page: params.page || 1
+            };
+        },
+        processResults: function(data, params) {
+          console.log(data.dog.data);
+            params.page = params.page || 1;
+            return {
+                results: data.dog.data,
+                pagination: {
+                    more: (params.page * 30) < data.total_count
+                }
+            };
+        },
+        cache: true
+    },
+    escapeMarkup: function(markup) {
+        return markup;
+    },
+    templateResult: function(dog) {
+        if (dog.loading) {
+         
+           return  dog.text;
+         
+        }
+        var markup = "<option>" + dog.dog_name + "</option>";
+        return markup;
+    },
+    templateSelection: function(dog) {
+        return dog.dog_name || dog.text;
+    }
+});
+
+  
+  $('#' +selectId).empty().append('<option value="0">Select Dog</option>');
+  $('#'+judgeId).empty().append('<option value="0">Select Judge</option>');
+      
+
+      // var judge_id=$('#judge').text();
+      // var judge_span=$('#judge_span').text();
+    var id=$('#event_id').val();
+    
+          console.log(id);
+          $.ajax({
+             type:'get',
+             url:'{{  url("api/event_results/judge") }}',
+             data:{id:id},
+             success:function(data)
+             {
+              for(let i = 0; i < data.judge.length; i++)
+                {
+                  if(data.judge.length <=1) {
+    $('#'+judgeId).select2('destroy');
+    $('#'+judgeId).hide();
+    $('#'+judge_span).show();
+                  
+                  var x = document.getElementById(judgeId);
+                
+                  judge_span.text = data.judge[i].full_name;
+                  judge_span.value = data.judge[i].judge_id;
+                  $('#'+judge_span).text(data.judge[i].full_name);
+                  // x.add(judge_id);
+                }else{
+                  $('#'+judge_span).hide();
+                  var x = document.getElementById(judgeId);
+                  var option = document.createElement("option");
+                  option.text = data.judge[i].full_name;
+                  option.value = data.judge[i].judge_id;
+                  
+                  x.add(option);
+                }
+                }
+    
+             
+             }     
+    });
+
+        });
+        // row.append($('<td>').append());
+        row.append($('<td>').append(editButton).append(addButton));
+        
         tableBody.append(row);
       });
     },
     error: function(xhr, status, error) {
       console.log(xhr.responseText);
     }
-  });
 
+  });
 }
 
 // Bind the update function to the change event of the class dropdown
 $('#class').on('change', fetchClassDogs);
- 
+
+// remove row 
+$(document).on('click','#remove',function(){
+$(this).parents('tr').remove();
+
+});
+
+$('#my-form').on('submit', function(e){
+
+e.preventDefault();
+
+$.ajax({
+  url: '{{ URL::to('api/edit-event_result')}}',
+  method: 'POST',
+  data: $(this).serialize(),
+});
+
+});
+
 
 </script>
 
