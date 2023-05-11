@@ -153,7 +153,7 @@
               
               <td>
 
-              <!-- <div class="col-md-12"> -->
+              <div class="col-md-12">
               <select class="form-control select2 dog"  name="dog_id[]" id="all_dogs">
            
                 <option  value="">
@@ -161,7 +161,7 @@
                 </option>
         
               </select>
-              <!-- </div> -->
+              </div>
               </td>
               <td>
             
@@ -171,9 +171,9 @@
               </td>
               <td>
               
-              <div class="col-sm-12">
+              <!-- <div class="col-sm-12">
                 <input class="form-control" name="place[]" placeholder="Enter Place" type="text">
-            </div>
+            </div> -->
               </td>
               <td>
               
@@ -552,21 +552,25 @@ $('#'+judge_span).show();
 
 $('#breed_ide').on('change', function() {
   $('#event_tbl').show();
-  // $('#all_dogs').empty().append('<option value="0">Select Dog</option>');
+  $('#all_dogs').empty().append('<option value="0">Select Dog</option>');
+ 
   $('#all_dogs').select2({
-                  allowClear: true,
-    // placeholder: 'Select a dog',
+    placeholder: 'Select a dog',
+    // allowClear: true,
+    // width: '100%',
+
     language: {
       noResults: function (term) {
         return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
       }
     },
-    minimumInputLength: 3,
+ 
+    minimumInputLength: 1,
     ajax: {
       url: function(){
         var breed_id=$('#breed_ide :selected').val();
         
-        return 'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id;
+        return 'https://inspedium.xyz/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id;
       },
         dataType: 'json',
         delay: 250,
@@ -578,15 +582,18 @@ $('#breed_ide').on('change', function() {
         },
         processResults: function(data, params) {
           console.log(data.dog.data);
+          // debugger;
+    // $('#all_dogs').val(null).trigger('change');
             params.page = params.page || 1;
             return {
                 results: data.dog.data,
+                
                 pagination: {
                     more: (params.page * 30) < data.total_count
                 }
             };
         },
-        cache: true
+        cache: false
     },
     escapeMarkup: function(markup) {
         return markup;
@@ -597,22 +604,32 @@ $('#breed_ide').on('change', function() {
            return  dog.text;
          
         }
-        var markup = "<option>" + dog.dog_name + "</option>";
+        if(dog.dog_name){
+          $('#all_dogs').empty();
+        }
+        var markup = "<option value="+ dog.dog_id +">" + dog.dog_name + "</option>";
         return markup;
     },
     templateSelection: function(dog) {
         return dog.dog_name || dog.text;
-        
+       
     }
 });
 
-
   }); 
 
-  $('#all_dogs').on('change', function() {
-    
- 
+  $( document ).ready(function() {
+    $('#all_dogs').on('change', function() {
+      
+   
+    });
+//     $("#all_dogs > option").removeAttr("selected");
+// $("#all_dogs").trigger("change");
+
+    console.log( "ready!" );
 });
+
+   
   
 // $('#breed_ide').on('change', function() {
 //   $('#event_tbl').show();
