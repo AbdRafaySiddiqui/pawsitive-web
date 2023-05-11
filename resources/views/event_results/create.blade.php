@@ -369,7 +369,7 @@
     <script type="text/javascript">
 
       
-  let i = 0; // Counter for generating unique IDs
+  var i = 0; // Counter for generating unique IDs
 
 $('#add').click(function(){
   var selectId = 'all_dogsb_' + i; // Generate a unique ID for the select element
@@ -379,11 +379,11 @@ $('#table').append(
 `<tr>
 <td><select class="form-control select2 dg" name="dog_id[]" id="${selectId}">
            
-@foreach($dogs as $dog)
-              <option  value="{{$dog->id}}">
-             {{$dog->dog_name}}
+
+              <option  value="">
+            
               </option>
-              @endforeach
+           
               
             </select></td>
 <td>  <input class="form-control" name="grading[]" placeholder="Enter Grade" type="text"></td>
@@ -471,29 +471,6 @@ $('#' + selectId).select2({
   $('#' +selectId).empty().append('<option value="0">Select Dog</option>');
 
         
-//         return 'http://localhost/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
-// var breed_id=$('#breed_ide :selected').val();
-//         var gender=$('#gender_dog').val();
-//         console.log(selectId);
-//         $.ajax({
-//            type:'get',
-//            url:'{{  url("api/dog/breed-dogs") }}' + '?breed_id=' + breed_id,
-//            data:{id:breed_id},
-//            success:function(data)
-//            {
-//               for(let i = 0; i < data.dog.length; i++)
-//               {
-                
-//                 var x = document.getElementById(selectId);
-//                 var option = document.createElement("option");
-//                 option.text = data.dog[i].dog_name;
-//                 option.value = data.dog[i].dog_id;
-//                 x.add(option);
-//                 console.log(data);
-//               }
-//            }
-      
-//       });
 
   
 
@@ -540,7 +517,6 @@ $('#'+judge_span).show();
  
  
 });
-   i++; // Increment the counter for the next iteration
    
 });
 
@@ -630,51 +606,11 @@ $('#breed_ide').on('change', function() {
 //     $("#all_dogs > option").removeAttr("selected");
 // $("#all_dogs").trigger("change");
 
+i++; // Increment the counter for the next iteration
   
 });
 
-   
-  
-// $('#breed_ide').on('change', function() {
-//   $('#event_tbl').show();
-  
-//   $('#all_dogs').empty().append('<option value="0">Select Dog</option>');
-
-        
-// //         return 'http://localhost/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
-// var breed_id=$('#breed_ide :selected').val();
-//         var gender=$('#gender_dog').val();
-//         // console.log(breed_id);
-//         $.ajax({
-//            type:'get',
-          
-//            url: '{{ route("breed-dogs") }}',
-//           //  url:'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id,
-          
-//            data:  {
-//              q:text,
-//             breed_id:breed_id,
-//           },
-//           dataType: 'json',
-//            success:function(data)
-//            {
-
-
-//                for(let i = 0; i < data.dog.length; i++)
-//                {
-//               var x = document.getElementById('all_dogs');
-//                 var option = document.createElement("option");
-//                 option.text = data.dog[i].dog_name;
-//                 option.value = data.dog[i].dog_id;
-//                 x.add(option);
-
-//             }
-    
-//            }
-
-//         });
-
-//       });       
+      
 
 $(document).on('click','#remove',function(){
 $(this).parents('tr').remove();

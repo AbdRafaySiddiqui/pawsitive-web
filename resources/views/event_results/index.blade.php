@@ -98,7 +98,7 @@
                                                 @if (isset($e->judges))
                                                     <td>
                                                       @foreach($e->judges as $judge)
-                                                        {{ $judge->judge->full_name }}
+                                                        {{ $judge->getjudge->full_name }}
                                                       @endforeach
                                                     </td>
                                                 @else

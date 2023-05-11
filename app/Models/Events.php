@@ -20,10 +20,8 @@ public function country_name(){
 public function club_name(){
   return $this->belongsTo('App\Models\Clubs','club_id','id');
 }
-public function judge_name(){
-  return $this->belongsTo('App\Models\Judges','judge_id','id');
-}
-public function judge(){
-  return $this->hasMany('App\Models\EventJudges','id','judge_id');
+
+public function judges(){
+  return $this->hasMany('App\Models\EventJudges','event_id','id');
 }
 }
