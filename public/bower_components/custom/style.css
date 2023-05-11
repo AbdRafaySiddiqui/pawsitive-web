@@ -220,9 +220,9 @@ body.color-scheme-dark .form-control, .content-panel.color-scheme-dark .form-con
 .select_judge{
   display: none;
 }
-#judge.select2-container{
+/* #judge.select2-container{
   display: none;
-}
+} */
 /* #selUser.select2-container--default .select2-selection--single {
   z-index: 99999;
 } */

@@ -112,8 +112,7 @@ class DogController extends Controller
         $search = $request->q;
         $id = $request->breed_id;
         $dog = DB::table('dogs')
-            ->select(DB::raw('dogs.id as dog_id, dogs.dog_name as dog_name, dogs.breed_id, breeds.id'))
-            ->leftJoin('breeds', 'breeds.id', '=', 'dogs.breed_id')
+            ->select(DB::raw('dogs.id as id, dogs.dog_name as dog_name, dogs.breed_id'))
             ->where('dogs.breed_id', '=', $id)
            ->where('dog_name', 'LIKE', "%$search%")
             ->orderBy('breed_id', 'ASC')
@@ -124,6 +123,30 @@ class DogController extends Controller
             ->orderBy('dog_name', 'ASC')
             ->get();
     }
+    return response()->json(['dog' => $dog], 200);
+}
+public function male()
+{
+ 
+        $dog = DB::table('dogs')
+            ->select(DB::raw('dogs.id as id, dogs.dog_name as dog_name, dogs.breed_id'))
+           ->where('dogs.gender', '=', 'Male')
+            ->orderBy('dogs.id', 'ASC')
+            ->paginate(10);
+            // ->get();
+    
+    return response()->json(['dog' => $dog], 200);
+}
+public function female()
+{
+ 
+        $dog = DB::table('dogs')
+            ->select(DB::raw('dogs.id as id, dogs.dog_name as dog_name, dogs.breed_id'))
+           ->where('dogs.gender', '=', 'Female')
+            ->orderBy('dogs.id', 'ASC')
+            ->paginate(10);
+            // ->get();
+    
     return response()->json(['dog' => $dog], 200);
 }
 

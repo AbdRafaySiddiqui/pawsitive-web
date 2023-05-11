@@ -55,6 +55,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //DogController routes
 Route::get('dog/{breed_id}/listings', [DogController::class, 'listing']);//working fine.
+Route::get('dog/male-dogs', [DogController::class, 'male']);
+Route::get('dog/female-dogs', [DogController::class, 'female']);
 Route::get('add/image', [DogController::class, 'add']);//working fine.
 Route::get('dog/{id}/details', [DogController::class, 'details']);//working fine.
 Route::get('dog/all-dogs', [DogController::class, 'alldogs']);//working fine.
