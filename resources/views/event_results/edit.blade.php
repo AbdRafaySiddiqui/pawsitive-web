@@ -96,7 +96,7 @@
           <table class="table table-bordered table-lg table-v2 table-striped" id="class-results-table">
   <thead>
     <tr>
-      <th>ID</th>
+      <!-- <th>ID</th> -->
       <th>Breed</th>
       <th>Award</th>
       <th>Dog</th>
@@ -377,13 +377,13 @@ $('#' + selectId).select2({
       tableBody.empty();
       $.each(data.class, function(i, item) {
         var row = $('<tr>');
-        row.append($('<td>', {text: i}));
+        // row.append($('<td>', {text: item.id}));
         row.append($('<td>', {text: item.breed_name}));
         row.append($('<td>', {text: item.award_id}));
         row.append($('<td>', {text: item.dog_name}));
         row.append($('<td>', {text: item.grading}));
         row.append($('<td>', {text: item.place}));
-        row.append($('<td>', {text: item.judge}));
+        row.append($('<td>', {text: item.judge_name}));
         var editButton = $('<button>', {text: 'Edit', class: 'btn btn-primary btn-sm'});
         editButton.on('click', function() {
           // Show modal to edit the record

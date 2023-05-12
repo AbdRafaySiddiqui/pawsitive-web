@@ -30,6 +30,47 @@ class DogController extends Controller
           }
   }  
 
+  public function listingNew(Request $request, $id)
+{
+    $dogs = DB::table('dogs')
+        ->select(
+            'dogs.id',
+            'dogs.dog_name as dogs_name',
+            'dogs.profile_photo as profilePhoto'
+        )
+        ->leftJoin('breeds', 'breeds.id', '=', 'dogs.breed_id')
+        ->where('breed_id', '=', $id)
+        ->where('dogs.status', '=', 'Active')
+        ->orderBy('dogs.dog_name', 'ASC')
+        ->paginate(1000); // Set the number of records per page
+    
+    $dogCollection = collect($dogs->items())->map(function ($dog) {
+        if ($dog->profilePhoto != null) {
+            // Check if profile photo starts with "https://"
+            if (strpos($dog->profilePhoto, 'https://') === 0) {
+                $dog->profilePhoto = $dog->profilePhoto;
+            }
+            // Check if profile photo exists in local storage
+            elseif (file_exists(storage_path('/app/public/dog_profile'.'/'.$dog->profilePhoto))) {
+                $dog->profilePhoto = asset('storage/app/public/dog_profile').'/'.$dog->profilePhoto;
+            }
+        } else {
+            $dog->profilePhoto = asset('storage/app/public/noimage.png');
+        }
+        return $dog;
+    });
+    
+    // Do something with the dog collection, such as return it to the client
+    
+    return response()->json([
+    'data' => $dogCollection,
+    'current_page' => $dogs->currentPage(),
+    'last_page' => $dogs->lastPage(),
+    'per_page' => $dogs->perPage(),
+    'total' => $dogs->total(),
+]);
+}
+
     public function listing(Request $request, $id)
     {
         $dogs = DB::table('dogs')
@@ -63,27 +104,40 @@ class DogController extends Controller
         return response()->json(['dog' => $dogCollection], 200);
     }
 
+    // return response()->json(['dog' => $dogCollection], 200);
+
     public function details(request $request, $id)
     {
         $dog = Dogs::select('dogs.id',
         'dogs.dog_name as dogs_name',
-        'dob',
-        'gender',
-        'breeds.name as breed_name',
-        'microchip',
-        'reg_no',
-        'achievements',
-        'show_title')
+        'dogs.profile_photo', 
+        'dogs.dob',
+        'dogs.gender',
+        'breeds.name as breed_name', 
+        'dogs.microchip',
+        'dogs.reg_no',
+        'dogs.achievements',
+        'sire.dog_name as sire_name', 
+        'dam.dog_name as dam_name',
+        'dogs.show_title',
+        'dogs.dog_owner',
+        'dogs.reg_with',
+        'dogs.breeders')
         ->leftjoin('breeds','breeds.id','=','dogs.breed_id')
-        
+        ->leftJoin('dog_real_parents', 'dog_real_parents.dog_id', '=', 'dogs.id')
+        ->leftJoin('dogs as sire', 'sire.ref_id', '=', 'dog_real_parents.sire_id')
+        ->leftJoin('dogs as dam', 'dam.ref_id', '=', 'dog_real_parents.dam_id')
+        ->leftJoin('dog_owners', 'dog_owners.dog_id', '=', 'dogs.id')
+        ->leftJoin('users', 'users.id', '=', 'dog_owners.owner_id')
           ->where('dogs.id','=',$id)
-          ->orderBy('dogs.id','ASC')
-          ->first();
+        ->where('dogs.status', '=', 'Active')
+        ->orderBy('dogs.id','ASC')
+        ->get();
         
         return response()->json(['dog' => $dog], 200);
     }
 
-    public function alldogs(request $request)
+     public function alldogs(request $request)
     {
       if($request->has('q')){
         $search = $request->q;

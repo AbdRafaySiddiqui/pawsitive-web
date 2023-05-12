@@ -41,12 +41,12 @@ class EventResultController extends Controller
         $results = DB::table('event_results')
                 ->join('dogs', 'event_results.dog_id', '=', 'dogs.id')
                 ->join('events', 'event_results.event_id', '=', 'events.id')
-                // ->join('breeds', 'dogs.breed_id', '=', 'breeds.id')
+                ->join('breeds', 'dogs.breed_id', '=', 'breeds.id')
                 ->join('clubs', 'events.club_id', '=', 'clubs.id')
                 ->join('countries', 'events.country', '=', 'countries.idCountry')
                 ->select('events.start_date',
                          'events.name AS event',
-                        //  'breeds.name AS breedName',
+                         'breeds.name AS breedName',
                          'clubs.name AS club',
                          'countries.countryName AS country',
                          'countries.countryCode',
@@ -258,11 +258,9 @@ class EventResultController extends Controller
       ]);
     }
 
+    public function class_dog(request $request)
+    {
 
-
-
-  public function class_dog(request $request)
-  {
       $class_name = $request->input('class');
       $class = Event_Result::select(
         'breeds.name as breed_name',
@@ -272,17 +270,18 @@ class EventResultController extends Controller
         'event_results.place',
         'event_results.award_id',
         'event_results.id',
-        'event_results.judge'
-    )
-    ->join('breeds', 'breeds.id', '=', 'event_results.breed_id')
-    ->join('dogs', 'dogs.id', '=', 'event_results.dog_id')
-    ->join('events', 'events.id', '=', 'event_results.event_id')
-    ->where('class', $class_name)
-    ->get();
+        'judges.full_name as judge_name'
+      )
+      ->join('breeds', 'breeds.id', '=', 'event_results.breed_id')
+      ->join('dogs', 'dogs.id', '=', 'event_results.dog_id')
+      ->join('events', 'events.id', '=', 'event_results.event_id')
+      ->join('judges', 'judges.id', '=', 'event_results.judge')
+      ->where('class', $class_name)
+      ->get();
 
 
-    return response()->json(['class' => $class]);
-  }
+      return response()->json(['class' => $class]);
+    }
 
     
 }
