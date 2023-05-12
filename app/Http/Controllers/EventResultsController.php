@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Dogs;
 use App\Models\Breeds;
+use App\Models\Clubs;
 use App\Models\Event_Result;
 use App\Models\EventJudges;
 use App\Models\Judges;
 use App\Models\DogsRealParent;
 use App\Models\DogClass;
+use App\Models\DogOwner;
 use App\Models\Events;
 use League\Csv\Writer;
+use App\Models\User;
+use Illuminate\Support\Str;
 use DB;
 
 class EventResultsController extends Controller
@@ -35,10 +39,12 @@ class EventResultsController extends Controller
         ->select(DB::raw('id,dog_name, status'))
           ->where('status','=',"Active")
       ->paginate(10);
+      $total_clubs = Clubs::get();
       $femaleDogs =  DB::table('dogs')
         ->select(DB::raw('id,dog_name'))
           ->where('gender', '=', "Female")
       ->get();
+      $total_owners = User::select('id','username')->get();
         $total_breeds = Breeds::get();
         $total_judges = Judges::get();
         $dog_class = DogClass::get();
@@ -50,7 +56,7 @@ class EventResultsController extends Controller
      
         $Events = Events::where('status', 'active')->get();
         
-        return view('event_results.create',compact('Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges','dog_class' ,'data'));
+        return view('event_results.create',compact('Events','maleDogs', 'femaleDogs','dogs','total_breeds','total_judges','dog_class' ,'data','total_owners','total_clubs'));
     }
 
     /**
@@ -166,20 +172,44 @@ class EventResultsController extends Controller
     
        
         
+        if($request->hasFile('profile_photo')) {
+            $imageName = time().'.'.request()->profile_photo->getClientoriginalName();
+            request()->profile_photo->move(storage_path('app/public/dogs'), $imageName);
+        }
+        else {
+            $imageName = "";
+        }
+
         $dogs = new Dogs;
         $dogs->dog_name =  $request->dog_name;
         $dogs->dob =  $request->dob;
         $dogs->reg_no =  $request->reg_no;
+        $dogs->reg_with =  $request->reg_with;
+        $dogs->breeders =  $request->breeder;
+        $dogs->is_champion =  $request->is_champion;
+        $dogs->profile_photo =  $imageName;
+        $dogs->dog_owner =  $request->dog_owner;
         $dogs->microchip =  $request->microchip;
         $dogs->gender =  $request->gender;
+        // $dog->class = $request->class;
         $dogs->show_title =  $request->show_title;
         $dogs->achievements =  $request->achievements;
         $dogs->breed_id = $request->breed_id;
+        $dogs->ref_id = (string) Str::uuid();
         $dogs->save();
-        $new_dog_id = $dogs->id;
+
+        // $new_dog_id = $dogs->id;
+        
+        $Dogowner = new DogOwner;
+        $Dogowner->owner_id = $request->dog_owner;
+        $Dogowner->dog_id = $dogs->id;
+        $Dogowner->type = 'Owner';
+        
+        $new_ref_id = $dogs->ref_id;
+
 
         $parent = new DogsRealParent;
-        $parent->dog_id = $new_dog_id;
+        $parent->dog_id = $new_ref_id;
         $parent->sire_id = $request->sire_id;
         $parent->dam_id = $request->dam_id;
         $parent->save();
@@ -200,7 +230,8 @@ class EventResultsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Event_Result::where('id',$id)->update(array('status' => 'Inactive'));
+        return redirect()->route('event_results.index')->with('message', 'Record Permenantly Deleted!');
     }
 
 }

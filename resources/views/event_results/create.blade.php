@@ -239,105 +239,152 @@
                     <div class="modal-body">
                       <form id="my-form">
                           @csrf        
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for="">Dog Name</label>
-                              <div class="col-sm-8">
-                                <input id="dog_name" class="form-control" name="dog_name" placeholder="Enter Dog Name" type="text">
-                              </div>
-                          </div>
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> DOB</label>
-                              <div class="col-sm-8">
-                                <input   class="form-control" name="dob" id="dob" type="date">
-                              </div>
-                          </div>
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> Club Reg</label>
-                            <div class="col-sm-8">
-                              <input class="form-control" type="text" id="reg_no" name="reg_no">
-                            </div>
-                          </div>
+                            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Dog Name</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="dog_name" placeholder="Enter Dog Name" type="text">
+              </div>
+            </div>
 
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> Microchip</label>
-                            <div class="col-sm-8">
-                              <input class="form-control" type="text" id="microchip" name="microchip" >
-                            </div>
-                          </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Select Breed</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="breed_id" id="breed_id">
+              @foreach($total_breeds as $total_breed)
+                <option  value="{{$total_breed->id}}">
+               {{$total_breed->name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
 
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Breeder</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="breeder" placeholder="Enter Breeder" type="text">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Select Sire</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="sire_id" id="selUser">
+              @foreach($maleDogs as $maleDog)
+                <option  value="{{$maleDog->id}}">
+               {{$maleDog->dog_name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
 
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> Title</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" id="title" name="show_title" >
-                            </div>
-                          </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Select Dam</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="dam_id" id="selUser_fe">
+              @foreach($femaleDogs as $femaleDog)
+                <option  value="{{$femaleDog->id}}">
+               {{$femaleDog->dog_name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
 
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">DOB</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="dob" placeholder="Enter DOB" type="date">
+              </div>
+            </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Club Reg #</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="reg_no" placeholder="Enter Club Reg #" type="text">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Registered With</label>
+              <div class="col-sm-8">
+              <select class="form-control select2" name="reg_with" id="reg_with">
+                <option value="">Select Registered With</option>
+              @foreach($total_clubs as $total_club)
+                <option  value="{{$total_club->id}}">
+               {{$total_club->name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Dog Owner</label>
+              <div class="col-sm-8">
+              <select class="form-control select2" name="dog_owner" id="dog_owner">
+                <option value="">Select Dog Owner</option>
+              @foreach($total_owners as $total_owner)
+                <option  value="{{$total_owner->id}}">
+               {{$total_owner->username}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Is Champion</label>
+              <div class="col-sm-8">
+              <select class="form-control" name="is_champion" id="is_champion">         
+              <option value="">Select</option>
+                <option  value="Yes">Yes   </option>
+                <option  value="No">No   </option>
+        
+              </select>
+              </div>
+            </div>
 
-                          <div class="form-group row">
-                              <label class="col-form-label col-sm-4" for=""> Achievements</label>
-                            <div class="col-sm-8">
-                              <textarea class="form-control" cols="80" id="achievements" name="achievements" rows="10"></textarea>
-                            </div>
-                          </div>
-                          
-                          <div class="form-group row">
-                        <label class="col-form-label col-sm-4" for="" > Gender</label>
-                        <div class="col-sm-8">
-                        <select class="form-control" name="gender">
-                        <option value="">
-                                Select One
-                              </option>
-                              <option value="Male">
-                                Male
-                              </option>
-                              <option value="Female">
-                              Female
-                              </option>
-                            </select>
-                          </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" for="">Select Breed</label>
-                            <div class="col-sm-8">
-                            <select class="form-control select2"  onchange="verify_if_dog" id="breed_id" name="breed_id" class="breed_id">
-                            <option>Select Breed</option>
-                            @foreach($total_breeds as $total_breed)
-                              <option  value="{{$total_breed->id}}">
-                            {{$total_breed->name}}
-                              </option>
-                              @endforeach
-                            </select>
-                            </div>
-                          </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Microchip</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="microchip" placeholder="Enter Microchip" type="text">
+              </div>
+            </div>
+       
+         
+            <div class="form-group row">
+          <label class="col-form-label col-sm-4" for="" > Gender</label>
+          <div class="col-sm-8">
+          <select class="form-control" name="gender">
+          <option value="">
+                  Select One
+                </option>
+                <option value="Male">
+                  Male
+                </option>
+                <option value="Female">
+                Female
+                </option>
+              </select>
+            </div>
+            </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for="">Show Title</label>
+            <div class="col-sm-8">
+              <input class="form-control" name="show_title" placeholder="Enter Show Title" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Achievements </label>
+              <div class="col-sm-8">
+                <textarea class="form-control" name="achievements" id="" cols="30" rows="10"></textarea>
+              </div>
+            </div>
 
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" for="">Select Sire</label>
-                            <div class="col-sm-8">
-                            <select class="form-control select2" name="sire_id" id="selUser"  >
-                            <option>Select Sire</option>
-                            @foreach($maleDogs as $maleDog)
-                              <option  value="{{$maleDog->id}}">
-                            {{$maleDog->dog_name}}
-                              </option>
-                              @endforeach
-                            </select>
-                            </div>
-                          </div>
-
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label " for="">Select Dam</label>
-                            <div class="col-sm-8">
-                            <select class="form-control select2" name="dam_id" id="selUser_fe">
-                            <option>Select Dam</option>
-                            @foreach($femaleDogs as $femaleDog)
-                              <option  value="{{$femaleDog->id}}">
-                            {{$femaleDog->dog_name}}
-                              </option>
-                              @endforeach
-                            </select>
-                            </div>
-                          </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Profile Photo</label>
+              <div class="col-sm-8">
+                
+                <input class="form-control" id="profile_photo" name="profile_photo" placeholder="Enter Profile Photo" type="file">
+              </div>
+            </div>
                           <div id="success-msg"> </div>
                       <div id="msg"> </div>
                           <div class="form-buttons-w mb-4">
@@ -427,8 +474,8 @@ $('#' + selectId).select2({
     ajax: {
       url: function(){
         var breed_id=$('#breed_ide :selected').val();
-        
-        return 'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id;
+        var  url='{{ URL::to('api/dog/breed-dogs?breed_id=') }}';
+        return url+breed_id;
       },
         dataType: 'json',
         delay: 250,
@@ -547,8 +594,8 @@ $('#breed_ide').on('change', function() {
     ajax: {
       url: function(){
         var breed_id=$('#breed_ide :selected').val();
-        
-        return 'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id;
+        var  url='{{ URL::to('api/dog/breed-dogs?breed_id=') }}';
+        return url+breed_id;
       },
         dataType: 'json',
         delay: 250,
@@ -635,8 +682,8 @@ $('#exampleModal').on('shown.bs.modal', function () {
     ajax: {
       url: function(){
         var breed_id=$('#breed_id :selected').val();
-        
-        return 'http://localhost/pawsitive-web/api/dog/male-dogs?breed_id='+breed_id;
+        var  url='{{ URL::to('api/dog/male-dogs?breed_id=') }}';
+        return url+breed_id;
       },
         dataType: 'json',
         delay: 250,
@@ -673,7 +720,7 @@ $('#exampleModal').on('shown.bs.modal', function () {
         var markup = "<option value="+ dog.id +">" + dog.dog_name + "</option>";
         return markup;
         if(dog.dog_name){
-          $('#selUser_fe').empty();
+          $('#selUser').empty();
         }
   
     },
@@ -700,8 +747,8 @@ $('#selUser_fe').select2({
     ajax: {
       url: function(){
         var breed_id=$('#breed_id :selected').val();
-        
-        return 'http://localhost/pawsitive-web/api/dog/female-dogs?breed_id='+breed_id;
+        var  url='{{ URL::to('api/dog/female-dogs?breed_id=') }}';
+        return url+breed_id;
       },
         dataType: 'json',
         delay: 250,
@@ -751,6 +798,18 @@ $('#breed_id').select2({
   dropdownParent: $("#exampleModal .modal-content")
   
 });
+$('#dog_owner').select2({
+  dropdownParent: $("#exampleModal .modal-content")
+  
+});
+$('#is_champion').select2({
+  dropdownParent: $("#exampleModal .modal-content")
+  
+});
+$('#reg_with').select2({
+  dropdownParent: $("#exampleModal .modal-content")
+  
+});
 
 });
 
@@ -760,10 +819,18 @@ $('#my-form').on('submit', function(e){
 
 e.preventDefault();
 
+var form = $('#my-form')[0];
+
+var data = new FormData(form);
+
 $.ajax({
   url: '{{ URL::to('/event-dog')}}',
   method: 'POST',
-  data: $(this).serialize(),
+  enctype: 'multipart/form-data',
+  data: data,
+  contentType: false,
+  processData: false,
+  cache: false,
   success: function(response){
     // Handle successful form submission
     
@@ -784,7 +851,7 @@ $.ajax({
     // Handle errors
     var responJson=JSON.parse(response.responseText);
     var responseJson=responJson.errors;
- //   console.log(responJson.message);
+   console.log(responJson.message);
     //   $.map(responseJson, function(value) {
     $('#msg').append($('<p>',{
       text: responseJson.dog_name
@@ -941,8 +1008,12 @@ var judge_id=$('#judge').text();
 $('#exampleModal').on('hidden.bs.modal', function () {
   $('#my-form')[0].reset(); // reset the form
   $('#msg').text(''); // clear the error message
+  $('#success-msg').hide();
+
 });
 $('#m_sub').on('click', function () {
+  // $('#my-form')[0].reset(); 
+  // $('#success-msg').empty();
   $('#msg').text(''); // clear the error message
 });
 

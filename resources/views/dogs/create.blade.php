@@ -196,7 +196,7 @@
       Add Dog
       </h6>
       <div class="element-box">
-        <form action="{{ route('dogs.store') }}" method="post" >
+        <form action="{{ route('dogs.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <h5 class="form-header">
             Add Dog
@@ -223,10 +223,17 @@
               </select>
               </div>
             </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Breeder</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="breeder" placeholder="Enter Breeder" type="text">
+              </div>
+            </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Select Sire</label>
               <div class="col-sm-8">
-              <select class="form-control js-data-example-ajax" name="sire_id" id="selUser"  >
+              <select class="form-control js-data-example-ajax" name="sire_id" id="selUser">
               @foreach($maleDogs as $maleDog)
                 <option  value="{{$maleDog->id}}">
                {{$maleDog->dog_name}}
@@ -265,11 +272,36 @@
               <label class="col-sm-4 col-form-label" for="">Registered With</label>
               <div class="col-sm-8">
               <select class="form-control js-data-example-ajax" name="reg_with" id="reg_with">
+                <option value="">Select Registered With</option>
               @foreach($total_clubs as $total_club)
                 <option  value="{{$total_club->id}}">
                {{$total_club->name}}
                 </option>
                 @endforeach
+              </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Dog Owner</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="dog_owner" id="dog_owner">
+                <option value="">Select Dog Owner</option>
+              @foreach($total_owners as $total_owner)
+                <option  value="{{$total_owner->id}}">
+               {{$total_owner->username}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Is Champion</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="is_champion">         
+              <option value="">Select</option>
+                <option  value="Yes">Yes   </option>
+                <option  value="No">No   </option>
+        
               </select>
               </div>
             </div>
@@ -311,7 +343,13 @@
               </div>
             </div>
 
-          
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Profile Photo</label>
+              <div class="col-sm-8">
+                
+                <input class="form-control" name="profile_photo" placeholder="Enter Profile Photo" type="file">
+              </div>
+            </div>
           
          
           <div class="form-buttons-w mb-4">
@@ -478,92 +516,141 @@
     <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
 
 <script>
+  
   $('#selUser').select2({
-    allowClear: true,
-    placeholder: 'Select an item',
+  
+  placeholder: 'Select a dog',
+    // allowClear: true,
+    // width: '100%',
+
     language: {
       noResults: function (term) {
-        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Sire</button>';
+        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
       }
     },
-    escapeMarkup: function(markup) {
-      return markup;
-    },
+ 
+    minimumInputLength: 1,
     ajax: {
-      type: "get",
-      url: '{{ URL::to('api/dog') }}',
-      dataType: 'json',
-  
-      delay: 250,
-   
-       data: function (params) {
-              return {
-                  q: $.trim(params.term)
-              };   
-          },
-      processResults: function (data) {
-        // console.log(data)
-        return {
-          results:  $.map(data, function (item) {
-                return {
-          //  _token: CSRF_TOKEN,
-  
-                    text: item.dog_name,
-                    id: item.id,
-                    
-                }
-            })
-        };
+      url: function(){
+        var breed_id=$('#breed_id :selected').val();
+        var  url='{{ URL::to('api/dog/male-dogs?breed_id=') }}';
+        return url+breed_id;
       },
-      
-      cache: true
-    }
-    
-  }).on('select2:open', function() {
-});
-  $('#selUser_fe').select2({
-    allowClear: true,
-    placeholder: 'Select an item',
-    language: {
-      noResults: function (term) {
-        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal2">Add Dam</button>';
-      }
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+            return {
+                q: params.term,
+                page: params.page || 1
+            };
+        },
+        processResults: function(data, params) {
+        //   console.log(data.dog.data);
+          // debugger;
+    // $('#all_dogs').val(null).trigger('change');
+            params.page = params.page || 1;
+            return {
+                results: data.dog.data,
+                
+                pagination: {
+                    more: (params.page * 30) < data.total_count
+                }
+            };
+        },
+        cache: false
     },
     escapeMarkup: function(markup) {
-      return markup;
+        return markup;
     },
-    ajax: {
-      type: "get",
-      url: '{{ URL::to('api/fe_dog') }}',
-      dataType: 'json',
+    templateResult: function(dog) {
+        if (dog.loading) {
+         
+           return  dog.text;
+         
+        }
+        var markup = "<option value="+ dog.id +">" + dog.dog_name + "</option>";
+        return markup;
+        if(dog.dog_name){
+          $('#selUser').empty();
+        }
   
-      delay: 250,
-   
-       data: function (params) {
-              return {
-                  q: $.trim(params.term)
-              };   
-          },
-      processResults: function (data) {
-        // console.log(data)
-        return {
-          results:  $.map(data, function (item) {
-                return {
-          //  _token: CSRF_TOKEN,
-  
-                    text: item.dog_name,
-                    id: item.id,
-                    
-                }
-            })
-        };
-      },
-      
-      cache: true
+    },
+    templateSelection: function(dog) {
+        return dog.dog_name || dog.text;
+       
     }
-    
-  }).on('select2:open', function() {
+  
 });
+
+$('#selUser_fe').select2({
+  
+  placeholder: 'Select a dog',
+    // allowClear: true,
+    // width: '100%',
+
+    // language: {
+    //   noResults: function (term) {
+    //     return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+    //   }
+    // },
+ 
+    minimumInputLength: 1,
+    ajax: {
+      url: function(){
+        var breed_id=$('#breed_id :selected').val();
+        var  url='{{ URL::to('api/dog/female-dogs?breed_id=') }}';
+        return url+breed_id;
+      },
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+            return {
+                q: params.term,
+                page: params.page || 1
+            };
+        },
+        processResults: function(data, params) {
+        //   console.log(data.dog.data);
+          // debugger;
+    // $('#all_dogs').val(null).trigger('change');
+            params.page = params.page || 1;
+            return {
+                results: data.dog.data,
+                
+                pagination: {
+                    more: (params.page * 30) < data.total_count
+                }
+            };
+        },
+        cache: false
+    },
+    escapeMarkup: function(markup) {
+        return markup;
+    },
+    templateResult: function(dog) {
+        if (dog.loading) {
+         
+           return  dog.text;
+         
+        }
+        var markup = "<option value="+ dog.id +">" + dog.dog_name + "</option>";
+        return markup;
+        if(dog.dog_name){
+          $('#selUser_fe').empty();
+        }
+  
+    },
+    templateSelection: function(dog) {
+        return dog.dog_name || dog.text;
+       
+    }
+  
+});
+
+
+$('#reg_with').select2();
+$('#breed_id').select2();
+$('#dog_owner').select2();
 </script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 

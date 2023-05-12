@@ -268,17 +268,17 @@ $('#'+breed_id).select2();
 $('#' + selectId).select2({
   allowClear: true,
     placeholder: 'Select a dog',
-    language: {
-      noResults: function (term) {
-        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
-      }
-    },
+    // language: {
+    //   noResults: function (term) {
+    //     return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+    //   }
+    // },
     minimumInputLength: 1,
     ajax: {
       url: function(){
         var breed_ide=$('#'+breed_id+' :selected').val();
-        
-        return 'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_ide;
+        var  url='{{ URL::to('api/dog/breed-dogs?breed_id=') }}';
+        return url+breed_ide;
       },
         dataType: 'json',
         delay: 250,
