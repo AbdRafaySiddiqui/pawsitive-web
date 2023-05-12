@@ -2,8 +2,8 @@
 
 @section('content')
     <!--------------------
-            END - Main Menu
-            -------------------->
+                END - Main Menu
+                -------------------->
     <div class="content-w" style="width:100%">
 
         <div class="content-panel-toggler">
@@ -20,22 +20,23 @@
                         </div>
                         <div class="element-box-tp">
                             <!--------------------
-          START - Controls Above Table
-          -------------------->
+              START - Controls Above Table
+              -------------------->
                             <div class="controls-above-table">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         {{-- <a class="btn btn-sm btn-secondary" href="{{ route('download-event-csv') }}">Download CSV</a> --}}
-                                            <a class="btn btn-sm btn-secondary" href="{{ route('event_result.create') }}">Add Event Results</a>
+                                        <a class="btn btn-sm btn-secondary" href="{{ route('event_result.create') }}">Add
+                                            Event Results</a>
                                     </div>
                                 </div>
                             </div>
                             <!--------------------
-          END - Controls Above Table
-          ------------------          -->
+              END - Controls Above Table
+              ------------------          -->
                             <!--------------------
-          START - Table with actions
-          ------------------  -->
+              START - Table with actions
+              ------------------  -->
                             <div class="table-responsive">
                                 <table class="table table-bordered table-lg table-v2 table-striped">
                                     <thead>
@@ -45,7 +46,7 @@
                                                 S.no
                                             </th>
                                             <th>
-                                              Club Name
+                                                Club Name
                                             </th>
                                             <th>
                                                 Event's Name
@@ -56,7 +57,7 @@
                                             <th>
                                                 Location
                                             </th>
-                                            
+
                                             <th>
                                                 Judge(s)
                                             </th>
@@ -90,33 +91,32 @@
 
                                                 <td>{{ $created = date('F d, Y', strtotime($e->start_date)) }}</td>
                                                 @if (isset($e->cities_name->city))
-                                                    <td>{{ $e->cities_name->city .', '.$e->country_name->countryName }}</td>
-                                                @else
-                                                    <td></td>
-                                                @endif
-
-                                                @if (isset($e->judges))
-                                                    <td>
-                                                      @foreach($e->judges as $judge)
-                                                        {{ $judge->getjudge->full_name }}
-                                                      @endforeach
-                                                    </td>
+                                                    <td>{{ $e->cities_name->city . ', ' . $e->country_name->countryName }}</td>
                                                 @else
                                                     <td></td>
                                                 @endif
                                                 <td>
-                                                  <div class="row-actions">
-                                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                                      <a href="{{ route('event_result.edit', $e->id) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="os-icon os-icon-ui-49"></i></a>
-                                                      {{-- <form action="{{ route('events.destroy', $e->id) }}" method="post">
+                                                    @foreach ($e->judges as $judge)
+                                                        {{ $judge->getjudge->full_name }}@if (!$loop->last)
+                                                            ,
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    <div class="row-actions">
+                                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                                            <a href="{{ route('event_result.edit', $e->id) }}"
+                                                                data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                                    class="os-icon os-icon-ui-49"></i></a>
+                                                            {{-- <form action="{{ route('events.destroy', $e->id) }}" method="post">
                                                           @csrf
                                                           @method('DELETE')
                                                           <button type="submit" class="trans_btn"
                                                               onclick="return confirm('Are you sure to delete this event?')"><i
                                                                   class="os-icon os-icon-ui-15"></i></button>
                                                       </form> --}}
+                                                        </div>
                                                     </div>
-                                                  </div>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -124,11 +124,11 @@
                                 </table>
                             </div>
                             <!--------------------
-          END - Table with actions
-          ------------------            -->
+              END - Table with actions
+              ------------------            -->
                             <!--------------------
-          START - Controls below table
-          ------------------  -->
+              START - Controls below table
+              ------------------  -->
                             <div class="controls-below-table">
                                 <div class="table-records-pages">
                                     {{ $event->links() }}
@@ -136,27 +136,27 @@
                             </div>
 
                             <!--------------------
-          END - Controls below table
-          -------------------->
+              END - Controls below table
+              -------------------->
                         </div>
                     </div>
                 </div>
             </div>
             <!--------------------
-                START - Sidebar
-                -------------------->
+                    START - Sidebar
+                    -------------------->
             <div class="content-panel">
                 <div class="content-panel-close">
                     <i class="os-icon os-icon-close"></i>
                 </div>
                 <!--------------------
-    START - Support Agents
-    -------------------->
+        START - Support Agents
+        -------------------->
 
             </div>
             <!--------------------
-                END - Sidebar
-                -------------------->
+                    END - Sidebar
+                    -------------------->
         </div>
     </div>
     </div>

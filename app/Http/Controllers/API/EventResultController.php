@@ -54,7 +54,6 @@ class EventResultController extends Controller
                 ->where('events.status', '=', 'Active')
                 ->orderBy('events.start_date', 'desc')
                 ->distinct('events.id')
-                ->take(20)
                 ->get();
                 return response()->json(['event_result' => $results]);
     }
@@ -249,7 +248,7 @@ class EventResultController extends Controller
             $event_result->event_id = $event_id;
             $event_result->breed_id = $breed_id;
             $event_result->class = $class;
-            $event_result->save();
+            $event_result->update();
         }
     
         return redirect()->back()->with('message', 'Record added successfully');
@@ -258,25 +257,24 @@ class EventResultController extends Controller
 
 
 
-    public function class_dog(request $request)
+  public function class_dog(request $request)
   {
-
-    $class_name = $request->input('class');
-    $class = Event_Result::select(
-      'breeds.name as breed_name',
-      'dogs.dog_name as dog_name',
-      'events.name as event_name',
-      'event_results.grading',
-      'event_results.place',
-      'event_results.award_id',
-      'event_results.id',
-      'event_results.judge'
-  )
-  ->join('breeds', 'breeds.id', '=', 'event_results.breed_id')
-  ->join('dogs', 'dogs.id', '=', 'event_results.dog_id')
-  ->join('events', 'events.id', '=', 'event_results.event_id')
-  ->where('class', $class_name)
-  ->get();
+      $class_name = $request->input('class');
+      $class = Event_Result::select(
+        'breeds.name as breed_name',
+        'dogs.dog_name as dog_name',
+        'events.name as event_name',
+        'event_results.grading',
+        'event_results.place',
+        'event_results.award_id',
+        'event_results.id',
+        'event_results.judge'
+    )
+    ->join('breeds', 'breeds.id', '=', 'event_results.breed_id')
+    ->join('dogs', 'dogs.id', '=', 'event_results.dog_id')
+    ->join('events', 'events.id', '=', 'event_results.event_id')
+    ->where('class', $class_name)
+    ->get();
 
 
     return response()->json(['class' => $class]);

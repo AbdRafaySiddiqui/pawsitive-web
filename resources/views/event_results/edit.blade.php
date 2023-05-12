@@ -216,7 +216,7 @@ var i =0;
       tableBody.empty();
       $.each(data.class, function(i, item) {
         var row = $('<tr>');
-        row.append($('<td>', {text: item.id}));
+        row.append($('<td>', {text: i}));
         row.append($('<td>', {text: item.breed_name}));
         row.append($('<td>', {text: item.award_id}));
         row.append($('<td>', {text: item.dog_name}));
@@ -269,12 +269,10 @@ var i =0;
 
            
 <select class="form-control select2" name="judge[]" id="${judgeId}">
-           @foreach($total_judges as $judge)
-             <option  value="{{$judge->id}}">
-            {{$judge->full_name}}
-             </option>
-           
-         @endforeach  </select>
+            @foreach($event->judges as $judge)
+             <option  value="{{ $judge->getjudge->id }}">{{ $judge->getjudge->full_name }}</option>
+            @endforeach  
+</select>
          
     
        

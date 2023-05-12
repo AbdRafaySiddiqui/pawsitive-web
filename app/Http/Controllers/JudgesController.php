@@ -38,12 +38,12 @@ class JudgesController extends Controller
     {
         if(!empty(request()->img)){
             $imageName = time().'.'.request()->img->getClientOriginalExtension();
-                request()->img->move(storage_path('app/public/judge_images'), $imageName);
+                request()->img->move(storage_path('app/public/judge_imgs'), $imageName);
         }
 
         if(!empty(request()->sig)){
                 $imagesig = time().'.'.request()->sig->getClientOriginalExtension();
-                request()->sig->move(storage_path('app/public/judge_signatures'), $imagesig);
+                request()->sig->move(storage_path('app/public/judge_sigs'), $imagesig);
         }
 
         if(!empty($imageName) && !empty($imagesig)){
@@ -167,12 +167,12 @@ class JudgesController extends Controller
     {
         if(!empty(request()->img)){
             $imageName = time().'.'.request()->img->getClientOriginalExtension();
-                request()->img->move(storage_path('app/public/judge_images'), $imageName);
+                request()->img->move(storage_path('app/public/judge_imgs'), $imageName);
         }
 
         if(!empty(request()->sig)){
                 $imagesig = time().'.'.request()->sig->getClientOriginalExtension();
-                request()->sig->move(storage_path('app/public/judge_signatures'), $imagesig);
+                request()->sig->move(storage_path('app/public/judge_sigs'), $imagesig);
         }
 
         if(!empty($imageName) && !empty($imagesig)){

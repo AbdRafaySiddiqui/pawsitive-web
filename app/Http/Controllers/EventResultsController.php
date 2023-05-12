@@ -21,7 +21,7 @@ class EventResultsController extends Controller
      */
     public function index()
     {
-        $event = Events::with('cities_name','country_name','club_name')->where('status','=','Active')->orderBy('id','DESC')->paginate('5');
+        $event = Events::where('status','=','Active')->orderBy('id','DESC')->paginate('5');
        
         return view('event_results.index', compact('event'));
     }
@@ -119,12 +119,11 @@ class EventResultsController extends Controller
      */
     public function edit($id)
     {
-        $total_judges = Judges::get();
         $total_breeds = Breeds::get();
         $event = Events::find($id);
         $classes = Event_Result::select('class')->where('event_id', $id)->distinct()->get();
         
-        return view('event_results.edit', compact('event','classes','total_breeds','total_judges'));
+        return view('event_results.edit', compact('event','classes','total_breeds'));
     }
 
     /**
