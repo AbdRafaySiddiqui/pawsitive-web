@@ -12,7 +12,7 @@
       Edit Result Event
       </h6>
       <div class="element-box">
-        <form id="my-form" action="" method="post" enctype="multipart/form-data">
+        <form id="my-form">
         @csrf
           <h5 class="form-header">
           Edit Result Event
@@ -25,7 +25,7 @@
             <label class="col-form-label col-sm-2" for=""> Event Name</label>
             <div class="col-sm-2">
             <span>{{ $event->name }}</span>
-            <input type="hidden" id="event_id" value="{{ $event->id }}" class="form-control">
+            <input type="hidden" name="event_id" id="event_id" value="{{ $event->id }}" class="form-control">
             </div>
         </div>
         <div id="ed_event_frm">
@@ -89,6 +89,8 @@
               
           </div>
           </div>
+<div id="success-msg"> ff</div>
+
           <div class="table-responsive">
 
           <table class="table table-bordered table-lg table-v2 table-striped" id="class-results-table">
@@ -108,7 +110,9 @@
   <tbody>
   </tbody>
 </table>
-<button class="btn btn-primary" id="m_sub" type="submit"> Submit</button>
+<button class="btn btn-primary" id="up_sub" type="submit"> Submit</button>
+<button class="btn btn-primary" id="add" type="button"> Add Result</button>
+
 </form>
 
 
@@ -121,7 +125,6 @@
     </div>
   </div>
 </div>
-
 
             <!--           Modal -->
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -202,47 +205,17 @@
 
     <script type="text/javascript">
 
-var i =0;
-  
-  function fetchClassDogs() {
-  var selectedClass = $('#class').val();
-  $.ajax({
-    type: 'get',
-    url: '{{ route("class-dogs") }}',
-    data: { class: selectedClass },
-    success: function(data) {
-      console.log(data);
-      var tableBody = $('#class-results-table tbody');
-      tableBody.empty();
-      $.each(data.class, function(i, item) {
-        var row = $('<tr>');
-        row.append($('<td>', {text: i}));
-        row.append($('<td>', {text: item.breed_name}));
-        row.append($('<td>', {text: item.award_id}));
-        row.append($('<td>', {text: item.dog_name}));
-        row.append($('<td>', {text: item.grading}));
-        row.append($('<td>', {text: item.place}));
-        row.append($('<td>', {text: item.judge}));
-        var editButton = $('<button>', {text: 'Edit', class: 'btn btn-primary btn-sm'});
-        editButton.on('click', function() {
-          // Show modal to edit the record
-          $('#editModal').modal('show');
-          $('#editForm').attr('action', "{{ route('event_results.update', ':id') }}".replace(':id', item.id));
-          // Populate modal inputs with record data
-          $('#award').val(item.award_id);
-          $('#grading').val(item.grading);
-          $('#place').val(item.place);
-          // $('#judge').val(item.judge);
-        });
-        var selectId = 'all_dogsb_' + i; // Generate a unique ID for the select element
-  var judgeId = 'all_judgeb_' + i; // Generate a unique ID for the select element
-  var judge_span = 'judge_span_b' + i; // Generate a unique ID for the select element
-        var addButton = $('<button>', {text: 'Add', class: 'btn btn-primary btn-sm'});
-        addButton.on('click', function() {
+let j =0;
+$('#add').click(function() {
+          $('#up_sub').show();
+          var selectId = 'all_dogsb_' + j; // Generate a unique ID for the select element
+  var judgeId = 'all_judgeb_' + j; // Generate a unique ID for the select element
+  var judge_span = 'judge_span_b' + j; // Generate a unique ID for the select element
+  var breed_id = 'breed_ide_' + j; // Generate a unique ID for the select element
           $('#class-results-table').append(
 `<tr>
 <td>  </td>
-<td>  <select class="form-control select2" name="breed_id" id="breed_ide">
+<td>  <select class="form-control select2" name="breed_id" id="${breed_id}">
           <option>Select Breed</option>
                     <!-- <option> Select</option> -->
                     @foreach($total_breeds as $total_breed)
@@ -273,7 +246,7 @@ var i =0;
              <option  value="{{ $judge->getjudge->id }}">{{ $judge->getjudge->full_name }}</option>
             @endforeach  
 </select>
-         
+<span class="form-control" id="${judge_span}" name="judge[]"></span>
     
        
 </td>
@@ -290,7 +263,7 @@ var i =0;
 );
 
 $('#' + judgeId).select2();
-$('#breed_ide').select2();
+$('#'+breed_id).select2();
 
 $('#' + selectId).select2({
   allowClear: true,
@@ -303,9 +276,9 @@ $('#' + selectId).select2({
     minimumInputLength: 1,
     ajax: {
       url: function(){
-        var breed_id=$('#breed_ide :selected').val();
+        var breed_ide=$('#'+breed_id+' :selected').val();
         
-        return 'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_id;
+        return 'http://localhost/pawsitive-web/api/dog/breed-dogs?breed_id='+breed_ide;
       },
         dataType: 'json',
         delay: 250,
@@ -387,10 +360,47 @@ $('#' + selectId).select2({
              
              }     
     });
-i++;
+    j++;
         });
+  function fetchClassDogs() {
+    $('#add').show();
+
+    $('#success-msg').hide();
+  var selectedClass = $('#class').val();
+  $.ajax({
+    type: 'get',
+    url: '{{ route("class-dogs") }}',
+    data: { class: selectedClass },
+    success: function(data) {
+      console.log(data);
+      var tableBody = $('#class-results-table tbody');
+      tableBody.empty();
+      $.each(data.class, function(i, item) {
+        var row = $('<tr>');
+        row.append($('<td>', {text: i}));
+        row.append($('<td>', {text: item.breed_name}));
+        row.append($('<td>', {text: item.award_id}));
+        row.append($('<td>', {text: item.dog_name}));
+        row.append($('<td>', {text: item.grading}));
+        row.append($('<td>', {text: item.place}));
+        row.append($('<td>', {text: item.judge}));
+        var editButton = $('<button>', {text: 'Edit', class: 'btn btn-primary btn-sm'});
+        editButton.on('click', function() {
+          // Show modal to edit the record
+          $('#editModal').modal('show');
+          $('#editForm').attr('action', "{{ route('event_results.update', ':id') }}".replace(':id', item.id));
+          // Populate modal inputs with record data
+          $('#award').val(item.award_id);
+          $('#grading').val(item.grading);
+          $('#place').val(item.place);
+          // $('#judge').val(item.judge);
+        });
+
+    
+        // var addButton = $('<button>', {text: 'Add', class: 'btn btn-primary btn-sm',id:'add', type:'button'});
+        
         // row.append($('<td>').append());
-        row.append($('<td>').append(editButton).append(addButton));
+        row.append($('<td>').append(editButton));
         
         tableBody.append(row);
       });
@@ -412,13 +422,26 @@ $(this).parents('tr').remove();
 });
 
 $('#my-form').on('submit', function(e){
-
+console.log('submit');
 e.preventDefault();
 
 $.ajax({
   url: '{{ URL::to('api/edit-event_result')}}',
   method: 'POST',
   data: $(this).serialize(),
+  success: function(response){
+    // Handle successful form submission
+    
+    // console.log(response);
+// $('#class-results-table tbody').empty();
+fetchClassDogs();
+    $('#success-msg').show();
+    $('#success-msg').html('<p class="success">'+response.message+'</p>');
+    $('#up_sub').hide();
+  },
+  error: function(response,xhr, status, error){
+    
+  }
 });
 
 });

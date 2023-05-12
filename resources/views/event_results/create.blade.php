@@ -636,7 +636,7 @@ $('#exampleModal').on('shown.bs.modal', function () {
       url: function(){
         var breed_id=$('#breed_id :selected').val();
         
-        return 'http://localhost/pawsitive-web/api/dog/male-dogs';
+        return 'http://localhost/pawsitive-web/api/dog/male-dogs?breed_id='+breed_id;
       },
         dataType: 'json',
         delay: 250,
@@ -701,7 +701,7 @@ $('#selUser_fe').select2({
       url: function(){
         var breed_id=$('#breed_id :selected').val();
         
-        return 'http://localhost/pawsitive-web/api/dog/female-dogs';
+        return 'http://localhost/pawsitive-web/api/dog/female-dogs?breed_id='+breed_id;
       },
         dataType: 'json',
         delay: 250,

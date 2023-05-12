@@ -69,7 +69,7 @@ Route::get('dog/{id}/profile-details', [DogController::class, 'profile_details']
 Route::get('result-listing', [EventResultController::class, 'result']);
 Route::get('event/{id}/result', [EventResultController::class, 'event_result']);
 Route::get('event_results/judge', [EventResultController::class, 'judge'])->name('event_judge');
-Route::post('/edit-event_result', [EventResultController::class, 'edit_event_result']);
+Route::post('/edit-event_result', [EventResultController::class, 'edit_event_result']); // add event result in edit page
 
 //EventController routes
 Route::get('event-listing/{breed_id}', [App\Http\Controllers\API\EventController::class, 'retrieve']);//working fine.

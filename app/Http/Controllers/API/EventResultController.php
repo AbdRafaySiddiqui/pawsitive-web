@@ -248,10 +248,14 @@ class EventResultController extends Controller
             $event_result->event_id = $event_id;
             $event_result->breed_id = $breed_id;
             $event_result->class = $class;
-            $event_result->update();
+            $event_result->save();
         }
     
-        return redirect()->back()->with('message', 'Record added successfully');
+        return response()->json([
+          'success' => true,
+          'message' => 'Form submitted successfully',
+          'response' =>   $event_result
+      ]);
     }
 
 
