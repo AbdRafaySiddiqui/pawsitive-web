@@ -389,7 +389,7 @@ $('#' + selectId).select2({
              
              }     
     });
-
+i++;
         });
         // row.append($('<td>').append());
         row.append($('<td>').append(editButton).append(addButton));
