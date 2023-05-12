@@ -44,7 +44,7 @@ class EventController extends Controller
                 ->join('events', 'event_results.event_id', '=', 'events.id')
                 ->join('clubs', 'events.club_id', '=', 'clubs.id')
                 ->join('countries', 'events.country', '=', 'countries.idCountry')
-                ->join('judges', 'events.judge_id', '=', 'judges.id')
+                // ->join('judges', 'events.judge_id', '=', 'judges.id')
                 ->select('events.start_date',
                          'events.end_date',
                         'events.name AS event',
