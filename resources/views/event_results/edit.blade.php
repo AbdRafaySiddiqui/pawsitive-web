@@ -204,7 +204,17 @@
     <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
 
     <script type="text/javascript">
+@if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif 
 
+
+  
 let j =0;
 $('#add').click(function() {
           $('#up_sub').show();
@@ -214,7 +224,6 @@ $('#add').click(function() {
   var breed_id = 'breed_ide_' + j; // Generate a unique ID for the select element
           $('#class-results-table').append(
 `<tr>
-<td>  </td>
 <td>  <select class="form-control select2" name="breed_id" id="${breed_id}">
           <option>Select Breed</option>
                     <!-- <option> Select</option> -->

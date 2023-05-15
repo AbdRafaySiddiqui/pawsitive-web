@@ -74,11 +74,7 @@
                                     <div class="form-buttons-w mb-4">
                                         <button class="btn btn-primary" type="submit"> Submit</button>
                                     </div>
-                                    @if (session()->has('message'))
-                                        <div class="alert alert-success">
-                                            {{ session()->get('message') }}
-                                        </div>
-                                    @endif
+                                 
 
 
                                 </form>
@@ -97,6 +93,15 @@
     <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
 
     <script type="text/javascript">
+@if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif 
+
         $('#role_id').select2({
             allowClear: true,
             tags: true,

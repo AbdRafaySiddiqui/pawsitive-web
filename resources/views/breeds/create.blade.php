@@ -11,11 +11,7 @@
                             <h6 class="element-header">
                                 Breeds - Create
                             </h6>
-                            @if (session()->has('message'))
-                                        <div class="alert alert-success">
-                                            {{ session()->get('message') }}
-                                        </div>
-                                    @endif
+                 
                             <div class="element-box">
                                 <form action="{{ route('breeds.store') }}" method="post">
                                     @csrf
@@ -706,6 +702,24 @@
     <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
 
     <script type="text/javascript">
+        
+@if(Session::has('success'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('success') }}");
+  @endif
+@if(Session::has('danger'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.error("{{ session('danger') }}");
+  @endif
+
 $('#club_id').select2();
 $('#akc_group').select2();
 $('#fci_group').select2();

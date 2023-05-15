@@ -71,7 +71,7 @@ class EventsController extends Controller
         }
 
         
-        return redirect()->route('events.index')->with('message', 'Record added successfully');
+        return redirect()->back()->with('message', 'Record added successfully');
     }
 
     /**
@@ -128,7 +128,7 @@ class EventsController extends Controller
 	    $events->judge_id = $request->judge_id;
         $events->update();
  
-        return redirect()->route('events.index')->with('message', 'Record updated successfully');
+        return redirect()->back()->with('message', 'Record updated successfully');
     }
 
     /**

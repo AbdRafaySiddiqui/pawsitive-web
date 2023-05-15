@@ -200,7 +200,7 @@
             
 
            
-              <td> <button id="add" name="add" class="btn btn-primary" type="button">Add</button></td>
+              <td> <button id="add_result" name="add" class="btn btn-primary" type="button">Add</button></td>
             </tr>
             
           </tbody>
@@ -218,11 +218,7 @@
     </div>
   </div>
 </div>
-@if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
+
       <!--           Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -400,11 +396,6 @@
                   </div>
                 </div>
             </div>
-            <script>
-
-
-
-</script>
 
 <!-- <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
@@ -415,10 +406,20 @@
 
     <script type="text/javascript">
 
-      
+@if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif 
+
+
+  
   var i = 0; // Counter for generating unique IDs
 
-$('#add').click(function(){
+$('#add_result').click(function(){
   var selectId = 'all_dogsb_' + i; // Generate a unique ID for the select element
   var judgeId = 'all_judgeb_' + i; // Generate a unique ID for the select element
   var judge_span = 'judge_span_b' + i; // Generate a unique ID for the select element
@@ -470,7 +471,7 @@ $('#' + selectId).select2({
         return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
       }
     },
-    minimumInputLength: 3,
+    minimumInputLength: 1,
     ajax: {
       url: function(){
         var breed_id=$('#breed_ide :selected').val();
@@ -531,7 +532,7 @@ var id=$('#event_id :selected').val();
       // console.log(breed_id);
       $.ajax({
          type:'get',
-         url:'{{  url("api/dog/event_judge") }}',
+         url:'{{ route("event_judge") }}',
          data:{id:id},
          success:function(data)
          {
@@ -564,6 +565,7 @@ $('#'+judge_span).show();
  
  
 });
+i++; // Increment the counter for the next iteration
    
 });
 
@@ -653,7 +655,6 @@ $('#breed_ide').on('change', function() {
 //     $("#all_dogs > option").removeAttr("selected");
 // $("#all_dogs").trigger("change");
 
-i++; // Increment the counter for the next iteration
   
 });
 
@@ -843,8 +844,14 @@ $.ajax({
     text: response.response.dog_name
   }));
     $('.dog').val(response.response.id).trigger('change'); 
-    $('#success-msg').show();
-    $('#success-msg').html('<p class="success">'+response.message+'</p>');
+    // $('#success-msg').show();
+    // $('#success-msg').html('<p class="success">'+response.message+'</p>');
+    toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+    toastr.success(response.message);
   },
   error: function(response,xhr, status, error){
     

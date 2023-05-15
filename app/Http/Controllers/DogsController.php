@@ -132,7 +132,7 @@ class DogsController extends Controller
 	    $dog->dob = $request->dob;
 	    $dog->reg_no = $request->reg_no;
 	    $dog->microchip = $request->microchip;
-	    $dog->class = $request->class;
+	    // $dog->class = $request->class;
 	    $dog->gender = $request->gender;
 	    $dog->show_title = $request->show_title;
 	    $dog->achievements = $request->achievements;
@@ -154,32 +154,97 @@ class DogsController extends Controller
     
     public function storeMale(Request $request)
     {
+        if($request->hasFile('profile_photo')) {
+            $imageName = time().'.'.request()->profile_photo->getClientoriginalName();
+            request()->profile_photo->move(storage_path('app/public/dogs'), $imageName);
+        }
+        else {
+            $imageName = "";
+        }
+
         $dogs = new Dogs;
         $dogs->dog_name =  $request->dog_name;
         $dogs->dob =  $request->dob;
         $dogs->reg_no =  $request->reg_no;
+        $dogs->reg_with =  $request->reg_with;
+        $dogs->breeders =  $request->breeder;
+        $dogs->is_champion =  $request->is_champion;
+        $dogs->profile_photo =  $imageName;
+        $dogs->dog_owner =  $request->dog_owner;
         $dogs->microchip =  $request->microchip;
         $dogs->gender =  "Male";
-        $dogs->title =  $request->show_title;
+        // $dog->class = $request->class;
+        $dogs->show_title =  $request->show_title;
         $dogs->achievements =  $request->achievements;
-	
+        $dogs->breed_id = $request->breed_id;
+        $dogs->ref_id = (string) Str::uuid();
         $dogs->save();
-        return redirect()->back()->with('message', 'Record added successfully');
+
+        // $new_dog_id = $dogs->id;
+        $Dogowner = new DogOwner;
+        $Dogowner->owner_id = $request->dog_owner;
+        $Dogowner->dog_id = $dogs->id;
+        $Dogowner->type = 'Owner';
+        
+        $new_ref_id = $dogs->ref_id;
+        $parent = new DogsRealParent;
+        $parent->dog_id = $new_ref_id;
+        $parent->sire_id = $request->sire_id;
+        $parent->dam_id = $request->dam_id;
+        $parent->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Form submitted successfully',
+            'response' =>   $dogs
+        ]);
+    
     }
 
     public function storeFemale(Request $request)
     {
+        if($request->hasFile('profile_photo')) {
+            $imageName = time().'.'.request()->profile_photo->getClientoriginalName();
+            request()->profile_photo->move(storage_path('app/public/dogs'), $imageName);
+        }
+        else {
+            $imageName = "";
+        }
+
         $dogs = new Dogs;
-        $dogs->dog_name =  $request->fe_dog_name;
-        $dogs->dob =  $request->fe_dob;
-        $dogs->reg_no =  $request->fe_reg_no;
-        $dogs->microchip =  $request->fe_microchip;
+        $dogs->dog_name =  $request->dog_name;
+        $dogs->dob =  $request->dob;
+        $dogs->reg_no =  $request->reg_no;
+        $dogs->reg_with =  $request->reg_with;
+        $dogs->breeders =  $request->breeder;
+        $dogs->is_champion =  $request->is_champion;
+        $dogs->profile_photo =  $imageName;
+        $dogs->dog_owner =  $request->dog_owner;
+        $dogs->microchip =  $request->microchip;
         $dogs->gender =  "Female";
-        $dogs->title =  $request->fe_show_title;
-        $dogs->achievements =  $request->fe_achievements;
-	
+        // $dog->class = $request->class;
+        $dogs->show_title =  $request->show_title;
+        $dogs->achievements =  $request->achievements;
+        $dogs->breed_id = $request->breed_id;
+        $dogs->ref_id = (string) Str::uuid();
         $dogs->save();
-        return redirect()->back()->with('message', 'Record added successfully');
+
+        // $new_dog_id = $dogs->id;
+        $Dogowner = new DogOwner;
+        $Dogowner->owner_id = $request->dog_owner;
+        $Dogowner->dog_id = $dogs->id;
+        $Dogowner->type = 'Owner';
+        
+        $new_ref_id = $dogs->ref_id;
+        $parent = new DogsRealParent;
+        $parent->dog_id = $new_ref_id;
+        $parent->sire_id = $request->sire_id;
+        $parent->dam_id = $request->dam_id;
+        $parent->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Form submitted successfully',
+            'response' =>   $dogs
+        ]);
     }
 
     public function download()

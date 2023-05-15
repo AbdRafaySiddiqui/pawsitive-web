@@ -42,8 +42,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::put('/users/{id}/update', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{id}/delete', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
 
-    Route::resource('judges',App\Http\Controllers\JudgesController::class);
-    Route::put('/judges/{id}/update', [App\Http\Controllers\JudgesController::class, 'update'])->name('judges.update');
+    // Route::resource('judges',App\Http\Controllers\JudgesController::class);
+    // Route::put('/judges/{id}/update', [App\Http\Controllers\JudgesController::class, 'update'])->name('judges.update');
     Route::delete('/judges/{id}/delete', [App\Http\Controllers\JudgesController::class, 'destroy'])->name('judges.destroy');
     Route::get('/events/{eventId}/details', 'App\Http\Controllers\EventsController@details')->name('event_details');
     Route::get('/clubs/{clubId}', 'App\Http\Controllers\ClubsController@club_details')->name('club_details');

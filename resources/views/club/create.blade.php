@@ -97,11 +97,7 @@
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
           </div>
-          @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
+        
 </div>
 
         </form>
@@ -117,6 +113,16 @@
     </div>
 
     <script>
+
+@if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif
+
 
 // JavaScript
     $(document).ready(function() {

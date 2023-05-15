@@ -66,12 +66,7 @@
           <div class="form-buttons-w mb-4">
             <button class="btn btn-primary" type="submit"> Submit</button>
           </div>
-                  @if(session()->has('message'))
-                  <div class="alert alert-success">
-                      {{ session()->get('message') }}
-                  </div>
-              @endif
-
+                 
         </form>
       </div>
     </div>
@@ -90,3 +85,14 @@
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 @endsection
+<script>
+  
+@if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif
+</script>
