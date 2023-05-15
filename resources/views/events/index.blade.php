@@ -4,7 +4,7 @@
     <!--------------------
             END - Main Menu
             -------------------->
-    <div class="content-w">
+    <div class="content-w" style="width:100%">
         @if (session()->has('message'))
             <div class="alert alert-success">
                 {{ session()->get('message') }}

@@ -4,7 +4,7 @@
         <!--------------------
         END - Main Menu
         -------------------->
-        <div class="content-w">
+        <div class="content-w" style="width:100%">
 
           <div class="content-panel-toggler">
             <i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span>

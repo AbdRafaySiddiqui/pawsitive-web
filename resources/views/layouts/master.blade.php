@@ -695,31 +695,7 @@
                 </div>
               </div>
             </li>
-            <li class=" has-sub-menu">
-              <a href="{{route('species.index')}}">
-                <div class="icon-w">
-                  <div class="os-icon os-icon-layers"></div>
-                </div>
-                <span>Species</span></a>
-              <div class="sub-menu-w">
-                <div class="sub-menu-header">
-                Species
-                </div>
-                <div class="sub-menu-icon">
-                  <i class="os-icon os-icon-layers"></i>
-                </div>
-                <div class="sub-menu-i">
-                  <ul class="sub-menu">
-                    <li>
-                      <a href="{{route('species.create')}}">Add Species</a>
-                    </li>
-                    <li>
-                      <a href="{{route('species.index')}}">All Species</a>
-                    </li>     
-                  </ul>
-                </div>
-              </div>
-            </li>
+       
             <li class=" has-sub-menu">
               <a href="">
                 <div class="icon-w">

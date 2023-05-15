@@ -932,7 +932,7 @@ $('#event_id').on('change', function() {
     var event_id = $('#event_id').val();
     // Make AJAX request to fetch event details
     $.ajax({
-        url: '{{ url("api/event_details", ":event_id") }}'.replace(':event_id', event_id),
+        url: '{{ route("event_details", ":event_id") }}'.replace(':event_id', event_id),
         type: 'GET',
         dataType: 'json',
         success: function(response) {

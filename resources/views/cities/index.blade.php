@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-       
+<div class="content-w" style="width:100%">
           <div class="content-panel-toggler">
             <i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span>
           </div>
@@ -10,7 +10,7 @@
 <div class="element-wrapper">
   <div class="element-box-tp">
     <h5 class="form-header">
-     CLUB - LIST
+     CITIES - LIST
     </h5>
     <div class="form-desc">
     </div>
@@ -21,7 +21,9 @@
       <div class="controls-above-table">
         <div class="row">
           <div class="col-sm-6">
-            <a class="btn btn-sm btn-secondary" href="{{ route('download-club-csv') }}">Download CSV</a><a class="btn btn-sm btn-secondary" href="{{route('cities.create')}}">Add Club</a>
+            <!-- <a class="btn btn-sm btn-secondary" href="{{ route('download-club-csv') }}">Download CSV</a> -->
+            
+            <a class="btn btn-sm btn-secondary" href="{{route('cities.create')}}">Add City</a>
           </div>
         </div>
       </div>
