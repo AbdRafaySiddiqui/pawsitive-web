@@ -701,7 +701,6 @@
                 </div>
               </div>
             </li>
-       
             <li class=" has-sub-menu">
               <a href="">
                 <div class="icon-w">
