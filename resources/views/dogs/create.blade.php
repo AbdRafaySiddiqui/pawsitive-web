@@ -1298,7 +1298,7 @@ $('#reg_withf').select2({
   
 });
 $('#selUserf').select2({
-  dropdownParent: $("#exampleModal .modal-content"),
+  dropdownParent: $("#Modal2 .modal-content"),
   placeholder: 'Select a dog',
     // allowClear: true,
     // width: '100%',
@@ -1362,7 +1362,7 @@ $('#selUserf').select2({
   
 });
 $('#selUserf_fe').select2({
-  dropdownParent: $("#exampleModal .modal-content"),
+  dropdownParent: $("#Modal2 .modal-content"),
   placeholder: 'Select a dog',
     // allowClear: true,
     // width: '100%',
