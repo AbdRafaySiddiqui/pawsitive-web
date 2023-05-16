@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <meta content="Pawsitiv Website Admin Panel" name="keywords">
-    <meta content="Inspedium Corporation" name="author">
+    <meta content="Inspedium Corporation PVT LTD" name="author">
     <meta content="Pawsitiv Web Admin Panel" name="description">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="favicon.png" rel="shortcut icon">
