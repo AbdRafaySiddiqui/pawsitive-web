@@ -1,6 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
+
     <div class="all-wrapper menu-side with-pattern">
       <div class="auth-box-w">
         <div class="logo-w">
