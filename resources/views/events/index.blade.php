@@ -137,11 +137,12 @@
                             <!--------------------
           START - Controls below table
           ------------------  -->
-                            <div class="controls-below-table">
+          <div class="controls-below-table">
                                 <div class="table-records-info">
                                     Showing records 1 - 10
                                 </div>
                                 <div class="table-records-pages">
+                                    {{ $event->links() }}
                                 </div>
                             </div>
 
