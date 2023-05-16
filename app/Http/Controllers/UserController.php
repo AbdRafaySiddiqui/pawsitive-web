@@ -35,14 +35,14 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('users.index')->with('message', 'Record added successfully');
+        return redirect()->back()->with('message', 'Record added successfully');
     }
 
     public function edit($id)
     {
         $user = User::find($id);
         $roles = Roles::all();
-        return view('users.edit', compact('user','roles')); 
+        return view('users.edit', compact('user','roles'))->with('message', 'Record added updated'); 
     }
 
     public function update(Request $request, $id)

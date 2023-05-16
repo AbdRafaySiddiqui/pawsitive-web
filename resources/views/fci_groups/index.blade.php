@@ -83,4 +83,16 @@
     </div>
     <div class="display-type"></div>
     </div>
+    
+    <script  type="text/javascript">
+    @if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.error("{{ session('message') }}");
+  @endif 
+</script>
+
 @endsection

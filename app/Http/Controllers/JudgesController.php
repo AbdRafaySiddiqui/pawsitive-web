@@ -154,16 +154,16 @@ class JudgesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        $judge = Judges::where('id',$id)->get();
+        $judge = Judges::find($id);
         return view('judges/edit', compact('judge'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         if(!empty(request()->img)){
             $imageName = time().'.'.request()->img->getClientOriginalExtension();
@@ -246,8 +246,7 @@ if( $judge->facebook == null){
     $judge->facebook='https://www.facebook.com/';
 }
 
-        return redirect()->route('judges.index')
-            ->with('success','Judge Updated');
+        return redirect()->back()->with('success','Judge Updated');
     }
 
     /**

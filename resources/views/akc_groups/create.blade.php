@@ -11,11 +11,7 @@
                             <h6 class="element-header">
                                 AKC_Group - Create
                             </h6>
-                            @if (session()->has('message'))
-                                        <div class="alert alert-success">
-                                            {{ session()->get('message') }}
-                                        </div>
-                                    @endif
+                          
                             <div class="element-box">
                                 <form action="{{ route('akc_groups.store') }}" method="post">
                                     @csrf
@@ -47,4 +43,16 @@
     </div>
     <div class="display-type"></div>
     </div>
+
+    <script>
+
+@if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif 
+    </script>
 @endsection

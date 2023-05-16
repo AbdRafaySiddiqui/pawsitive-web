@@ -15,6 +15,7 @@ use App\Models\DogOwner;
 use App\Models\Events;
 use League\Csv\Writer;
 use App\Models\User;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Str;
 use DB;
 
@@ -25,6 +26,7 @@ class EventResultsController extends Controller
      */
     public function index()
     {
+        Paginator::useBootstrap();
         $event = Events::where('status','=','Active')->orderBy('id','DESC')->paginate('5');
        
         return view('event_results.index', compact('event'));

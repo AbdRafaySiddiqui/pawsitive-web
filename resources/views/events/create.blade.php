@@ -258,7 +258,16 @@
 
 
     <script type="text/javascript">
-        
+     @if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif 
+     
+
         $('#club_id').select2({
             allowClear: true,
             tags: true,
@@ -351,9 +360,15 @@ var data = new FormData(form);
                         text: response.response.full_name
                     }));
                     // $('#selUser').val(response.response.id).trigger('change');
-                    $('#selUser').val(response.response.id).trigger('change'); 
-                    $('#success-msg').show();
-                    $('#success-msg').html('<p class="success">' + response.message + '</p>');
+                    $('#selUser').val(response.response.id).trigger('change');
+                    toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+    toastr.success(response.message); 
+                    // $('#success-msg').show();
+                    // $('#success-msg').html('<p class="success">' + response.message + '</p>');
                 },
                 error: function(response, xhr, status, error) {
 

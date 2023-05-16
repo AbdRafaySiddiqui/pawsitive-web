@@ -12,10 +12,10 @@
       Edit Judge
       </h6>
       <div class="element-box">
-      <form action="{{ route('judges.update', $judge[0]->id) }}" method="post" enctype="multipart/form-data" >
+      <form action="{{ route('judges.update', $judge->id) }}" method="post" enctype="multipart/form-data" >
         @csrf
         @method('PUT')
-        <input type="hidden" id="idd" name="idd" value="{{$judge[0]->id}}"/>
+        <input type="hidden" id="idd" name="idd" value="{{$judge->id}}"/>
 
           <h5 class="form-header">
           Edit Judge
@@ -26,19 +26,19 @@
           <div class="form-group row">
               <label class="col-sm-4 col-form-label" for="">Full Name</label>
               <div class="col-sm-8">
-                <input id="full_name" class="form-control" name="full_name" value="{{$judge[0]->full_name}}" placeholder="Enter Full Name" type="text">
+                <input id="full_name" class="form-control" name="full_name" value="{{$judge->full_name}}" placeholder="Enter Full Name" type="text">
               </div>
             </div>
           <div class="form-group row">
               <label class="col-sm-4 col-form-label" for=""> Position In Club</label>
               <div class="col-sm-8">
-                <input   class="form-control" name="position_in_club" value="{{$judge[0]->position_in_club}}" id="position_in_club" placeholder="Enter Position In Club" type="text">
+                <input   class="form-control" name="position_in_club" value="{{$judge->position_in_club}}" id="position_in_club" placeholder="Enter Position In Club" type="text">
               </div>
             </div>
           <div class="form-group row">
               <label class="col-sm-4 col-form-label" for=""> Image</label>
               <div class="col-sm-8">
-              <img class="rounded img-thumbnail" id="preview" src="{{ URL::asset("storage/app/public/judge_imgs/{$judge[0]->image}") }}" alt="image not found" height="200" width="200" />
+              <img class="rounded img-thumbnail" id="preview" src="{{ URL::asset("storage/app/public/judge_imgs/{$judge->image}") }}" alt="image not found" height="200" width="200" />
               <input class="form-control" type="file" id="img" name="img" accept="image/png, image/jpeg">
                
               </div>
@@ -46,7 +46,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label" for=""> Signature</label>
               <div class="col-sm-8">
-              <img class="rounded img-thumbnail" src="{{ URL::asset("storage/app/public/judge_sigs/{$judge[0]->signature}") }}" alt="signature not found" height="200" width="200" />
+              <img class="rounded img-thumbnail" src="{{ URL::asset("storage/app/public/judge_sigs/{$judge->signature}") }}" alt="signature not found" height="200" width="200" />
                 <input class="form-control" type="file" id="sig" name="sig" accept="image/png, image/jpeg">
                                             </div>
                                         </div>
@@ -55,31 +55,31 @@
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Enter Description Below</label>
             <div class="col-sm-8">
-            <textarea class="form-control" cols="80" id="ckeditor1" name="description" rows="10">{{htmlspecialchars_decode($judge[0]->description)}}</textarea>
+            <textarea class="form-control" cols="80" id="ckeditor1" name="description" rows="10">{{htmlspecialchars_decode($judge->description)}}</textarea>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Facebook</label>
             <div class="col-sm-8">
-            <input id="facebook" class="form-control" name="facebook" value="{{$judge[0]->facebook}}" placeholder="Enter Facebook Url" type="text">
+            <input id="facebook" class="form-control" name="facebook" value="{{$judge->facebook}}" placeholder="Enter Facebook Url" type="text">
             </div>
           </div>
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Instagram</label>
             <div class="col-sm-8">
-            <input id="instagram" class="form-control" name="instagram" value="{{$judge[0]->instagram}}" placeholder="Enter Instagram Url" type="text">
+            <input id="instagram" class="form-control" name="instagram" value="{{$judge->instagram}}" placeholder="Enter Instagram Url" type="text">
             </div>
           </div>
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for="">LinkedIn</label>
             <div class="col-sm-8">
-            <input id="linkedIn" class="form-control" name="linkedIn" value="{{$judge[0]->linkedIn}}" placeholder="Enter LinkedIn Url" type="text">
+            <input id="linkedIn" class="form-control" name="linkedIn" value="{{$judge->linkedIn}}" placeholder="Enter LinkedIn Url" type="text">
             </div>
           </div>
             <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Twitter</label>
             <div class="col-sm-8">
-            <input id="twitter" class="form-control" name="twitter" value="{{$judge[0]->twitter}}" placeholder="Enter Twitter Url" type="text">
+            <input id="twitter" class="form-control" name="twitter" value="{{$judge->twitter}}" placeholder="Enter Twitter Url" type="text">
             </div>
           </div>
          
@@ -90,11 +90,7 @@
               <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
             </a>
           </div>
-          @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
+        
 
         </form>
       </div>
@@ -110,7 +106,14 @@
 
     <script>
     
-
+    @if(Session::has('success'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('success') }}");
+  @endif 
 
 
     
