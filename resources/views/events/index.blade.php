@@ -4,8 +4,17 @@
     <!--------------------
             END - Main Menu
             -------------------->
-    <div class="content-w">
-
+    <div class="content-w" style="width:100%">
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                {!! implode('', $errors->all('<div>:message</div>')) !!}
+            </div>
+        @endif
         <div class="content-panel-toggler">
             <i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span>
         </div>
@@ -76,14 +85,16 @@
                                             <th>
                                                 Action
                                             </th>
+
+
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         <?php
                                         $i = 1;
                                         ?>
-                                        @foreach ($events as $e)
+
+                                        @foreach ($event as $e)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
                                                 <td>
@@ -111,9 +122,11 @@
                                                     <td></td>
                                                 @endif
                                                 <td>
-                                                @if(isset($event->judge_id))
-                                                    {{ implode(', ', is_array($event->judge_id) ? $event->judge_id : [$event->judge_id]) }}
-                                                @endif
+                                                    @foreach ($e->judges as $judge)
+                                                        {{ $judge->getjudge->full_name }}@if (!$loop->last)
+                                                            ,
+                                                        @endif
+                                                    @endforeach
                                                 </td>
                                                 <td class="row-actions">
                                                     <a href="{{ route('events.edit', $e->id) }}"><i

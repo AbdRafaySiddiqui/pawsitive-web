@@ -33,7 +33,7 @@
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for=""> Select Club</label>
-                                                <select class="form-control select2" name="club_id" id="club_id">
+                                                <select class="form-control js-data-example-ajax" name="club_id" id="club_id">
                                                     <option></option>
                                                     @foreach ($total_clubs as $clubs)
                                                         <option value="{{ $clubs->id }}">
@@ -47,7 +47,7 @@
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label class="col-form-label" for="">Select Judge</label>
-                                          <select class="form-control" name="judge_id[]" id="selUser" multiple>
+                                          <select class="form-control js-data-example-ajax" name="judge_id[]" id="selUser" multiple>
                                               @foreach ($judges as $judge)
                                                   <option value="{{ $judge->id }}">
                                                       {{ $judge->full_name }}
@@ -104,7 +104,6 @@
                                         <button class="btn btn-secondary" type="reset"> Reset</button>
                                         <a action="back" href="javascript: window.history.back();" class="btn btn-danger">
                                             <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
-                                            
                                         </a>
                                     </div>
                                     
@@ -172,7 +171,30 @@
                                             <textarea class="form-control" cols="80" id="ckeditor1" name="description" rows="10"></textarea>
                                         </div>
                                     </div>
-
+                                    <div class="form-group row">
+            <label class="col-form-label col-sm-4" for=""> Facebook</label>
+            <div class="col-sm-8">
+            <input id="facebook" class="form-control" name="facebook" placeholder="Enter Facebook Url" type="text">
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for=""> Instagram</label>
+            <div class="col-sm-8">
+            <input id="instagram" class="form-control" name="instagram" placeholder="Enter Instagram Url" type="text">
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for="">LinkedIn</label>
+            <div class="col-sm-8">
+            <input id="linkedIn" class="form-control" name="linkedIn" placeholder="Enter LinkedIn Url" type="text">
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for=""> Twitter</label>
+            <div class="col-sm-8">
+            <input id="twitter" class="form-control" name="twitter" placeholder="Enter Twitter Url" type="text">
+            </div>
+          </div>
                                     <div id="success-msg"> </div>
                                     <div id="msg"> </div>
                                     <div class="form-buttons-w mb-4">
@@ -236,7 +258,16 @@
 
 
     <script type="text/javascript">
-        
+     @if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif 
+     
+
         $('#club_id').select2({
             allowClear: true,
             tags: true,
@@ -305,15 +336,22 @@
         $('#my-form').on('submit', function(e) {
 
             e.preventDefault();
+            var form = $('#my-form')[0];
 
+var data = new FormData(form);
             $.ajax({
                 url: '{{ URL::to('/submit-form') }}',
                 method: 'POST',
-                data: $(this).serialize(),
+                enctype: 'multipart/form-data',
+  data: data,
+  contentType: false,
+  processData: false,
+  cache: false,
                 success: function(response) {
                     // Handle successful form submission
 
-                    // console.log(response);
+                    console.log(response);
+                    console.log(response.message);
                     // console.log(response.response.full_name);
                     // console.log(response.response.message);
                     $('#selUser').append($('<option>', {
@@ -322,6 +360,14 @@
                         text: response.response.full_name
                     }));
                     // $('#selUser').val(response.response.id).trigger('change');
+                    $('#selUser').val(response.response.id).trigger('change');
+                    toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+    toastr.success(response.message); 
+                    // $('#success-msg').show();
                     // $('#success-msg').html('<p class="success">' + response.message + '</p>');
                 },
                 error: function(response, xhr, status, error) {
@@ -349,11 +395,22 @@
         });
 
         // clear modal 
-        $('#exampleModal').on('hidden.bs.modal', function() {
-            $('#my-form')[0].reset(); // reset the form
+        // $('#exampleModal').on('hidden', function() {
+        //     console.log('hide');
+        //     $('#my-form')[0].reset(); // reset the form
+        //     $('#success-msg').hide();
+        //     $('#msg').text(''); // clear the error message
+        // });
+        $('#m_sub').on('click', function() {
+            // $('#my-form')[0].reset(); 
             $('#msg').text(''); // clear the error message
         });
-        $('#m_sub').on('click', function() {
+        
+        // clear modal
+        $('.close').on('click', function() {
+            console.log('hide');
+            $('#my-form')[0].reset(); // reset the form
+            $('#success-msg').hide();
             $('#msg').text(''); // clear the error message
         });
     </script>

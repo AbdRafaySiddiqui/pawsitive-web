@@ -95,16 +95,8 @@
               <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
             </a>
           </div>
-          @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
-@if($errors->any())
-<div class="alert alert-danger">
-    {!! implode('', $errors->all('<div>:message</div>')) !!}
-    </div>
-@endif
+      
+
 
         </form>
       </div>
@@ -199,6 +191,16 @@
     <script src="{{asset('public/select2-develop/dist/js/select2.full.min.js')}}"></script>
     <script src="{{asset('public/select2-develop/dist/js/i18n/pt-BR.js')}}"></script>
 <script>
+  
+@if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif
+  
   $('#selUser').select2({
     // allowClear: true,
     // placeholder: 'Select an item',

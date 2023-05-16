@@ -117,22 +117,22 @@
               <i class="fa fa-times"> </i><span> &nbsp; Cancel</span>
             </a>
           </div>
-          @if(session()->has('success'))
-    <div class="alert alert-success">
-        {{ session()->get('success') }}
-    </div>
-@endif
-@if($errors->any())
-<div class="alert alert-danger">
-    {!! implode('', $errors->all('<div>:error</div>')) !!}
-    </div>
-@endif
+      
 
         </form>
       </div>
     </div>
   </div>
 </div>
-
+<script>
+    @if(Session::has('success'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('success') }}");
+  @endif 
+</script>
 
 @endsection

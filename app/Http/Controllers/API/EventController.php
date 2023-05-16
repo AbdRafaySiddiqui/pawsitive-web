@@ -28,7 +28,6 @@ class EventController extends Controller
                          'judges.full_name AS judge',
                          'events.id AS eventId')
                 ->where('event_results.breed_id', '=', $breed_id)
-                ->where('events.status', '=', 'Active')
                 ->orderBy('events.start_date', 'desc')
                 ->distinct('events.id')
                 ->get();

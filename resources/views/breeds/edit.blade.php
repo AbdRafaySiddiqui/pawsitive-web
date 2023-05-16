@@ -13,11 +13,7 @@
                             <h6 class="element-header">
                                 Breeds - Edit
                             </h6>
-                            @if (session()->has('message'))
-                                        <div class="alert alert-success">
-                                            {{ session()->get('message') }}
-                                        </div>
-                                    @endif
+ 
                             <div class="element-box">
                             <form action="{{ route('breeds.edit', $breed->id) }}" method="POST">
                                 @csrf
@@ -1029,6 +1025,26 @@
 
 
 <script type="text/javascript">
+
+
+@if(Session::has('success'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('success') }}");
+  @endif
+  
+@if(Session::has('danger'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.error("{{ session('danger') }}");
+  @endif
+
 if ($('#ckeditor1').length) {
 CKEDITOR.replace('ckeditor1');
 }

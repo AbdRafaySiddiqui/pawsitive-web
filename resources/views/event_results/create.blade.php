@@ -80,7 +80,7 @@
             <div class="col-sm-4">
             <div class="form-group">
           <label class="col-form-label" for="" >Select Breed </label>
-          <select class="form-control select2" onchange="dogs_by_judge(this)" name="breed_id" id="breed_ide">
+          <select class="form-control select2" name="breed_id" id="breed_ide">
           <option>Select Breed</option>
                     <!-- <option> Select</option> -->
                     @foreach($total_breeds as $total_breed)
@@ -153,13 +153,15 @@
               
               <td>
 
-              <!-- <div class="col-md-12"> -->
-              <select class="form-control select2 dog" name="dog_id[]" id="all_dogs" onchange="verify_if_dog(this)">
-                <option  value="0">
-               Select dog
+              <div class="col-md-12">
+              <select class="form-control select2 dog"  name="dog_id[]" id="all_dogs">
+           
+                <option  value="">
+               Select Dog
                 </option>
+        
               </select>
-              <!-- </div> -->
+              </div>
               </td>
               <td>
             
@@ -198,7 +200,7 @@
             
 
            
-              <td> <button id="add" name="add" class="btn btn-primary" type="button">Add</button></td>
+              <td> <button id="add_result" name="add" class="btn btn-primary" type="button">Add</button></td>
             </tr>
             
           </tbody>
@@ -216,11 +218,7 @@
     </div>
   </div>
 </div>
-@if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
+
       <!--           Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -237,104 +235,152 @@
                     <div class="modal-body">
                       <form id="my-form">
                           @csrf        
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for="">Dog Name</label>
-                              <div class="col-sm-8">
-                                <input id="dog_name" class="form-control" name="dog_name" placeholder="Enter Dog Name" type="text">
-                              </div>
-                          </div>
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> DOB</label>
-                              <div class="col-sm-8">
-                                <input   class="form-control" name="dob" id="dob" type="date">
-                              </div>
-                          </div>
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> Club Reg</label>
-                            <div class="col-sm-8">
-                              <input class="form-control" type="text" id="reg_no" name="reg_no">
-                            </div>
-                          </div>
+                            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Dog Name</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="dog_name" placeholder="Enter Dog Name" type="text">
+              </div>
+            </div>
 
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> Microchip</label>
-                            <div class="col-sm-8">
-                              <input class="form-control" type="text" id="microchip" name="microchip" >
-                            </div>
-                          </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Select Breed</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="breed_id" id="breed_id">
+              @foreach($total_breeds as $total_breed)
+                <option  value="{{$total_breed->id}}">
+               {{$total_breed->name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
 
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Breeder</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="breeder" placeholder="Enter Breeder" type="text">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Select Sire</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="sire_id" id="selUser">
+              @foreach($maleDogs as $maleDog)
+                <option  value="{{$maleDog->id}}">
+               {{$maleDog->dog_name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
 
-                          <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for=""> Title</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="text" id="title" name="show_title" >
-                            </div>
-                          </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Select Dam</label>
+              <div class="col-sm-8">
+              <select class="form-control js-data-example-ajax" name="dam_id" id="selUser_fe">
+              @foreach($femaleDogs as $femaleDog)
+                <option  value="{{$femaleDog->id}}">
+               {{$femaleDog->dog_name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
 
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">DOB</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="dob" placeholder="Enter DOB" type="date">
+              </div>
+            </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Club Reg #</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="reg_no" placeholder="Enter Club Reg #" type="text">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Registered With</label>
+              <div class="col-sm-8">
+              <select class="form-control select2" name="reg_with" id="reg_with">
+                <option value="">Select Registered With</option>
+              @foreach($total_clubs as $total_club)
+                <option  value="{{$total_club->id}}">
+               {{$total_club->name}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Dog Owner</label>
+              <div class="col-sm-8">
+              <select class="form-control select2" name="dog_owner" id="dog_owner">
+                <option value="">Select Dog Owner</option>
+              @foreach($total_owners as $total_owner)
+                <option  value="{{$total_owner->id}}">
+               {{$total_owner->username}}
+                </option>
+                @endforeach
+              </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Is Champion</label>
+              <div class="col-sm-8">
+              <select class="form-control" name="is_champion" id="is_champion">         
+              <option value="">Select</option>
+                <option  value="Yes">Yes   </option>
+                <option  value="No">No   </option>
+        
+              </select>
+              </div>
+            </div>
 
-                          <div class="form-group row">
-                              <label class="col-form-label col-sm-4" for=""> Achievements</label>
-                            <div class="col-sm-8">
-                              <textarea class="form-control" cols="80" id="achievements" name="achievements" rows="10"></textarea>
-                            </div>
-                          </div>
-                          
-                          <div class="form-group row">
-                        <label class="col-form-label col-sm-4" for="" > Gender</label>
-                        <div class="col-sm-8">
-                        <select class="form-control" name="gender">
-                        <option value="">
-                                Select One
-                              </option>
-                              <option value="Male">
-                                Male
-                              </option>
-                              <option value="Female">
-                              Female
-                              </option>
-                            </select>
-                          </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" for="">Select Breed</label>
-                            <div class="col-sm-8">
-                            <select class="form-control select2" name="breed_id" class="breed_id">
-                            <option></option>
-                            @foreach($total_breeds as $total_breed)
-                              <option  value="{{$total_breed->id}}">
-                            {{$total_breed->name}}
-                              </option>
-                              @endforeach
-                            </select>
-                            </div>
-                          </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Microchip</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="microchip" placeholder="Enter Microchip" type="text">
+              </div>
+            </div>
+       
+         
+            <div class="form-group row">
+          <label class="col-form-label col-sm-4" for="" > Gender</label>
+          <div class="col-sm-8">
+          <select class="form-control" name="gender">
+          <option value="">
+                  Select One
+                </option>
+                <option value="Male">
+                  Male
+                </option>
+                <option value="Female">
+                Female
+                </option>
+              </select>
+            </div>
+            </div>
+            <div class="form-group row">
+            <label class="col-form-label col-sm-4" for="">Show Title</label>
+            <div class="col-sm-8">
+              <input class="form-control" name="show_title" placeholder="Enter Show Title" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Achievements </label>
+              <div class="col-sm-8">
+                <textarea class="form-control" name="achievements" id="" cols="30" rows="10"></textarea>
+              </div>
+            </div>
 
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" for="">Select Sire</label>
-                            <div class="col-sm-8">
-                            <select class="form-control select2" name="sire_id" id="selUser"  >
-                            @foreach($maleDogs as $maleDog)
-                              <option  value="{{$maleDog->id}}">
-                            {{$maleDog->dog_name}}
-                              </option>
-                              @endforeach
-                            </select>
-                            </div>
-                          </div>
-
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label " for="">Select Dam</label>
-                            <div class="col-sm-8">
-                            <select class="form-control select2" name="dam_id" id="selUser_fe">
-                            @foreach($femaleDogs as $femaleDog)
-                              <option  value="{{$femaleDog->id}}">
-                            {{$femaleDog->dog_name}}
-                              </option>
-                              @endforeach
-                            </select>
-                            </div>
-                          </div>
-
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="">Profile Photo</label>
+              <div class="col-sm-8">
+                
+                <input class="form-control" id="profile_photo" name="profile_photo" placeholder="Enter Profile Photo" type="file">
+              </div>
+            </div>
                           <div id="success-msg"> </div>
                       <div id="msg"> </div>
                           <div class="form-buttons-w mb-4">
@@ -350,11 +396,6 @@
                   </div>
                 </div>
             </div>
-            <script>
-
-
-
-</script>
 
 <!-- <script src="{{asset('public/bower_components/jquery/dist/jquery.min.js')}}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
@@ -365,26 +406,32 @@
 
     <script type="text/javascript">
 
-      
-  let i = 0; // Counter for generating unique IDs
+@if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif 
 
-$('#add').click(function(){
+
   
+  var i = 0; // Counter for generating unique IDs
+
+$('#add_result').click(function(){
   var selectId = 'all_dogsb_' + i; // Generate a unique ID for the select element
   var judgeId = 'all_judgeb_' + i; // Generate a unique ID for the select element
   var judge_span = 'judge_span_b' + i; // Generate a unique ID for the select element
-
-  var breed_id=$('#breed_id :selected').val();
-  
 $('#table').append(
 `<tr>
 <td><select class="form-control select2 dg" name="dog_id[]" id="${selectId}">
            
-@foreach($dogs as $dog)
-              <option  value="{{$dog->id}}">
-             {{$dog->dog_name}}
+
+              <option  value="">
+            
               </option>
-              @endforeach
+           
               
             </select></td>
 <td>  <input class="form-control" name="grading[]" placeholder="Enter Grade" type="text"></td>
@@ -414,36 +461,64 @@ $('#table').append(
 
 $('#' + judgeId).select2();
 
-$('#' + selectId).select2();
+// $('#' + selectId).select2();
 
+$('#' + selectId).select2({
+  allowClear: true,
+    placeholder: 'Select a dog',
+    language: {
+      noResults: function (term) {
+        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+      }
+    },
+    minimumInputLength: 1,
+    ajax: {
+      url: function(){
+        var breed_id=$('#breed_ide :selected').val();
+        var  url='{{ URL::to('api/dog/breed-dogs?breed_id=') }}';
+        return url+breed_id;
+      },
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+            return {
+                q: params.term,
+                page: params.page || 1
+            };
+        },
+        processResults: function(data, params) {
+          console.log(data.dog.data);
+            params.page = params.page || 1;
+            return {
+                results: data.dog.data,
+                pagination: {
+                    more: (params.page * 30) < data.total_count
+                }
+            };
+        },
+        cache: true
+    },
+    escapeMarkup: function(markup) {
+        return markup;
+    },
+    templateResult: function(dog) {
+        if (dog.loading) {
+         
+           return  dog.text;
+         
+        }
+        var markup = "<option>" + dog.dog_name + "</option>";
+        return markup;
+    },
+    templateSelection: function(dog) {
+        return dog.dog_name || dog.text;
+    }
+});
 
   
   $('#' +selectId).empty().append('<option value="0">Select Dog</option>');
 
         
-//         return 'http://localhost/pawsitive-web/api/dog/breed-dogs?id='+id+'&gender='+gender;
-var breed_id=$('#breed_id :selected').val();
-        var gender=$('#gender_dog').val();
-        console.log(selectId);
-        $.ajax({
-           type:'get',
-           url:'{{ route("breed-dogs") }}' + '?breed_id=' + breed_id,
-           data:{id:breed_id},
-           success:function(data)
-           {
-              for(let i = 0; i < data.dog.length; i++)
-              {
-                
-                var x = document.getElementById(selectId);
-                var option = document.createElement("option");
-                option.text = data.dog[i].dog_name;
-                option.value = data.dog[i].dog_id;
-                x.add(option);
-                console.log(data);
-              }
-           }
-      
-      });
 
   
 
@@ -457,7 +532,7 @@ var id=$('#event_id :selected').val();
       // console.log(breed_id);
       $.ajax({
          type:'get',
-         url:'{{ route("event_judge") }}' + '?id=' + id,
+         url:'{{ route("event_judge") }}',
          data:{id:id},
          success:function(data)
          {
@@ -490,7 +565,7 @@ $('#'+judge_span).show();
  
  
 });
-   i++; // Increment the counter for the next iteration
+i++; // Increment the counter for the next iteration
    
 });
 
@@ -504,73 +579,259 @@ $('#'+judge_span).show();
 
 $('#breed_ide').on('change', function() {
   $('#event_tbl').show();
+  $('#all_dogs').empty().append('<option value="0">Select Dog</option>');
+ 
+  $('#all_dogs').select2({
+    placeholder: 'Select a dog',
+    // allowClear: true,
+    // width: '100%',
+
+    language: {
+      noResults: function (term) {
+        return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+      }
+    },
+ 
+    minimumInputLength: 1,
+    ajax: {
+      url: function(){
+        var breed_id=$('#breed_ide :selected').val();
+        var  url='{{ URL::to('api/dog/breed-dogs?breed_id=') }}';
+        return url+breed_id;
+      },
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+            return {
+                q: params.term,
+                page: params.page || 1
+            };
+        },
+        processResults: function(data, params) {
+          console.log(data.dog.data);
+          // debugger;
+    // $('#all_dogs').val(null).trigger('change');
+            params.page = params.page || 1;
+            return {
+                results: data.dog.data,
+                
+                pagination: {
+                    more: (params.page * 30) < data.total_count
+                }
+            };
+        },
+        cache: false
+    },
+    escapeMarkup: function(markup) {
+        return markup;
+    },
+    templateResult: function(dog) {
+        if (dog.loading) {
+         
+           return  dog.text;
+         
+        }
+        var markup = "<option value="+ dog.id +">" + dog.dog_name + "</option>";
+        return markup;
+        if(dog.dog_name){
+          $('#all_dogs').empty();
+        }
+  
+    },
+    templateSelection: function(dog) {
+        return dog.dog_name || dog.text;
+       
+    }
+});
+
+  }); 
+
+  $( document ).ready(function() {
+    $('#all_dogs').on('change', function() {
+      
+    var id =$('#all_dogs').val();
+    console.log( id );
+    });
+//     $("#all_dogs > option").removeAttr("selected");
+// $("#all_dogs").trigger("change");
+
   
 });
- 
 
-function dogs_by_judge(select) {
-  $('#all_dogs').empty().append('<option value="0">Select Dog</option>');
-
-  var breed_id=$('#breed_ide :selected').val();
-  var gender=$('#gender_dog').val();
-
-  $.ajax({
-    type: 'get',
-    url: '{{ route("breed-dogs") }}' + '?breed_id=' + breed_id,
-    data: {id: breed_id},
-    success: function(data) {
-      if(data.dog.length > 0) {
-        for(let i = 0; i < data.dog.length; i++) {
-          var x = document.getElementById('all_dogs');
-          var option = document.createElement("option");
-          option.text = data.dog[i].dog_name;
-          option.value = data.dog[i].dog_id;
-          x.add(option);
-        }
-
-        // create a new option for "Add a New dog"
-        var newDogOption = document.createElement('option');
-        newDogOption.text = 'Add a New dog';
-        newDogOption.value = 'new_dog';
-        x.add(newDogOption);
-
-      } else {
-        var x = document.getElementById('all_dogs');
-        // create a new option for "Add a New dog"
-        var newDogOption = document.createElement('option');
-        newDogOption.text = 'Add a New dog';
-        newDogOption.value = 'new_dog';
-        x.add(newDogOption);
-      }
-    }
-  });
-}
-
+      
 
 $(document).on('click','#remove',function(){
 $(this).parents('tr').remove();
 
 });
 
-
-$('#selUser').select2({
+$('#exampleModal').on('shown.bs.modal', function () {
+  $('#selUser').select2({
+  
   dropdownParent: $("#exampleModal .modal-content"),
-});
+  placeholder: 'Select a dog',
+    // allowClear: true,
+    // width: '100%',
 
+    // language: {
+    //   noResults: function (term) {
+    //     return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+    //   }
+    // },
+ 
+    // minimumInputLength: 1,
+    ajax: {
+      url: function(){
+        var breed_id=$('#breed_id :selected').val();
+        var  url='{{ URL::to('api/dog/male-dogs?breed_id=') }}';
+        return url+breed_id;
+      },
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+            return {
+                q: params.term,
+                page: params.page || 1
+            };
+        },
+        processResults: function(data, params) {
+          console.log(data.dog.data);
+          // debugger;
+    // $('#all_dogs').val(null).trigger('change');
+            params.page = params.page || 1;
+            return {
+                results: data.dog.data,
+                
+                pagination: {
+                    more: (params.page * 30) < data.total_count
+                }
+            };
+        },
+        cache: false
+    },
+    escapeMarkup: function(markup) {
+        return markup;
+    },
+    templateResult: function(dog) {
+        if (dog.loading) {
+         
+           return  dog.text;
+         
+        }
+        var markup = "<option value="+ dog.id +">" + dog.dog_name + "</option>";
+        return markup;
+        if(dog.dog_name){
+          $('#selUser').empty();
+        }
+  
+    },
+    templateSelection: function(dog) {
+        return dog.dog_name || dog.text;
+       
+    }
+  
+});
 
 $('#selUser_fe').select2({
-  dropdownParent: $("#exampleModal .modal-content")
+  dropdownParent: $("#exampleModal .modal-content"),
+  placeholder: 'Select a dog',
+    // allowClear: true,
+    // width: '100%',
+
+    // language: {
+    //   noResults: function (term) {
+    //     return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Dog</button>';
+    //   }
+    // },
+ 
+    minimumInputLength: 1,
+    ajax: {
+      url: function(){
+        var breed_id=$('#breed_id :selected').val();
+        var  url='{{ URL::to('api/dog/female-dogs?breed_id=') }}';
+        return url+breed_id;
+      },
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+            return {
+                q: params.term,
+                page: params.page || 1
+            };
+        },
+        processResults: function(data, params) {
+          console.log(data.dog.data);
+          // debugger;
+    // $('#all_dogs').val(null).trigger('change');
+            params.page = params.page || 1;
+            return {
+                results: data.dog.data,
+                
+                pagination: {
+                    more: (params.page * 30) < data.total_count
+                }
+            };
+        },
+        cache: false
+    },
+    escapeMarkup: function(markup) {
+        return markup;
+    },
+    templateResult: function(dog) {
+        if (dog.loading) {
+         
+           return  dog.text;
+         
+        }
+        var markup = "<option value="+ dog.id +">" + dog.dog_name + "</option>";
+        return markup;
+        if(dog.dog_name){
+          $('#selUser_fe').empty();
+        }
+  
+    },
+    templateSelection: function(dog) {
+        return dog.dog_name || dog.text;
+       
+    }
 });
+$('#breed_id').select2({
+  dropdownParent: $("#exampleModal .modal-content")
+  
+});
+$('#dog_owner').select2({
+  dropdownParent: $("#exampleModal .modal-content")
+  
+});
+$('#is_champion').select2({
+  dropdownParent: $("#exampleModal .modal-content")
+  
+});
+$('#reg_with').select2({
+  dropdownParent: $("#exampleModal .modal-content")
+  
+});
+
+});
+
 
 // modal submit 
 $('#my-form').on('submit', function(e){
 
 e.preventDefault();
 
+var form = $('#my-form')[0];
+
+var data = new FormData(form);
+
 $.ajax({
   url: '{{ URL::to('/event-dog')}}',
   method: 'POST',
-  data: $(this).serialize(),
+  enctype: 'multipart/form-data',
+  data: data,
+  contentType: false,
+  processData: false,
+  cache: false,
   success: function(response){
     // Handle successful form submission
     
@@ -583,15 +844,21 @@ $.ajax({
     text: response.response.dog_name
   }));
     $('.dog').val(response.response.id).trigger('change'); 
-    $('#success-msg').show();
-    $('#success-msg').html('<p class="success">'+response.message+'</p>');
+    // $('#success-msg').show();
+    // $('#success-msg').html('<p class="success">'+response.message+'</p>');
+    toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+    toastr.success(response.message);
   },
   error: function(response,xhr, status, error){
     
     // Handle errors
     var responJson=JSON.parse(response.responseText);
     var responseJson=responJson.errors;
- //   console.log(responJson.message);
+   console.log(responJson.message);
     //   $.map(responseJson, function(value) {
     $('#msg').append($('<p>',{
       text: responseJson.dog_name
@@ -702,7 +969,7 @@ var judge_id=$('#judge').text();
       // console.log(breed_id);
       $.ajax({
          type:'get',
-         url:'{{ route("event_judge") }}' + '?id=' + id,
+         url:'{{ route("event_judge") }}',
          data:{id:id},
          success:function(data)
          {
@@ -744,17 +1011,26 @@ var judge_id=$('#judge').text();
       });
  
 });
+// clear modal 
+$('#exampleModal').on('hidden.bs.modal', function () {
+  $('#my-form')[0].reset(); // reset the form
+  $('#msg').text(''); // clear the error message
+  $('#success-msg').hide();
 
-function verify_if_dog(select) {
-  if (select.value == 'new_dog') {
-    $('#exampleModal').modal('show');
-  }
-}
-
-// Bind the event listener to the select element
-$('#all_dogs').on('change', function() {
-  $('#exampleModal').removeData(); // Remove any existing data from the modal
 });
+$('#m_sub').on('click', function () {
+  // $('#my-form')[0].reset(); 
+  // $('#success-msg').empty();
+  $('#msg').text(''); // clear the error message
+});
+
+
+// function verify_if_dog(select) {
+//   if (select.value == 'new_dog') {
+//     $('#exampleModal').modal('show');
+//   }
+// }
+
 
 </script>
 

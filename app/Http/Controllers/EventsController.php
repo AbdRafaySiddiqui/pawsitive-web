@@ -22,17 +22,9 @@ class EventsController extends Controller
     public function index()
     {
         Paginator::useBootstrap();
-        $events = Events::with('cities_name', 'country_name', 'club_name')->where('status', 'Active')->orderBy('id', 'DESC')->paginate(10);
-
-        foreach ($events as $event) {
-            $event_judge = EventJudges::where('event_id', $event->id)->first();
-            if ($event_judge) {
-                $event->judge_id = $event_judge->judge_id;
-            }
-        }
-
-        return view('events.index', compact('events'));
-
+        $event = Events::where('status', 'Active')->orderBy('id','DESC')->paginate('10');
+       
+        return view('events.index', compact('event'));
     }
 
     /**
@@ -79,8 +71,7 @@ class EventsController extends Controller
         }
 
         
-        return redirect()->route('events.index')->with('message', 'Record added successfully');
-
+        return redirect()->back()->with('message', 'Record added successfully');
     }
 
     /**
@@ -97,11 +88,17 @@ class EventsController extends Controller
     public function edit(string $id)
     {
         $events = Events::find($id);
+        // $event_judges = EventJudges::find($id);
+        $event_judges = EventJudges::select('event_judges.event_id','event_judges.judge_id as judge_id','judges.full_name as full_name','judges.id as judgeid')
+                        ->leftjoin('judges','judges.id','=','event_judges.judge_id')
+                        ->where('event_judges.event_id','=',$id)
+                        ->get();
+
         $total_clubs = Clubs::get();
         $total_countries = Countries::get();
         $total_cities = Cities::get();
         $judges = Judges::get();
-        return view('events.edit', compact('events','total_countries','total_cities','total_clubs','judges'));
+        return view('events.edit', compact('events','total_countries','total_cities','total_clubs','judges','event_judges'));
     }
 
     /**
@@ -141,7 +138,7 @@ class EventsController extends Controller
     {
         //
         Events::where('id',$id)->update(array('status' => 'Inactive'));
-        return redirect()->back()->with('message', 'Record Permenantly Deleted!');
+        return redirect()->route('events.index')->with('message', 'Record Permenantly Deleted!');
     }
 
 
@@ -156,27 +153,107 @@ public function submitForm(Request $request)
    
     ]); 
 
-    if($request->hasFile('img') && $request->hasFile('sig') ) {
-        $imageName = time().'.'.request()->img->getClientoriginalName();
-        request()->img->move(public_path('judge_images'), $imageName);
-        
-        $imagesig = time().'.'.request()->sig->getClientoriginalName();
-        request()->sig->move(public_path('judge_signatures'), $imagesig);
+    if(!empty(request()->img)){
+        $imageName = time().'.'.request()->img->getClientOriginalExtension();
+            request()->img->move(storage_path('app/public/judge_imgs'), $imageName);
     }
-    else {
-        $imageName = "";
-        $imagesig = "";
+
+    if(!empty(request()->sig)){
+            $imagesig = time().'.'.request()->sig->getClientOriginalExtension();
+            request()->sig->move(storage_path('app/public/judge_sigs'), $imagesig);
     }
-    
+
+    if(!empty($imageName) && !empty($imagesig)){
+
     $create =  new Judges;
     $create->full_name = $request->full_name;
     $create->position_in_club = $request->position_in_club;
+    $create->facebook = $request->facebook;
+    $create->instagram = $request->instagram;
+    $create->linkedIn = $request->linkedIn;
+    $create->twitter = $request->twitter;
     $create->description = htmlentities($request->description);
     $create->image = $imageName;
     $create->signature = $imagesig;
     $link = str_replace(" ", "-", $request->full_name);
     $create->url_link = $link; 
     $create->save();
+
+        }elseif(!empty($imageName) && empty($imagesig)){
+
+            $create =  new Judges;
+    $create->full_name = $request->full_name;
+    $create->position_in_club = $request->position_in_club;
+    $create->facebook = $request->facebook;
+    $create->instagram = $request->instagram;
+    $create->linkedIn = $request->linkedIn;
+    $create->twitter = $request->twitter;
+    $create->description = htmlentities($request->description);
+    $create->image = $imageName;
+    $link = str_replace(" ", "-", $request->full_name);
+    $create->url_link = $link; 
+    $create->save();
+
+        }elseif(empty($imageName) && !empty($imagesig)){
+
+            $create =  new Judges;
+            $create->full_name = $request->full_name;
+            $create->position_in_club = $request->position_in_club;
+            $create->facebook = $request->facebook;
+            $create->instagram = $request->instagram;
+            $create->linkedIn = $request->linkedIn;
+            $create->twitter = $request->twitter;
+            $create->description = htmlentities($request->description);
+            $create->signature = $imagesig;
+            $link = str_replace(" ", "-", $request->full_name);
+            $create->url_link = $link; 
+            $create->save();
+
+        }elseif(!empty($imageName)){
+
+            $create =  new Judges;
+    $create->full_name = $request->full_name;
+    $create->position_in_club = $request->position_in_club;
+    $create->facebook = $request->facebook;
+    $create->instagram = $request->instagram;
+    $create->linkedIn = $request->linkedIn;
+    $create->twitter = $request->twitter;
+    $create->description = htmlentities($request->description);
+    $create->image = $imageName;
+    $link = str_replace(" ", "-", $request->full_name);
+    $create->url_link = $link; 
+    $create->save();
+
+        }elseif(!empty($imagesig)){
+
+            $create =  new Judges;
+    $create->full_name = $request->full_name;
+    $create->position_in_club = $request->position_in_club;
+    $create->facebook = $request->facebook;
+    $create->instagram = $request->instagram;
+    $create->linkedIn = $request->linkedIn;
+    $create->twitter = $request->twitter;
+    $create->description = htmlentities($request->description);
+    $create->signature = $imagesig;
+    $link = str_replace(" ", "-", $request->full_name);
+    $create->url_link = $link; 
+    $create->save();
+
+        }else{
+
+            $create =  new Judges;
+    $create->full_name = $request->full_name;
+    $create->position_in_club = $request->position_in_club;
+    $create->facebook = $request->facebook;
+    $create->instagram = $request->instagram;
+    $create->linkedIn = $request->linkedIn;
+    $create->twitter = $request->twitter;
+    $create->description = htmlentities($request->description);
+    $link = str_replace(" ", "-", $request->full_name);
+    $create->url_link = $link; 
+    $create->save();
+
+        }
 
     return response()->json([
         'success' => true,
