@@ -355,7 +355,7 @@
                   {{ Auth::user()->name }}
                 </div>
                 <div class="logged-user-role">
-                  Administrator
+                  {{ Auth::user()->user_role->name }}
                 </div>
               </div>
             </div>
@@ -363,25 +363,82 @@
             START - Mobile Menu List
             -------------------->
             <ul class="main-menu">
-              <li class="has-sub-menu">
+              <li class="selected">
                 <a href="{{ route('dashboard') }}">
                   <div class="icon-w">
                     <div class="os-icon os-icon-layout"></div>
                   </div>
                   <span>Dashboard</span></a>
               </li>
-              <li class="has-sub-menu">
-                <a href="#">
+              <li class="selected">
+                <a href="{{route('club.index')}}">
                   <div class="icon-w">
                     <div class="os-icon os-icon-layers"></div>
                   </div>
                   <span>Club</span></a>
-                <ul class="sub-menu">
-                  <li>
-                    <a href="{{route('club.create')}}">Add Club</a>
-                  </li>
-                  
-                </ul>
+              </li>
+              <li class="selected">
+                <a href="{{route('judges.index')}}">
+                  <div class="icon-w">
+                    <div class="os-icon os-icon-layers"></div>
+                  </div>
+                  <span>Judges</span></a>
+              </li>
+              <li class="selected">
+                <a href="{{route('breeds.index')}}">
+                  <div class="icon-w">
+                    <div class="os-icon os-icon-layers"></div>
+                  </div>
+                  <span>Breeds</span></a>
+              </li>
+              <li class=" selected">
+                <a href="{{route('dogs.index')}}">
+                  <div class="icon-w">
+                    <div class="os-icon os-icon-layers"></div>
+                  </div>
+                  <span>Dogs</span></a>
+              </li>
+              <li class=" selected">
+                <a href="{{route('events.index')}}">
+                  <div class="icon-w">
+                    <div class="os-icon os-icon-layers"></div>
+                  </div>
+                  <span>Events</span></a>
+              </li>
+              <li class=" selected">
+                <a href="{{route('event_results.index')}}">
+                  <div class="icon-w">
+                    <div class="os-icon os-icon-layers"></div>
+                  </div>
+                  <span>Event Result</span></a>
+              </li>
+              <li class=" selected">
+                <a href="{{route('users.index')}}">
+                  <div class="icon-w">
+                    <div class="os-icon os-icon-layers"></div>
+                  </div>
+                  <span>Users</span></a>
+              </li>
+              <li class=" selected">
+                <a href="{{route('akc_groups.index')}}">
+                  <div class="icon-w">
+                    <div class="os-icon os-icon-layers"></div>
+                  </div>
+                  <span>AKC Groups</span></a>
+              </li>
+              <li class="selected">
+                <a href="{{route('fci_groups.index')}}">
+                  <div class="icon-w">
+                    <div class="os-icon os-icon-layers"></div>
+                  </div>
+                  <span>FCI Groups</span></a>
+              </li>
+              <li class="selected">
+                <a href="{{route('cities.index')}}">
+                  <div class="icon-w">
+                    <div class="os-icon os-icon-layers"></div>
+                  </div>
+                  <span>Cities</span></a>
               </li>
             </ul>
             <!--------------------
@@ -406,7 +463,7 @@
                   {{ Auth::user()->name }}
                 </div>
                 <div class="logged-user-role">
-                  Administrator
+                  {{ Auth::user()->user_role->name }}
                 </div>
               </div>
               <div class="logged-user-toggler-arrow">
@@ -422,7 +479,7 @@
                       {{ Auth::user()->name }}
                     </div>
                     <div class="logged-user-role">
-                      Administrator
+                      {{ Auth::user()->user_role->name }}
                     </div>
                   </div>
                 </div>
