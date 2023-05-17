@@ -105,6 +105,9 @@ class RolesController extends Controller
     {
         $role = Role::find($id);
 
+        $role->name = $request->name;
+        $role->update();
+
         $role->syncPermissions($request->input('permission_id'));
 
         if($role){
