@@ -758,39 +758,6 @@
                 </div>
               </div>
             </li>
-            <li class=" has-sub-menu">
-              <a href="">
-                <div class="icon-w">
-                  <div class="os-icon os-icon-layers"></div>
-                </div>
-                <span>Logged in as:</span></a>
-              <div class="sub-menu-w">
-                <div class="sub-menu-header">
-                Logged in as:
-                </div>
-                <div class="sub-menu-icon">
-                  <i class="os-icon os-icon-layers"></i>
-                </div>
-                <div class="sub-menu-i">
-                  <ul class="sub-menu">
-                    <li>
-                      <!-- check if the user have logged in as admin  -->
-                    @if(Auth::check() && Auth::user()->role_id == '1')
-                      <a href="">Admin</a>
-                      @endif
-                      <!-- check in if the user have logged in as writer  -->
-                      @if(Auth::check() && Auth::user()->role_id == '2')
-                      <a href="">Writer</a>
-                      @endif
-                      <!-- check if the user have logged in as user  -->
-                      @if(Auth::check() && Auth::user()->role_id == '3')
-                      <a href="">User</a>
-                      @endif
-                    </li>                   
-                  </ul>
-                </div>
-              </div>
-            </li>
           </ul>
         </div>
         <!--------------------

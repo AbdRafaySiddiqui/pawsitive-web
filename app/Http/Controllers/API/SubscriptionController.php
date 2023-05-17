@@ -10,12 +10,14 @@ class SubscriptionController extends Controller
 {
     function add(Request $req)
     {
+        $array = json_decode($req->getContent());
+
         $subscription = new Subscriptions;
-        $subscription->name=$req->name;
-        $subscription->email=$req->email;
-        $subscription->breed=$req->breed;
-        $result=$subscription->save();
-        if($result)
+        $subscription->name = $array->name;
+        $subscription->email = $array->email;
+        $subscription->breed = $array->breed;
+
+        if($subscription->save())
         {
             return response()->json(["Result" => "Inserted Successfully."], 200);
         }
