@@ -44,6 +44,7 @@ Route::post('add-subscription', [App\Http\Controllers\API\SubscriptionController
 
 //contact
 Route::post('contact', [App\Http\Controllers\API\ContactController::class, 'add']);
+Route::post('club-contact', [App\Http\Controllers\API\ContactController::class, 'contact']);
 
 // Judges Controller.
 Route::get('judge-listings', [App\Http\Controllers\API\JudgeController::class, 'listing']);//working on live.

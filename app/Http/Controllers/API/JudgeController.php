@@ -29,43 +29,61 @@ class JudgeController extends Controller
 
     public function details($id)
     {
-        $judge = Judges::select('id','full_name','position_in_club','description','image','signature','facebook','instagram','linkedIn','twitter')->find($id);
+        $judge = Judges::select('id',
+                                'full_name',
+                                'position_in_club',
+                                'description','image',
+                                'signature',
+                                'facebook',
+                                'instagram','
+                                linkedIn',
+                                'twitter')
+                        ->find($id);
 
-        $judge->description = html_entity_decode($judge->description);
-
-        if($judge->image != null)
+        if($judge)
         {
-            if(file_exists(storage_path('/app/public/judge_imgs/'.$judge->image)))
+
+            $judge->description = html_entity_decode($judge->description);
+
+            if($judge->image != null)
+            {
+                if(file_exists(storage_path('/app/public/judge_imgs/'.$judge->image)))
+                    {
+                        $judge->profilePhoto = asset('storage/app/public/judge_imgs'.'/'.$judge->image);
+                    }
+                    else
+                    {
+                        $judge->profilePhoto = asset('storage/app/public/noimage.png');
+                    }
+            }
+            else
+            {
+                $judge->image = asset('storage/app/public/noimage.png');
+            }
+
+            if($judge->signature != null)
+            {
+                if(file_exists(storage_path('app/public/judge_signatures/'.$judge->signature)))
                 {
-                    $judge->profilePhoto = asset('storage/app/public/judge_imgs'.'/'.$judge->image);
+                    $judge->signature = asset('storage/app/public/judge_signatures').'/'.$judge->signature;
                 }
                 else
                 {
-                    $judge->profilePhoto = asset('storage/app/public/noimage.png');
+                    $judge->signature = null;
                 }
-        }
-        else
-        {
-            $judge->image = asset('storage/app/public/noimage.png');
-        }
-
-        if($judge->signature != null)
-        {
-            if(file_exists(storage_path('app/public/judge_signatures/'.$judge->signature)))
-            {
-                $judge->signature = asset('storage/app/public/judge_signatures').'/'.$judge->signature;
             }
             else
             {
                 $judge->signature = null;
             }
+
+            return response()->json(['judge' => $judge], 200);
+
         }
         else
         {
-            $judge->signature = null;
+            return response()->json(['judge' => []], 404);
         }
-
-        return response()->json(['judge' => $judge], 200);
     }
 
     public function judge_details($judgeId)
