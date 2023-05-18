@@ -89,9 +89,7 @@ a[x-apple-data-detectors] {
                       <td class="es-m-txt-l" align="left" style="padding:0;Margin:0;padding-top:5px;padding-bottom:10px"><h3 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#333333">Dear {{ $mailData['title'] }},</h3></td>
                      </tr>
                      <tr>
-                      <td align="left" style="padding:0;Margin:0;padding-top:5px;padding-bottom:10px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">Thank you for reaching out to us through our "Contact Us" form.<br>We appreciate your interest in our company and your time to connect with us.<br>
-At Pawsitiv.Dog, we strive to provide the highest level of customer service and are committed to resolving any concerns or questions you may have.<br> If you require further assistance or have any follow-up questions, please don't hesitate to reach out to us again.<br>
-Thank you for your patience and understanding.<br> We value your feedback and look forward to serving you.</p>
+                      <td align="left" style="padding:0;Margin:0;padding-top:5px;padding-bottom:10px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">{{ $mailData['body'] }}</p>
                        <ul>
                        </ul><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px"><br><br>Sincerely,<br>Team PAWSITIV.DOG.<br><br></p></td>
                      </tr>

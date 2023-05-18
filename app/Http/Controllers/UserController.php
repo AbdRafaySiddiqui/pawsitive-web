@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Roles;
+use App\Models\ModelHasRoles;
 use Hash;
 
 class UserController extends Controller
@@ -32,10 +33,24 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
 
         $user->role_id = $request->role_id;
+        $save1 = $user->save();
 
-        $user->save();
+        $lastInsertedId = $user->id;
+        $model = new ModelHasRoles;
+        $model->role_id = $request->role_id;
+        $model->model_type = 'App\Models\User';
+        $model->model_id = $lastInsertedId;
 
-        return redirect()->back()->with('message', 'Record added successfully');
+        $save2 = $model->save();
+        
+        if($save1 && $save2)
+        {
+            return redirect()->back()->with('message', 'Record added successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('message', 'Some error occured');
+        }
     }
 
     public function edit($id)

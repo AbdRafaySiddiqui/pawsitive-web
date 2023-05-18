@@ -378,9 +378,10 @@
                   <span>Club</span></a>
                 <ul class="sub-menu">
                   <li>
+                  @if (auth()->user()->hasPermissionTo('club-create'))
                     <a href="{{route('club.create')}}">Add Club</a>
+                    @endif
                   </li>
-                  
                 </ul>
               </li>
             </ul>
