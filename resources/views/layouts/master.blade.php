@@ -406,7 +406,7 @@
                   {{ Auth::user()->name }}
                 </div>
                 <div class="logged-user-role">
-                  Administrator
+                {{ Auth::user()->role_id }}
                 </div>
               </div>
               <div class="logged-user-toggler-arrow">
@@ -426,13 +426,6 @@
                     </div>
                   </div>
                 </div>
-
-                @php
-
-                $accesses = DB::select(DB::RAW("select role_id 
-                FROM users WHERE role_id = Auth::user()->role_id"))
-
-                @endphp
                 <div class="bg-icon">
                   <i class="os-icon os-icon-wallet-loaded"></i>
                 </div>
