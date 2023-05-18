@@ -406,7 +406,7 @@
                   {{ Auth::user()->name }}
                 </div>
                 <div class="logged-user-role">
-                  Administrator
+                {{ Auth::user()->role_id }}
                 </div>
               </div>
               <div class="logged-user-toggler-arrow">
@@ -431,7 +431,7 @@
                 </div>
                 <ul>
                   <li>
-                    <a href="users_profile_big.html"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a>
+                    <a href="{{route('users.edit',Auth::user()->id)}}"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a>
                   </li>
                   <li>
                     <form method="POST" action="{{ route('logout') }}" class="inline">
@@ -459,6 +459,9 @@
                 </div>
                 <span>Dashboard</span></a>
             </li>
+            @if(Auth::check() && Auth::user()->role_id == '1')
+                      <a href="">Admin</a>
+                      @endif
             <li class=" has-sub-menu">
               <a href="{{route('club.index')}}">
                 <div class="icon-w">

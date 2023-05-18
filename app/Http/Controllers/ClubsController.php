@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 
 class ClubsController extends Controller
 {
+
+    // function __construct()
+    // {
+    //     $this->middleware('permission:club-list');
+    //     $this->middleware('permission:club-create', ['only' => ['create','store']]);
+    //     $this->middleware('permission:club-edit', ['only' => ['edit','update']]);
+    //     $this->middleware('permission:club-delete', ['only' => ['destroy']]);
+    // }
     /**
      * Display a listing of the resource.
      */
