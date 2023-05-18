@@ -35,8 +35,8 @@ class JudgeController extends Controller
                                 'description','image',
                                 'signature',
                                 'facebook',
-                                'instagram','
-                                linkedIn',
+                                'instagram',
+                                'linkedIn',
                                 'twitter')
                         ->find($id);
 
