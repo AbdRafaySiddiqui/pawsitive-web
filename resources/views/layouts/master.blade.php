@@ -426,12 +426,19 @@
                     </div>
                   </div>
                 </div>
+
+                @php
+
+                $accesses = DB::select(DB::RAW("select role_id 
+                FROM users WHERE role_id = Auth::user()->role_id"))
+
+                @endphp
                 <div class="bg-icon">
                   <i class="os-icon os-icon-wallet-loaded"></i>
                 </div>
                 <ul>
                   <li>
-                    <a href="users_profile_big.html"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a>
+                    <a href="{{route('users.edit',Auth::user()->id)}}"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a>
                   </li>
                   <li>
                     <form method="POST" action="{{ route('logout') }}" class="inline">
@@ -459,6 +466,9 @@
                 </div>
                 <span>Dashboard</span></a>
             </li>
+            @if(Auth::check() && Auth::user()->role_id == '1')
+                      <a href="">Admin</a>
+                      @endif
             <li class=" has-sub-menu">
               <a href="{{route('club.index')}}">
                 <div class="icon-w">

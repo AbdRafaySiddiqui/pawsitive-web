@@ -54,24 +54,7 @@
                                             <input class="form-control" name="password" placeholder="Enter Password" type="password">
                                          </div>
                                         </div>
-                                    
-
-
-                                    <div class="col-sm-6">
-                                          <div class="form-group">
-                                              <label class="col-form-label" for=""> Role</label>
-                                              <select class="form-control" name="role_id" id="role_id">
-                                              @foreach ($roles as $role)
-                                                @if($role->id == $user->role_id)
-                                                  <option selected value="{{ $role->id }}">{{ $role->name }}</option>
-                                                @else
-                                                  <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                                @endif
-                                              @endforeach
-                                              </select>
-                                          </div>
-                                        </div>
-                                        </div>
+                                    </div>    
 
                                     <div class="form-buttons-w mb-4">
                                         <button class="btn btn-primary" type="submit"> Submit</button>
