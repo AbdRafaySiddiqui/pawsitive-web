@@ -20,7 +20,6 @@ class ClubController extends Controller
                               'clubs.email as clubs_email',
                               'clubs.affiliation as clubs_affiliation',
                               'countries.countryName as country_of_origin',
-                             
                               'image as logo')
         ->leftjoin('countries','countries.idCountry','=','clubs.country')
         ->leftjoin('cities','cities.id','=','clubs.city')
@@ -33,9 +32,9 @@ class ClubController extends Controller
 
           if($clubs->logo != null)
           {
-            if(file_exists(storage_path('/app/public/club_images'.'/'.$clubs->image)))
+            if(file_exists(storage_path('/app/public/club_images/'.$clubs->logo)))
             {
-              $clubs->logo = asset('storage/app/public/club_images').'/'.$clubs->image;
+              $clubs->logo = asset('storage/app/public/club_images').'/'.$clubs->logo;
             }
             else
             {
@@ -72,9 +71,9 @@ class ClubController extends Controller
             
             if($club->logo != null)
             {
-              if(file_exists(storage_path().'/app/public/club_images'.'/'.$club->image))
+              if(file_exists(storage_path('app/public/club_images/'.$club->logo)))
               {
-                $club->logo = asset('storage/app/public/club_images').'/'.$club->image;
+                $club->logo = asset('storage/app/public/club_images').'/'.$club->logo;
               }
               else
               {

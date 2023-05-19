@@ -49,7 +49,7 @@ class JudgeController extends Controller
             {
                 if(file_exists(storage_path('/app/public/judge_imgs/'.$judge->image)))
                     {
-                        $judge->profilePhoto = asset('storage/app/public/judge_imgs'.'/'.$judge->image);
+                        $judge->profilePhoto = asset('storage/app/public/judge_imgs').'/'.$judge->image;
                     }
                     else
                     {
@@ -58,7 +58,7 @@ class JudgeController extends Controller
             }
             else
             {
-                $judge->image = asset('storage/app/public/noimage.png');
+                $judge->profilePhoto = asset('storage/app/public/noimage.png');
             }
 
             if($judge->signature != null)
