@@ -183,69 +183,13 @@
                     <div class="os-icon os-icon-layers"></div>
                   </div>
                   <span>Club</span></a>
-              </li>
-              <li class="selected">
-                <a href="{{route('judges.index')}}">
-                  <div class="icon-w">
-                    <div class="os-icon os-icon-layers"></div>
-                  </div>
-                  <span>Judges</span></a>
-              </li>
-              <li class="selected">
-                <a href="{{route('breeds.index')}}">
-                  <div class="icon-w">
-                    <div class="os-icon os-icon-layers"></div>
-                  </div>
-                  <span>Breeds</span></a>
-              </li>
-              <li class=" selected">
-                <a href="{{route('dogs.index')}}">
-                  <div class="icon-w">
-                    <div class="os-icon os-icon-layers"></div>
-                  </div>
-                  <span>Dogs</span></a>
-              </li>
-              <li class=" selected">
-                <a href="{{route('events.index')}}">
-                  <div class="icon-w">
-                    <div class="os-icon os-icon-layers"></div>
-                  </div>
-                  <span>Events</span></a>
-              </li>
-              <li class=" selected">
-                <a href="{{route('event_results.index')}}">
-                  <div class="icon-w">
-                    <div class="os-icon os-icon-layers"></div>
-                  </div>
-                  <span>Event Result</span></a>
-              </li>
-              <li class=" selected">
-                <a href="{{route('users.index')}}">
-                  <div class="icon-w">
-                    <div class="os-icon os-icon-layers"></div>
-                  </div>
-                  <span>Users</span></a>
-              </li>
-              <li class=" selected">
-                <a href="{{route('akc_groups.index')}}">
-                  <div class="icon-w">
-                    <div class="os-icon os-icon-layers"></div>
-                  </div>
-                  <span>AKC Groups</span></a>
-              </li>
-              <li class="selected">
-                <a href="{{route('fci_groups.index')}}">
-                  <div class="icon-w">
-                    <div class="os-icon os-icon-layers"></div>
-                  </div>
-                  <span>FCI Groups</span></a>
-              </li>
-              <li class="selected">
-                <a href="{{route('cities.index')}}">
-                  <div class="icon-w">
-                    <div class="os-icon os-icon-layers"></div>
-                  </div>
-                  <span>Cities</span></a>
+                <ul class="sub-menu">
+                  <li>
+                  @if (auth()->user()->hasPermissionTo('club-create'))
+                    <a href="{{route('club.create')}}">Add Club</a>
+                    @endif
+                  </li>
+                </ul>
               </li>
             </ul>
             <!--------------------
@@ -295,7 +239,7 @@
                 </div>
                 <ul>
                   <li>
-                    <a href="users_profile_big.html"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a>
+                    <a href="{{route('users.edit',Auth::user()->id)}}"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a>
                   </li>
                   <li>
                     <form method="POST" action="{{ route('logout') }}" class="inline">
@@ -323,6 +267,9 @@
                 </div>
                 <span>Dashboard</span></a>
             </li>
+            @if(Auth::check() && Auth::user()->role_id == '1')
+                      <a href="">Admin</a>
+                      @endif
             <li class=" has-sub-menu">
               <a href="{{route('club.index')}}">
                 <div class="icon-w">
