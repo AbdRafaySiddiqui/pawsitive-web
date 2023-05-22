@@ -110,8 +110,8 @@ class DogController extends Controller
     {
         $dog = Dogs::select('dogs.id',
         'dogs.dog_name as dogs_name',
-        'dogs.sire_ref as sire_id',
-        'dogs.dam_ref as dam_id',
+        // 'dogs.sire_ref as sire_id',
+        // 'dogs.dam_ref as dam_id',
         'dogs.profile_photo', 
         'dogs.dob',
         'dogs.gender',
