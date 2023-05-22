@@ -49,7 +49,7 @@ class UserController extends Controller
         }
         else
         {
-            return redirect()->back()->with('message', 'Some error occured');
+            return redirect()->back()->with('message', 'Some error');
         }
     }
 
