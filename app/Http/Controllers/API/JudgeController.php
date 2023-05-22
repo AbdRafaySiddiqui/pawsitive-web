@@ -32,7 +32,7 @@ class JudgeController extends Controller
         $judge = Judges::select('id',
                                 'full_name',
                                 'position_in_club',
-                                'description','image',
+                                'description','image as profilePhoto',
                                 'signature',
                                 'facebook',
                                 'instagram',
@@ -45,11 +45,11 @@ class JudgeController extends Controller
 
             $judge->description = html_entity_decode($judge->description);
 
-            if($judge->image != null)
+            if($judge->profilePhoto != null)
             {
-                if(file_exists(storage_path('/app/public/judge_imgs/'.$judge->image)))
+                if(file_exists(storage_path('/app/public/judge_imgs/'.$judge->profilePhoto)))
                     {
-                        $judge->profilePhoto = asset('storage/app/public/judge_imgs'.'/'.$judge->image);
+                        $judge->profilePhoto = asset('storage/app/public/judge_imgs').'/'.$judge->profilePhoto;
                     }
                     else
                     {
@@ -58,7 +58,7 @@ class JudgeController extends Controller
             }
             else
             {
-                $judge->image = asset('storage/app/public/noimage.png');
+                $judge->profilePhoto = asset('storage/app/public/noimage.png');
             }
 
             if($judge->signature != null)
