@@ -178,7 +178,9 @@
                   <span>Dashboard</span></a>
               </li>
               <li class="selected">
+              @if (auth()->user()->hasPermissionTo('club-list'))
                 <a href="{{route('club.index')}}">
+                @endif
                   <div class="icon-w">
                     <div class="os-icon os-icon-layers"></div>
                   </div>
@@ -295,7 +297,9 @@
               </div>
             </li>
             <li class=" has-sub-menu">
+            @if (auth()->user()->hasPermissionTo('judges-list'))
               <a href="{{route('judges.index')}}">
+                @endif
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -310,8 +314,12 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
+                    @if (auth()->user()->hasPermissionTo('judges-create'))
                       <a href="{{route('judges.create')}}">Add Judges</a>
+                      @endif
+                      @if (auth()->user()->hasPermissionTo('judges-list'))
                       <a href="{{route('judges.index')}}">All Judges</a>
+                      @endif
                     </li>
                     
                   </ul>
@@ -319,8 +327,10 @@
               </div>
             </li>
             <li class=" has-sub-menu">
+            @if (auth()->user()->hasPermissionTo('breeds-list'))
               <a href="{{route('breeds.index')}}">
-                <div class="icon-w">
+              @endif  
+              <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
                 <span>Breeds</span></a>
@@ -334,8 +344,12 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
+                    @if (auth()->user()->hasPermissionTo('breeds-create'))
                       <a href="{{route('breeds.create')}}">Add Breeds</a>
+                      @endif
+                      @if (auth()->user()->hasPermissionTo('breeds-list'))
                       <a href="{{route('breeds.index')}}">All Breeds</a>
+                      @endif
                     </li>
                     
                   </ul>
@@ -343,7 +357,9 @@
               </div>
             </li>
             <li class=" has-sub-menu">
+            @if (auth()->user()->hasPermissionTo('events-list'))
               <a href="{{route('events.index')}}">
+              @endif
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -358,8 +374,12 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
+                    @if (auth()->user()->hasPermissionTo('events-create'))
                       <a href="{{route('events.create')}}">Add Events</a>
+                      @endif
+                      @if (auth()->user()->hasPermissionTo('events-list'))
                       <a href="{{route('events.index')}}">All Events</a>
+                      @endif
                     </li>
                     
                   </ul>
@@ -367,7 +387,9 @@
               </div>
             </li>
             <li class=" has-sub-menu">
+            @if (auth()->user()->hasPermissionTo('event_results-list'))
               <a href="{{route('event_results.index')}}">
+              @endif
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -382,8 +404,12 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
+                    @if (auth()->user()->hasPermissionTo('event_results-create'))
                       <a href="{{route('event_results.create')}}">Add Event Result</a>
+                      @endif
+                      @if (auth()->user()->hasPermissionTo('event_results-list'))
                       <a href="{{route('event_results.index')}}">All Event Result</a>
+                      @endif
                     </li>
                     
                   </ul>
@@ -391,7 +417,9 @@
               </div>
             </li>
             <li class=" has-sub-menu">
+            @if (auth()->user()->hasPermissionTo('dogs-list'))
               <a href="{{route('dogs.index')}}">
+              @endif
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -406,15 +434,21 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
+                    @if (auth()->user()->hasPermissionTo('dogs-create'))
                       <a href="{{route('dogs.create')}}">Add Dogs</a>
+                      @endif
+                      @if (auth()->user()->hasPermissionTo('dogs-list'))
                       <a href="{{route('dogs.index')}}">All Dogs</a>
+                      @endif
                     </li>             
                   </ul>
                 </div>
               </div>
             </li>
             <li class=" has-sub-menu">
+            @if (auth()->user()->hasPermissionTo('users-list'))
               <a href="{{route('users.index')}}">
+              @endif
                 <div class="icon-w">
                   <div class="os-icon os-icon-layers"></div>
                 </div>
@@ -429,10 +463,14 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
+                    @if (auth()->user()->hasPermissionTo('users-create'))
                       <a href="{{route('users.create')}}">Add Users</a>
+                      @endif
                     </li>
                     <li>
+                    @if (auth()->user()->hasPermissionTo('users-list'))
                       <a href="{{route('users.index')}}">All Users</a>
+                      @endif
                     </li>     
                   </ul>
                 </div>

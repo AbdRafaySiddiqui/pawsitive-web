@@ -21,6 +21,16 @@ use DB;
 
 class EventResultsController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:event_results-list');
+        $this->middleware('permission:event_results-create', ['only' => ['create','store']]);
+        $this->middleware('permission:event_results-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:event_results-delete', ['only' => ['destroy']]);
+    } 
+
+
     /**
      * Display a listing of the resource.
      */

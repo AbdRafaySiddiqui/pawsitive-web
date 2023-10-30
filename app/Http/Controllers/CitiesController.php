@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\DB;
 
 class CitiesController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:cities-list');
+        $this->middleware('permission:cities-create', ['only' => ['create','store']]);
+        $this->middleware('permission:cities-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:cities-delete', ['only' => ['destroy']]);
+    } 
+
+
     /**
      * Display a listing of the resource.
      */

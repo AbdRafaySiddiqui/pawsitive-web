@@ -17,6 +17,15 @@ use League\Csv\Writer;
 
 class BreedsController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:breeds-list');
+        $this->middleware('permission:breeds-create', ['only' => ['create','store']]);
+        $this->middleware('permission:breeds-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:breeds-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

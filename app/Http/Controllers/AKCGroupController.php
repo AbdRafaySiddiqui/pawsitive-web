@@ -9,6 +9,14 @@ use Illuminate\Pagination\Paginator;
 
 class AKCGroupController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:akc_groups-list');
+        $this->middleware('permission:akc_groups-create', ['only' => ['create','store']]);
+        $this->middleware('permission:akc_groups-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:akc_groups-delete', ['only' => ['destroy']]);
+    } 
     /**
      * Display a listing of the resource.
      */

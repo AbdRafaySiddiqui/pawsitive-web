@@ -17,6 +17,15 @@ use DB;
 
 class DogsController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:dogs-list');
+        $this->middleware('permission:dogs-create', ['only' => ['create','store']]);
+        $this->middleware('permission:dogs-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:dogs-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -16,6 +16,14 @@ use League\Csv\Writer;
 
 class EventsController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:events-list');
+        $this->middleware('permission:events-create', ['only' => ['create','store']]);
+        $this->middleware('permission:events-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:events-delete', ['only' => ['destroy']]);
+    } 
+
     /**
      * Display a listing of the resource.
      */

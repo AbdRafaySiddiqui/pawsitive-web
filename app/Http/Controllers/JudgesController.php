@@ -7,9 +7,16 @@ use App\Models\Judges;
 use League\Csv\Writer;
 use Illuminate\Pagination\Paginator;
 
-
 class JudgesController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:judges-list');
+        $this->middleware('permission:judges-create', ['only' => ['create','store']]);
+        $this->middleware('permission:judges-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:judges-delete', ['only' => ['destroy']]);
+    }
 
     public $module_name = "judges";
     /**

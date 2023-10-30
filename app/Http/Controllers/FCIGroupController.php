@@ -7,6 +7,15 @@ use App\Models\FCIGroup;
 
 class FCIGroupController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:fci_groups-list');
+        $this->middleware('permission:fci_groups-create', ['only' => ['create','store']]);
+        $this->middleware('permission:fci_groups-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:fci_groups-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
